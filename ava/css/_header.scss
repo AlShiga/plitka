@@ -1,0 +1,34 @@
+.header{
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  &_top{
+    z-index: 20;
+  }
+  &_bottom{
+    z-index: 19;
+    mix-blend-mode: difference;
+  }
+  &__border{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    & div{
+      border: 1px solid $white;
+      color: $white;
+      border-bottom: none;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      height: 100%;
+      width: 100%/48*46;
+      margin-left: 100%/48*1;
+      mix-blend-mode: difference;
+    }
+  }
+  &__logo{
+    mix-blend-mode: normal;
+  }
+}
