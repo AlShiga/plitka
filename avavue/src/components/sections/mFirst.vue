@@ -100,7 +100,9 @@ export default {
       container: '',
       camera: '',
       renderer: '',
-      uniforms: ''
+      uniforms: '',
+      render: '',
+      mFirstPause: false
     }
   },
   methods: {
@@ -111,18 +113,22 @@ export default {
       this.uniforms.u_mouse.value.y =
         ((e.pageY - window.innerHeight / 2) / window.innerHeight) * -1
       e.preventDefault()
-      console.log('Xyi')
+      // console.log('Xyi')
     },
     onWindowResize: function (e) {
       this.renderer.setSize(window.innerWidth, window.innerHeight)
       this.uniforms.u_resolution.value.x = this.renderer.domElement.width
       this.uniforms.u_resolution.value.y = this.renderer.domElement.height
+    },
+    animate: function (delta) {
+      requestAnimationFrame(this.animate)
+      this.render(delta)
     }
   },
   mounted () {
     console.log('Прив')
-
-    const fragmentShader = `
+    if (this.mFirstPause === false) {
+      const fragmentShader = `
         uniform vec2 u_resolution;
         uniform float u_pxaspect;
         uniform vec2 u_mouse;
@@ -325,95 +331,91 @@ export default {
       }
     `
 
-    const vertexShader = `
+      const vertexShader = `
       void main() {
           gl_Position = vec4( position, 1.0 );
       }
     `
 
-    // let container
-    let scene
+      let scene
 
-    const loader = new THREE.TextureLoader()
-    let texture, _500
-    loader.setCrossOrigin('anonymous')
-    loader.load(require('@/assets/img/noise.png'), (tex) => {
-      texture = tex
-      texture.wrapS = THREE.RepeatWrapping
-      texture.wrapT = THREE.RepeatWrapping
-      texture.minFilter = THREE.LinearFilter
+      const loader = new THREE.TextureLoader()
+      let texture, _500
+      loader.setCrossOrigin('anonymous')
+      loader.load(require('@/assets/img/noise.png'), (tex) => {
+        texture = tex
+        texture.wrapS = THREE.RepeatWrapping
+        texture.wrapT = THREE.RepeatWrapping
+        texture.minFilter = THREE.LinearFilter
 
-      loader.load(require('@/assets/img/mainAva.jpg'), (tex) => {
-        _500 = tex
+        loader.load(require('@/assets/img/mainAva.jpg'), (tex) => {
+          _500 = tex
 
-        init()
-        animate()
+          init()
+          this.animate()
+        })
       })
-    })
 
-    const init = () => {
-      this.container = document.querySelector('.containerMAdv')
+      const init = () => {
+        this.container = document.querySelector('.containerMAdv')
 
-      this.camera = new THREE.Camera()
-      this.camera.position.z = 1
+        this.camera = new THREE.Camera()
+        this.camera.position.z = 1
 
-      scene = new THREE.Scene()
+        scene = new THREE.Scene()
 
-      var geometry = new THREE.PlaneBufferGeometry(2, 2)
+        var geometry = new THREE.PlaneBufferGeometry(2, 2)
 
-      this.uniforms = {
-        u_time: { type: 'f', value: 1.0 },
-        u_resolution: { type: 'v2', value: new THREE.Vector2() },
-        u_pxaspect: { type: 'f', value: window.devicePixelRatio },
-        u_noise: { type: 't', value: texture },
-        u_text500: { type: 't', value: _500 },
-        u_mouse: { type: 'v2', value: new THREE.Vector2(-0.1, -0.1) }
+        this.uniforms = {
+          u_time: { type: 'f', value: 1.0 },
+          u_resolution: { type: 'v2', value: new THREE.Vector2() },
+          u_pxaspect: { type: 'f', value: window.devicePixelRatio },
+          u_noise: { type: 't', value: texture },
+          u_text500: { type: 't', value: _500 },
+          u_mouse: { type: 'v2', value: new THREE.Vector2(-0.1, -0.1) }
+        }
+
+        var material = new THREE.ShaderMaterial({
+          uniforms: this.uniforms,
+          vertexShader: vertexShader,
+          fragmentShader: fragmentShader
+        })
+        material.extensions.derivatives = true
+
+        var mesh = new THREE.Mesh(geometry, material)
+        scene.add(mesh)
+
+        this.renderer = new THREE.WebGLRenderer()
+        this.renderer.setPixelRatio(window.devicePixelRatio)
+
+        this.container.appendChild(this.renderer.domElement)
+
+        this.onWindowResize()
+        window.addEventListener('resize', this.onWindowResize, false)
+
+        document.addEventListener('pointermove', this.onPointerMove)
       }
 
-      var material = new THREE.ShaderMaterial({
-        uniforms: this.uniforms,
-        vertexShader: vertexShader,
-        fragmentShader: fragmentShader
-      })
-      material.extensions.derivatives = true
-
-      var mesh = new THREE.Mesh(geometry, material)
-      scene.add(mesh)
-
-      this.renderer = new THREE.WebGLRenderer()
-      this.renderer.setPixelRatio(window.devicePixelRatio)
-
-      this.container.appendChild(this.renderer.domElement)
-
-      this.onWindowResize()
-      window.addEventListener('resize', this.onWindowResize, false)
-
+      this.render = (delta) => {
+        this.uniforms.u_time.value = delta * 0.0005
+        this.renderer.render(scene, this.camera)
+      }
+    } else {
       document.addEventListener('pointermove', this.onPointerMove)
-    }
-
-    function animate (delta) {
-      requestAnimationFrame(animate)
-      render(delta)
-    }
-
-    const render = (delta) => {
-      this.uniforms.u_time.value = delta * 0.0005
-      this.renderer.render(scene, this.camera)
+      window.addEventListener('resize', this.onWindowResize, false)
+      requestAnimationFrame(this.animate)
     }
   },
   unmounted () {
-    console.log('Пока')
+    // console.log('Пока')
     document.removeEventListener('pointermove', this.onPointerMove)
     window.removeEventListener('resize', this.onWindowResize, false)
-
-    // window.removeEventListener('resize', onWindowResize)
-
-    // document.removeEventListener('pointermove', onPointerMove)
+    cancelAnimationFrame(this.animate)
+    this.mFirstPause = true
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .mFirst {
   position: relative;

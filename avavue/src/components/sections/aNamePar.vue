@@ -31,7 +31,7 @@ export default {
   },
   // methods(){},
   mounted () {
-    console.log('Прив1')
+    // console.log('Прив1')
     var checkScrollSpeed = (function () {
       var lastPos; var newPos; var timer; var delta
       var delay = 32
@@ -53,17 +53,20 @@ export default {
     })()
 
     function pamalax () {
-      const el = document.querySelectorAll('.par span')
+      let el = document.querySelectorAll('.par span')
+      el = Array.from(el).reverse()
       let show = false
       setInterval(() => {
         let transformY = checkScrollSpeed()
         if (show) {
           // console.log(transformY)
-          if (transformY > 3) {
-            transformY = 3
+          if (transformY > 7) {
+            transformY = 7
+          } else if (transformY < -7) {
+            transformY = -7
           }
           el.forEach((element, key) => {
-            element.style.transform = 'translateY(' + -transformY * 10 / ((key + 1) / 8) + 'px)'
+            element.style.transform = 'translateY(' + -transformY * 20 * key / 8 + 'px)'
           })
         }
         (!transformY) ? show = true : show = false
@@ -93,7 +96,7 @@ export default {
     top: 0;
     left: 0;
     color: #ECE8ED;
-    transition:0.4s ease-in-out ;
+    transition:0.5s ease-out ;
     text-shadow: 2px 0 0 #E10F1C, -2px 0 0 #E10F1C, 0 2px 0 #E10F1C, 0 -2px 0 #E10F1C, 1px 1px #E10F1C, -1px -1px 0 #E10F1C, 1px -1px 0 #E10F1C, -1px 1px 0 #E10F1C;
   }
   span:last-of-type{

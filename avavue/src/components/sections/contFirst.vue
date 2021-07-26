@@ -31,22 +31,36 @@ export default {
   data () {
     return {
       name: 'contFirst',
-      props: {
-        // msg: String
+      contFirst: {
+        pause: false,
+        stage: '',
+        mesh: ''
       }
     }
+  },
+  props: {
+    // msg: String
+  },
+  methods: {
+    animate: function (e) {
+      this.stage.onRaf()
+      this.mesh.onRaf()
+      requestAnimationFrame(this.animate)
+    }
+
   },
   // methods(){},
   mounted () {
     console.log('Прив1')
-    const jsVertexShader = `
+    if (this.contFirst.pause === false) {
+      const jsVertexShader = `
       attribute vec3 position;
       void main(){
         gl_Position = vec4(position, 1.0);
       }
     `
 
-    const jsFragmentShader = `
+      const jsFragmentShader = `
       precision highp float;
       uniform vec2 resolution;
       uniform float time;
@@ -72,180 +86,173 @@ export default {
 
     `
 
-    // let raf
+      // let raf
 
-    class Stage {
-      constructor () {
-        this.renderParam = {
-          clearColor: 0x666666,
-          width: window.innerWidth,
-          height: window.innerHeight
+      class Stage {
+        constructor () {
+          this.renderParam = {
+            clearColor: 0x666666,
+            width: window.innerWidth,
+            height: window.innerHeight
+          }
+
+          this.cameraParam = {
+            left: -1,
+            right: 1,
+            top: 1,
+            bottom: 1,
+            near: 0,
+            far: -1
+          }
+
+          this.scene = null
+          this.camera = null
+          this.renderer = null
+          this.geometry = null
+          this.material = null
+          this.mesh = null
+
+          this.isInitialized = false
         }
 
-        this.cameraParam = {
-          left: -1,
-          right: 1,
-          top: 1,
-          bottom: 1,
-          near: 0,
-          far: -1
+        init () {
+          this._setScene()
+          this._setRender()
+          this._setCamera()
+
+          this.isInitialized = true
         }
 
-        this.scene = null
-        this.camera = null
-        this.renderer = null
-        this.geometry = null
-        this.material = null
-        this.mesh = null
+        _setScene () {
+          this.scene = new THREE.Scene()
+        }
 
-        this.isInitialized = false
-      }
-
-      init () {
-        this._setScene()
-        this._setRender()
-        this._setCamera()
-
-        this.isInitialized = true
-      }
-
-      _setScene () {
-        this.scene = new THREE.Scene()
-      }
-
-      _setRender () {
-        this.renderer = new THREE.WebGLRenderer({
-          canvas: document.querySelector('.sinWrap')
-        })
-        this.renderer.setPixelRatio(window.devicePixelRatio)
-        this.renderer.setClearColor(
-          new THREE.Color(this.renderParam.clearColor)
-        )
-        this.renderer.setSize(this.renderParam.width, this.renderParam.height)
-      }
-
-      _setCamera () {
-        if (!this.isInitialized) {
-          this.camera = new THREE.OrthographicCamera(
-            this.cameraParam.left,
-            this.cameraParam.right,
-            this.cameraParam.top,
-            this.cameraParam.bottom,
-            this.cameraParam.near,
-            this.cameraParam.far
+        _setRender () {
+          this.renderer = new THREE.WebGLRenderer({
+            canvas: document.querySelector('.sinWrap')
+          })
+          this.renderer.setPixelRatio(window.devicePixelRatio)
+          this.renderer.setClearColor(
+            new THREE.Color(this.renderParam.clearColor)
           )
+          this.renderer.setSize(this.renderParam.width, this.renderParam.height)
         }
 
-        const windowWidth = window.innerWidth
-        const windowHeight = window.innerHeight
+        _setCamera () {
+          if (!this.isInitialized) {
+            this.camera = new THREE.OrthographicCamera(
+              this.cameraParam.left,
+              this.cameraParam.right,
+              this.cameraParam.top,
+              this.cameraParam.bottom,
+              this.cameraParam.near,
+              this.cameraParam.far
+            )
+          }
 
-        this.camera.aspect = windowWidth / windowHeight
+          const windowWidth = window.innerWidth
+          const windowHeight = window.innerHeight
 
-        this.camera.updateProjectionMatrix()
-        this.renderer.setSize(windowWidth, windowHeight)
-      }
+          this.camera.aspect = windowWidth / windowHeight
 
-      _render () {
-        this.renderer.render(this.scene, this.camera)
-      }
-
-      onResize () {
-        this._setCamera()
-      }
-
-      onRaf () {
-        this._render()
-      }
-    }
-
-    class Mesh {
-      constructor (stage) {
-        this.canvas = document.querySelector('.sinWrap')
-        this.canvasWidth = this.canvas.width
-        this.canvasHeight = this.canvas.height
-
-        this.uniforms = {
-          resolution: {
-            type: 'v2',
-            value: [this.canvasWidth, this.canvasHeight]
-          },
-          time: { type: 'f', value: 0.0 },
-          xScale: { type: 'f', value: 1.0 },
-          yScale: { type: 'f', value: 0.5 },
-          distortion: { type: 'f', value: 0.05 }
+          this.camera.updateProjectionMatrix()
+          this.renderer.setSize(windowWidth, windowHeight)
         }
 
-        this.stage = stage
+        _render () {
+          this.renderer.render(this.scene, this.camera)
+        }
+
+        onResize () {
+          this._setCamera()
+        }
+
+        onRaf () {
+          this._render()
+        }
       }
 
-      init () {
-        this._setMesh()
+      class Mesh {
+        constructor (stage) {
+          this.canvas = document.querySelector('.sinWrap')
+          this.canvasWidth = this.canvas.width
+          this.canvasHeight = this.canvas.height
+
+          this.uniforms = {
+            resolution: {
+              type: 'v2',
+              value: [this.canvasWidth, this.canvasHeight]
+            },
+            time: { type: 'f', value: 0.0 },
+            xScale: { type: 'f', value: 1.0 },
+            yScale: { type: 'f', value: 0.5 },
+            distortion: { type: 'f', value: 0.05 }
+          }
+
+          this.stage = stage
+        }
+
+        init () {
+          this._setMesh()
+        }
+
+        _setMesh () {
+          const position = [
+            -1.0, -1.0, 0.0, 1.0, -1.0, 0.0, -1.0, 1.0, 0.0, 1.0, -1.0, 0.0, -1.0,
+            1.0, 0.0, 1.0, 1.0, 0.0
+          ]
+
+          const positions = new THREE.BufferAttribute(
+            new Float32Array(position),
+            3
+          )
+
+          const geometry = new THREE.BufferGeometry()
+          geometry.setAttribute('position', positions)
+
+          const material = new THREE.RawShaderMaterial({
+            vertexShader: jsVertexShader,
+            fragmentShader: jsFragmentShader,
+            uniforms: this.uniforms,
+            side: THREE.DoubleSide
+          })
+
+          this.mesh = new THREE.Mesh(geometry, material)
+
+          this.stage.scene.add(this.mesh)
+        }
+
+        _render () {
+          this.uniforms.time.value += 0.01
+        }
+
+        onRaf () {
+          this._render()
+        }
       }
 
-      _setMesh () {
-        const position = [
-          -1.0, -1.0, 0.0, 1.0, -1.0, 0.0, -1.0, 1.0, 0.0, 1.0, -1.0, 0.0, -1.0,
-          1.0, 0.0, 1.0, 1.0, 0.0
-        ]
+      this.stage = new Stage()
 
-        const positions = new THREE.BufferAttribute(
-          new Float32Array(position),
-          3
-        )
+      this.stage.init()
 
-        const geometry = new THREE.BufferGeometry()
-        geometry.setAttribute('position', positions)
+      this.mesh = new Mesh(this.stage)
 
-        const material = new THREE.RawShaderMaterial({
-          vertexShader: jsVertexShader,
-          fragmentShader: jsFragmentShader,
-          uniforms: this.uniforms,
-          side: THREE.DoubleSide
-        })
+      this.mesh.init()
 
-        this.mesh = new THREE.Mesh(geometry, material)
+      // window.addEventListener('resize', this.stage.onResize)
 
-        this.stage.scene.add(this.mesh)
-      }
-
-      _render () {
-        this.uniforms.time.value += 0.01
-      }
-
-      onRaf () {
-        this._render()
-      }
+      this.animate()
+      console.log(this.mesh)
+      console.log(this.stage)
+    } else {
+      // window.addEventListener('resize', this.stage.onResize)
+      this.animate()
     }
-
-    (() => {
-      const stage = new Stage()
-
-      stage.init()
-
-      const mesh = new Mesh(stage)
-
-      mesh.init()
-
-      window.addEventListener('resize', () => {
-        stage.onResize()
-      })
-
-      const _raf = () => {
-        window.requestAnimationFrame(() => {
-          stage.onRaf()
-          mesh.onRaf()
-          _raf()
-        })
-      }
-      _raf()
-    })()
-
-    // setTimeout(()=>{
-    //   cancelAnimationFrame(raf);
-    // }, 1000)
   },
   unmounted () {
     console.log('Пока1')
+    // window.removeEventListener('resize', this.stage.onResize)
+    cancelAnimationFrame(this.animate)
   }
 }
 </script>

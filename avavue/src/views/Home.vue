@@ -1,53 +1,8 @@
 <template>
    <div class="overflow-hidden">
-    <div class="noise"></div>
-    <div class="header header_bottom m-t-20 p-t-20">
-      <div class="header__border">
-        <div class=""></div>
-      </div>
-      <div class="row">
-        <div class="col-1 offset-1">
-          <svg style="opacity: 0;" class="header__logo" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M40 18.8015L24.1062 18.2431L29.5131 12.1825L27.8175 10.4801L21.7569 15.8938L21.1985 0H18.8015L18.2431 15.8938L12.1825 10.4801L10.4869 12.1825L15.8938 18.2431L0 18.8015V21.1985L15.8938 21.7569L10.4869 27.8175L12.1825 29.5132L18.2431 24.1062L18.8015 40H21.1985L21.7569 24.1062L27.8175 29.5132L29.5131 27.8175L24.1062 21.7569L40 21.1985V18.8015Z" fill="#ED2330"/>
-          </svg>
-        </div>
-      </div>
-    </div>
-    <div class="header header_top m-t-20 p-t-20">
-      <!-- <div class="header__border">
-        <div class=""></div>
-      </div> -->
-      <div class="row">
-        <div class="col-1 offset-1">
-          <svg class="header__logo" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M40 18.8015L24.1062 18.2431L29.5131 12.1825L27.8175 10.4801L21.7569 15.8938L21.1985 0H18.8015L18.2431 15.8938L12.1825 10.4801L10.4869 12.1825L15.8938 18.2431L0 18.8015V21.1985L15.8938 21.7569L10.4869 27.8175L12.1825 29.5132L18.2431 24.1062L18.8015 40H21.1985L21.7569 24.1062L27.8175 29.5132L29.5131 27.8175L24.1062 21.7569L40 21.1985V18.8015Z" fill="#ED2330"/>
-          </svg>
-        </div>
-      </div>
-    </div>
+    <myHeader/>
     <mFirst/>
-    <!-- <div class="mFirst p-t-250 p-b-250">
-      <div class="row">
-        <div class="col-xl-19 offset-xl-4 col-lg-11 offset-lg-4 col-md-19 offset-md-3 col-1 offset-2">
-          <h1 class="h2 m-b-80">let’s</h1>
-        </div>
-        <div class="col-xl-16 offset-xl-7 col-lg-15 offset-lg-7 col-md-16 offset-md-6 col-1 offset-5">
-          <h1 class="h2 m-b-80">create</h1>
-        </div>
-        <div class="col-xl-22 offset-xl-1 col-lg-22 offset-lg-1 col-md-22 offset-md-1 col-1 offset-1">
-          <h1 class="h2 m-b-80">design</h1>
-        </div>
-        <div class="col-xl-13 offset-xl-9 col-lg-13 offset-lg-9 col-md-11 offset-md-11 col-1 offset-12">
-          <h1 class="h2 m-b-80">filled</h1>
-        </div>
-        <div class="col-xl-11 offset-xl-11 col-lg-12 offset-lg-10 col-md-9 offset-md-13 col-1 offset-14">
-          <h1 class="h2 m-b-80">with</h1>
-        </div>
-        <div class="col-xl-22 offset-xl-1 col-lg-22 offset-lg-1 col-md-22 offset-md-1 col-1 offset-2">
-          <h1 class="h2 m-b-80">e-motions.</h1>
-        </div>
-      </div>
-    </div> -->
+
     <div class="p-t-200 p-b-250">
       <div class="lent z-1 lent_gray lent_rotate">
         <div class="lent__img"></div>
@@ -153,13 +108,15 @@
 import mTagsFly from '@/components/sections/mTagsFly.vue'
 import mAdv from '@/components/sections/mAdv.vue'
 import mFirst from '@/components/sections/mFirst.vue'
+import myHeader from '@/components/sections/header.vue'
 
 export default {
   name: 'Home',
   components: {
     mTagsFly,
     mFirst,
-    mAdv
+    mAdv,
+    myHeader
   }
 }
 </script>

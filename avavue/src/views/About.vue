@@ -1,53 +1,7 @@
 <template>
    <div class="overflow-hidden">
-    <div class="noise"></div>
-    <div class="header header_bottom m-t-20 p-t-20">
-      <div class="header__border">
-        <div class=""></div>
-      </div>
-      <div class="row">
-        <div class="col-1 offset-1">
-          <svg style="opacity: 0;" class="header__logo" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M40 18.8015L24.1062 18.2431L29.5131 12.1825L27.8175 10.4801L21.7569 15.8938L21.1985 0H18.8015L18.2431 15.8938L12.1825 10.4801L10.4869 12.1825L15.8938 18.2431L0 18.8015V21.1985L15.8938 21.7569L10.4869 27.8175L12.1825 29.5132L18.2431 24.1062L18.8015 40H21.1985L21.7569 24.1062L27.8175 29.5132L29.5131 27.8175L24.1062 21.7569L40 21.1985V18.8015Z" fill="#ED2330"/>
-          </svg>
-        </div>
-      </div>
-    </div>
-    <div class="header header_top m-t-20 p-t-20">
-      <!-- <div class="header__border">
-        <div class=""></div>
-      </div> -->
-      <div class="row">
-        <div class="col-1 offset-1">
-          <svg class="header__logo" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M40 18.8015L24.1062 18.2431L29.5131 12.1825L27.8175 10.4801L21.7569 15.8938L21.1985 0H18.8015L18.2431 15.8938L12.1825 10.4801L10.4869 12.1825L15.8938 18.2431L0 18.8015V21.1985L15.8938 21.7569L10.4869 27.8175L12.1825 29.5132L18.2431 24.1062L18.8015 40H21.1985L21.7569 24.1062L27.8175 29.5132L29.5131 27.8175L24.1062 21.7569L40 21.1985V18.8015Z" fill="#ED2330"/>
-          </svg>
-        </div>
-      </div>
-    </div>
+    <myHeader/>
     <aFirst />
-
-    <!-- <div class="aboutFirst p-t-200 p-b-100">
-      <div class="">
-        <div class="row">
-          <div class="m-b-20 col-20 offset-1">
-            <h2 class="h3">Grid, type </h2>
-          </div>
-          <div class="m-b-20 col-16 offset-lg-7 offset-md-7 offset-4">
-            <h2 class="h3 d-flex"><span class="h3 red ">&</span>&nbsp;rock’n’roll</h2>
-          </div>
-          <div class="m-b-40 col-xl-6 offset-xl-13 col-lg-8 offset-lg-10 col-md-13 offset-md-7 col-22 offset-1">
-            <p class="p1">
-              We have worked on over 100 different projects and want more We have worked on over 100 different projects and want moreWe have worked on over 100 different projects and want moreWe have worked on over 100 different projects and want moreWe have worked on over 100
-              <br>
-              <br>
-              We have worked on over 100 different projects and want more We orked on over 100 different projects and want moreWe have worked on over 100 different projects and want more
-            </p>
-          </div>
-        </div>
-      </div>
-
-    </div> -->
     <div class="lent lent_gray">
       <div class="lent__img"></div>
     </div>
@@ -73,38 +27,7 @@
       <div class="lent__img"></div>
     </div>
     <aNamePar />
-    <!-- <div class="bg_w p-t-200 p-b-200">
-      <div class="row">
-        <div class="col-22 offset-1">
-            <div class="par" >
-              <span class="h3" >AVA</span>
-              <span class="h3" >AVA</span>
-              <span class="h3" >AVA</span>
-              <span class="h3" >AVA</span>
-              <span class="h3" >AVA</span>
-              <span class="h3" >AVA</span>
-              <span class="h3" >AVA</span>
-              <span class="h3" >AVA</span>
-            </div>
-        </div>
-      </div>
-    </div> -->
-
-    <div class="bg_w">
-      <div class="line m-t-40 m-b-40"></div>
-      <div class="servItem servItem_web"></div>
-      <div class="line m-t-40 m-b-40"></div>
-      <div class="servItem servItem_des"></div>
-      <div class="line m-t-40 m-b-40"></div>
-      <div class="servItem servItem_web"></div>
-      <div class="line m-t-40 m-b-40"></div>
-      <div class="servItem servItem_des"></div>
-      <div class="line m-t-40 m-b-40"></div>
-      <div class="servItem servItem_web"></div>
-      <div class="line m-t-40 m-b-40"></div>
-      <div class="servItem servItem_des"></div>
-      <div class="line m-t-40 m-b-40"></div>
-    </div>
+    <aLines />
 
     <div class="p-t-200 p-b-200">
       <div class="row m-b-100">
@@ -207,12 +130,16 @@
 // @ is an alias to /src
 import aFirst from '@/components/sections/aFirst.vue'
 import aNamePar from '@/components/sections/aNamePar.vue'
+import aLines from '@/components/sections/aLines.vue'
+import myHeader from '@/components/sections/header.vue'
 
 export default {
   name: 'About',
   components: {
     aFirst,
-    aNamePar
+    aNamePar,
+    aLines,
+    myHeader
   }
 }
 </script>
