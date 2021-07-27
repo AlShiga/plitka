@@ -1,7 +1,7 @@
 <template>
   <div class="mAdvItem" v-on:mouseover.stop="myMouseover" v-on:mouseout="myMouseout" v-on:mousemove="myMousemove">
-    <span class="h7">{{title}}</span>
-    <img class="mAdvItem__img" v-if="img" :src=img alt="">
+    <span class="h7">{{ name }}</span>
+    <img class="mAdvItem__img" v-if = img :src = img alt="">
   </div>
 
 </template>
@@ -10,10 +10,10 @@
 import { gsap, TweenLite } from 'gsap/all'
 
 export default {
-  props: ['title', 'img'],
+  props: ['name', 'img'],
   data () {
     return {
-      name: 'HelloWorld',
+      // name: 'HelloWorld',
       imgTarget: '',
       transform: {
         x: 0,
@@ -21,7 +21,6 @@ export default {
         scale: 1,
         opacity: 1
       }
-
     }
   },
   methods: {

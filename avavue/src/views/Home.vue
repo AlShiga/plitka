@@ -25,7 +25,7 @@
         <div class="col-22 offset-1">
           <h2 class="h3 m-b-40">Hello world</h2>
           <div class="print">
-            <img src="~@/assets/img/print.png" alt="" class="w-100 m-b-15">
+            <img width="1222px" height="600px" src="~@/assets/img/print.png" alt="" class="w-100 m-b-15">
             <p class="p1 ttu">wow.  we feel like this</p>
           </div>
         </div>

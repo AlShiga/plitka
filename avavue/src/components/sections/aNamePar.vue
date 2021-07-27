@@ -18,15 +18,12 @@
 </template>
 
 <script>
-// import { gsap, TweenLite } from 'gsap/all'
+import { gsap } from 'gsap/all'
 
 export default {
   data () {
     return {
-      name: 'aNamePar',
-      props: {
-        // msg: String
-      }
+
     }
   },
   // methods(){},
@@ -59,14 +56,15 @@ export default {
       setInterval(() => {
         let transformY = checkScrollSpeed()
         if (show) {
-          // console.log(transformY)
+          // console.log(transformY
           if (transformY > 7) {
             transformY = 7
           } else if (transformY < -7) {
             transformY = -7
           }
           el.forEach((element, key) => {
-            element.style.transform = 'translateY(' + -transformY * 20 * key / 8 + 'px)'
+            // element.style.transform = 'translateY(' + -transformY * 20 * key / 8 + 'px)'
+            gsap.to(element, { y: -transformY * 20 * key / 8, duration: 0.5, ease: 'elastic' })
           })
         }
         (!transformY) ? show = true : show = false

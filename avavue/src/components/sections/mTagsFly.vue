@@ -6,6 +6,9 @@
 
 <script>
 import Matter from 'matter-js'
+import { gsap } from 'gsap/all'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+gsap.registerPlugin(ScrollTrigger)
 // import { ScrollTrigger } from 'gsap/all'
 
 // import 'poly-decomp'
@@ -34,6 +37,22 @@ export default {
   props: {
     // msg: String
   },
+  methods: {
+    scrollAnimation () {
+      ScrollTrigger.create({
+        trigger: '.wrapFlyTags',
+        start: 'center center',
+        markers: true,
+        // end: 'bottom top',
+        scrub: 2,
+        id: 'example',
+        onToggle: () => { this.world.gravity.scale = 1 }
+        // onUpdate: self => {
+        //   console.log('progress:', self.progress.toFixed(3), 'direction:', self.direction, 'velocity', self.getVelocity())
+        // }
+      })
+    }
+  },
   // methods(){},
   mounted () {
     if (this.myMatter.pause === false) {
@@ -53,7 +72,7 @@ export default {
         engine: this.engine,
         options: {
           width: window.innerWidth,
-          height: window.innerHeight,
+          height: window.innerHeight * 0.9,
           pixelRatio: 2,
           background: '#C4C4C4',
           wireframes: false
@@ -62,22 +81,22 @@ export default {
 
       this.elWorld = {
         ground: this.Bodies.rectangle(
-          window.innerWidth / 2 + 160,
-          window.innerHeight + 80,
+          window.innerWidth * 0.9 / 2 + 160,
+          window.innerHeight * 0.9 + 80,
           window.innerWidth + 320,
           160,
           { render: { fillStyle: '#080808' }, isStatic: true }
         ),
         wallLeft: this.Bodies.rectangle(
           -80,
-          window.innerHeight / 2,
+          window.innerHeight * 0.9 / 2,
           160,
-          window.innerHeight,
+          window.innerHeight * 0.9,
           { isStatic: true }
         ),
         wallRight: this.Bodies.rectangle(
           window.innerWidth + 80,
-          window.innerHeight / 2,
+          window.innerHeight * 0.9 / 2,
           160,
           1200,
           { isStatic: true }
@@ -89,7 +108,7 @@ export default {
           160,
           { isStatic: true }
         ),
-        art: this.Bodies.rectangle(235, 460, 355, 58, {
+        web: this.Bodies.rectangle(600, 200, 460, 78, {
           chamfer: { radius: this.radius },
           render: {
             sprite: {
@@ -99,11 +118,91 @@ export default {
             }
           }
         }),
-        threeD: this.Bodies.rectangle(90, 760, 180, 58, {
+        love: this.Bodies.rectangle(900, 200, 240, 78, {
           chamfer: { radius: this.radius },
           render: {
             sprite: {
               texture: require('@/assets/img/tags/love.svg'),
+              xScale: 1,
+              yScale: 1
+            }
+          }
+        }),
+        brand: this.Bodies.rectangle(1200, 200, 430, 78, {
+          chamfer: { radius: this.radius },
+          render: {
+            sprite: {
+              texture: require('@/assets/img/tags/brand.svg'),
+              xScale: 1,
+              yScale: 1
+            }
+          }
+        }),
+        sites: this.Bodies.rectangle(300, 300, 243, 78, {
+          chamfer: { radius: this.radius },
+          render: {
+            sprite: {
+              texture: require('@/assets/img/tags/sites.svg'),
+              xScale: 1,
+              yScale: 1
+            }
+          }
+        }),
+        animations: this.Bodies.rectangle(640, 300, 411, 78, {
+          chamfer: { radius: this.radius },
+          render: {
+            sprite: {
+              texture: require('@/assets/img/tags/animations.svg'),
+              xScale: 1,
+              yScale: 1
+            }
+          }
+        }),
+        copywriting: this.Bodies.rectangle(1080, 300, 448, 78, {
+          chamfer: { radius: this.radius },
+          render: {
+            sprite: {
+              texture: require('@/assets/img/tags/copywriting.svg'),
+              xScale: 1,
+              yScale: 1
+            }
+          }
+        }),
+        promotion: this.Bodies.rectangle(1520, 300, 422, 78, {
+          chamfer: { radius: this.radius },
+          render: {
+            sprite: {
+              texture: require('@/assets/img/tags/promotion.svg'),
+              xScale: 1,
+              yScale: 1
+            }
+          }
+        }),
+        naming: this.Bodies.rectangle(520, 400, 313, 78, {
+          chamfer: { radius: this.radius },
+          render: {
+            sprite: {
+              texture: require('@/assets/img/tags/naming.svg'),
+              xScale: 1,
+              yScale: 1
+            }
+          }
+        }),
+        cats: this.Bodies.rectangle(820, 400, 233, 78, {
+          chamfer: { radius: this.radius },
+          render: {
+            sprite: {
+              texture: require('@/assets/img/tags/cats.svg'),
+              xScale: 1,
+              yScale: 1
+            }
+          }
+        }),
+        uxui: this.Bodies.rectangle(1180, 400, 457, 78, {
+          chamfer: { radius: this.radius },
+          render: {
+            sprite: {
+              texture: require('@/assets/img/tags/uxui.svg'),
               xScale: 1,
               yScale: 1
             }
@@ -115,8 +214,17 @@ export default {
         this.elWorld.wallLeft,
         this.elWorld.wallRight,
         this.elWorld.roof,
-        this.elWorld.art,
-        this.elWorld.threeD
+        this.elWorld.web,
+        this.elWorld.love,
+        this.elWorld.brand,
+        this.elWorld.sites,
+        this.elWorld.animations,
+        this.elWorld.copywriting,
+        this.elWorld.promotion,
+        this.elWorld.naming,
+        this.elWorld.cats,
+        this.elWorld.uxui
+
       ])
       // add mouse control
       this.mouse = this.Mouse.create(this.render.canvas)
@@ -143,6 +251,7 @@ export default {
     } else {
       this.Render.run(this.render)
     }
+    this.scrollAnimation()
   },
   unmounted () {
     this.Render.stop(this.render)

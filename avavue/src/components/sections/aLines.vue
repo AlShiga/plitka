@@ -1,43 +1,74 @@
 <template>
-    <div class="bg_w">
-      <lineBig :key="line" v-for="line in lineList" :title = line ></lineBig>
+    <div class="bg_w linesWrap">
+      <lineBig :key="lineItem" v-for="lineItem in lineList" :name = lineItem.name ></lineBig>
       <div class="line m-t-40 m-b-40"></div>
-      <div class="servItem servItem_web"></div>
-      <div class="line m-t-40 m-b-40"></div>
-      <div class="servItem servItem_des"></div>
-      <div class="line m-t-40 m-b-40"></div>
-      <div class="servItem servItem_web"></div>
-      <div class="line m-t-40 m-b-40"></div>
-      <div class="servItem servItem_des"></div>
-      <div class="line m-t-40 m-b-40"></div>
-      <div class="servItem servItem_web"></div>
-      <div class="line m-t-40 m-b-40"></div>
-      <div class="servItem servItem_des"></div>
-      <div class="line m-t-40 m-b-40"></div>
-
     </div>
 </template>
 
 <script>
+import { gsap } from 'gsap/all'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
 import lineBig from '@/components/lineBig.vue'
 
+gsap.registerPlugin(ScrollTrigger)
 export default {
   data () {
     return {
-      lineList: ['servItem_web', 'servItem_des', 'servItem_web', 'servItem_des', 'servItem_web', 'servItem_web'],
-      components: {
-        lineBig
-      }
+      scrollTr: {},
+      lineList: [
+        { name: 'servItem_web', img: '' },
+        { name: 'servItem_des', img: '' },
+        { name: 'servItem_web', img: '' },
+        { name: 'servItem_des', img: '' },
+        { name: 'servItem_des', img: '' }
+
+      ]
     }
+  },
+  components: {
+    lineBig
   },
   props: {
     // msg: String
   },
   // methods(){},
+
+  methods: {
+    scrollAnimation () {
+      const trans = innerWidth / 3
+      this.lines.forEach((el, key) => {
+        this.scrollTr = ScrollTrigger.create({
+          trigger: el,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 2,
+          markers: true,
+          id: 'example' + key,
+          animation: gsap.to(el, {
+            // rotation: 27,
+            x: -trans + trans / 3 * Math.random(),
+            ease: 'cirk',
+            duration: 0.5 + 0.3 * Math.random()
+          }),
+          onToggle: self => console.log('toggled, isActive:', self.isActive),
+          onUpdate: self => {
+            // console.log('progress:', self.progress.toFixed(3), 'direction:', self.direction, 'velocity', self.getVelocity())
+          }
+        })
+      })
+    }
+  },
   mounted () {
+    this.lines = document.querySelectorAll('.linesWrap .servItem')
+    // this.trigger = new ScrollTrigger.default()
+
+    this.scrollAnimation()
+    console.log(this.scrollTr)
   },
   unmounted () {
     console.log('Пока1')
+    ScrollTrigger.kill(this.scrollTr)
   }
 }
 </script>

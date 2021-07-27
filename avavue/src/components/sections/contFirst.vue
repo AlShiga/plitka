@@ -34,7 +34,12 @@ export default {
       contFirst: {
         pause: false,
         stage: '',
-        mesh: ''
+        mesh: '',
+        mouseX: 1000,
+        mouseY: 1000,
+        oldMouseX: 1000,
+        oldMouseY: 1000
+        // dist: 0.1
       }
     }
   },
@@ -46,8 +51,13 @@ export default {
       this.stage.onRaf()
       this.mesh.onRaf()
       requestAnimationFrame(this.animate)
+    },
+    mouseMove: function (e) {
+      // console.log(e)
+      this.contFirst.mouseX = e.clientX
+      this.contFirst.mouseY = e.clientY
+      // console.log(this.contFirst.mouseX)
     }
-
   },
   // methods(){},
   mounted () {
@@ -87,7 +97,7 @@ export default {
     `
 
       // let raf
-
+      const dist = 0.05
       class Stage {
         constructor () {
           this.renderParam = {
@@ -186,7 +196,7 @@ export default {
             time: { type: 'f', value: 0.0 },
             xScale: { type: 'f', value: 1.0 },
             yScale: { type: 'f', value: 0.5 },
-            distortion: { type: 'f', value: 0.05 }
+            distortion: { type: 'f', value: dist }
           }
 
           this.stage = stage
@@ -242,16 +252,28 @@ export default {
       // window.addEventListener('resize', this.stage.onResize)
 
       this.animate()
-      console.log(this.mesh)
-      console.log(this.stage)
+      // console.log(this.mesh)
+      // console.log(this.stage)
+      setInterval(() => {
+        this.contFirst.oldMouseX = (this.contFirst.oldMouseX * 5 + this.contFirst.mouseX) / 6
+        this.contFirst.oldMouseY = (this.contFirst.oldMouseY * 5 + this.contFirst.mouseY) / 6
+        // console.log(this.contFirst.mouseX)
+        // console.log(this.contFirst.oldMouseX)
+        const moveX = (this.contFirst.oldMouseX) / innerWidth
+        const moveY = (this.contFirst.oldMouseY) / innerHeight
+        this.mesh.uniforms.distortion.value = 0.05 + 0.05 * moveY * moveX
+        // this.mesh.uniforms.xScale.value = 1 + 0.1 * this.contFirst.mouseX
+        this.mesh.uniforms.yScale.value = 0.4 + 0.2 * moveY
+      }, 32)
     } else {
-      // window.addEventListener('resize', this.stage.onResize)
+      window.addEventListener('resize', this.stage.onResize)
       this.animate()
     }
+    document.addEventListener('mousemove', this.mouseMove)
   },
   unmounted () {
     console.log('Пока1')
-    // window.removeEventListener('resize', this.stage.onResize)
+    window.removeEventListener('resize', this.stage.onResize)
     cancelAnimationFrame(this.animate)
   }
 }
