@@ -57,7 +57,8 @@
 
     <mAdv/>
 
-    <div class="lent lent_gray">
+    <myFooter big="true"/>
+    <!-- <div class="lent lent_gray">
       <div class="lent__img"></div>
     </div>
     <div class="bg_w p-t-250 p-b-80">
@@ -94,7 +95,7 @@
       <div class="d-flex justify-content-center ">
         <h6 class="h3 text-center">Are you<br> still here?</h6>
       </div>
-    </div>
+    </div> -->
 
   </div>
 
@@ -109,6 +110,7 @@ import mTagsFly from '@/components/sections/mTagsFly.vue'
 import mAdv from '@/components/sections/mAdv.vue'
 import mFirst from '@/components/sections/mFirst.vue'
 import myHeader from '@/components/sections/header.vue'
+import myFooter from '@/components/sections/footer.vue'
 
 export default {
   name: 'Home',
@@ -116,7 +118,8 @@ export default {
     mTagsFly,
     mFirst,
     mAdv,
-    myHeader
+    myHeader,
+    myFooter
   }
 }
 </script>

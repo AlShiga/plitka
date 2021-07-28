@@ -30,27 +30,21 @@
         </div>
       </div>
     </div>
-
-    <div class="mBottom p-t-250 p-b-250">
-      <div class="d-flex justify-content-center">
-        <h6 class="h3 text-center">
-          Are you<br />
-          still here?
-        </h6>
-      </div>
-    </div>
+    <myFooter big=""/>
   </div>
 </template>
 
 <script>
 import contFirst from '@/components/sections/contFirst.vue'
 import myHeader from '@/components/sections/header.vue'
+import myFooter from '@/components/sections/footer.vue'
 
 export default {
   name: 'Contacts',
   components: {
     contFirst,
-    myHeader
+    myHeader,
+    myFooter
 
   }
 }

@@ -104,26 +104,8 @@
         </div>
       </div>
     </div>
-    <div class="lent lent_gray">
-      <div class="lent__img"></div>
-    </div>
-    <div class="bg_w p-t-250 p-b-80">
-        <div class="row">
-          <div class="col-22 offset-1">
-            <a href="tel:+78129062232" class="h4 red">+7 812 906 —<br>22 — 32</a>
-            <a href="mailto:info@ava-digital.ru"  class="d-flex">
-              <span class="h4 red" >info@</span>
-              <span class="h4 red" >ava-<br>
-                digital.ru</span>
-            </a>
-          </div>
-        </div>
-    </div>
-    <div class="mBottom p-t-250 p-b-250">
-      <div class="d-flex justify-content-center ">
-        <h6 class="h3 text-center">Are you<br> still here?</h6>
-      </div>
-    </div>
+    <myFooter big="true"/>
+
   </div>
 </template>
 <script>
@@ -132,6 +114,7 @@ import aFirst from '@/components/sections/aFirst.vue'
 import aNamePar from '@/components/sections/aNamePar.vue'
 import aLines from '@/components/sections/aLines.vue'
 import myHeader from '@/components/sections/header.vue'
+import myFooter from '@/components/sections/footer.vue'
 
 export default {
   name: 'About',
@@ -139,7 +122,8 @@ export default {
     aFirst,
     aNamePar,
     aLines,
-    myHeader
+    myHeader,
+    myFooter
   }
 }
 </script>

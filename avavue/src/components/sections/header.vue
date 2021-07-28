@@ -37,14 +37,14 @@ export default {
   },
   props: {
     // msg: String
-  },
-  // methods(){},
-  mounted () {
-    console.log('Прив')
-  },
-  unmounted () {
-    console.log('Пока')
   }
+  // methods(){},
+  // mounted () {
+  //   console.log('Прив')
+  // },
+  // unmounted () {
+  //   console.log('Пока')
+  // }
 }
 </script>
 

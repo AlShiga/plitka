@@ -46,7 +46,7 @@ export default {
         // end: 'bottom top',
         scrub: 2,
         id: 'example',
-        onToggle: () => { this.world.gravity.scale = 1 }
+        onToggle: () => { this.world.gravity.scale = 0.0015 }
         // onUpdate: self => {
         //   console.log('progress:', self.progress.toFixed(3), 'direction:', self.direction, 'velocity', self.getVelocity())
         // }
@@ -66,7 +66,6 @@ export default {
       this.world = this.engine.world
 
       this.world.gravity.scale = 0
-
       this.render = this.Render.create({
         element: document.querySelector('.wrapFlyTags'),
         engine: this.engine,
