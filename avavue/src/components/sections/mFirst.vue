@@ -1,6 +1,6 @@
 <template>
   <div class="mFirst p-t-250 p-b-250">
-    <div class="row z-1 position-relative">
+    <div class="row z-5 position-relative">
       <div
         class="
           col-xl-19
@@ -87,6 +87,7 @@
       </div>
     </div>
     <div class="containerMAdv" touch-action="none"></div>
+    <div class="containerMAdv__bg z-1" touch-action="none"></div>
   </div>
 </template>
 
@@ -102,18 +103,15 @@ export default {
       renderer: '',
       uniforms: '',
       render: '',
-      mFirstPause: false
+      mFirstPause: false,
+      mouse: {}
     }
   },
   methods: {
     onPointerMove: function (e) {
-      const ratio = window.innerHeight / window.innerWidth
-      this.uniforms.u_mouse.value.x =
-        (e.pageX - window.innerWidth / 2) / window.innerWidth / ratio
-      this.uniforms.u_mouse.value.y =
-        ((e.pageY - window.innerHeight / 2) / window.innerHeight) * -1
+      this.mouse.X = e.pageX
+      this.mouse.Y = e.pageY
       e.preventDefault()
-      // console.log('Xyi')
     },
     onWindowResize: function (e) {
       this.renderer.setSize(window.innerWidth, window.innerHeight)
@@ -123,10 +121,20 @@ export default {
     animate: function (delta) {
       requestAnimationFrame(this.animate)
       this.render(delta)
+      this.mousePos()
+    },
+    mousePos: function () {
+      const ratio = window.innerHeight / window.innerWidth
+
+      this.mouse.oldX = (this.mouse.oldX * 5 + this.mouse.X) / 6
+      this.mouse.oldY = (this.mouse.oldY * 5 + this.mouse.Y) / 6
+      this.uniforms.u_mouse.value.x =
+        (this.mouse.oldX - window.innerWidth / 2) / window.innerWidth / ratio
+      this.uniforms.u_mouse.value.y =
+        ((this.mouse.oldY - window.innerHeight / 2) / window.innerHeight) * -1
     }
   },
   mounted () {
-    console.log('Прив')
     if (this.mFirstPause === false) {
       const fragmentShader = `
         uniform vec2 u_resolution;
@@ -400,14 +408,19 @@ export default {
         this.uniforms.u_time.value = delta * 0.0005
         this.renderer.render(scene, this.camera)
       }
+      // this.uniforms.u_mouse.value.x = innerWidth / 10 * 8
+      // this.uniforms.u_mouse.value.y = innerHeight / 10
     } else {
       document.addEventListener('pointermove', this.onPointerMove)
       window.addEventListener('resize', this.onWindowResize, false)
       requestAnimationFrame(this.animate)
     }
+    this.mouse.X = innerWidth / 10 * 9
+    this.mouse.oldX = innerWidth / 10 * 9
+    this.mouse.Y = innerHeight / 10
+    this.mouse.oldY = innerHeight / 10
   },
   unmounted () {
-    // console.log('Пока')
     document.removeEventListener('pointermove', this.onPointerMove)
     window.removeEventListener('resize', this.onWindowResize, false)
     cancelAnimationFrame(this.animate)
@@ -426,5 +439,14 @@ export default {
   left: 0;
   bottom: 0;
   right: 0;
+  &__bg{
+    position: absolute;
+    top: 90vh;
+    right: 0;
+    left: 0;
+    height: 10vh;
+    background: linear-gradient(to bottom, rgba(206,89,55,0) 0%, #202020 100%);
+  }
 }
+
 </style>

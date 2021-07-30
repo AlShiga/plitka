@@ -1,20 +1,7 @@
 <template>
  <div class="overflow-hidden">
    <myHeader/>
-
-    <div class="carFirst p-t-250 p-b-250">
-      <div class="row">
-        <div class="col-xl-20 offset-xl-3 col-lg-20 offset-lg-3 col-md-20 offset-md-3 col-20 offset-3">
-          <h1 class="h3 m-b-40">We make realy</h1>
-        </div>
-        <div class="col-xl-22 offset-xl-1 col-lg-22 offset-lg-1 col-md-22 offset-md-1 col-22 offset-1">
-          <h1 class="h3 m-b-40">good things </h1>
-        </div>
-        <div class="col-xl-18 offset-xl-5 col-lg-18 offset-lg-5 col-md-18 offset-md-5 col-20 offset-3">
-          <h1 class="h3 m-b-40">Join our team</h1>
-        </div>
-      </div>
-    </div>
+    <carFirst/>
     <div class="lent lent_gray">
       <div class="lent__img"></div>
     </div>
@@ -118,7 +105,6 @@
       </div>
     </div>
     <myFooter big="true"/>
-
   </div>
 </template>
 
@@ -126,14 +112,15 @@
 import formPizza from '@/components/sections/formPizza.vue'
 import myFooter from '@/components/sections/footer.vue'
 import myHeader from '@/components/sections/header.vue'
+import carFirst from '@/components/sections/carFirst.vue'
 
 export default {
   name: 'Home',
   components: {
     formPizza,
     myFooter,
-    myHeader
-
+    myHeader,
+    carFirst
   }
 }
 </script>

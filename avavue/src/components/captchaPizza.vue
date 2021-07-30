@@ -94,11 +94,9 @@ export default {
   },
   methods: {
     bite: function (key) {
-      console.log('Кусь')
       if (this.count[key] < 3) {
         ++this.count[key]
       }
-      console.log(this.count[key])
     },
     start: function () {
       this.play = true

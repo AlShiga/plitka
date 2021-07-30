@@ -4,9 +4,12 @@
     <mFirst/>
 
     <div class="p-t-200 p-b-250">
-      <div class="lent z-1 lent_gray lent_rotate">
+      <myMarquee :addClass="'z-1 marquee_rotate marquee_gray'" />
+      <myMarquee/>
+      <!-- <myMarquee/> -->
+      <!-- <div class="lent z-1 lent_gray lent_rotate">
         <div class="lent__img"></div>
-      </div>
+      </div> -->
       <div class="lent z-2">
         <div class="lent__img"></div>
       </div>
@@ -35,6 +38,11 @@
           <p class="h8">
             <span class="p1 red">[ Our team ];</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AVA is a small team. There are five of us. Each of us is responsible for his/her part of the work. We are engaged in web design and site development of different difficulty.
           </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-5 offset-1">
+          <myButton :text='"[ хуй ]"'/>
         </div>
       </div>
 
@@ -111,6 +119,8 @@ import mAdv from '@/components/sections/mAdv.vue'
 import mFirst from '@/components/sections/mFirst.vue'
 import myHeader from '@/components/sections/header.vue'
 import myFooter from '@/components/sections/footer.vue'
+import myMarquee from '@/components/myMarquee.vue'
+import myButton from '@/components/myButton.vue'
 
 export default {
   name: 'Home',
@@ -119,7 +129,9 @@ export default {
     mFirst,
     mAdv,
     myHeader,
-    myFooter
+    myFooter,
+    myMarquee,
+    myButton
   }
 }
 </script>
