@@ -18,6 +18,8 @@ export default {
       transform: {
         x: 0,
         y: 0,
+        curX: 0,
+        curY: 0,
         scale: 1,
         opacity: 1
       }
@@ -31,8 +33,8 @@ export default {
       gsap.ticker.add(this.updatePos)
     },
     myMousemove: function (e) {
-      this.transform.x = e.clientX - e.target.getBoundingClientRect().left
-      this.transform.y = e.clientY - e.target.getBoundingClientRect().top
+      this.transform.curX = e.clientX - e.target.getBoundingClientRect().left
+      this.transform.curY = e.clientY - e.target.getBoundingClientRect().top
       console.log([this.transform.x, this.transform.y])
     },
     myMouseout: function (e) {
@@ -41,6 +43,8 @@ export default {
       gsap.ticker.remove(this.updatePos)
     },
     updatePos: function (e) {
+      this.transform.x = (this.transform.x * 9 + this.transform.curX) / 10
+      this.transform.y = (this.transform.y * 9 + this.transform.curY) / 10
       TweenLite.set(this.imgTarget, { x: this.transform.x, y: this.transform.y, scale: 1, opacity: this.transform.opacity })
     }
   }
