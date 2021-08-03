@@ -21,21 +21,21 @@ const routes = [
     path: '/career',
     name: 'Career',
     component: () => import(/* webpackChunkName: "about" */ '../views/Career.vue')
+  },
+  {
+    path: '/projects',
+    name: 'Projects',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Projects.vue')
   }
 ]
 
 const router = createRouter({
-  mode: 'history',
-  history: createWebHistory(process.env.BASE_URL),
   routes,
-  scrollBehavior (to) {
-    if (to.hash) {
-      return {
-        selector: to.hash,
-        offset: { x: 0, y: 0 }
-      }
-    }
-    return { x: 0, y: 0 }
+  // mode: 'history',
+  history: createWebHistory(process.env.BASE_URL),
+  scrollBehavior (to, from, savedPosition) {
+    // always scroll to top
+    return { top: 0 }
   }
 })
 

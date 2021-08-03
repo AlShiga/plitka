@@ -15,7 +15,7 @@ gsap.registerPlugin(ScrollTrigger)
 export default {
   data () {
     return {
-      scrollTr: {},
+      scrollTrig: {},
       lineList: [
         { name: 'servItem_web', img: '' },
         { name: 'servItem_des', img: '' },
@@ -38,7 +38,7 @@ export default {
     scrollAnimation () {
       const trans = innerWidth / 3
       this.lines.forEach((el, key) => {
-        this.scrollTr = ScrollTrigger.create({
+        this.scrollTrig[key] = ScrollTrigger.create({
           trigger: el,
           start: 'top bottom',
           end: 'bottom top',
@@ -64,11 +64,15 @@ export default {
     // this.trigger = new ScrollTrigger.default()
 
     this.scrollAnimation()
-    console.log(this.scrollTr)
+    console.log(this.scrollTrig)
   },
   unmounted () {
     console.log('Пока1')
-    ScrollTrigger.kill(this.scrollTr)
+    this.scrollTrig[0].kill()
+    this.scrollTrig[1].kill()
+    this.scrollTrig[2].kill()
+    this.scrollTrig[3].kill()
+    this.scrollTrig[4].kill()
   }
 }
 </script>

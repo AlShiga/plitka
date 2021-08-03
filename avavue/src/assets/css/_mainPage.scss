@@ -174,8 +174,15 @@
   border: 1px solid currentColor;
   border-radius: 100px;
   margin-right: 15px;
+  margin-bottom: 10px;
+  width: max-content;
 }
-
+.tagsW{
+  display: flex;
+  @include media-breakpoint-down(sm) {
+    flex-direction: column;
+  }
+}
 .blogBody{
   display: grid;
   gap: 3vw;

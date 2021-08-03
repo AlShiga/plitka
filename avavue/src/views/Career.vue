@@ -1,26 +1,28 @@
 <template>
  <div class="overflow-hidden">
-   <myHeader/>
     <carFirst/>
     <div class="lent lent_gray">
       <div class="lent__img"></div>
     </div>
 
-    <div class="bg_w p-t-250 p-b-200">
+    <div class="bg_w p-t-100 p-b-200">
+      <secTitle :title='"[ Super puper cool team ];"' :addClass='"m-b-100"' />
       <div class="row m-b-40">
         <div class="col-22 offset-1">
           <div class="m-b-40">
-            <div class="tag">
-              <span class="h9 ttu">love</span>
-            </div>
-            <div class="tag">
-              <span class="h9 ttu">modest</span>
-            </div>
-            <div class="tag">
-              <span class="h9 ttu">the best</span>
-            </div>
-            <div class="tag">
-              <span class="h9 ttu">cats</span>
+            <div class="tagsW">
+                <div class="tag">
+                  <span class="h9 ttu">love</span>
+                </div>
+                <div class="tag">
+                  <span class="h9 ttu">modest</span>
+                </div>
+                <div class="tag">
+                  <span class="h9 ttu">the best</span>
+                </div>
+                <div class="tag">
+                  <span class="h9 ttu">cats</span>
+                </div>
             </div>
           </div>
           <div class="print">
@@ -39,7 +41,9 @@
       </div>
 
     </div>
-    <div class="bg_g p-t-250 p-b-200">
+    <div class="bg_g p-t-100 p-b-200">
+      <secTitle :title='"[ Super puper cool team ];"' :addClass='"m-b-100"' />
+
       <div class="row m-b-100">
         <div class="offset-1 col-xl-13 col-lg-14 col-md-17 col-22" >
           <p class="h6 ttu">
@@ -81,7 +85,8 @@
       <div class="lent__img"></div>
     </div>
     <formPizza/>
-    <div class="bg_r p-t-200 p-b-200">
+    <div class="bg_r p-t-100 p-b-200">
+      <secTitle :title='"[ Super puper cool team ];"' :addClass='"m-b-100"' />
       <div class="row m-b-100">
         <div class="offset-1 col-xl-12 col-lg-14 col-md-18 col-22">
           <h6 class="h7 ttu">forward and we see our agency as a either the meaning of the work is obvious or to hell with it</h6>
@@ -111,16 +116,16 @@
 <script>
 import formPizza from '@/components/sections/formPizza.vue'
 import myFooter from '@/components/sections/footer.vue'
-import myHeader from '@/components/sections/header.vue'
 import carFirst from '@/components/sections/carFirst.vue'
+import secTitle from '@/components/secTitle.vue'
 
 export default {
   name: 'Home',
   components: {
     formPizza,
     myFooter,
-    myHeader,
-    carFirst
+    carFirst,
+    secTitle
   }
 }
 </script>

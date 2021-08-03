@@ -1,10 +1,13 @@
 <template>
-  <div id="nav">
+<myCursor/>
+<myHeader/>
+
+  <!-- <div id="nav">
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> |
     <router-link to="/career">Career</router-link> |
     <router-link to="/contacts">Contacts</router-link>
-  </div>
+  </div> -->
   <!-- <transition name="fade">
     <router-view/>
   </transition> -->
@@ -14,7 +17,6 @@
     <!-- </transition> -->
   </router-view>
 </template>
-
 <style lang="scss">
 
 // .slide-enter-active {
@@ -41,3 +43,16 @@
 @import 'src/assets/css/style.scss';
 
 </style>
+<script>
+import myCursor from '@/components/myCursor.vue'
+import myHeader from '@/components/sections/header.vue'
+
+export default ({
+  setup () {
+  },
+  components: {
+    myCursor,
+    myHeader
+  }
+})
+</script>

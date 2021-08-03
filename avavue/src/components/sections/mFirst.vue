@@ -9,7 +9,7 @@
           offset-lg-4
           col-md-19
           offset-md-3
-          col-1
+          col-20
           offset-2
         "
       >
@@ -23,7 +23,7 @@
           offset-lg-7
           col-md-16
           offset-md-6
-          col-1
+          col-18
           offset-5
         "
       >
@@ -37,7 +37,7 @@
           offset-lg-1
           col-md-22
           offset-md-1
-          col-1
+          col-20
           offset-1
         "
       >
@@ -51,7 +51,7 @@
           offset-lg-9
           col-md-11
           offset-md-11
-          col-1
+          col-11
           offset-12
         "
       >
@@ -65,7 +65,7 @@
           offset-lg-10
           col-md-9
           offset-md-13
-          col-1
+          col-9
           offset-14
         "
       >
@@ -79,7 +79,7 @@
           offset-lg-1
           col-md-22
           offset-md-1
-          col-1
+          col-20
           offset-2
         "
       >
@@ -97,7 +97,6 @@ import * as THREE from 'three'
 export default {
   data () {
     return {
-      name: 'mFirst',
       container: '',
       camera: '',
       renderer: '',
@@ -119,6 +118,8 @@ export default {
       this.uniforms.u_resolution.value.y = this.renderer.domElement.height
     },
     animate: function (delta) {
+      // console.log('anim')
+      if (this.stop) return
       requestAnimationFrame(this.animate)
       this.render(delta)
       this.mousePos()
@@ -425,6 +426,7 @@ export default {
     window.removeEventListener('resize', this.onWindowResize, false)
     cancelAnimationFrame(this.animate)
     this.mFirstPause = true
+    this.stop = true
   }
 }
 </script>
@@ -445,7 +447,7 @@ export default {
     right: 0;
     left: 0;
     height: 10vh;
-    background: linear-gradient(to bottom, rgba(206,89,55,0) 0%, #202020 100%);
+    background: linear-gradient(to bottom, rgba(32,32,32,0) 0%, #202020 100%);
   }
 }
 

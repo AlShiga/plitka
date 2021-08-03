@@ -1,10 +1,13 @@
 <template>
-  <div class="bg_g">
+  <div class="bg_g p-t-100">
+    <secTitle :title='"[ Super puper cool team ];"' :addClass='"m-b-100"' />
     <div class="wrapFlyTags"></div>
   </div>
 </template>
 
 <script>
+import secTitle from '@/components/secTitle.vue'
+
 import Matter from 'matter-js'
 import { gsap } from 'gsap/all'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -14,9 +17,11 @@ gsap.registerPlugin(ScrollTrigger)
 // import 'poly-decomp'
 
 export default {
+
   data () {
     return {
       name: 'mTagsFly',
+      scrollTr: {},
       myMatter: {
         pause: false,
         Engine: '',
@@ -34,12 +39,13 @@ export default {
       }
     }
   },
+  components: { secTitle },
   props: {
     // msg: String
   },
   methods: {
     scrollAnimation () {
-      ScrollTrigger.create({
+      this.scrollTr = ScrollTrigger.create({
         trigger: '.wrapFlyTags',
         start: 'center center',
         markers: true,
@@ -47,9 +53,6 @@ export default {
         scrub: 2,
         id: 'example',
         onToggle: () => { this.world.gravity.scale = 0.0015 }
-        // onUpdate: self => {
-        //   console.log('progress:', self.progress.toFixed(3), 'direction:', self.direction, 'velocity', self.getVelocity())
-        // }
       })
     }
   },
@@ -248,13 +251,14 @@ export default {
       // run the renderer
       this.Render.run(this.render)
     } else {
-      this.Render.run(this.render)
+      this.Render.play(this.render)
     }
     this.scrollAnimation()
   },
   unmounted () {
     this.Render.stop(this.render)
     this.myMatter.pause = true
+    this.scrollTr.kill()
   }
 }
 </script>

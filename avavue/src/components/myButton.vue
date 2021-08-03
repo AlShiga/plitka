@@ -9,6 +9,7 @@
 
 <script>
 import { gsap } from 'gsap/all'
+// import func from 'vue-editor-bridge'
 
 export default {
   props: ['text'],
@@ -20,27 +21,23 @@ export default {
     }
   },
   methods: {
-    gsapTick: function (e) {
-      gsap.to(e.target, { x: this.move.x })
+    animButton: function (e) {
+      gsap.to(this.el, { x: this.move.x, y: this.move.y, ease: 'power1' })
     },
     myMouseover: function (e) {
-      // gsap.ticker.add(this.gsapTick(e))
+      gsap.ticker.add(this.animButton)
+      this.el = e.target
     },
     myMouseout: function (e) {
-      // gsap.ticker.remove(this.gsapTick(e))
-      gsap.to(e.target, { x: 0 })
+      gsap.ticker.remove(this.animButton)
+      gsap.to(e.target, { x: 0, y: 0, ease: 'Back.easeOut' })
     },
     myMousemove: function (e) {
-      console.log(e)
-      this.move.x = (e.clientX - e.offsetX) / 5
-      gsap.to(e.target, { x: this.move.x })
+      this.move.x = -(e.target.getBoundingClientRect().left + e.target.getBoundingClientRect().width / 2 - e.clientX) / 4
+      this.move.y = -(e.target.getBoundingClientRect().top + e.target.getBoundingClientRect().height / 2 - e.clientY) / 2
     }
-
   },
-  mounted () {
-    // console.log(this)
-  }
-
+  mounted () {}
 }
 </script>
 
@@ -57,6 +54,9 @@ export default {
       background-color: #f8f8f8;
       z-index: 1;
       position: relative;
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
       & *{
         pointer-events: none;
       }
@@ -71,6 +71,7 @@ export default {
       border-radius: 100px;
       background-color: #262626;
       pointer-events: none;
+      transform: translate(10px, 10px);
     }
 
   }

@@ -48,8 +48,10 @@ export default {
   },
   methods: {
     animate: function (e) {
+      if (this.stop) return
       this.stage.onRaf()
       this.mesh.onRaf()
+      // console.log('animCont')
       requestAnimationFrame(this.animate)
     },
     mouseMove: function (e) {
@@ -272,9 +274,9 @@ export default {
     document.addEventListener('mousemove', this.mouseMove)
   },
   unmounted () {
-    console.log('Пока1')
     window.removeEventListener('resize', this.stage.onResize)
     cancelAnimationFrame(this.animate)
+    this.stop = true
   }
 }
 </script>

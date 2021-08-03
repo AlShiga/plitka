@@ -1,11 +1,12 @@
 <template>
    <div class="overflow-hidden">
-    <myHeader/>
+    <!-- <myHeader/> -->
     <aFirst />
     <div class="lent lent_gray">
       <div class="lent__img"></div>
     </div>
-    <div class="bg_w p-t-250 p-b-200">
+    <div class="bg_w p-t-100 p-b-200">
+       <secTitle :title='"[ Super puper cool team ];"' :addClass='"m-b-200"' />
       <div class="row m-b-40">
         <div class="col-22 offset-1">
           <h2 class="h3 m-b-40">Hello world</h2>
@@ -29,7 +30,8 @@
     <aNamePar />
     <aLines />
 
-    <div class="p-t-200 p-b-200">
+    <div class="p-t-100 p-b-200">
+      <secTitle :title='"[ Super puper cool team ];"' :addClass='"m-b-100"' />
       <div class="row m-b-100">
         <div class="offset-1 col-xl-16 col-lg-12 col-md-15 col-22">
           <h4 class="h6">
@@ -76,12 +78,12 @@
               <p class="p1 ttu mp0">Alevtina Ksenofontova</p>
               <p class="p1 ttu mp0">designer</p>
             </div>
-
           </div>
         </div>
       </div>
     </div>
-    <div class="bg_r p-t-200 p-b-200">
+    <div class="bg_r p-t-100 p-b-200">
+      <secTitle :title='"[ Super puper cool team ];"' :addClass='"m-b-100"' />
       <div class="row m-b-100">
         <div class="offset-1 col-xl-12 col-lg-14 col-md-18 col-22">
           <h6 class="h7 ttu">forward and we see our agency as a either the meaning of the work is obvious or to hell with it</h6>
@@ -105,7 +107,6 @@
       </div>
     </div>
     <myFooter big="true"/>
-
   </div>
 </template>
 <script>
@@ -113,8 +114,8 @@
 import aFirst from '@/components/sections/aFirst.vue'
 import aNamePar from '@/components/sections/aNamePar.vue'
 import aLines from '@/components/sections/aLines.vue'
-import myHeader from '@/components/sections/header.vue'
 import myFooter from '@/components/sections/footer.vue'
+import secTitle from '@/components/secTitle.vue'
 
 export default {
   name: 'About',
@@ -122,8 +123,8 @@ export default {
     aFirst,
     aNamePar,
     aLines,
-    myHeader,
-    myFooter
+    myFooter,
+    secTitle
   }
 }
 </script>

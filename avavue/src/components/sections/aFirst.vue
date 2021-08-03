@@ -89,6 +89,7 @@ const invertEl = {
   },
   stop: function () {
     gsap.ticker.remove(tickFrame)
+    this.wrapEl.removeEventListener('mousemove', this.mouseMove)
   }
 }
 function tickFrame () { invertEl.updatePos() }

@@ -1,11 +1,11 @@
 <template>
   <div class="overflow-hidden">
-    <myHeader/>
     <contFirst/>
     <div class="lent lent_gray">
       <div class="lent__img"></div>
     </div>
-    <div class="bg_g p-t-200 p-b-200">
+    <div class="bg_g p-t-100 p-b-200">
+      <secTitle :title='"[ Super puper cool team ];"' :addClass='"m-b-100"' />
       <div class="row">
         <div class="col-lg-9 offset-lg-1 col-22 offset-1">
           <div class="d-flex flex-column">
@@ -36,15 +36,15 @@
 
 <script>
 import contFirst from '@/components/sections/contFirst.vue'
-import myHeader from '@/components/sections/header.vue'
 import myFooter from '@/components/sections/footer.vue'
+import secTitle from '@/components/secTitle.vue'
 
 export default {
   name: 'Contacts',
   components: {
     contFirst,
-    myHeader,
-    myFooter
+    myFooter,
+    secTitle
 
   }
 }

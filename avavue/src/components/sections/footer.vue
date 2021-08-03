@@ -15,20 +15,23 @@
         </a>
       </div>
     </div>
+    <secTitle :title='"[ Super puper cool team ];"' :addClass='"m-b-100 m-t-100"' />
     <div class="row m-b-40">
       <div class="col-22 offset-1">
         <div class="m-b-40">
-          <div class="tag">
-            <span class="h9 ttu">love</span>
-          </div>
-          <div class="tag">
-            <span class="h9 ttu">modest</span>
-          </div>
-          <div class="tag">
-            <span class="h9 ttu">the best</span>
-          </div>
-          <div class="tag">
-            <span class="h9 ttu">cats</span>
+          <div class="tagsW">
+            <div class="tag">
+              <span class="h9 ttu">love</span>
+            </div>
+            <div class="tag">
+              <span class="h9 ttu">modest</span>
+            </div>
+            <div class="tag">
+              <span class="h9 ttu">the best</span>
+            </div>
+            <div class="tag">
+              <span class="h9 ttu">cats</span>
+            </div>
           </div>
         </div>
       </div>
@@ -57,10 +60,26 @@
       <img class="mBottom__img" src="~@/assets/img/career/p3.jpg" alt="Some image" />
     </div>
   </div>
+  <div class="row p-b-40">
+    <div class="col-22 offset-1">
+      <div class="footerLink">
+        <div class="row align-items-center">
+          <div class="col-xl-12 offset-xl-0 col-lg-9 offset-lg-0 d-none d-lg-block order-md-1 "><p class="p1 ttu mp0">[ we are ava-digital ];</p></div>
+          <div class="col-xl-3 offset-xl-1  col-lg-5 offset-lg-1 col-md-7 offset-md-7 offset-0 col-20 order-md-2 order-1"><a href="+78129062232" class="footerLink__tel  p1 ttu mp0">[ +7 812 906 — 22— 32 ];</a></div>
+          <div class="col-xl-3 offset-xl-1  col-lg-5 offset-lg-1 col-md-7 offset-md-1 offset-0 col-20 order-md-3 order-3"><a href="info@ava-digital.ru" class="p1 ttu mp0">[ info@ava-digital.ru ];</a></div>
+          <div class="col-xl-1 offset-xl-3  col-lg-1 offset-lg-2 col-md-1 offset-md-1 offset-1 col-3 order-md-4 order-2">
+            <div class="footerLink__circle"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <!--/content-->
 </template>
 
 <script>
+import secTitle from '@/components/secTitle.vue'
+
 import { gsap } from 'gsap/all'
 
 // gsap.registerPlugin(TweenMax)
@@ -87,6 +106,7 @@ export default {
       }
     }
   },
+  components: { secTitle },
   props: ['big'],
   methods: {
     init: function () {
@@ -94,7 +114,7 @@ export default {
       this.wrap = document.querySelector('.mBottom')
       this.images = document.querySelectorAll('.mBottom__img')
       this.allImage = this.images.length
-      console.log(this.images)
+      // console.log(this.images)
       this.wrap.addEventListener('mousemove', this.getMousePos)
       setInterval(() => {
         this.mousePos.cash.x = this.mousePos.current.x
@@ -106,14 +126,14 @@ export default {
       this.mousePos.current.y = e.clientY - this.wrap.getBoundingClientRect().top
       if (this.mousePos.current.x - this.mousePos.old.x > 100 || this.mousePos.current.x - this.mousePos.old.x < -100 ||
       this.mousePos.current.y - this.mousePos.old.y > 100 || this.mousePos.current.y - this.mousePos.old.y < -100) {
-        console.log(e)
+        // console.log(e)
         this.mousePos.old.x = this.mousePos.current.x
         this.mousePos.old.y = this.mousePos.current.y
         this.showNextImage()
       }
     },
     showNextImage: function () {
-      console.log(this.mousePos.cash.x, this.mousePos.current.x)
+      // console.log(this.mousePos.cash.x, this.mousePos.current.x)
       ++this.zIndexVal
       const z = this.zIndexVal % 10000
       const img = this.images[this.currentImage % (this.allImage - 1)]
@@ -152,7 +172,7 @@ export default {
       // scale down the image
         .to(img, 1, {
           ease: 'Quint.easeOut',
-          scale: 0.2
+          scale: 0.1
         }, 0.4)
     }
 
@@ -196,6 +216,31 @@ export default {
     width: 100%;
     height: 100%;
     background-size: cover;
+  }
+}
+.footerLink{
+  padding: 20px 40px 10px 40px;
+  border-top: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+  border-left: 1px solid currentColor;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  &__circle{
+    margin-left: auto;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: currentColor;
+    transition: 0.3s;
+    &:hover{
+      background-color: #E10F1C;
+    }
+  }
+  &__tel{
+    @media (max-width: 767px) {
+      margin-bottom: 10px !important;
+      display: inline-block;
+    }
   }
 }
 </style>

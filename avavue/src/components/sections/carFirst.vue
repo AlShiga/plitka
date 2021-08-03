@@ -46,7 +46,7 @@ export default {
   mounted () {
     // Draggable.create('.photoWrap img')
     document.querySelectorAll('.photoWrap img').forEach((el) => {
-      gsap.set(el, { left: 0, x: innerWidth * Math.random() - 300, y: innerHeight / 3 * 2 + innerHeight / 3 * 2 * Math.random() - 300, rotation: Math.random() * 25 - 12 })
+      gsap.set(el, { left: 0, x: innerWidth * Math.random() - innerWidth / 6, y: innerHeight / 3 * 2 + innerHeight / 3 * 2 * Math.random() - innerWidth / 6, rotation: Math.random() * 25 - 12 })
     })
     Draggable.create('.photoWrap img', {
       bounds: document.querySelector('.photoWrap'),
@@ -62,30 +62,30 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.carFirst{
-  position: relative;
-  min-height: 150vh;
-  &__content{
+  .carFirst{
     position: relative;
-    z-index: 10005;
-    pointer-events: none;
+    min-height: 150vh;
+    &__content{
+      position: relative;
+      z-index: 10005;
+      pointer-events: none;
+    }
   }
-}
-.photoWrap {
-  position: absolute;
-  top: 0;
-  left:0;
-  right: 0;
-  bottom: 0;
-  img{
-    width: 20vw;
-    min-width: 100px;
-    height: auto;
-    background-color: #f8f8f8;
-    padding: 15px 15px 50px 15px;
+  .photoWrap {
     position: absolute;
-    z-index: 1;
-    top: 0;left: 0;
+    top: 0;
+    left:0;
+    right: 0;
+    bottom: 0;
+    img{
+      width: 20vw;
+      min-width: 200px;
+      height: auto;
+      background-color: #f8f8f8;
+      padding: 1vmax 1vmax 2vmax 1vmax;
+      position: absolute;
+      z-index: 1;
+      top: 0;left: 0;
+    }
   }
-}
 </style>

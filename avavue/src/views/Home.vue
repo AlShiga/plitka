@@ -1,11 +1,10 @@
 <template>
-   <div class="overflow-hidden">
-    <myHeader/>
-    <mFirst/>
+  <div class="overflow-hidden">
+    <mFirst />
 
     <div class="p-t-200 p-b-250">
       <myMarquee :addClass="'z-1 marquee_rotate marquee_gray'" />
-      <myMarquee/>
+      <myMarquee />
       <!-- <myMarquee/> -->
       <!-- <div class="lent z-1 lent_gray lent_rotate">
         <div class="lent__img"></div>
@@ -14,124 +13,154 @@
         <div class="lent__img"></div>
       </div>
     </div>
-
     <div class="row">
-      <div class="col-xl-12 offset-xl-1 col-lg-13 offset-lg-1 col-md-14 offset-md-1 col-22 offset-1">
+      <div
+        class="
+          col-xl-12
+          offset-xl-1
+          col-lg-13
+          offset-lg-1
+          col-md-14
+          offset-md-1
+          col-22
+          offset-1
+        "
+      >
         <p class="h7 ttu">
-          we’re a branding/digital design studio connecting brands to people through craft and culture.
-          A collective of three like-minded creatives and one powerhouse project
+          we’re a branding/digital design studio connecting brands to people
+          through craft and culture. A collective of three like-minded creatives
+          and one powerhouse project
         </p>
       </div>
     </div>
-    <div class="bg_w p-t-250 p-b-200">
+    <div class="bg_w p-t-100 p-b-200">
+      <secTitle :title="'[ Super puper cool team ];'" :addClass="'m-b-250'" />
       <div class="row m-b-40">
         <div class="col-22 offset-1">
-          <h2 class="h3 m-b-40">Hello world</h2>
+          <h2 class="h3 m-b-40">&lt;Hello world/&gt;</h2>
           <div class="print">
-            <img width="1222px" height="600px" src="~@/assets/img/print.png" alt="" class="w-100 m-b-15">
-            <p class="p1 ttu">wow.  we feel like this</p>
+            <img
+              width="1222px"
+              height="600px"
+              src="~@/assets/img/print.png"
+              alt=""
+              class="w-100 m-b-15"
+            />
+            <p class="p1 ttu">wow. we feel like this</p>
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="offset-1 col-lg-12 col-md-15 col-22" >
+      <div class="row m-b-150">
+        <div class="offset-1 col-lg-12 col-md-15 col-22">
           <p class="h8">
-            <span class="p1 red">[ Our team ];</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AVA is a small team. There are five of us. Each of us is responsible for his/her part of the work. We are engaged in web design and site development of different difficulty.
+            <span class="p1 red">[ Our team ];</span
+            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AVA is a small team.
+            There are five of us. Each of us is responsible for his/her part of
+            the work. We are engaged in web design and site development of
+            different difficulty.
           </p>
         </div>
       </div>
-      <div class="row">
-        <div class="col-5 offset-1">
-          <myButton :text='"[ хуй ]"'/>
+      <div class="row position-relative">
+        <div class="yes h2 red">YES</div>
+        <div class="col-lg-5 offset-lg-1 d-none d-lg-block">
+          <myButton :text="'[ хуй ]'" />
+        </div>
+        <div
+          class="
+            col-lg-5
+            offset-lg-6
+            col-md-7
+            offset-md-7 offset-1
+            col-22
+            offset-1
+            m-b-40
+          "
+        >
+          <myButton @click="$router.push('/about')" :text="'[ пизда ]'" />
+        </div>
+        <div
+          class="
+            col-lg-4
+            offset-lg-1
+            col-md-6
+            offset-md-1 offset-1
+            col-22
+            offset-1
+          "
+        >
+          <myButton @click="showYes" :text="'[ джигурда ]'" />
         </div>
       </div>
-
     </div>
-    <mTagsFly/>
+    <mTagsFly />
     <div class="lent lent_red">
       <div class="lent__img"></div>
     </div>
-    <div class="p-t-200 p-b-200">
-      <div class="row">
-        <div class="offset-1 col-lg-12 col-md-16 col-18">
-          <h3 class="h7 ttu">forward and we see our agency as a either the meaning of the work is obvious or to hell with it</h3>
-        </div>
-      </div>
-
-      <div class="workItem">
-
-      </div>
+    <div class="position-relative p-t-100 p-b-200">
+      <secTitle :title="'[ Super puper cool team ];'" :addClass="'m-b-100'" />
+      <mPrList />
     </div>
-
-    <mAdv/>
-
-    <myFooter big="true"/>
-    <!-- <div class="lent lent_gray">
-      <div class="lent__img"></div>
-    </div>
-    <div class="bg_w p-t-250 p-b-80">
-        <div class="row m-b-200">
-          <div class="col-22 offset-1">
-            <a href="tel:+78129062232" class="h4 red">+7 812 906 —<br>22 — 32</a>
-            <a href="mailto:info@ava-digital.ru"  class="d-flex">
-              <span class="h4 red" >info@</span>
-              <span class="h4 red" >ava-<br>
-                digital.ru</span>
-            </a>
-          </div>
-        </div>
-        <div class="row m-b-40">
-          <div class="col-22 offset-1">
-            <div class="m-b-40">
-              <div class="tag">
-                <span class="h9 ttu">love</span>
-              </div>
-              <div class="tag">
-                <span class="h9 ttu">modest</span>
-              </div>
-              <div class="tag">
-                <span class="h9 ttu">the best</span>
-              </div>
-              <div class="tag">
-                <span class="h9 ttu">cats</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="mBottom p-t-250 p-b-250">
-      <div class="d-flex justify-content-center ">
-        <h6 class="h3 text-center">Are you<br> still here?</h6>
-      </div>
-    </div> -->
-
+    <mAdv />
+    <myFooter big="true" />
   </div>
-
-  <!-- <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div> -->
 </template>
 
 <script>
 import mTagsFly from '@/components/sections/mTagsFly.vue'
 import mAdv from '@/components/sections/mAdv.vue'
 import mFirst from '@/components/sections/mFirst.vue'
-import myHeader from '@/components/sections/header.vue'
 import myFooter from '@/components/sections/footer.vue'
 import myMarquee from '@/components/myMarquee.vue'
 import myButton from '@/components/myButton.vue'
+import secTitle from '@/components/secTitle.vue'
+import mPrList from '@/components/sections/mPrList.vue'
 
 export default {
-  name: 'Home',
+  data () {
+    return {
+    }
+  },
   components: {
     mTagsFly,
     mFirst,
     mAdv,
-    myHeader,
     myFooter,
     myMarquee,
-    myButton
+    myButton,
+    secTitle,
+    mPrList
+  },
+  methods: {
+    showYes: function () {
+      document.querySelector('.yes').classList.add('show')
+      setTimeout(() => {
+        document.querySelector('.yes').classList.remove('show')
+      }, 100)
+    }
+  },
+  mounted () {
+    console.log('Прив1')
+  },
+  unmounted () {
+    console.log('Пока1')
   }
 }
+
 </script>
+
+<style lang="scss" scoped>
+.yes {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -200%);
+  transition: 1.5s;
+  opacity: 0;
+  pointer-events: none;
+  &.show {
+    transition: 0.1s;
+    opacity: 1;
+  }
+}
+</style>

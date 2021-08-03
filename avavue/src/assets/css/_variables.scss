@@ -16,7 +16,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  // scroll-behavior: smooth;
   font-size: 14px;
   @include media-breakpoint-down(lg) {
     font-size: 14px;
@@ -406,7 +406,7 @@ input[type="number"] {
   font-weight: 400;
   line-height: 90%;
   letter-spacing: -0.035em;
-  @include fontS(150px, 100px, 100px, 100px);
+  @include fontS(150px, 100px, 80px, 50px);
 }
 
 .h5 {
