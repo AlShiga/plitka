@@ -2,9 +2,24 @@
  <div class="overflow-hidden">
     <div class="prFirst"></div>
     <div class="prMore">
-      <div class="row">
+      <div class="row p-b-200">
         <div class="col-xl-19 offset-xl-1 col-lg-19 offset-lg-1 col-md-22 offset-md-1 col-22 offset-1">
-          <div class="prMoreItem p-b-40 p-t-40 m-b-20">
+
+          <div v-for="pr in projects" :key="pr.title" class="prMoreItem p-b-40 p-t-40 m-b-20">
+            <span class="h6 prMoreItem__title ttu">{{pr.title}}</span>
+            <div class="prMoreItem__detail">
+              <p class="p1">International company</p>
+              <div class="d-none d-lg-block">
+                <span class="p1">[ Branding ]</span>&nbsp;&nbsp;
+                <span class="p1">[ Web ]</span>&nbsp;&nbsp;
+                <span class="p1">[ Printing ]</span>&nbsp;&nbsp;
+                <span class="p1">[ Logo ]</span>&nbsp;&nbsp;
+                <span class="p1">[ 2021 ]</span>&nbsp;&nbsp;
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="prMoreItem p-b-40 p-t-40 m-b-20">
             <span class="h6 prMoreItem__title">knauf</span>
             <div class="prMoreItem__detail">
               <p class="p1">International company</p>
@@ -30,21 +45,7 @@
                 <span class="p1">[ 2021 ]</span>&nbsp;&nbsp;
               </div>
             </div>
-          </div>
-
-          <div class="prMoreItem p-b-40 p-t-40 m-b-20">
-            <span class="h6 prMoreItem__title">knauf</span>
-            <div class="prMoreItem__detail">
-              <p class="p1">International company</p>
-              <div class="d-none d-lg-block">
-                <span class="p1">[ Branding ]</span>&nbsp;&nbsp;
-                <span class="p1">[ Web ]</span>&nbsp;&nbsp;
-                <span class="p1">[ Printing ]</span>&nbsp;&nbsp;
-                <span class="p1">[ Logo ]</span>&nbsp;&nbsp;
-                <span class="p1">[ 2021 ]</span>&nbsp;&nbsp;
-              </div>
-            </div>
-          </div>
+          </div> -->
 
         </div>
       </div>
@@ -55,13 +56,31 @@
 
 <script>
 // import formPizza from '@/components/sections/formPizza.vue'
+import myFooter from '@/components/sections/footer.vue'
 
 export default {
-  name: 'Home',
+  data () {
+    return {
+      projects: [{ name: 'knauf' }, { name: 'knauf1' }]
+    }
+  },
   components: {
-    // formPizza,
+    myFooter
+  },
+  mounted () {
+    fetch('https://zapolie-v.ru/wp-json/wp/v2/posts')
+      .then((r) => r.json())
+      // eslint-disable-next-line no-return-assign
+      .then((res) => {
+        this.projects = res.map(x => x)
+        // console.log(this.projects[0])
+      })
 
+    setTimeout(() => {
+      console.log(this.projects[0])
+    }, 1000)
   }
+
 }
 </script>
 <style lang="scss" scoped>

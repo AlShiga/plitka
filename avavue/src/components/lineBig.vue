@@ -22,6 +22,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
   .servItem{
-    width: 200vw;
+    width: 400vw;
   }
 </style>

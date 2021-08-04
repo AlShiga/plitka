@@ -63,18 +63,18 @@
             <div class=""></div>
             <div class=""></div>
             <div class="persItem">
-              <img src="img/al.jpg" alt="" class="w-100 m-b-10">
+              <img src="~@/assets/img/al.jpg" alt="" class="w-100 m-b-10">
               <p class="p1 ttu mp0">Alevtina Ksenofontova</p>
               <p class="p1 ttu mp0">designer</p>
             </div>
             <div class="persItem">
-              <img src="img/al.jpg" alt="" class="w-100 m-b-10">
+              <img src="~@/assets/img/al.jpg" alt="" class="w-100 m-b-10">
               <p class="p1 ttu mp0">Alevtina Ksenofontova</p>
               <p class="p1 ttu mp0">designer</p>
             </div>
             <div class=""></div>
             <div class="persItem">
-              <img src="img/al.jpg" alt="" class="w-100 m-b-10">
+              <img src="~@/assets/img/al.jpg" alt="" class="w-100 m-b-10">
               <p class="p1 ttu mp0">Alevtina Ksenofontova</p>
               <p class="p1 ttu mp0">designer</p>
             </div>
@@ -82,30 +82,7 @@
         </div>
       </div>
     </div>
-    <div class="bg_r p-t-100 p-b-200">
-      <secTitle :title='"[ Super puper cool team ];"' :addClass='"m-b-100"' />
-      <div class="row m-b-100">
-        <div class="offset-1 col-xl-12 col-lg-14 col-md-18 col-22">
-          <h6 class="h7 ttu">forward and we see our agency as a either the meaning of the work is obvious or to hell with it</h6>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-7 offset-1">
-          <div class="persItem">
-            <img src="img/al.jpg" alt="" class="w-100 m-b-10">
-            <p class="p1 ttu mp0">Alevtina Ksenofontova</p>
-            <p class="p1 ttu mp0">designer</p>
-          </div>
-        </div>
-        <div class="col-9 offset-1">
-          <div class="persItem">
-            <img src="img/al.jpg" alt="" class="w-100 m-b-10">
-            <p class="p1 ttu mp0">Alevtina Ksenofontova</p>
-            <p class="p1 ttu mp0">designer</p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <aSlider/>
     <myFooter big="true"/>
   </div>
 </template>
@@ -115,6 +92,7 @@ import aFirst from '@/components/sections/aFirst.vue'
 import aNamePar from '@/components/sections/aNamePar.vue'
 import aLines from '@/components/sections/aLines.vue'
 import myFooter from '@/components/sections/footer.vue'
+import aSlider from '@/components/sections/aSlider.vue'
 import secTitle from '@/components/secTitle.vue'
 
 export default {
@@ -124,7 +102,8 @@ export default {
     aNamePar,
     aLines,
     myFooter,
-    secTitle
+    secTitle,
+    aSlider
   }
 }
 </script>

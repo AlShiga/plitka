@@ -3,15 +3,8 @@
     <mFirst />
 
     <div class="p-t-200 p-b-250">
-      <myMarquee :addClass="'z-1 marquee_rotate marquee_gray'" />
-      <myMarquee />
-      <!-- <myMarquee/> -->
-      <!-- <div class="lent z-1 lent_gray lent_rotate">
-        <div class="lent__img"></div>
-      </div> -->
-      <div class="lent z-2">
-        <div class="lent__img"></div>
-      </div>
+      <myMarquee :addClass="'z-1 lent_rotate lent_gray'" />
+      <myMarquee :addClass="'z-2'"/>
     </div>
     <div class="row">
       <div
@@ -26,10 +19,13 @@
           offset-1
         "
       >
-        <p class="h7 ttu">
+        <p v-if="$store.state.langEn" class="h7 ttu">
           we’re a branding/digital design studio connecting brands to people
           through craft and culture. A collective of three like-minded creatives
           and one powerhouse project
+        </p>
+        <p v-else class="h7 ttu">
+          AVA - digital агентство полного цикла. Делаем сокрушительные сайты, которые всем нравятся.  Мы помешаны на дизайне, технологиях и мечтаем сделать интернет красивым.
         </p>
       </div>
     </div>
@@ -94,9 +90,7 @@
       </div>
     </div>
     <mTagsFly />
-    <div class="lent lent_red">
-      <div class="lent__img"></div>
-    </div>
+    <myMarquee :addClass="'z-2 lent__red'"/>
     <div class="position-relative p-t-100 p-b-200">
       <secTitle :title="'[ Super puper cool team ];'" :addClass="'m-b-100'" />
       <mPrList />

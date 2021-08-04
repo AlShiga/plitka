@@ -1,6 +1,6 @@
 <template>
   <div class="mFirst p-t-250 p-b-250">
-    <div class="row z-5 position-relative">
+    <div v-if="$store.state.langEn" class="row z-5 position-relative">
       <div
         class="
           col-xl-19
@@ -84,6 +84,92 @@
         "
       >
         <h1 class="h2 m-b-80">e-motions.</h1>
+      </div>
+    </div>
+    <div v-else class="row z-5 position-relative">
+      <div
+        class="
+          col-xl-19
+          offset-xl-4
+          col-lg-11
+          offset-lg-4
+          col-md-19
+          offset-md-3
+          col-20
+          offset-2
+        "
+      >
+        <h1 class="h2 m-b-80">мы</h1>
+      </div>
+      <div
+        class="
+          col-xl-16
+          offset-xl-7
+          col-lg-15
+          offset-lg-7
+          col-md-16
+          offset-md-6
+          col-18
+          offset-5
+        "
+      >
+        <h1 class="h2 m-b-80">создаём</h1>
+      </div>
+      <div
+        class="
+          col-xl-22
+          offset-xl-1
+          col-lg-22
+          offset-lg-1
+          col-md-22
+          offset-md-1
+          col-20
+          offset-1
+        "
+      >
+        <h1 class="h2 m-b-80">дизайн</h1>
+      </div>
+      <div
+        class="
+          col-xl-13
+          offset-xl-9
+          col-lg-13
+          offset-lg-9
+          col-md-11
+          offset-md-11
+          col-11
+          offset-12
+        "
+      >
+        <h1 class="h2 m-b-80">полный</h1>
+      </div>
+      <div
+        class="
+          col-xl-11
+          offset-xl-11
+          col-lg-12
+          offset-lg-10
+          col-md-9
+          offset-md-13
+          col-9
+          offset-14
+        "
+      >
+        <h1 class="h2 m-b-80">огня</h1>
+      </div>
+      <div
+        class="
+          col-xl-22
+          offset-xl-1
+          col-lg-22
+          offset-lg-1
+          col-md-22
+          offset-md-1
+          col-20
+          offset-2
+        "
+      >
+        <h1 class="h2 m-b-80">и страсти</h1>
       </div>
     </div>
     <div class="containerMAdv" touch-action="none"></div>

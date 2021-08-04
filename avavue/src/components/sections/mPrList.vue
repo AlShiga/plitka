@@ -1,9 +1,12 @@
 <template>
   <div class="row m-b-150">
     <div class="offset-1 col-lg-12 col-md-16 col-18">
-      <h3 class="h7 ttu">
+      <h3 v-if="$store.state.langEn" class="h7 ttu">
         forward and we see our agency as a either the meaning of the work is
         obvious or to hell with it
+      </h3>
+      <h3 v-else class="h7 ttu">
+        Здесь наши завершённые работы. Не сомневайтесь, ваш сайт будет ещё лучше.
       </h3>
     </div>
   </div>

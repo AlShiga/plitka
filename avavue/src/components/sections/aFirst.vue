@@ -116,6 +116,7 @@ export default {
 <style scoped lang="scss">
 .aboutFirst {
   position: relative;
+  min-height: 100vh;
   //   width: 100%;
   //   height: 1000px;
   // background: rgb(0,32,36);

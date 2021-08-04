@@ -1,7 +1,6 @@
 <template>
-  <div v-if="big" class="lent lent_gray">
-    <div class="lent__img"></div>
-  </div>
+  <myMarquee v-if="big" :addClass="'z-2 lent_gray'"/>
+
   <div v-if="big" class="bg_w p-t-250 p-b-80">
     <div class="row m-b-200">
       <div class="col-22 offset-1">
@@ -39,9 +38,13 @@
   </div>
   <div class="mBottom p-t-250 p-b-250">
     <div class="d-flex justify-content-center">
-      <h6 class="mBottom__title h3 text-center">
+      <h6 v-if="$store.state.langEn" class="mBottom__title h3 text-center">
         Are you<br />
         still here?
+      </h6>
+      <h6 v-else class="mBottom__title h3 text-center">
+        Тебе<br />
+        дальше!
       </h6>
       <img class="mBottom__img" src="~@/assets/img/career/p1.jpg" alt="Some image" />
       <img class="mBottom__img" src="~@/assets/img/career/p2.jpg" alt="Some image" />
@@ -79,6 +82,7 @@
 
 <script>
 import secTitle from '@/components/secTitle.vue'
+import myMarquee from '@/components/myMarquee.vue'
 
 import { gsap } from 'gsap/all'
 
@@ -106,7 +110,7 @@ export default {
       }
     }
   },
-  components: { secTitle },
+  components: { secTitle, myMarquee },
   props: ['big'],
   methods: {
     init: function () {
