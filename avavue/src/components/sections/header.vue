@@ -21,7 +21,7 @@
         </div>
         <div class="header__menu">
           <div class="row">
-            <div class="col-24"><router-link to="/"><p class="p1 ttu m-b-10"><span v-if="$store.state.langEn" class="p1 ttu m-b-10">[&nbsp;Home&nbsp;]</span><span v-else class="p1 ttu m-b-10">[&nbsp;Главная&nbsp;]</span></p></router-link></div>
+            <div class="col-24"><router-link to="/blog"><p class="p1 ttu m-b-10"><span v-if="$store.state.langEn" class="p1 ttu m-b-10">[&nbsp;Blog&nbsp;]</span><span v-else class="p1 ttu m-b-10">[&nbsp;Блог&nbsp;]</span></p></router-link></div>
             <div class="col-24"><router-link to="/contacts"><p class="p1 ttu m-b-10"><span v-if="$store.state.langEn" class="p1 ttu m-b-10">[&nbsp;Contacts&nbsp;]</span><span v-else class="p1 ttu m-b-10">[&nbsp;Контакты&nbsp;]</span></p></router-link></div>
             <div class="offset-12 col-12"><router-link to="/about"><p class="p1 ttu m-b-10"><span v-if="$store.state.langEn" class="p1 ttu m-b-10">[&nbsp;About&nbsp;]</span><span v-else class="p1 ttu m-b-10">[&nbsp;О нас&nbsp;]</span></p></router-link></div>
             <div class="offset-12 col-12"><router-link to="/career"><p class="p1 ttu m-b-10"><span v-if="$store.state.langEn" class="p1 ttu m-b-10">[&nbsp;Career&nbsp;]</span><span v-else class="p1 ttu m-b-10">[&nbsp;Карьера&nbsp;]</span></p></router-link></div>

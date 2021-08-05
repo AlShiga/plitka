@@ -1,4 +1,5 @@
 <template>
+  <div class="mPrWrap">
   <div class="row m-b-150">
     <div class="offset-1 col-lg-12 col-md-16 col-18">
       <h3 v-if="$store.state.langEn" class="h7 ttu">
@@ -10,7 +11,8 @@
       </h3>
     </div>
   </div>
-  <div class="mPrItem row m-b-250">
+
+  <div v-for="pr in projects" :key="pr.acf.title" class="mPrItem row m-b-250">
     <div
       class="
         col-xl-16
@@ -24,16 +26,12 @@
         position-relattive
       "
     >
-      <img src="~@/assets/img/mProj/p1.jpg" alt="" class="imgDisp w-100" />
+      <img :src="pr.acf.img" alt="" class="imgDisp w-100" />
       <div class="mPrItem__det">
-        <div class="mPrItem__tags d-none d-lg-block m-b-40">
-          <span class="p1">[ Branding ]</span>&nbsp;&nbsp;
-          <span class="p1">[ Web ]</span>&nbsp;&nbsp;
-          <span class="p1">[ Printing ]</span>&nbsp;&nbsp;
-          <span class="p1">[ Logo ]</span>&nbsp;&nbsp;
-          <span class="p1">[ 2021 ]</span>&nbsp;&nbsp;
+        <div v-if="pr.acf.tags" class="mPrItem__tags d-none d-lg-block m-b-40">
+          <span v-for="tag in pr.acf.tags" class="p1" :key="tag.name">[&nbsp;{{tag.name}}&nbsp;]&nbsp;&nbsp;</span>
         </div>
-        <span class="h3 d-block">zapolie-village</span>
+        <span @click="$router.push({ path: `/projects/${pr.id}` })" class="mPrItem__title h3 d-block">{{pr.acf.title}}</span>
       </div>
     </div>
   </div>
@@ -91,6 +89,7 @@
       </div>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
@@ -117,12 +116,12 @@ vec2 backgroundCoverUv(vec2 screenSize, vec2 imageSize, vec2 uv) {
   float screenRatio = screenSize.x / screenSize.y;
   float imageRatio = imageSize.x / imageSize.y;
 
-  vec2 newSize = screenRatio < imageRatio 
+  vec2 newSize = screenRatio < imageRatio
       ? vec2(imageSize.x * screenSize.y / imageSize.y, screenSize.y)
       : vec2(screenSize.x, imageSize.y * screenSize.x / imageSize.x);
 
-  vec2 newOffset = (screenRatio < imageRatio 
-      ? vec2((newSize.x - screenSize.x) / 2.0, 0.0) 
+  vec2 newOffset = (screenRatio < imageRatio
+      ? vec2((newSize.x - screenSize.x) / 2.0, 0.0)
       : vec2(0.0, (newSize.y - screenSize.y) / 2.0)) / newSize;
 
   return uv * screenSize / newSize + newOffset;
@@ -158,8 +157,6 @@ void main() {
   texScale.y += 0.10 * uyVelo;
   if(uv.x < 1.) texturer.b = texture(uTexture, texScale).b;
 
-
-  
   gl_FragColor = texturer;
 }
 `
@@ -202,22 +199,24 @@ const AddImg = {
   renderer: {},
   scr: 0,
   init: function () {
-    this.canvasW = window.innerWidth
-    this.canvasH = window.innerHeight
-    this.aspect = window.innerWidth / window.innerHeight
+    if (!AddImg.inited) {
+      AddImg.inited = true
+      this.canvasW = window.innerWidth
+      this.canvasH = window.innerHeight
+      this.aspect = window.innerWidth / window.innerHeight
 
-    this.loader = new THREE.TextureLoader()
+      this.loader = new THREE.TextureLoader()
 
-    this.scene = new THREE.Scene()
+      this.scene = new THREE.Scene()
 
-    this.camera = new THREE.PerspectiveCamera(
-      70,
-      this.aspect,
-      100,
-      1000
-    )
-    this.camera.position.set(0, 0, 1000)
-    this.camera.fov =
+      this.camera = new THREE.PerspectiveCamera(
+        70,
+        this.aspect,
+        100,
+        1000
+      )
+      this.camera.position.set(0, 0, 1000)
+      this.camera.fov =
       2 *
       Math.atan(
         window.innerWidth /
@@ -225,25 +224,26 @@ const AddImg = {
           (2 * 1000)
       ) *
       (180 / Math.PI)
-    this.camera.updateProjectionMatrix()
+      this.camera.updateProjectionMatrix()
 
-    this.renderer = new THREE.WebGLRenderer({
-      alpha: true,
-      antialias: true
-    })
-    this.renderer.setClearColor(0xffffff, 0)
-    this.renderer.setSize(window.innerWidth, window.innerHeight)
-    document.body.appendChild(this.renderer.domElement)
-    this.renderer.domElement.classList.add('dispWrap')
-    this.findImg('.imgDisp')
-    // window.addEventListener('scroll', () => {
-    //   this.changePos()
-    //   // this.scroll = window.scrollY;
-    // })
+      this.renderer = new THREE.WebGLRenderer({
+        alpha: true,
+        antialias: true
+      })
+      this.renderer.setClearColor(0xffffff, 0)
+      this.renderer.setSize(window.innerWidth, window.innerHeight)
+      document.querySelector('.mPrWrap').appendChild(this.renderer.domElement)
+      this.renderer.domElement.classList.add('dispWrap')
+      this.findImg('.imgDisp')
+    }
+    if (AddImg.stop) {
+      AddImg.stop = !AddImg.stop
+      requestAnimationFrame(AddImg.render)
+    }
   },
   findImg: function (selector) {
-    const images = document.querySelectorAll(selector)
-    images.forEach((el, key) => {
+    this.domImg = document.querySelectorAll(selector)
+    this.domImg.forEach((el, key) => {
       // console.dir(el);
       let texturr
       this.loader.load(
@@ -277,15 +277,17 @@ const AddImg = {
         uniforms: uniforms[key],
         transparent: true
       })
+
+      // const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
       const cube = new THREE.Mesh(geometry, material)
       this.images[key] = cube
       cube.scale.set(el.offsetWidth, el.offsetHeight, 1)
-      el.style.opacity = '0.3'
+      el.style.opacity = '0.5'
 
       this.scene.add(this.images[key])
-
-      cube.position.x = 0 - this.canvasW / 2 + el.offsetWidth / 2 + el.offsetLeft
-      cube.position.y = -this.canvasH / 2 + el.offsetHeight / 2 + el.offsetTop
+      console.log(this.canvasW, el.offsetWidth, el)
+      cube.position.x = -this.canvasW / 2 + el.offsetWidth / 2 + el.getBoundingClientRect().x
+      cube.position.y = -this.canvasH / 2 + el.offsetHeight / 2 + el.getBoundingClientRect().y
     })
     console.log(AddImg.images)
 
@@ -293,31 +295,28 @@ const AddImg = {
     // console.log(this);
   },
   render: () => {
+    // console.log('anim')
+    if (AddImg.stop) return
     requestAnimationFrame(AddImg.render)
     const newPos = window.scrollY
-    // let delta
-    if (AddImg.scroll != null) { // && newPos < maxScroll
-      // delta = newPos - AddImg.scroll
+    if (AddImg.scroll != null) {
       AddImg.scroll = newPos
     }
-    // console.log(delta)
-    AddImg.changePos()
+    AddImg.domImg.forEach((el, key) => {
+      AddImg.images[key].position.y = AddImg.canvasH / 2 - el.offsetHeight / 2 - el.getBoundingClientRect().y
+    })
     AddImg.renderer.render(AddImg.scene, AddImg.camera)
-    AddImg.scr = (AddImg.scr * 3 + checkScrollSpeed() / 100) / 4
+    AddImg.scr = (AddImg.scr * 8 + checkScrollSpeed() / 100) / 9
     uniforms.forEach((el) => {
       el.uyVelo.value = AddImg.scr
     }
     )
-  },
-  changePos: () => {
-    document.querySelectorAll('.imgDisp').forEach((el, key) => {
-      AddImg.images[key].position.y = AddImg.canvasH / 2 - el.offsetHeight / 2 - el.y
-    })
   }
 }
 export default {
   data () {
     return {
+      projects: {}
     }
   },
   components: {
@@ -327,12 +326,22 @@ export default {
 
   },
   mounted () {
+    fetch('http://ava/wp-json/wp/v2/posts?categories=3')
+      .then((r) => r.json())
+      // eslint-disable-next-line no-return-assign
+      .then((res) => {
+        this.projects = res.map(x => x)
+        console.log(this.projects[0])
+        setTimeout(() => {
+          AddImg.init()
+        }, 500)
+      })
     setTimeout(() => {
       // AddImg.init()
     }, 500)
   },
   unmounted () {
-    console.log('Пока1')
+    AddImg.stop = true
   }
 }
 
@@ -345,10 +354,11 @@ export default {
   left: 0;
   pointer-events: none;
   opacity: 1;
-  // z-index: 1;
+  z-index: 1;
 }
 
 .mPrItem {
+  position: relative;z-index: 2;
   &__det {
     position: absolute;
     bottom: 0;
@@ -365,6 +375,9 @@ export default {
     @media (max-width: 767.98px) {
       transform: translate(0, 20%);
     }
+  }
+  &__title{
+    cursor: pointer;
   }
 }
 </style>

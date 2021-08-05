@@ -60,6 +60,7 @@ export default {
     background-size: contain;
     background-repeat-x: repeat;
     background-repeat-y: no-repeat;
+    will-change:transform;
   }
 }
 
