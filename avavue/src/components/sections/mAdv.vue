@@ -1,8 +1,9 @@
 <template>
-    <div class="bg_r p-t-200 p-b-80">
+    <div class="bg_r p-t-100 p-b-80">
+      <secTitle :title='"[ Super puper cool team ];"' :addClass='"m-b-150"' />
      <div class="row">
        <div class="col-22 offset-1">
-        <mAdvItem :key="adv" v-for="adv in advList" :title = adv.name :img = adv.img ></mAdvItem>
+        <mAdvItem :key="adv" v-for="adv in advList" :name = adv.name :img = adv.img ></mAdvItem>
        </div>
      </div>
     </div>
@@ -11,15 +12,12 @@
 <script>
 // import { gsap, TweenLite } from 'gsap/all'
 import mAdvItem from '@/components/mAdvItem.vue'
+import secTitle from '@/components/secTitle.vue'
 
 export default {
   data () {
     return {
       name: 'aAdv',
-
-      props: {
-        // msg: String
-      },
       advList: [
         { name: '[ no manager ];', img: 'https://townsquare.media/site/341/files/2013/04/Cutest-Dogs1.gif?w=1200&h=0&zc=1&s=0&a=t&q=89' },
         { name: '[ perfect service ];', img: 'https://99px.ru/sstorage/86/2020/09/10309201303436361.gif' },
@@ -29,9 +27,9 @@ export default {
     }
   },
   components: {
-    mAdvItem
+    mAdvItem, secTitle
   },
-  // methods(){},
+  methods () {},
   mounted () {
     console.log('Прив1')
   },

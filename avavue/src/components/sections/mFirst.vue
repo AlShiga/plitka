@@ -1,6 +1,6 @@
 <template>
   <div class="mFirst p-t-250 p-b-250">
-    <div class="row z-1 position-relative">
+    <div v-if="$store.state.langEn" class="row z-5 position-relative">
       <div
         class="
           col-xl-19
@@ -9,7 +9,7 @@
           offset-lg-4
           col-md-19
           offset-md-3
-          col-1
+          col-20
           offset-2
         "
       >
@@ -23,7 +23,7 @@
           offset-lg-7
           col-md-16
           offset-md-6
-          col-1
+          col-18
           offset-5
         "
       >
@@ -37,7 +37,7 @@
           offset-lg-1
           col-md-22
           offset-md-1
-          col-1
+          col-20
           offset-1
         "
       >
@@ -51,7 +51,7 @@
           offset-lg-9
           col-md-11
           offset-md-11
-          col-1
+          col-11
           offset-12
         "
       >
@@ -65,7 +65,7 @@
           offset-lg-10
           col-md-9
           offset-md-13
-          col-1
+          col-9
           offset-14
         "
       >
@@ -79,14 +79,101 @@
           offset-lg-1
           col-md-22
           offset-md-1
-          col-1
+          col-20
           offset-2
         "
       >
         <h1 class="h2 m-b-80">e-motions.</h1>
       </div>
     </div>
+    <div v-else class="row z-5 position-relative">
+      <div
+        class="
+          col-xl-19
+          offset-xl-4
+          col-lg-11
+          offset-lg-4
+          col-md-19
+          offset-md-3
+          col-20
+          offset-2
+        "
+      >
+        <h1 class="h2 m-b-80">мы</h1>
+      </div>
+      <div
+        class="
+          col-xl-16
+          offset-xl-7
+          col-lg-15
+          offset-lg-7
+          col-md-16
+          offset-md-6
+          col-18
+          offset-5
+        "
+      >
+        <h1 class="h2 m-b-80">создаём</h1>
+      </div>
+      <div
+        class="
+          col-xl-22
+          offset-xl-1
+          col-lg-22
+          offset-lg-1
+          col-md-22
+          offset-md-1
+          col-20
+          offset-1
+        "
+      >
+        <h1 class="h2 m-b-80">дизайн</h1>
+      </div>
+      <div
+        class="
+          col-xl-13
+          offset-xl-9
+          col-lg-13
+          offset-lg-9
+          col-md-11
+          offset-md-11
+          col-11
+          offset-12
+        "
+      >
+        <h1 class="h2 m-b-80">полный</h1>
+      </div>
+      <div
+        class="
+          col-xl-11
+          offset-xl-11
+          col-lg-12
+          offset-lg-10
+          col-md-9
+          offset-md-13
+          col-9
+          offset-14
+        "
+      >
+        <h1 class="h2 m-b-80">огня</h1>
+      </div>
+      <div
+        class="
+          col-xl-22
+          offset-xl-1
+          col-lg-22
+          offset-lg-1
+          col-md-22
+          offset-md-1
+          col-20
+          offset-2
+        "
+      >
+        <h1 class="h2 m-b-80">и страсти</h1>
+      </div>
+    </div>
     <div class="containerMAdv" touch-action="none"></div>
+    <div class="containerMAdv__bg z-1" touch-action="none"></div>
   </div>
 </template>
 
@@ -96,33 +183,47 @@ import * as THREE from 'three'
 export default {
   data () {
     return {
-      name: 'mFirst',
       container: '',
       camera: '',
       renderer: '',
-      uniforms: ''
+      uniforms: '',
+      render: '',
+      mFirstPause: false,
+      mouse: {}
     }
   },
   methods: {
     onPointerMove: function (e) {
-      const ratio = window.innerHeight / window.innerWidth
-      this.uniforms.u_mouse.value.x =
-        (e.pageX - window.innerWidth / 2) / window.innerWidth / ratio
-      this.uniforms.u_mouse.value.y =
-        ((e.pageY - window.innerHeight / 2) / window.innerHeight) * -1
+      this.mouse.X = e.pageX
+      this.mouse.Y = e.pageY
       e.preventDefault()
-      console.log('Xyi')
     },
     onWindowResize: function (e) {
       this.renderer.setSize(window.innerWidth, window.innerHeight)
       this.uniforms.u_resolution.value.x = this.renderer.domElement.width
       this.uniforms.u_resolution.value.y = this.renderer.domElement.height
+    },
+    animate: function (delta) {
+      // console.log('anim')
+      if (this.stop) return
+      requestAnimationFrame(this.animate)
+      this.render(delta)
+      this.mousePos()
+    },
+    mousePos: function () {
+      const ratio = window.innerHeight / window.innerWidth
+
+      this.mouse.oldX = (this.mouse.oldX * 5 + this.mouse.X) / 6
+      this.mouse.oldY = (this.mouse.oldY * 5 + this.mouse.Y) / 6
+      this.uniforms.u_mouse.value.x =
+        (this.mouse.oldX - window.innerWidth / 2) / window.innerWidth / ratio
+      this.uniforms.u_mouse.value.y =
+        ((this.mouse.oldY - window.innerHeight / 2) / window.innerHeight) * -1
     }
   },
   mounted () {
-    console.log('Прив')
-
-    const fragmentShader = `
+    if (this.mFirstPause === false) {
+      const fragmentShader = `
         uniform vec2 u_resolution;
         uniform float u_pxaspect;
         uniform vec2 u_mouse;
@@ -325,95 +426,97 @@ export default {
       }
     `
 
-    const vertexShader = `
+      const vertexShader = `
       void main() {
           gl_Position = vec4( position, 1.0 );
       }
     `
 
-    // let container
-    let scene
+      let scene
 
-    const loader = new THREE.TextureLoader()
-    let texture, _500
-    loader.setCrossOrigin('anonymous')
-    loader.load(require('@/assets/img/noise.png'), (tex) => {
-      texture = tex
-      texture.wrapS = THREE.RepeatWrapping
-      texture.wrapT = THREE.RepeatWrapping
-      texture.minFilter = THREE.LinearFilter
+      const loader = new THREE.TextureLoader()
+      let texture, _500
+      loader.setCrossOrigin('anonymous')
+      loader.load(require('@/assets/img/noise.png'), (tex) => {
+        texture = tex
+        texture.wrapS = THREE.RepeatWrapping
+        texture.wrapT = THREE.RepeatWrapping
+        texture.minFilter = THREE.LinearFilter
 
-      loader.load(require('@/assets/img/mainAva.jpg'), (tex) => {
-        _500 = tex
+        loader.load(require('@/assets/img/mainAva.jpg'), (tex) => {
+          _500 = tex
 
-        init()
-        animate()
+          init()
+          this.animate()
+        })
       })
-    })
 
-    const init = () => {
-      this.container = document.querySelector('.containerMAdv')
+      const init = () => {
+        this.container = document.querySelector('.containerMAdv')
 
-      this.camera = new THREE.Camera()
-      this.camera.position.z = 1
+        this.camera = new THREE.Camera()
+        this.camera.position.z = 1
 
-      scene = new THREE.Scene()
+        scene = new THREE.Scene()
 
-      var geometry = new THREE.PlaneBufferGeometry(2, 2)
+        var geometry = new THREE.PlaneBufferGeometry(2, 2)
 
-      this.uniforms = {
-        u_time: { type: 'f', value: 1.0 },
-        u_resolution: { type: 'v2', value: new THREE.Vector2() },
-        u_pxaspect: { type: 'f', value: window.devicePixelRatio },
-        u_noise: { type: 't', value: texture },
-        u_text500: { type: 't', value: _500 },
-        u_mouse: { type: 'v2', value: new THREE.Vector2(-0.1, -0.1) }
+        this.uniforms = {
+          u_time: { type: 'f', value: 1.0 },
+          u_resolution: { type: 'v2', value: new THREE.Vector2() },
+          u_pxaspect: { type: 'f', value: window.devicePixelRatio },
+          u_noise: { type: 't', value: texture },
+          u_text500: { type: 't', value: _500 },
+          u_mouse: { type: 'v2', value: new THREE.Vector2(-0.1, -0.1) }
+        }
+
+        var material = new THREE.ShaderMaterial({
+          uniforms: this.uniforms,
+          vertexShader: vertexShader,
+          fragmentShader: fragmentShader
+        })
+        material.extensions.derivatives = true
+
+        var mesh = new THREE.Mesh(geometry, material)
+        scene.add(mesh)
+
+        this.renderer = new THREE.WebGLRenderer()
+        this.renderer.setPixelRatio(window.devicePixelRatio)
+
+        this.container.appendChild(this.renderer.domElement)
+
+        this.onWindowResize()
+        window.addEventListener('resize', this.onWindowResize, false)
+
+        document.addEventListener('pointermove', this.onPointerMove)
       }
 
-      var material = new THREE.ShaderMaterial({
-        uniforms: this.uniforms,
-        vertexShader: vertexShader,
-        fragmentShader: fragmentShader
-      })
-      material.extensions.derivatives = true
-
-      var mesh = new THREE.Mesh(geometry, material)
-      scene.add(mesh)
-
-      this.renderer = new THREE.WebGLRenderer()
-      this.renderer.setPixelRatio(window.devicePixelRatio)
-
-      this.container.appendChild(this.renderer.domElement)
-
-      this.onWindowResize()
-      window.addEventListener('resize', this.onWindowResize, false)
-
+      this.render = (delta) => {
+        this.uniforms.u_time.value = delta * 0.0005
+        this.renderer.render(scene, this.camera)
+      }
+      // this.uniforms.u_mouse.value.x = innerWidth / 10 * 8
+      // this.uniforms.u_mouse.value.y = innerHeight / 10
+    } else {
       document.addEventListener('pointermove', this.onPointerMove)
+      window.addEventListener('resize', this.onWindowResize, false)
+      requestAnimationFrame(this.animate)
     }
-
-    function animate (delta) {
-      requestAnimationFrame(animate)
-      render(delta)
-    }
-
-    const render = (delta) => {
-      this.uniforms.u_time.value = delta * 0.0005
-      this.renderer.render(scene, this.camera)
-    }
+    this.mouse.X = innerWidth / 10 * 9
+    this.mouse.oldX = innerWidth / 10 * 9
+    this.mouse.Y = innerHeight / 10
+    this.mouse.oldY = innerHeight / 10
   },
   unmounted () {
-    console.log('Пока')
     document.removeEventListener('pointermove', this.onPointerMove)
     window.removeEventListener('resize', this.onWindowResize, false)
-
-    // window.removeEventListener('resize', onWindowResize)
-
-    // document.removeEventListener('pointermove', onPointerMove)
+    cancelAnimationFrame(this.animate)
+    this.mFirstPause = true
+    this.stop = true
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .mFirst {
   position: relative;
@@ -424,5 +527,14 @@ export default {
   left: 0;
   bottom: 0;
   right: 0;
+  &__bg{
+    position: absolute;
+    top: 90vh;
+    right: 0;
+    left: 0;
+    height: 10vh;
+    background: linear-gradient(to bottom, rgba(32,32,32,0) 0%, #202020 100%);
+  }
 }
+
 </style>

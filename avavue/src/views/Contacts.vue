@@ -1,57 +1,11 @@
 <template>
   <div class="overflow-hidden">
-    <div class="noise"></div>
-
-    <div class="header header_bottom m-t-20 p-t-20">
-      <div class="header__border">
-        <div class=""></div>
-      </div>
-      <div class="row">
-        <div class="col-1 offset-1">
-          <svg
-            style="opacity: 0"
-            class="header__logo"
-            width="40"
-            height="40"
-            viewBox="0 0 40 40"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M40 18.8015L24.1062 18.2431L29.5131 12.1825L27.8175 10.4801L21.7569 15.8938L21.1985 0H18.8015L18.2431 15.8938L12.1825 10.4801L10.4869 12.1825L15.8938 18.2431L0 18.8015V21.1985L15.8938 21.7569L10.4869 27.8175L12.1825 29.5132L18.2431 24.1062L18.8015 40H21.1985L21.7569 24.1062L27.8175 29.5132L29.5131 27.8175L24.1062 21.7569L40 21.1985V18.8015Z"
-              fill="#ED2330"
-            />
-          </svg>
-        </div>
-      </div>
-    </div>
-    <div class="header header_top m-t-20 p-t-20">
-      <!-- <div class="header__border">
-        <div class=""></div>
-      </div> -->
-      <div class="row">
-        <div class="col-1 offset-1">
-          <svg
-            class="header__logo"
-            width="40"
-            height="40"
-            viewBox="0 0 40 40"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M40 18.8015L24.1062 18.2431L29.5131 12.1825L27.8175 10.4801L21.7569 15.8938L21.1985 0H18.8015L18.2431 15.8938L12.1825 10.4801L10.4869 12.1825L15.8938 18.2431L0 18.8015V21.1985L15.8938 21.7569L10.4869 27.8175L12.1825 29.5132L18.2431 24.1062L18.8015 40H21.1985L21.7569 24.1062L27.8175 29.5132L29.5131 27.8175L24.1062 21.7569L40 21.1985V18.8015Z"
-              fill="#ED2330"
-            />
-          </svg>
-        </div>
-      </div>
-    </div>
     <contFirst/>
     <div class="lent lent_gray">
       <div class="lent__img"></div>
     </div>
-    <div class="bg_g p-t-200 p-b-200">
+    <div class="bg_g p-t-100 p-b-200">
+      <secTitle :title='"[ Super puper cool team ];"' :addClass='"m-b-100"' />
       <div class="row">
         <div class="col-lg-9 offset-lg-1 col-22 offset-1">
           <div class="d-flex flex-column">
@@ -76,25 +30,22 @@
         </div>
       </div>
     </div>
-
-    <div class="mBottom p-t-250 p-b-250">
-      <div class="d-flex justify-content-center">
-        <h6 class="h3 text-center">
-          Are you<br />
-          still here?
-        </h6>
-      </div>
-    </div>
+    <myFooter big=""/>
   </div>
 </template>
 
 <script>
 import contFirst from '@/components/sections/contFirst.vue'
+import myFooter from '@/components/sections/footer.vue'
+import secTitle from '@/components/secTitle.vue'
 
 export default {
   name: 'Contacts',
   components: {
-    contFirst
+    contFirst,
+    myFooter,
+    secTitle
+
   }
 }
 </script>

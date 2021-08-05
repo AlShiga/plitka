@@ -1,48 +1,54 @@
 <template>
   <div class="mAdvItem" v-on:mouseover.stop="myMouseover" v-on:mouseout="myMouseout" v-on:mousemove="myMousemove">
-    <span class="h7">{{title}}</span>
-    <img class="mAdvItem__img" v-if="img" :src=img alt="">
+    <span class="h7">{{ name }}</span>
+    <img class="mAdvItem__img" v-if = img :src = img alt="">
   </div>
 
 </template>
 
 <script>
-import { gsap, TweenLite } from 'gsap/all'
+import { gsap } from 'gsap/all'
 
 export default {
-  props: ['title', 'img'],
+  props: ['name', 'img'],
   data () {
     return {
-      name: 'HelloWorld',
+      // name: 'HelloWorld',
       imgTarget: '',
       transform: {
         x: 0,
         y: 0,
+        curX: 0,
+        curY: 0,
         scale: 1,
         opacity: 1
       }
-
     }
   },
   methods: {
     myMouseover: function (e) {
-      // if(innerWidth<1024) return
-      console.log('in')
+      if (innerWidth < 1023) return
+      this.transform.x = e.clientX - e.target.getBoundingClientRect().left
+      this.transform.y = e.clientY - e.target.getBoundingClientRect().top
       this.imgTarget = e.target.querySelector('img')
       gsap.ticker.add(this.updatePos)
     },
     myMousemove: function (e) {
-      this.transform.x = e.clientX - e.target.getBoundingClientRect().left
-      this.transform.y = e.clientY - e.target.getBoundingClientRect().top
-      console.log([this.transform.x, this.transform.y])
+      if (innerWidth < 1023) return
+      this.transform.curX = e.clientX - e.target.getBoundingClientRect().left
+      this.transform.curY = e.clientY - e.target.getBoundingClientRect().top
+      // console.log([this.transform.x, this.transform.y])
     },
     myMouseout: function (e) {
-      console.log('out')
-      TweenLite.set(this.imgTarget, { x: this.transform.x, y: this.transform.y, scale: 0, opacity: 0 })
+      if (innerWidth < 1023) return
+      gsap.to(this.imgTarget, { x: this.transform.x, y: this.transform.y, scale: 0, opacity: 0 })
       gsap.ticker.remove(this.updatePos)
     },
     updatePos: function (e) {
-      TweenLite.set(this.imgTarget, { x: this.transform.x, y: this.transform.y, scale: 1, opacity: this.transform.opacity })
+      if (innerWidth < 1023) return
+      this.transform.x = (this.transform.x * 9 + this.transform.curX) / 10
+      this.transform.y = (this.transform.y * 9 + this.transform.curY) / 10
+      gsap.to(this.imgTarget, { x: this.transform.x, y: this.transform.y, scale: 1, opacity: this.transform.opacity })
     }
   }
 }

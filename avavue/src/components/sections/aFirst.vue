@@ -53,8 +53,8 @@ const invertEl = {
   screen: { w: 0, h: 0 },
   ratio: 0.25,
   active: true,
+  scale: 0,
   updatePos: function () {
-    let scale = 1
     if (!this.active) return
     this.elPos.x += (this.mouse.x - this.elPos.x) * this.ratio
     this.elPos.y += (this.mouse.y - this.elPos.y) * this.ratio
@@ -62,12 +62,13 @@ const invertEl = {
     this.mouse.y < 150 ||
     this.mouse.x > this.screen.w - 150 ||
     this.mouse.y > this.screen.h - 150
-      ? (scale = 0)
-      : (scale = 1)
+      ? ((this.scale >= 0.01) ? (this.scale = this.scale - 0.1) : this.scale = this.scale - 0)
+      : ((this.scale <= 1) ? (this.scale = this.scale + 0.1) : this.scale = this.scale - 0)
+    // this.scale = this.scale - 0.02
     TweenLite.set(this.el, {
       x: this.elPos.x,
       y: this.elPos.y,
-      scale: scale
+      scale: this.scale
     })
     // console.log(1)
   },
@@ -88,6 +89,7 @@ const invertEl = {
   },
   stop: function () {
     gsap.ticker.remove(tickFrame)
+    this.wrapEl.removeEventListener('mousemove', this.mouseMove)
   }
 }
 function tickFrame () { invertEl.updatePos() }
@@ -101,16 +103,10 @@ export default {
       }
     }
   },
-  // methods(){},
   mounted () {
-    console.log('Прив')
-
     invertEl.init()
-
-    // console.log(this)
   },
   unmounted () {
-    console.log('Пока')
     invertEl.stop()
   }
 }
@@ -120,6 +116,7 @@ export default {
 <style scoped lang="scss">
 .aboutFirst {
   position: relative;
+  min-height: 100vh;
   //   width: 100%;
   //   height: 1000px;
   // background: rgb(0,32,36);
@@ -137,7 +134,7 @@ export default {
   border-radius: 50%;
   mix-blend-mode: difference;
   filter: grayscale(0%);
-  transition: 0.15s;
+  // transition: 0.15s;
   will-change: transform;
 }
 </style>
