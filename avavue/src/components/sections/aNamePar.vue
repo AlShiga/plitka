@@ -59,11 +59,11 @@ export default {
         let transformY = checkScrollSpeed()
         if (show) {
           // console.log(transformY)
-          if (transformY > 3) {
-            transformY = 3
+          if (transformY > 300) {
+            transformY = 300
           }
           el.forEach((element, key) => {
-            element.style.transform = 'translateY(' + -transformY * 10 / ((key + 1) / 8) + 'px)'
+            element.style.transform = 'translateY(' + -transformY * 6 / ((key + 1) / 8) + 'px)'
           })
         }
         (!transformY) ? show = true : show = false
