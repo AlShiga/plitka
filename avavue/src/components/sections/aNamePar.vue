@@ -18,17 +18,20 @@
 </template>
 
 <script>
-import { gsap } from 'gsap/all'
+// import { gsap, TweenLite } from 'gsap/all'
 
 export default {
   data () {
     return {
-
+      name: 'aNamePar',
+      props: {
+        // msg: String
+      }
     }
   },
   // methods(){},
   mounted () {
-    // console.log('Прив1')
+    console.log('Прив1')
     var checkScrollSpeed = (function () {
       var lastPos; var newPos; var timer; var delta
       var delay = 32
@@ -50,21 +53,17 @@ export default {
     })()
 
     function pamalax () {
-      let el = document.querySelectorAll('.par span')
-      el = Array.from(el).reverse()
+      const el = document.querySelectorAll('.par span')
       let show = false
       setInterval(() => {
         let transformY = checkScrollSpeed()
         if (show) {
-          // console.log(transformY
-          if (transformY > 7) {
-            transformY = 7
-          } else if (transformY < -7) {
-            transformY = -7
+          // console.log(transformY)
+          if (transformY > 300) {
+            transformY = 300
           }
           el.forEach((element, key) => {
-            // element.style.transform = 'translateY(' + -transformY * 20 * key / 8 + 'px)'
-            gsap.to(element, { y: -transformY * 20 * key / 8, duration: 0.5, ease: 'elastic' })
+            element.style.transform = 'translateY(' + -transformY * 6 / ((key + 1) / 8) + 'px)'
           })
         }
         (!transformY) ? show = true : show = false
@@ -94,7 +93,7 @@ export default {
     top: 0;
     left: 0;
     color: #ECE8ED;
-    transition:0.5s ease-out ;
+    transition:0.4s ease-in-out ;
     text-shadow: 2px 0 0 #E10F1C, -2px 0 0 #E10F1C, 0 2px 0 #E10F1C, 0 -2px 0 #E10F1C, 1px 1px #E10F1C, -1px -1px 0 #E10F1C, 1px -1px 0 #E10F1C, -1px 1px 0 #E10F1C;
   }
   span:last-of-type{
