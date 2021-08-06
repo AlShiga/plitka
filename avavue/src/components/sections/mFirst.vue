@@ -179,7 +179,9 @@
 
 <script>
 import * as THREE from 'three'
-
+import { gsap } from 'gsap/all'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+gsap.registerPlugin(ScrollTrigger)
 export default {
   data () {
     return {
@@ -203,11 +205,11 @@ export default {
       this.uniforms.u_resolution.value.x = this.renderer.domElement.width
       this.uniforms.u_resolution.value.y = this.renderer.domElement.height
     },
-    animate: function (delta) {
+    animate: function () {
       // console.log('anim')
       if (this.stop) return
       requestAnimationFrame(this.animate)
-      this.render(delta)
+      this.render()
       this.mousePos()
     },
     mousePos: function () {
@@ -219,6 +221,30 @@ export default {
         (this.mouse.oldX - window.innerWidth / 2) / window.innerWidth / ratio
       this.uniforms.u_mouse.value.y =
         ((this.mouse.oldY - window.innerHeight / 2) / window.innerHeight) * -1
+    },
+    scrollAnimation () {
+      this.scrollTrPlay = ScrollTrigger.create({
+        trigger: '.mFirst',
+        start: 'top bottom',
+        markers: true,
+        end: 'bottom top',
+        // scrub: 2,
+        id: '2',
+        onToggle: self => {
+          console.log(self.isActive)
+          if (self.isActive) {
+            // document.addEventListener('pointermove', this.onPointerMove)
+            // window.addEventListener('resize', this.onWindowResize, false)
+            // requestAnimationFrame(this.animate)
+          } else {
+            // document.removeEventListener('pointermove', this.onPointerMove)
+            // window.removeEventListener('resize', this.onWindowResize, false)
+            // this.stop = true
+            // cancelAnimationFrame(this.animate)
+          }
+        }
+        // onToggle: () => { this.world.gravity.scale = 0.0015 }
+      })
     }
   },
   mounted () {
@@ -491,12 +517,10 @@ export default {
         document.addEventListener('pointermove', this.onPointerMove)
       }
 
-      this.render = (delta) => {
-        this.uniforms.u_time.value = delta * 0.0005
+      this.render = () => {
+        // this.uniforms.u_time.value = delta * 0.0005
         this.renderer.render(scene, this.camera)
       }
-      // this.uniforms.u_mouse.value.x = innerWidth / 10 * 8
-      // this.uniforms.u_mouse.value.y = innerHeight / 10
     } else {
       document.addEventListener('pointermove', this.onPointerMove)
       window.addEventListener('resize', this.onWindowResize, false)
@@ -506,6 +530,7 @@ export default {
     this.mouse.oldX = innerWidth / 10 * 9
     this.mouse.Y = innerHeight / 10
     this.mouse.oldY = innerHeight / 10
+    // this.scrollAnimation()
   },
   unmounted () {
     document.removeEventListener('pointermove', this.onPointerMove)

@@ -43,6 +43,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/BlogItem.vue')
   },
   {
+    path: '/form',
+    name: 'Form',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Form.vue')
+  },
+  {
     path: '/404',
     name: '404',
     component: () => import(/* webpackChunkName: "about" */ '../views/P404.vue')

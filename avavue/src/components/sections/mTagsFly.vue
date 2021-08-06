@@ -22,6 +22,7 @@ export default {
     return {
       name: 'mTagsFly',
       scrollTr: {},
+      scrollTrPlay: {},
       myMatter: {
         pause: false,
         Engine: '',
@@ -51,8 +52,28 @@ export default {
         markers: true,
         // end: 'bottom top',
         scrub: 2,
-        id: 'example',
+        id: '1',
+        // onToggle: self => console.log('toggled, isActive:', self.isActive)
         onToggle: () => { this.world.gravity.scale = 0.0015 }
+      })
+      this.scrollTrPlay = ScrollTrigger.create({
+        trigger: '.wrapFlyTags',
+        start: 'top bottom',
+        markers: true,
+        end: 'bottom top',
+        // scrub: 2,
+        id: '2',
+        onToggle: self => {
+          console.log('toggled, isActive:', self.isActive)
+          if (self.isActive) {
+            this.Render.run(this.render)
+            this.myMatter.pause = false
+          } else {
+            this.Render.stop(this.render)
+            this.myMatter.pause = true
+          }
+        }
+        // onToggle: () => { this.world.gravity.scale = 0.0015 }
       })
     }
   },
@@ -249,9 +270,9 @@ export default {
       this.Engine.run(this.engine)
 
       // run the renderer
-      this.Render.run(this.render)
+      // this.Render.run(this.render)
     } else {
-      this.Render.play(this.render)
+      // this.Render.play(this.render)
     }
     this.scrollAnimation()
   },
@@ -259,6 +280,7 @@ export default {
     this.Render.stop(this.render)
     this.myMatter.pause = true
     this.scrollTr.kill()
+    this.scrollTrPlay.kill()
   }
 }
 </script>

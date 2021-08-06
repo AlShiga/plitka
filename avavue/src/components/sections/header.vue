@@ -12,7 +12,7 @@
             </svg>
           </router-link>
         </div>
-        <div class="col-4 offset-14"><p class=""><span v-if="$store.state.langEn" class="p1 ttu m-b-10">[ Start the project  ]</span><span v-else class="p1 ttu m-b-10">[ Начать проект ]</span></p></div>
+        <div class="col-4 offset-14"><a @click.stop="$router.push('/form')" class=""><span v-if="$store.state.langEn" class="p1 ttu m-b-10">[ Start the project  ]</span><span v-else class="p1 ttu m-b-10">[ Начать проект ]</span></a></div>
         <div class="col-1">
           <a @click.stop="$store.commit('selectLang')" class="selectLang">
             <span class="p1 ttu" v-if="$store.state.langEn">[ EN ]</span>

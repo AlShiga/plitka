@@ -326,14 +326,14 @@ export default {
 
   },
   mounted () {
-    fetch('http://ava/wp-json/wp/v2/posts?categories=3')
+    fetch('http://ava.avadev.ru/wp-json/wp/v2/posts?categories=3')
       .then((r) => r.json())
       // eslint-disable-next-line no-return-assign
       .then((res) => {
         this.projects = res.map(x => x)
-        console.log(this.projects[0])
+        // console.log(this.projects[0])
         setTimeout(() => {
-          AddImg.init()
+          // AddImg.init()
         }, 500)
       })
     setTimeout(() => {

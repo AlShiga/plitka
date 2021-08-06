@@ -36,8 +36,8 @@
           <h2 class="h3 m-b-40">&lt;Hello world/&gt;</h2>
           <div class="print">
             <img
-              width="1222px"
-              height="600px"
+              width="1222"
+              height="600"
               src="~@/assets/img/print.png"
               alt=""
               class="w-100 m-b-15"
@@ -60,7 +60,9 @@
       <div class="row position-relative">
         <div class="yes h2 red">YES</div>
         <div class="col-lg-5 offset-lg-1 d-none d-lg-block">
-          <myButton :text="'[ хуй ]'" />
+          <div @mouseenter="hideButton" @mouseleave="showButton" ref="hideButtonWrap" class="hideButtonWrap">
+          <myButton class="hideButton" ref="hideButton" :text="'[ нет ]'" />
+          </div>
         </div>
         <div
           class="
@@ -73,7 +75,7 @@
             m-b-40
           "
         >
-          <myButton @click="$router.push('/about')" :text="'[ пизда ]'" />
+          <myButton @click="$router.push('/about')" :text="'[ да ]'" />
         </div>
         <div
           class="
@@ -85,7 +87,7 @@
             offset-1
           "
         >
-          <myButton @click="showYes" :text="'[ джигурда ]'" />
+          <myButton @click="showYes" :text="'[ серьезно ]'" />
         </div>
       </div>
     </div>
@@ -131,10 +133,24 @@ export default {
       setTimeout(() => {
         document.querySelector('.yes').classList.remove('show')
       }, 100)
+    },
+    hideButton: function (e) {
+      console.log(this.$refs.hideButton)
+      const btn = document.querySelector('.hideButton')
+      btn.style.opacity = '0'
+      btn.style.transition = '0.2s'
+      btn.style.transform = 'translateX(-500px)'
+    },
+    showButton: function (e) {
+      // console.log(e)
+      const btn = document.querySelector('.hideButton')
+      document.querySelector('.hideButton').style.opacity = '1'
+      btn.style.transition = '1.3s ease-out'
+      btn.style.transform = 'translateX(0)'
     }
   },
   mounted () {
-    console.log('Прив1')
+
   },
   unmounted () {
     console.log('Пока1')
@@ -155,6 +171,19 @@ export default {
   &.show {
     transition: 0.1s;
     opacity: 1;
+  }
+}
+.hideButtonWrap{
+  display: inline-block;
+  position: relative;
+  &::before{
+    content: '';
+    position: absolute;
+    width: 300%;
+    height: 400%;
+    top: -150%;
+    left: -100%;
+    // background-color: rgba($color: red, $alpha: 0.2);
   }
 }
 </style>

@@ -34,7 +34,7 @@ export default {
     myFooter
   },
   mounted () {
-    fetch('http://ava/wp-json/wp/v2/posts?categories=4')
+    fetch('http://ava.avadev.ru/wp-json/wp/v2/posts?categories=4')
       .then((r) => r.json())
       // eslint-disable-next-line no-return-assign
       .then((res) => {
