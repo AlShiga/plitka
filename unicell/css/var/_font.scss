@@ -1,0 +1,19 @@
+/* cyrillic-ext */
+@font-face {
+  font-family: 'TT Firs Neue';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/font/TTFirsNeue-Light.woff2") format("woff2"),
+       url("/font/TTFirsNeue-Light.woff") format("woff"),
+       url("/font/TTFirsNeue-Light.ttf") format("ttf");
+}
+@font-face {
+  font-family: 'TT Firs Neue';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("/font/TTFirsNeue-Regular.woff2") format("woff2"),
+       url("/font/TTFirsNeue-Regular.woff") format("woff"),
+       url("/font/TTFirsNeue-Regular.ttf") format("ttf");
+}
