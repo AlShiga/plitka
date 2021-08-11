@@ -3,6 +3,14 @@ document.addEventListener("DOMContentLoaded", function (e) {
   gsapInit();
   new Swiper(".mySwiper", { spaceBetween: 10 });
   new Swiper(".mySwiper1", { spaceBetween: 10 });
+  document.querySelectorAll(".burger").forEach((el)=>{
+    el.addEventListener('click',(e)=>{
+      document.querySelector('body').classList.toggle('openMenu')
+    })
+  })
+  document.querySelector  (".menuBg").addEventListener('click',(e)=>{
+    document.querySelector('body').classList.toggle('openMenu')
+  })
 });
 
 function gsapInit() {

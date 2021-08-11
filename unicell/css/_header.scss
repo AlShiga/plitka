@@ -14,6 +14,9 @@
   user-select: none;
   &__lang{
     display: flex;
+    p{
+      opacity: 0.6;
+    }
     & *+*{
       margin-left: 10px;
     }
@@ -30,5 +33,128 @@
   align-items: center;
   svg{
     margin-right: 10px;
+  }
+}
+.burger{
+  cursor: pointer;
+}
+.menuBg{
+  transition: 0.4s ease-in-out;
+  transform: translateX(100%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba($black, 0.6);
+  z-index: 200;
+}
+.menu{
+  transition: 0.4s ease-in-out;
+  transform: translateX(100%);
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  max-width: 400px;
+  z-index: 201;
+  &__head{
+    background-color: $orange;
+    color: $black;
+    padding: 40px 4.16vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__body{
+    color: $black;
+    background-color: $white;
+    height: 100%;
+    display: flex;
+    padding: 40px 4.16vw 120px;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  &__menu{
+    display: flex;
+    flex-direction: column;
+  }
+  &__lang{
+    display: flex;
+    & *+*{
+      margin-left: 10px;
+    }
+    p{
+      opacity: 0.6;
+    }
+  } 
+}
+.prCartBg{
+  transition: 0.4s ease-in-out;
+  transform: translateX(100%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba($black, 0.6);
+  z-index: 200;
+}
+.prCart{
+  transition: 0.4s ease-in-out;
+  transform: translateX(100%);
+  z-index: 201;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100vh;
+  max-width: 800px;
+  background-color: $white;
+  color: $black;
+  display: flex;
+  flex-direction: column;
+  &__body{height: 100%;}
+  &__item{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  &__head{
+    display: flex;
+    justify-content: space-between;
+    background-color: $orange;
+    padding: 40px 4.16vw;
+  }
+  &__content{
+    padding: 40px 4.16vw;
+    height: 100%;
+  }
+  &__btns{
+    display: flex;
+
+  }
+  &__btn{
+    width: 50%;
+    text-align: center;
+    padding: 25px;
+    border:1px solid $black;
+    &_orange{
+      background-color: $orange;
+    }
+    &+&{
+      border-left: none;
+    }
+  }
+}
+.openCart{
+  .prCartBg, .prCart{
+    transform: translateX(0);
+  }
+}
+.openMenu{
+  .menuBg, .menu{
+    transform: translateX(0);
   }
 }
