@@ -14,8 +14,8 @@ document.addEventListener("DOMContentLoaded", function(e) {
       }) 
     }
     );
-
-
+    var swiper = new Swiper(".mySwiper", {spaceBetween: 10,});
+    var swiper1 = new Swiper(".mySwiper1", {spaceBetween: 10,});
 })
 
 // var tl = gsap.timeline({});
@@ -79,7 +79,7 @@ let tl3 = gsap.timeline({scrollTrigger:{
   markers:true
   // duration: 4
 }})
-tl3.fromTo(".mVideo__bg", {scale:1},{scale:2.5, duration: 1})
+tl3.fromTo(".mVideo__bg", {scale:1},{scale:2.5, duration: 3})
 tl3.fromTo(".mVideo__quote1", {opacity:0,y:100},{opacity:1,y:0, duration: 1})
   tl3.fromTo(".mVideo__quote4", {opacity:0,y:0},{opacity:0,y:-100, duration: 1})
 tl3.fromTo(".mVideo__quote1", {opacity:1,y:0},{opacity:0,y:-100, duration: 1})
@@ -127,8 +127,8 @@ let tl5 = gsap.timeline({scrollTrigger:{
   markers:true
 
 }})
-tl5.fromTo(".mProj__or1", {rotate:0},{rotate:210, duration: 10})
-tl5.fromTo(".mProj__or2", {rotate:0},{rotate:250, duration: 10},'<')
+tl5.fromTo(".mProj__or1", {rotate:'0 center', transformOrigin:"50% 50%"},{rotate:'210 center', transformOrigin:"50% 50%", duration: 10})
+tl5.fromTo(".mProj__or2", {rotate:'0 center', transformOrigin:"50% 50%"},{rotate:'250 center', transformOrigin:"50% 50%", duration: 10},'<')
 tl5.fromTo(".mProj__text_1", {opacity:0,y:100},{opacity:1,y:0, duration: 1},'<1')
   tl5.fromTo(".mProj__text_4", {opacity:0,y:0},{opacity:0,y:-100, duration: 1},'<1')
 tl5.fromTo(".mProj__text_1", {opacity:1,y:0},{opacity:0,y:-100, duration: 1},'<1')
@@ -162,7 +162,13 @@ let tl6 = gsap.timeline({scrollTrigger:{
   scrub: true,
   markers:true
 }})
-tl6.fromTo(".mMap__bg", {translateX:'-50%'},{translateX:'0%', duration: 1})
+if(innerWidth>1024){
+  tl6.fromTo(".mMap__bg", {translateY:'0%', translateX:'-50%'},{translateY:'0%', translateX:'0%', duration: 1})
+  tl6.fromTo(".mMap__bg", {translateY:'0%', translateX:'0%'  },{translateY:'0%', translateX:'0%', duration: 1})
+}else{
+  tl6.fromTo(".mMap__bg", {translateY:'-65%', translateX:'0%'},{translateY:'0%', translateX:'0%', duration: 1})
+  tl6.fromTo(".mMap__bg", {translateY:'0%', translateX:'0%'},{translateY:'0%', translateX:'0%', duration: 1})
+}
 
 let tl7 = gsap.timeline({scrollTrigger:{
 	trigger:".mEvents",

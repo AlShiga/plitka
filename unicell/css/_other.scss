@@ -37,3 +37,16 @@
 //   }
 // }
 
+
+.swiper-container{
+  overflow: visible;
+}
+.mySwiper{
+  .swiper-slide{
+    opacity: 0.6;
+    transition: opacity 0.3s;
+  } 
+  .swiper-slide-active{
+    opacity: 1;
+  }
+}

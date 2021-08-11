@@ -11,6 +11,9 @@
     width: 100%;
     position: relative;
     z-index: 2;
+    @include media-breakpoint-down(sm) {
+      margin-bottom: 60px;
+    }
   }
   &__svg{
     position: absolute;
@@ -20,6 +23,10 @@
     height: 100vmin;
     transform: translate(-50%, -50%);
     overflow: visible;
+  }
+  &__list{
+    display: flex;
+    flex-direction: column;
   }
 }
 .mSecond{
@@ -51,6 +58,7 @@
   width: 100%;
   background-color: $black;
   background-image: url(/img/video.jpg);
+  background-size: cover;
   color: $white;
   position: relative;
   z-index: 3;
@@ -125,6 +133,9 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  @include media-breakpoint-down(sm) {
+    padding-bottom: 100px;
+  }
   &__title{
     &_1{
       &::before{
@@ -232,6 +243,9 @@
 .mProjWrap{
   width: 100%;
   height: 400vh;
+  @include media-breakpoint-down(md) {
+    height: 200vh;
+  }
 }
 .mProj{
   height: 100vh;
@@ -303,6 +317,13 @@
     color: $white;
     position: relative;
     z-index: 1;
+    mix-blend-mode: difference;
+  }
+  &__col2{
+    color: $white;
+    position: relative;
+    z-index: 1;
+    mix-blend-mode: difference;
   }
   &__bg{
     position: absolute;
@@ -326,8 +347,9 @@
       width: 0.6em;
       height: 0.6em;
       border-radius: 1em;
-      background-color: $black;
+      background-color: $white;
       margin-right: 1em;
+      mix-blend-mode: normal;
     }
   }
   &__content{
@@ -433,5 +455,10 @@
     border: 1px solid $grayL;
     border-radius: 50px;
     padding: 20px 0;
+  }
+  &__title{
+    span{
+      margin-left: 20vw;
+    }
   }
 }
