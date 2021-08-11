@@ -374,23 +374,23 @@ function gsapInit() {
   });
   tl7.fromTo(
     ".mEvents__c",
-    { strokeDasharray: 2510, strokeDashoffset: -2510 },
-    { strokeDasharray: 2510, strokeDashoffset: 0 }
+    { strokeDashoffset: "2510px" },
+    { strokeDashoffset: "0px" }
   );
   tl7.fromTo(
     ".mEvents__c1",
-    { strokeDasharray: 2510, strokeDashoffset: -2510 },
-    { strokeDasharray: 2510, strokeDashoffset: 0 }
+    { strokeDashoffset: "2510px" },
+    { strokeDashoffset: "0px" }
   );
   tl7.fromTo(
     ".mEvents__c2",
-    { strokeDasharray: 2510, strokeDashoffset: -2510 },
-    { strokeDasharray: 2510, strokeDashoffset: 0 }
+    { strokeDashoffset: "2510px" },
+    { strokeDashoffset: "0px" }
   );
   tl7.fromTo(
     ".mEvents__c",
-    { strokeDasharray: 2510, strokeDashoffset: -2510 },
-    { strokeDasharray: 2510, strokeDashoffset: 0 }
+    { strokeDashoffset: "2510px" },
+    { strokeDashoffset: "0px" }
   );
   // tl7.fromTo(".mEvents__c2", {rotate:0},{rotate:210, duration: 10})
 

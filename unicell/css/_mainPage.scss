@@ -383,12 +383,12 @@
   z-index: 10;
   background-color: $white;
   &__c1{
-    stroke-dasharray: 2510;
-    stroke-dashoffset: -2510;
+    stroke-dasharray: 2510px;
+    stroke-dashoffset: 2510px;
   }
   &__c2{
-    stroke-dasharray: 2510;
-    stroke-dashoffset: -2510;
+    stroke-dasharray: 2510px;
+    stroke-dashoffset: 2510px;
   }
   &__svg{
     width: 100%;

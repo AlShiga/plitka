@@ -9402,13 +9402,13 @@ input::placeholder {
 }
 
 .mEvents__c1 {
-  stroke-dasharray: 2510;
-  stroke-dashoffset: -2510;
+  stroke-dasharray: 2510px;
+  stroke-dashoffset: 2510px;
 }
 
 .mEvents__c2 {
-  stroke-dasharray: 2510;
-  stroke-dashoffset: -2510;
+  stroke-dasharray: 2510px;
+  stroke-dashoffset: 2510px;
 }
 
 .mEvents__svg {
