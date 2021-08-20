@@ -14,48 +14,16 @@
             @swiper="onSwiper"
             @slideChange="onSlideChange"
           >
-            <swiper-slide>
+            <swiper-slide v-for="galItem in gal"  :key="galItem.nameEN">
               <div class="polarImg">
-                <img src="~@/assets/img/al.jpg" alt="" class="w-100 m-b-10">
-                <p class="p1 ttu">Nikita kechkin</p>
-                <p class="p1 ttu gray">CEO</p>
+                <img :src="galItem.img" alt="" class="w-100 m-b-10">
+                <p v-if="$store.state.langEn" class="p1 ttu">{{galItem.nameEN}}</p>
+                <p v-else class="p1 ttu">{{galItem.name}}</p>
+                <p v-if="$store.state.langEn" class="p1 ttu gray">{{galItem.detEN}}</p>
+                <p v-else class="p1 ttu gray">{{galItem.det}}</p>
               </div>
             </swiper-slide>
-             <swiper-slide>
-              <div class="polarImg">
-                <img src="~@/assets/img/al.jpg" alt="" class="w-100 m-b-10">
-                <p class="p1 ttu m-b-10">Nikita kechkin</p>
-                <p class="p1 ttu gray">CEO</p>
-              </div>
-            </swiper-slide>
-            <swiper-slide>
-              <div class="polarImg">
-                <img src="~@/assets/img/al.jpg" alt="" class="w-100 m-b-10">
-                <p class="p1 ttu m-b-10">Nikita kechkin</p>
-                <p class="p1 ttu gray">CEO</p>
-              </div>
-            </swiper-slide>
-            <swiper-slide>
-              <div class="polarImg">
-                <img src="~@/assets/img/al.jpg" alt="" class="w-100 m-b-10">
-                <p class="p1 ttu m-b-10">Nikita kechkin</p>
-                <p class="p1 ttu gray">CEO</p>
-              </div>
-            </swiper-slide>
-            <swiper-slide>
-              <div class="polarImg">
-                <img src="~@/assets/img/al.jpg" alt="" class="w-100 m-b-10">
-                <p class="p1 ttu m-b-10">Nikita kechkin</p>
-                <p class="p1 ttu gray">CEO</p>
-              </div>
-            </swiper-slide>
-            <swiper-slide>
-              <div class="polarImg">
-                <img src="~@/assets/img/al.jpg" alt="" class="w-100 m-b-10">
-                <p class="p1 ttu m-b-10">Nikita kechkin</p>
-                <p class="p1 ttu gray">CEO</p>
-              </div>
-            </swiper-slide>
+
           </swiper>
         </div>
       </div>
@@ -79,9 +47,7 @@ export default {
     SwiperSlide,
     secTitle
   },
-  props: {
-    // []
-  },
+  props: ['gal'],
   methods: {
     scrollAnimation () {}
   },

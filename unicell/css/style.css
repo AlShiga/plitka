@@ -8631,7 +8631,7 @@ li > a {
   p,
   li,
   li > a {
-    font-size: 10px;
+    font-size: 12px;
   }
 }
 
@@ -8640,7 +8640,7 @@ li > a {
   p,
   li,
   li > a {
-    font-size: 10px;
+    font-size: 12px;
   }
 }
 
@@ -8649,7 +8649,7 @@ li > a {
   p,
   li,
   li > a {
-    font-size: 10px;
+    font-size: 12px;
   }
 }
 
@@ -8675,7 +8675,7 @@ li > a {
 
 @media (max-width: 767.98px) {
   .b2 {
-    font-size: 11px;
+    font-size: 12px;
   }
 }
 
@@ -8733,7 +8733,7 @@ input {
   border-bottom: 1px solid currentColor;
   padding: 15px 0;
   margin-bottom: 20px;
-  font-family: 'Vela Sans';
+  font-family: "TT Firs Neue", Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   line-height: 150%;
@@ -8742,7 +8742,7 @@ input {
 }
 
 input::-webkit-input-placeholder {
-  font-family: 'Vela Sans';
+  font-family: "TT Firs Neue", Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   line-height: 150%;
@@ -8751,7 +8751,7 @@ input::-webkit-input-placeholder {
 }
 
 input:-ms-input-placeholder {
-  font-family: 'Vela Sans';
+  font-family: "TT Firs Neue", Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   line-height: 150%;
@@ -8760,7 +8760,7 @@ input:-ms-input-placeholder {
 }
 
 input::-ms-input-placeholder {
-  font-family: 'Vela Sans';
+  font-family: "TT Firs Neue", Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   line-height: 150%;
@@ -8769,7 +8769,7 @@ input::-ms-input-placeholder {
 }
 
 input::placeholder {
-  font-family: 'Vela Sans';
+  font-family: "TT Firs Neue", Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   line-height: 150%;
@@ -8883,7 +8883,7 @@ input::placeholder {
   margin-right: 10px;
 }
 
-.burger {
+.burger, .burgerCard {
   cursor: pointer;
 }
 
@@ -8994,8 +8994,8 @@ input::placeholder {
   position: fixed;
   top: 0;
   right: 0;
+  bottom: 0;
   width: 100%;
-  height: 100vh;
   max-width: 800px;
   background-color: #ffffff;
   color: #1B1B1B;
@@ -9010,17 +9010,25 @@ input::placeholder {
 
 .prCart__body {
   height: 100%;
+  overflow-y: scroll;
+}
+
+.prCart__bodyCont {
+  height: 100%;
+  overflow-y: scroll;
+  padding: 40px 4.16vw;
 }
 
 .prCart__item {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
   height: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  display: none;
+}
+
+.prCart__item_active {
+  display: block;
 }
 
 .prCart__head {
@@ -9036,13 +9044,17 @@ input::placeholder {
 
 .prCart__content {
   padding: 40px 4.16vw;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
   height: 100%;
 }
 
-.prCart__btns {
+.prCart__btns, .prCart__btnsCont {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  width: 100%;
 }
 
 .prCart__btn {
@@ -9151,7 +9163,7 @@ input::placeholder {
   height: 100vh;
   width: 100%;
   background-color: #1B1B1B;
-  background-image: url(/img/video.jpg);
+  background-image: url(../img/video.jpg);
   background-size: cover;
   color: #ffffff;
   position: relative;
@@ -9405,14 +9417,30 @@ input::placeholder {
           align-items: center;
 }
 
-.mProd__btn::before {
-  content: "";
-  display: inline-block;
+.mProd__btn > div {
+  position: relative;
   width: 1em;
   height: 1em;
   background-color: #BD0000;
   border-radius: 1em;
   margin-right: 1em;
+}
+
+.mProd__btn > div > div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 1em;
+  border: 1px solid #ffffff;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.mProd__btn:hover > div > div {
+  -webkit-transform: translateX(50%);
+          transform: translateX(50%);
 }
 
 .mProjWrap {

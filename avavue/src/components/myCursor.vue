@@ -1,5 +1,5 @@
 <template>
-<div class="ball d-none d-lg-block" />
+<div class="ball d-none d-lg-block" style="opacity:0" />
 </template>
 
 <script>
@@ -18,8 +18,8 @@ export default {
 
   },
   mounted () {
-    if (innerWidth < 1023) return
-    gsap.set('.ball', { xPercent: -50, yPercent: -50 })
+    if (innerWidth < 1024) return
+    gsap.set('.ball', { xPercent: -50, yPercent: -50, opacity: 1 })
 
     const ball = document.querySelector('.ball')
     const pos = { x: window.innerWidth / 2, y: window.innerHeight / 2 }
@@ -46,6 +46,7 @@ export default {
       xSet(pos.x)
       ySet(pos.y)
     })
+    // gsap.ticker.fps(30)
   }
 
 }
@@ -61,5 +62,6 @@ export default {
   border-radius:100px;
   pointer-events:none;
   z-index: 100;
+
 }
 </style>

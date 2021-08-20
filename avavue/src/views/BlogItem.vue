@@ -70,7 +70,7 @@ export default {
     }
   },
   mounted () {
-    fetch('http://ava.avadev.ru/wp-json/wp/v2/posts/' + this.$route.params.id)
+    fetch(this.$store.state.linkAdmin + '/wp-json/wp/v2/posts/' + this.$route.params.id)
       .then((r) => r.json())
     // eslint-disable-next-line no-return-assign
       .then((res) => {

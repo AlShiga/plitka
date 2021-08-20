@@ -41,7 +41,7 @@
       </div>
 
     </div>
-    <div class="bg_g p-t-100 p-b-200">
+    <div v-if="show" class="bg_g p-t-100 p-b-200">
       <secTitle :title='"[ Super puper cool team ];"' :addClass='"m-b-100"' />
 
       <div class="row m-b-100">
@@ -51,41 +51,19 @@
           </p>
         </div>
       </div>
-      <div class="row">
-        <div class="col-2 d-none d-lg-block"></div>
-        <div class="col-lg-6 col-md-9 col-22 offset-1">
-          <div class="cartItem cartItem_red m-b-100">
-            <img src="~@/assets/img/al.jpg" alt="" class="w-100 m-b-10">
-            <p class="h7 ttu mp0">developer full stack</p>
+      <div class="vacWrap">
+          <div v-for="vac in this.vac"  :key="vac.posEN" class="cartItem m-b-100">
+            <img :src="vac.img" alt="" class="w-100 m-b-10">
+            <p v-if="$store.state.langEn" class="h7 ttu mp0">{{vac.posEN}}</p>
+            <p v-else class="h7 ttu mp0">{{vac.pos}}</p>
           </div>
-        </div>
-        <div class="col-lg-6 col-md-9 col-22 offset-1">
-          <div class="cartItem m-b-100">
-            <img src="~@/assets/img/al.jpg" alt="" class="w-100 m-b-10">
-            <p class="h7 ttu mp0">developer full stack</p>
-          </div>
-        </div>
-        <div class="col-6 d-none d-lg-block"></div>
-        <div class="col-lg-9 col-10 d-none d-md-block"></div>
-        <div class="col-lg-6 col-md-9 col-22 offset-1">
-          <div class="cartItem cartItem_gray m-b-100">
-            <img src="~@/assets/img/al.jpg" alt="" class="w-100 m-b-10">
-            <p class="h7 ttu mp0">developer full stack</p>
-          </div>
-        </div>
-        <div class="col-lg-6 col-md-9 col-22 offset-1">
-          <div class="cartItem m-b-100">
-            <img src="~@/assets/img/al.jpg" alt="" class="w-100 m-b-10">
-            <p class="h7 ttu mp0">developer full stack</p>
-          </div>
-        </div>
       </div>
     </div>
     <div class="lent lent_gray ">
       <div class="lent__img"></div>
     </div>
     <formPizza/>
-    <carSlider/>
+    <carSlider v-if="show" :gal="this.gal" />
     <myFooter big="true"/>
   </div>
 </template>
@@ -105,6 +83,61 @@ export default {
     carFirst,
     secTitle,
     carSlider
+  },
+  data () {
+    return {
+      vac: [],
+      gal: [],
+      show: false
+    }
+  },
+  mounted () {
+    fetch(this.$store.state.linkAdmin + '/wp-json/wp/v2/pages/91')
+      .then((r) => r.json())
+      // eslint-disable-next-line no-return-assign
+      .then((res) => {
+        this.vac = res.acf.find
+        this.gal = res.acf.gal
+        this.show = true
+        // console.log(this.vac)
+        console.log(this.gal)
+      })
   }
 }
 </script>
+<style lang="scss">
+.vacWrap{
+  display: flex;
+  flex-wrap: wrap;
+
+  & > * {
+    width: 100/24*6%;
+    flex: none;
+    img{
+      width: 100%;
+      height: auto;
+    }
+    &:nth-of-type(4n - 3){
+      margin-left: 100/24*3%;
+    }
+    &:nth-of-type(4n - 2){
+      margin-left: 100/24*1%;
+    }
+    &:nth-of-type(4n - 1){
+      margin-left: 100/24*10%;
+    }
+    &:nth-of-type(4n){
+      margin-left: 100/24*1%;
+    }
+    @media (max-width: 1024.98px) {
+      margin-left: 100/24*1% !important;
+      width: 100/24*9%;
+    }
+
+    @media (max-width: 767.98px) {
+      margin-left: 100/24*1% !important;
+      width: 100/24*22%;
+    }
+  }
+}
+</style>

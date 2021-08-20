@@ -2,7 +2,7 @@
 <transition name="fade">
   <div v-if="show" class="prItem overflow-hidden">
     <div class="row">
-      <img   :src="project.acf.img" alt="" class="prItem__firstImg">
+      <img :src="project.acf.img" alt="" class="prItem__firstImg">
     </div>
     <div class="blogFirst bg_w p-t-250 p-b-80">
       <div class="row">
@@ -51,7 +51,7 @@ export default {
     myFooter
   },
   mounted () {
-    fetch('http://ava.avadev.ru/wp-json/wp/v2/posts/' + this.$route.params.id)
+    fetch(this.$store.state.linkAdmin + '/wp-json/wp/v2/posts/' + this.$route.params.id)
       .then((r) => r.json())
       // eslint-disable-next-line no-return-assign
       .then((res) => {
@@ -60,8 +60,6 @@ export default {
         console.log(this.project)
       })
   }
-  // mounted () {
-  // }
 
 }
 </script>

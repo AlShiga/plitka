@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", function (e) {
+  
+
   new Headroom(document.querySelector("header")).init();
   gsapInit();
   new Swiper(".mySwiper", { spaceBetween: 10 });
@@ -6,12 +8,81 @@ document.addEventListener("DOMContentLoaded", function (e) {
   document.querySelectorAll(".burger").forEach((el)=>{
     el.addEventListener('click',(e)=>{
       document.querySelector('body').classList.toggle('openMenu')
+      document.querySelector('body').classList.toggle('overflow-hidden')
     })
   })
   document.querySelector  (".menuBg").addEventListener('click',(e)=>{
     document.querySelector('body').classList.toggle('openMenu')
+    document.querySelector('body').classList.toggle('overflow-hidden')
   })
+
+
+  cartInit()
 });
+
+function cartInit() {
+  let title = document.querySelector('.prCart__title')
+  let btnNext = document.querySelector('.nextCart')
+  let toForm = document.querySelector('.toForm')
+  let toCart = document.querySelector('.toCart')
+  let inpTren = document.querySelector('.inpTren')
+
+  document.querySelectorAll(".cartBtn").forEach((el)=>{
+    el.addEventListener('click',(e)=>{
+      popToCart ()
+      document.querySelector('body').classList.toggle('openCart')
+      document.querySelector('body').classList.toggle('overflow-hidden')
+      console.log(e.target.dataset.num)
+      if(e.target.dataset.num){
+        document.querySelectorAll('.prCart__item').forEach((el)=>{
+          el.classList.remove('prCart__item_active')
+        })
+        document.querySelector('.prCart__item[data-num="'+e.target.dataset.num+'"]').classList.add('prCart__item_active')
+        title.textContent= document.querySelector('.prCart__item[data-num="'+e.target.dataset.num+'"]').dataset.title
+        btnNext.dataset.num = e.target.dataset.num*1+1
+      }
+    })
+  })
+  document.querySelector  (".prCartBg").addEventListener('click',(e)=>{
+    document.querySelector('body').classList.toggle('openCart')
+    document.querySelector('body').classList.toggle('overflow-hidden')
+  })
+
+
+
+  btnNext.addEventListener('click',(e)=>{
+    console.dir(btnNext)
+    let activeEl = document.querySelector('.prCart__item_active')
+    activeEl.classList.remove('prCart__item_active')
+    let nevActiveEl = document.querySelector('.prCart__item[data-num="'+btnNext.dataset.num+'"]')
+    if(nevActiveEl){
+      nevActiveEl.classList.add('prCart__item_active')
+      btnNext.dataset.num = btnNext.dataset.num*1+1
+    }else{
+      nevActiveEl = document.querySelector('.prCart__item[data-num="1"]')
+      nevActiveEl.classList.add('prCart__item_active')
+      btnNext.dataset.num = 2
+    }
+    title.textContent= nevActiveEl.dataset.title
+  })
+  toForm.addEventListener('click',()=>{
+    document.querySelector('.prCart__btns').style.display='none';
+    document.querySelector('.prCart__body').style.display='none';
+    document.querySelector('.prCart__btnsCont').style.display='';
+    document.querySelector('.prCart__bodyCont').style.display='';
+    inpTren.value = title.textContent
+  })
+  toCart.addEventListener('click',()=>{
+    popToCart ()
+  })
+}
+
+function popToCart (){
+  document.querySelector('.prCart__btns').style.display='';
+  document.querySelector('.prCart__body').style.display='';
+  document.querySelector('.prCart__btnsCont').style.display='none';
+  document.querySelector('.prCart__bodyCont').style.display='none';
+}
 
 function gsapInit() {
   document.querySelector(".mFirst").addEventListener("mousemove", function (e) {

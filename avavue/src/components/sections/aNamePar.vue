@@ -18,23 +18,24 @@
 </template>
 
 <script>
-// import { gsap, TweenLite } from 'gsap/all'
+import { gsap } from 'gsap/all'
 
 export default {
   data () {
     return {
-      name: 'aNamePar',
-      props: {
-        // msg: String
-      }
+      name: 'aNamePar'
+
     }
   },
-  // methods(){},
-  mounted () {
-    console.log('Прив1')
-    var checkScrollSpeed = (function () {
+  // props: {
+  //   // msg: String
+  // },
+  methods: {
+    checkScrollSpeed: (function (settings) {
+      settings = settings || {}
       var lastPos; var newPos; var timer; var delta
-      var delay = 32
+      var delay = settings.delay || 50 // in "ms" (higher means lower fidelity )
+
       function clear () {
         lastPos = null
         delta = 0
@@ -42,7 +43,7 @@ export default {
       clear()
       return function () {
         newPos = window.scrollY
-        if (lastPos != null) {
+        if (lastPos != null) { // && newPos < maxScroll
           delta = newPos - lastPos
         }
         lastPos = newPos
@@ -50,29 +51,53 @@ export default {
         timer = setTimeout(clear, delay)
         return delta
       }
-    })()
-
-    function pamalax () {
-      const el = document.querySelectorAll('.par span')
-      let show = false
-      setInterval(() => {
-        let transformY = checkScrollSpeed()
-        if (show) {
-          // console.log(transformY)
-          if (transformY > 300) {
-            transformY = 300
-          }
-          el.forEach((element, key) => {
-            element.style.transform = 'translateY(' + -transformY * 6 / ((key + 1) / 8) + 'px)'
-          })
-        }
-        (!transformY) ? show = true : show = false
-      }, 32)
+    })(),
+    anim: function () {
+      this.scr = ((this.scr * 5 + this.checkScrollSpeed()) / 6).toFixed(2)
+      // if (scr < 9 && scr > -9) { scr = 0 }
+      if (this.scr > this.maxScr) { this.maxScr = this.scr }
+      if (-this.scr > this.maxScr) { this.maxScr = -this.scr }
+      // x.textContent = scr + ' / ' + maxScr
+      this.elem.forEach((el, key) => {
+        const trNev = 100 * this.scr / this.maxScr * ((8 - (key + 1)) / 8)
+        // tr.key = (tr.key * 16 + trNev) / 17
+        // console.log(tr.key)
+        el.style.transform = 'translateY(' + -trNev + '%)'
+        el.style.transition = '0.2s'
+        // gsap.to(el, { y: trNev + '%', ease: 'none' })
+      })
     }
-    pamalax()
+  },
+  mounted () {
+    // var checkScrollSpeed = (function (settings) {
+    //   settings = settings || {}
+    //   var lastPos; var newPos; var timer; var delta
+    //   var delay = settings.delay || 50 // in "ms" (higher means lower fidelity )
+
+    //   function clear () {
+    //     lastPos = null
+    //     delta = 0
+    //   }
+    //   clear()
+    //   return function () {
+    //     newPos = window.scrollY
+    //     if (lastPos != null) { // && newPos < maxScroll
+    //       delta = newPos - lastPos
+    //     }
+    //     lastPos = newPos
+    //     clearTimeout(timer)
+    //     timer = setTimeout(clear, delay)
+    //     return delta
+    //   }
+    // })()
+    this.elem = document.querySelectorAll('.par span')
+    this.scr = 1
+    this.maxScr = 1
+
+    gsap.ticker.add(this.anim)
   },
   unmounted () {
-    console.log('Пока1')
+    gsap.ticker.add(this.anim)
   }
 }
 </script>
@@ -86,6 +111,7 @@ export default {
   position: relative;
   width: 100%;
     span{
+    white-space: nowrap;
     width: 100%;
     font-size:160px;
     font-family:Helvetica;

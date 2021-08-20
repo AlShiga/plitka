@@ -37,7 +37,7 @@ export default {
     }
   },
   mounted () {
-    fetch('http://ava.avadev.ru/wp-json/wp/v2/posts?categories=2')
+    fetch(this.$store.state.linkAdmin + '/wp-json/wp/v2/posts?categories=2')
       .then((r) => r.json())
     // eslint-disable-next-line no-return-assign
       .then((res) => {

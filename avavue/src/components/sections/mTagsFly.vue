@@ -101,7 +101,153 @@ export default {
           wireframes: false
         }
       })
-
+      this.size = {
+        xl: {
+          web: {
+            x: 600 / 1920 * innerWidth,
+            y: 200 / 1920 * innerWidth,
+            w: 460 / 1920 * innerWidth,
+            h: 78 / 1920 * innerWidth,
+            s: innerWidth / 1920
+          },
+          love: {
+            x: 900 / 1920 * innerWidth,
+            y: 200 / 1920 * innerWidth,
+            w: 240 / 1920 * innerWidth,
+            h: 78 / 1920 * innerWidth,
+            s: innerWidth / 1920
+          },
+          brand: {
+            x: 1200 / 1920 * innerWidth,
+            y: 200 / 1920 * innerWidth,
+            w: 430 / 1920 * innerWidth,
+            h: 78 / 1920 * innerWidth,
+            s: innerWidth / 1920
+          },
+          sites: {
+            x: 300 / 1920 * innerWidth,
+            y: 300 / 1920 * innerWidth,
+            w: 243 / 1920 * innerWidth,
+            h: 78 / 1920 * innerWidth,
+            s: innerWidth / 1920
+          },
+          animations: {
+            x: 640 / 1920 * innerWidth,
+            y: 300 / 1920 * innerWidth,
+            w: 411 / 1920 * innerWidth,
+            h: 78 / 1920 * innerWidth,
+            s: innerWidth / 1920
+          },
+          copywriting: {
+            x: 1080 / 1920 * innerWidth,
+            y: 300 / 1920 * innerWidth,
+            w: 448 / 1920 * innerWidth,
+            h: 78 / 1920 * innerWidth,
+            s: innerWidth / 1920
+          },
+          promotion: {
+            x: 1520 / 1920 * innerWidth,
+            y: 300 / 1920 * innerWidth,
+            w: 422 / 1920 * innerWidth,
+            h: 78 / 1920 * innerWidth,
+            s: innerWidth / 1920
+          },
+          naming: {
+            x: 520 / 1920 * innerWidth,
+            y: 400 / 1920 * innerWidth,
+            w: 313 / 1920 * innerWidth,
+            h: 78 / 1920 * innerWidth,
+            s: innerWidth / 1920
+          },
+          cats: {
+            x: 820 / 1920 * innerWidth,
+            y: 400 / 1920 * innerWidth,
+            w: 233 / 1920 * innerWidth,
+            h: 78 / 1920 * innerWidth,
+            s: innerWidth / 1920
+          },
+          uxui: {
+            x: 1180 / 1920 * innerWidth,
+            y: 400 / 1920 * innerWidth,
+            w: 457 / 1920 * innerWidth,
+            h: 78 / 1920 * innerWidth,
+            s: innerWidth / 1920
+          }
+        },
+        sm: {
+          web: {
+            x: innerWidth / 2,
+            y: 200 / 1920 * innerWidth,
+            w: 460 / 1920 * innerWidth,
+            h: 78 / 1920 * innerWidth,
+            s: innerWidth / 1920 * 2
+          },
+          love: {
+            x: innerWidth / 2,
+            y: 400 / 1920 * innerWidth,
+            w: 240 / 1920 * innerWidth,
+            h: 78 / 1920 * innerWidth,
+            s: innerWidth / 1920 * 2
+          },
+          brand: {
+            x: innerWidth / 2,
+            y: 600 / 1920 * innerWidth,
+            w: 430 / 1920 * innerWidth,
+            h: 78 / 1920 * innerWidth,
+            s: innerWidth / 1920 * 2
+          },
+          sites: {
+            x: innerWidth / 2,
+            y: 800 / 1920 * innerWidth,
+            w: 243 / 1920 * innerWidth,
+            h: 78 / 1920 * innerWidth,
+            s: innerWidth / 1920 * 2
+          },
+          animations: {
+            x: innerWidth / 2,
+            y: 1000 / 1920 * innerWidth,
+            w: 411 / 1920 * innerWidth,
+            h: 78 / 1920 * innerWidth,
+            s: innerWidth / 1920 * 2
+          },
+          copywriting: {
+            x: innerWidth / 2,
+            y: 1200 / 1920 * innerWidth,
+            w: 448 / 1920 * innerWidth,
+            h: 78 / 1920 * innerWidth,
+            s: innerWidth / 1920 * 2
+          },
+          promotion: {
+            x: innerWidth / 2,
+            y: 1400 / 1920 * innerWidth,
+            w: 422 / 1920 * innerWidth,
+            h: 78 / 1920 * innerWidth,
+            s: innerWidth / 1920 * 2
+          },
+          naming: {
+            x: innerWidth / 2,
+            y: 1600 / 1920 * innerWidth,
+            w: 313 / 1920 * innerWidth,
+            h: 78 / 1920 * innerWidth,
+            s: innerWidth / 1920 * 2
+          },
+          cats: {
+            x: innerWidth / 2,
+            y: 1800 / 1920 * innerWidth,
+            w: 233 / 1920 * innerWidth,
+            h: 78 / 1920 * innerWidth,
+            s: innerWidth / 1920 * 2
+          },
+          uxui: {
+            x: innerWidth / 2,
+            y: 2000 / 1920 * innerWidth,
+            w: 457 / 1920 * innerWidth,
+            h: 78 / 1920 * innerWidth,
+            s: innerWidth / 1920 * 2
+          }
+        }
+      }
+      this.curSize = (innerWidth > 700) ? this.size.xl : this.size.sm
       this.elWorld = {
         ground: this.Bodies.rectangle(
           window.innerWidth * 0.9 / 2 + 160,
@@ -131,103 +277,103 @@ export default {
           160,
           { isStatic: true }
         ),
-        web: this.Bodies.rectangle(600, 200, 460, 78, {
+        web: this.Bodies.rectangle(this.curSize.web.x, this.curSize.web.y, this.curSize.web.w, this.curSize.web.h, {
           chamfer: { radius: this.radius },
           render: {
             sprite: {
               texture: require('@/assets/img/tags/web.svg'),
-              xScale: 1,
-              yScale: 1
+              xScale: this.curSize.web.s,
+              yScale: this.curSize.web.s
             }
           }
         }),
-        love: this.Bodies.rectangle(900, 200, 240, 78, {
+        love: this.Bodies.rectangle(this.curSize.love.x, this.curSize.love.y, this.curSize.love.w, this.curSize.love.h, {
           chamfer: { radius: this.radius },
           render: {
             sprite: {
               texture: require('@/assets/img/tags/love.svg'),
-              xScale: 1,
-              yScale: 1
+              xScale: this.curSize.love.s,
+              yScale: this.curSize.love.s
             }
           }
         }),
-        brand: this.Bodies.rectangle(1200, 200, 430, 78, {
+        brand: this.Bodies.rectangle(this.curSize.brand.x, this.curSize.brand.y, this.curSize.brand.w, this.curSize.brand.h, {
           chamfer: { radius: this.radius },
           render: {
             sprite: {
               texture: require('@/assets/img/tags/brand.svg'),
-              xScale: 1,
-              yScale: 1
+              xScale: this.curSize.brand.s,
+              yScale: this.curSize.brand.s
             }
           }
         }),
-        sites: this.Bodies.rectangle(300, 300, 243, 78, {
+        sites: this.Bodies.rectangle(this.curSize.sites.x, this.curSize.sites.y, this.curSize.sites.w, this.curSize.sites.h, {
           chamfer: { radius: this.radius },
           render: {
             sprite: {
               texture: require('@/assets/img/tags/sites.svg'),
-              xScale: 1,
-              yScale: 1
+              xScale: this.curSize.sites.s,
+              yScale: this.curSize.sites.s
             }
           }
         }),
-        animations: this.Bodies.rectangle(640, 300, 411, 78, {
+        animations: this.Bodies.rectangle(this.curSize.animations.x, this.curSize.animations.y, this.curSize.animations.w, this.curSize.animations.h, {
           chamfer: { radius: this.radius },
           render: {
             sprite: {
               texture: require('@/assets/img/tags/animations.svg'),
-              xScale: 1,
-              yScale: 1
+              xScale: this.curSize.animations.s,
+              yScale: this.curSize.animations.s
             }
           }
         }),
-        copywriting: this.Bodies.rectangle(1080, 300, 448, 78, {
+        copywriting: this.Bodies.rectangle(this.curSize.copywriting.x, this.curSize.copywriting.y, this.curSize.copywriting.w, this.curSize.copywriting.h, {
           chamfer: { radius: this.radius },
           render: {
             sprite: {
               texture: require('@/assets/img/tags/copywriting.svg'),
-              xScale: 1,
-              yScale: 1
+              xScale: this.curSize.copywriting.s,
+              yScale: this.curSize.copywriting.s
             }
           }
         }),
-        promotion: this.Bodies.rectangle(1520, 300, 422, 78, {
+        promotion: this.Bodies.rectangle(this.curSize.promotion.x, this.curSize.promotion.y, this.curSize.promotion.w, this.curSize.promotion.h, {
           chamfer: { radius: this.radius },
           render: {
             sprite: {
               texture: require('@/assets/img/tags/promotion.svg'),
-              xScale: 1,
-              yScale: 1
+              xScale: this.curSize.promotion.s,
+              yScale: this.curSize.promotion.s
             }
           }
         }),
-        naming: this.Bodies.rectangle(520, 400, 313, 78, {
+        naming: this.Bodies.rectangle(this.curSize.naming.x, this.curSize.naming.y, this.curSize.naming.w, this.curSize.naming.h, {
           chamfer: { radius: this.radius },
           render: {
             sprite: {
               texture: require('@/assets/img/tags/naming.svg'),
-              xScale: 1,
-              yScale: 1
+              xScale: this.curSize.naming.s,
+              yScale: this.curSize.naming.s
             }
           }
         }),
-        cats: this.Bodies.rectangle(820, 400, 233, 78, {
+        cats: this.Bodies.rectangle(this.curSize.cats.x, this.curSize.cats.y, this.curSize.cats.w, this.curSize.cats.h, {
           chamfer: { radius: this.radius },
           render: {
             sprite: {
               texture: require('@/assets/img/tags/cats.svg'),
-              xScale: 1,
-              yScale: 1
+              xScale: this.curSize.cats.s,
+              yScale: this.curSize.cats.s
             }
           }
         }),
-        uxui: this.Bodies.rectangle(1180, 400, 457, 78, {
+        uxui: this.Bodies.rectangle(this.curSize.uxui.x, this.curSize.uxui.y, this.curSize.uxui.w, this.curSize.uxui.h, {
           chamfer: { radius: this.radius },
           render: {
             sprite: {
               texture: require('@/assets/img/tags/uxui.svg'),
-              xScale: 1,
-              yScale: 1
+              xScale: this.curSize.uxui.s,
+              yScale: this.curSize.uxui.s
             }
           }
         })
@@ -247,8 +393,8 @@ export default {
         this.elWorld.naming,
         this.elWorld.cats,
         this.elWorld.uxui
-
       ])
+
       // add mouse control
       this.mouse = this.Mouse.create(this.render.canvas)
       this.mouseConstraint = this.MouseConstraint.create(this.engine, {

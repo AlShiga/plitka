@@ -3,7 +3,7 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     langEn: true,
-    linkAdmin: 'http://ava/'
+    linkAdmin: 'https://ava.avadev.ru'
   },
   mutations: {
     selectLang (state) {

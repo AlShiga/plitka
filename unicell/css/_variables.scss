@@ -464,7 +464,7 @@ li > a {
   font-style: normal;
   font-weight: normal;
   line-height: 150%;
-  @include fontS(12px, 10px, 10px, 10px);
+  @include fontS(12px, 12px, 12px, 12px);
 }
 
 .b2 {
@@ -472,7 +472,7 @@ li > a {
   font-style: normal;
   font-weight: normal;
   line-height: 150%;
-  @include fontS(14px, 12px, 12px, 11px);
+  @include fontS(14px, 12px, 12px, 12px);
 }
 
 .ttu {
@@ -551,7 +551,7 @@ input {
   border-bottom: 1px solid currentColor;
   padding: 15px 0;
   margin-bottom: 20px;
-  font-family: 'Vela Sans';
+  font-family: "TT Firs Neue", Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   line-height: 150%;
@@ -559,7 +559,7 @@ input {
   line-height: 140%;
 
   &::placeholder {
-    font-family: 'Vela Sans';
+    font-family: "TT Firs Neue", Arial, Helvetica, sans-serif;
     font-style: normal;
     font-weight: normal;
     line-height: 150%;

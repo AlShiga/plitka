@@ -6313,7 +6313,7 @@ a.text-dark:hover, a.text-dark:focus {
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url(../font/TwentytwelveSlab-Regular.ttf);
+  src: url("~@/assets/font/TwentytwelveSlab-Regular.ttf");
 }
 
 @font-face {
@@ -6321,7 +6321,7 @@ a.text-dark:hover, a.text-dark:focus {
   font-style: normal;
   font-weight: 500;
   font-display: swap;
-  src: url(../font/TwentytwelveSlab-Bold.ttf);
+  src: url("~@/assets/font/TwentytwelveSlab-Bold.ttf");
 }
 
 @font-face {
@@ -6329,7 +6329,7 @@ a.text-dark:hover, a.text-dark:focus {
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url(../font/Montserrat.woff2) format("woff2");
+  src: url("~@/assets/font/Montserrat.woff2");
 }
 
 *,
@@ -6347,7 +6347,6 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 html {
-  scroll-behavior: smooth;
   font-size: 14px;
 }
 
@@ -7856,13 +7855,13 @@ input[type="number"] {
 
 @media (max-width: 1024.98px) {
   .h4 {
-    font-size: 100px;
+    font-size: 80px;
   }
 }
 
 @media (max-width: 767.98px) {
   .h4 {
-    font-size: 100px;
+    font-size: 50px;
   }
 }
 
@@ -8078,7 +8077,36 @@ li > a {
      object-fit: cover;
 }
 
+.h7 {
+  font-family: Montserrat, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 110%;
+  font-size: 44px;
+}
+
+@media (max-width: 1449.98px) {
+  .h7 {
+    font-size: 34px;
+  }
+}
+
+@media (max-width: 1024.98px) {
+  .h7 {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .h7 {
+    font-size: 24px;
+  }
+}
+
 input {
+  font-family: Montserrat, sans-serif;
+  font-style: normal;
+  font-weight: 400;
   display: block;
   width: 100%;
   background: transparent;
@@ -8086,39 +8114,119 @@ input {
   border: none;
   border-bottom: 1px solid currentColor;
   padding: 15px 0;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   font-weight: normal;
   line-height: 150%;
-  font-size: 14px;
+  font-size: 44px;
   line-height: 140%;
+  font-size: 44px;
+}
+
+@media (max-width: 1449.98px) {
+  input {
+    font-size: 34px;
+  }
+}
+
+@media (max-width: 1024.98px) {
+  input {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  input {
+    font-size: 24px;
+  }
 }
 
 input::-webkit-input-placeholder {
+  font-family: Montserrat, sans-serif;
+  font-style: normal;
+  font-weight: 400;
   font-weight: normal;
   line-height: 150%;
-  font-size: 14px;
+  text-transform: uppercase;
+  font-size: 44px;
   line-height: 140%;
 }
 
 input:-ms-input-placeholder {
+  font-family: Montserrat, sans-serif;
+  font-style: normal;
+  font-weight: 400;
   font-weight: normal;
   line-height: 150%;
-  font-size: 14px;
+  text-transform: uppercase;
+  font-size: 44px;
   line-height: 140%;
 }
 
 input::-ms-input-placeholder {
+  font-family: Montserrat, sans-serif;
+  font-style: normal;
+  font-weight: 400;
   font-weight: normal;
   line-height: 150%;
-  font-size: 14px;
+  text-transform: uppercase;
+  font-size: 44px;
   line-height: 140%;
 }
 
 input::placeholder {
+  font-family: Montserrat, sans-serif;
+  font-style: normal;
+  font-weight: 400;
   font-weight: normal;
   line-height: 150%;
-  font-size: 14px;
+  text-transform: uppercase;
+  font-size: 44px;
   line-height: 140%;
+}
+
+@media (max-width: 1449.98px) {
+  input::-webkit-input-placeholder {
+    font-size: 34px;
+  }
+  input:-ms-input-placeholder {
+    font-size: 34px;
+  }
+  input::-ms-input-placeholder {
+    font-size: 34px;
+  }
+  input::placeholder {
+    font-size: 34px;
+  }
+}
+
+@media (max-width: 1024.98px) {
+  input::-webkit-input-placeholder {
+    font-size: 28px;
+  }
+  input:-ms-input-placeholder {
+    font-size: 28px;
+  }
+  input::-ms-input-placeholder {
+    font-size: 28px;
+  }
+  input::placeholder {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  input::-webkit-input-placeholder {
+    font-size: 24px;
+  }
+  input:-ms-input-placeholder {
+    font-size: 24px;
+  }
+  input::-ms-input-placeholder {
+    font-size: 24px;
+  }
+  input::placeholder {
+    font-size: 24px;
+  }
 }
 
 .bg {
@@ -8139,6 +8247,10 @@ input::placeholder {
 .bg_r {
   background-color: #E10F1C;
   color: #F8F8F8;
+}
+
+.gray {
+  color: #818181;
 }
 
 .d-inline-grid {
@@ -8910,46 +9022,16 @@ button.swiper-pagination-bullet {
   mix-blend-mode: normal;
 }
 
-.lent {
-  width: 200%;
-  background-color: #E10F1C;
-  border-top: 1px solid #F8F8F8;
-  border-bottom: 1px solid #F8F8F8;
-  padding: 15px 0;
-  -webkit-transform: translateX(-25%);
-          transform: translateX(-25%);
-}
-
-.lent_gray {
-  background-color: #262626;
-}
-
-.lent_rotate {
-  -webkit-transform-origin: center;
-          transform-origin: center;
-  -webkit-transform: translateX(-25%) rotate(-10deg);
-          transform: translateX(-25%) rotate(-10deg);
-}
-
-.lent__img {
-  width: 100%;
-  height: 30px;
-  background-image: url(../img/lent.png);
-  background-size: contain;
-  background-repeat-x: repeat;
-  background-repeat-y: no-repeat;
-}
-
 .noise {
   -webkit-animation: noise 1.2s steps(3) infinite both;
           animation: noise 1.2s steps(3) infinite both;
-  background: url(https://shum.avadev.ru/wp-content/themes/avatheme/img/bg-noise.png);
-  height: 200%;
+  background: url(~@/assets/img/bg-noise.png);
+  height: 400%;
   left: -50%;
   pointer-events: none;
   position: fixed;
   top: -50%;
-  width: 200%;
+  width: 400%;
   will-change: auto;
   z-index: 99999;
   opacity: 0.5;
@@ -9087,33 +9169,11 @@ button.swiper-pagination-bullet {
 }
 
 .servItem_web {
-  background-image: url(../img/websites.png);
+  background-image: url(~@/assets/img/websites.png);
 }
 
 .servItem_des {
-  background-image: url(../img/ux.png);
-}
-
-.persWrap {
-  display: -ms-grid;
-  display: grid;
-  gap: 3vw;
-  -ms-grid-columns: (1fr)[4];
-      grid-template-columns: repeat(4, 1fr);
-}
-
-@media (max-width: 1024.98px) {
-  .persWrap {
-    -ms-grid-columns: (1fr)[2];
-        grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 767.98px) {
-  .persWrap {
-    -ms-grid-columns: (1fr)[1];
-        grid-template-columns: repeat(1, 1fr);
-  }
+  background-image: url(~@/assets/img/ux.png);
 }
 
 .persItem {
@@ -9152,6 +9212,25 @@ button.swiper-pagination-bullet {
   border: 1px solid currentColor;
   border-radius: 100px;
   margin-right: 15px;
+  margin-bottom: 10px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.tagsW {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@media (max-width: 767.98px) {
+  .tagsW {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
 }
 
 .blogBody {

@@ -86,6 +86,7 @@ const invertEl = {
     TweenLite.set(this.el, { xPercent: -50, yPercent: -50 })
     this.wrapEl.addEventListener('mousemove', this.mouseMove)
     gsap.ticker.add(tickFrame)
+    // gsap.ticker.fps(30)
   },
   stop: function () {
     gsap.ticker.remove(tickFrame)

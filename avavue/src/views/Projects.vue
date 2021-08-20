@@ -1,6 +1,7 @@
 <template>
  <div class="overflow-hidden">
     <!-- <div class="prFirst"></div> -->
+    <prFirst/>
     <div class="prMore">
       <div class="row p-t-200 p-b-200">
         <div class="col-xl-19 offset-xl-1 col-lg-19 offset-lg-1 col-md-22 offset-md-1 col-22 offset-1">
@@ -23,6 +24,7 @@
 <script>
 // import formPizza from '@/components/sections/formPizza.vue'
 import myFooter from '@/components/sections/footer.vue'
+import prFirst from '@/components/sections/prFirst.vue'
 
 export default {
   data () {
@@ -31,10 +33,11 @@ export default {
     }
   },
   components: {
-    myFooter
+    myFooter,
+    prFirst
   },
   mounted () {
-    fetch('http://ava.avadev.ru/wp-json/wp/v2/posts?categories=4')
+    fetch(this.$store.state.linkAdmin + '/wp-json/wp/v2/posts?categories=4')
       .then((r) => r.json())
       // eslint-disable-next-line no-return-assign
       .then((res) => {

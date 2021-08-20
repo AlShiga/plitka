@@ -246,5 +246,8 @@ export default {
       display: inline-block;
     }
   }
+  a{
+    white-space: nowrap;
+  }
 }
 </style>

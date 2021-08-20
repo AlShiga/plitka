@@ -12,8 +12,8 @@
             </svg>
           </router-link>
         </div>
-        <div class="col-4 offset-14"><a @click.stop="$router.push('/form')" class=""><span v-if="$store.state.langEn" class="p1 ttu m-b-10">[ Start the project  ]</span><span v-else class="p1 ttu m-b-10">[ Начать проект ]</span></a></div>
-        <div class="col-1">
+        <div class="col-lg-4 offset-lg-14 col-md-6 offset-md-9 d-none d-md-flex align-items-center"><a @click.stop="$router.push('/form')" class=""><span v-if="$store.state.langEn" class="p1 ttu m-b-10">[ Start the project  ]</span><span v-else class="p1 ttu m-b-10">[ Начать проект ]</span></a></div>
+        <div class="col-lg-1 offset-lg-0  col-md-2  offset-md-1 offset-10 col-4 d-flex align-items-center">
           <a @click.stop="$store.commit('selectLang')" class="selectLang">
             <span class="p1 ttu" v-if="$store.state.langEn">[ EN ]</span>
             <span class="p1 ttu" v-else>[ RU ]</span>
@@ -76,6 +76,7 @@ export default {
   }
   & a{
     pointer-events: all;
+    white-space: nowrap;
     & *{
       pointer-events: all;
     }
@@ -91,6 +92,14 @@ export default {
   transition: 0.4s;
   mix-blend-mode: difference;
   pointer-events: none;
+  @media (max-width: 1024.98px) {
+  right: 4.33vw;
+  width: 100 / 24 * 5vw;
+  }
+  @media (max-width: 767.98px) {
+   right: 4.33vw;
+      width: 100 / 24 * 11vw;
+    }
   & *{
     pointer-events: none;
   }
@@ -126,5 +135,18 @@ export default {
 }
 .selectLang{
   cursor: pointer;
+}
+.noise{
+  animation: noise 1.2s steps(3) infinite both;
+  background:url(~@/assets/img/noise.png);
+  height: 200%;
+  left: -50%;
+  pointer-events: none;
+  position: fixed;
+  top: -50%;
+  width: 200%;
+  will-change: auto;
+  z-index: 99999;
+  opacity: 0.2;
 }
 </style>

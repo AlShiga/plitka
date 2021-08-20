@@ -11,7 +11,12 @@
         <div class="col-22 offset-1">
           <h2 class="h3 m-b-40">Hello world</h2>
           <div class="print">
-            <img width="1222" height="600" src="~@/assets/img/print.png" alt="" class="w-100 m-b-15">
+            <picture>
+             <source srcset="~@/assets/img/about/teamLG.jpg" media="(min-width: 1200px)">
+             <source srcset="~@/assets/img/about/teamMD.jpg" media="(min-width: 700px)">
+             <img width="1222" height="600" src="~@/assets/img/about/team.jpg" alt="" class="w-100 m-b-15">
+            </picture>
+            <!-- <img width="1222" height="600" src="~@/assets/img/print.png" alt="" class="w-100 m-b-15"> -->
             <p class="p1 ttu">wow.  we feel like this</p>
           </div>
         </div>
@@ -30,7 +35,7 @@
     <aNamePar />
     <aLines />
 
-    <div class="p-t-100 p-b-200">
+    <div v-if="show" class="p-t-100 p-b-200">
       <secTitle :title='"[ Super puper cool team ];"' :addClass='"m-b-100"' />
       <div class="row m-b-100">
         <div class="offset-1 col-xl-16 col-lg-12 col-md-15 col-22">
@@ -42,6 +47,13 @@
       <div class="row">
         <div class="col-22 offset-1">
           <div class="persWrap">
+            <div v-for="employeeItem in this.employee" :key="employeeItem.name" class="persItem">
+              <img :src="employeeItem.img" alt="" class="w-100 m-b-10">
+              <p class="p1 ttu mp0">{{employeeItem.name}}</p>
+              <p class="p1 ttu mp0">{{employeeItem.position}}</p>
+            </div>
+          </div>
+          <!-- <div class="persWrap">
             <div class="persItem">
               <img src="~@/assets/img/al.jpg" alt="" class="w-100 m-b-10">
               <p class="p1 ttu mp0">Alevtina Ksenofontova</p>
@@ -78,11 +90,11 @@
               <p class="p1 ttu mp0">Alevtina Ksenofontova</p>
               <p class="p1 ttu mp0">designer</p>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
-    <aSlider/>
+    <aSlider v-if="show" :gal="this.gal" />
     <myFooter big="true"/>
   </div>
 </template>
@@ -104,6 +116,91 @@ export default {
     myFooter,
     secTitle,
     aSlider
+  },
+  data () {
+    return {
+      vac: [],
+      gal: [],
+      show: false
+    }
+  },
+  mounted () {
+    fetch(this.$store.state.linkAdmin + '/wp-json/wp/v2/pages/89')
+      .then((r) => r.json())
+      // eslint-disable-next-line no-return-assign
+      .then((res) => {
+        this.employee = res.acf.employee
+        this.gal = res.acf.gal
+        this.show = true
+        // console.log(this.vac)
+        console.log(this.employee)
+      })
   }
 }
 </script>
+<style lang="scss">
+.persWrap{
+  display: flex;
+  flex-wrap: wrap;
+}
+.persItem{
+  margin-left: 100/24*1%;
+  width: 100/24*5%;
+  margin-bottom: 40px;
+  &:nth-of-type(12n){
+    margin-right: 100/24*0%;
+  }
+  &:nth-of-type(12n+1){
+    margin-right: 100/24*0%;
+  }
+  &:nth-of-type(12n+2){
+    margin-right: 100/24*10%;
+  }
+  &:nth-of-type(12n+3){
+    margin-left: 100/24*7%;
+    margin-right: 100/24*0%;
+  }
+  &:nth-of-type(12n+4){
+    margin-right: 100/24*4%;
+  }
+  &:nth-of-type(12n+5){
+    margin-right: 100/24*0%;
+  }
+  &:nth-of-type(12n+6){
+    margin-left: 100/24*7%;
+    margin-right: 100/24*0%;
+  }
+  &:nth-of-type(12n+7){
+
+    margin-right: 100/24*0%;
+  }
+  &:nth-of-type(12n+8){
+    margin-left: 100/24*7%;
+
+    margin-right: 100/24*0%;
+  }
+  &:nth-of-type(12n+9){
+    margin-right: 100/24*6%;
+  }
+  &:nth-of-type(12n+10){
+    margin-right: 100/24*0%;
+  }
+  &:nth-of-type(12n+11){
+    margin-right: 100/24*10%;
+  }
+  &:nth-of-type(12n+12){
+    margin-left: 100/24*7%;
+
+    margin-right: 100/24*10%;
+  }
+  @media (max-width: 1024.98px) {
+    margin-left: 100/24*1% !important;
+    margin-right: 100/24*0% !important;
+    width: 100/24*9%;
+  }
+  @media (max-width: 767.98px) {
+    margin-left: 100/24*1% !important;
+    width: 100/24*22%;
+  }
+}
+</style>

@@ -1,3 +1,38 @@
+// .prel{
+//   display: flex;
+//   justify-content: center;
+//   justify-items: center;
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   bottom: 0;
+//   background-color: $black;
+//   z-index: 1000;
+//   transition: 0.6s ease-in;
+//   svg{
+//     width: 10%;
+//     min-width: 150px;
+//   }
+// }
+// .prelW{
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   bottom: 0;
+//   background-color: $white;
+//   z-index: 999;
+//   transition: 1.2s ease-in;
+// }
+// .loaded{
+//   .prel{
+//     transform: translateY(-110%);
+//   }
+//   .prelW{
+//     transform: translateY(-110%);
+//   }
+// }
 .header{
   position: fixed;
   top: 30px;
@@ -35,7 +70,7 @@
     margin-right: 10px;
   }
 }
-.burger{
+.burger, .burgerCard{
   cursor: pointer;
 }
 .menuBg{
@@ -108,18 +143,30 @@
   position: fixed;
   top: 0;
   right: 0;
+  bottom: 0;
   width: 100%;
-  height: 100vh;
   max-width: 800px;
   background-color: $white;
   color: $black;
   display: flex;
   flex-direction: column;
-  &__body{height: 100%;}
-  &__item{
+  // overflow-y: scroll;
+  &__body{
     height: 100%;
-    display: flex;
-    flex-direction: column;
+    overflow-y: scroll;
+  }
+  &__bodyCont{
+    height: 100%;
+    overflow-y: scroll;
+    padding: 40px 4.16vw;
+  }
+  &__item{
+    flex-grow: 1;
+    height: 100%;
+    display: none;
+    &_active{
+      display: block;
+    }
   }
   &__head{
     display: flex;
@@ -129,11 +176,13 @@
   }
   &__content{
     padding: 40px 4.16vw;
+    flex-grow: 1;
     height: 100%;
+    // overflow-y: scroll;
   }
-  &__btns{
+  &__btns, &__btnsCont{
     display: flex;
-
+    width: 100%;
   }
   &__btn{
     width: 50%;
