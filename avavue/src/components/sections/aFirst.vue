@@ -23,16 +23,21 @@
             offset-1
           "
         >
-          <p class="p1">
-            We have worked on over 100 different projects and want more We have
-            worked on over 100 different projects and want moreWe have worked on
-            over 100 different projects and want moreWe have worked on over 100
-            different projects and want moreWe have worked on over 100
+          <p v-if="$store.state.langEn" class="p1">
+            Ava has been working since 2018. Say it a couple of years ago, it would look like a flaw. But 2020 and 21st * passed, and our copywriter writes this text for the updated site. To admit, it was not an easy years. Young and ambitious, we constantly rushed in search of the vector of development of the company. Now the course is taken, and we are still full of creative potentials.
+
             <br />
             <br />
-            We have worked on over 100 different projects and want more We orked
-            on over 100 different projects and want moreWe have worked on over
-            100 different projects and want more
+           We're doing web design. We create sites for business from different areas. We make mobile applications. We are engaged in printing design, branding.<br>
+* If you read this text and do not understand what it is about, congratulations, you are young or forgetful! And congratulations to us, because we survived and continue to work.
+
+          </p>
+          <p v-else class="p1">
+ Ава работает с 2019 года. Скажи мы это пару лет назад, выглядело бы как недостаток. Но прошли 2020 и 21-й*, а наш копирайтер пишет этот текст для обновленного сайта. Признаться, непростые были годы. Молодые и амбициозные, мы постоянно метались в поисках вектора развития компании. Теперь курс взят, а мы все еще полны творческих потенций.
+            <br />
+            <br />
+           Мы занимаемся веб-дизайном. Создаем сайты для бизнеса из разных сфер. Делаем мобильные приложения. Занимаемся полиграфическим дизайном, брендингом. <br>
+          *Если вы читаете этот текст и не понимаете, о чем речь, поздравляем, вы молоды или забывчивы! И поздравляем нас, ведь выстояли и работаем.
           </p>
         </div>
       </div>
@@ -89,6 +94,7 @@ const invertEl = {
     // gsap.ticker.fps(30)
   },
   stop: function () {
+    if (innerWidth < 1025) return
     gsap.ticker.remove(tickFrame)
     this.wrapEl.removeEventListener('mousemove', this.mouseMove)
   }
@@ -116,6 +122,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .aboutFirst {
+  padding-top: 220px;
   position: relative;
   min-height: 100vh;
   //   width: 100%;

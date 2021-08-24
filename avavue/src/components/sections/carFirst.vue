@@ -63,6 +63,7 @@ export default {
 
 <style scoped lang="scss">
   .carFirst{
+    padding-top: 220px;
     position: relative;
     min-height: 150vh;
     &__content{

@@ -1,11 +1,10 @@
 <template>
   <div class="contFirst p-t-100 p-b-100">
     <div class=" position-relative z-1 col-22 offset-1 contFirst__content d-flex align-items-end">
-      <h2 class="h3">
+      <h2 v-if="$store.state.langEn" class="h3">
         Let's start<br />
         your a project
-      </h2>
-      <svg
+        <svg style='height:0.5em; width:auto; margin-left:0.5em'
         width="92"
         height="72"
         viewBox="0 0 92 72"
@@ -18,6 +17,25 @@
           stroke-width="9"
         />
       </svg>
+      </h2>
+       <h2 v-else class="h3">
+        Скорее за<br />
+        работу
+        <svg style='height:0.5em; width:auto; margin-left:0.5em'
+        width="92"
+        height="72"
+        viewBox="0 0 92 72"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M5 0V32.9474C5 38.4702 9.47715 42.9474 15 42.9474H85M85 42.9474L58.75 19.6842M85 42.9474L58.75 68"
+          stroke="#F8F8F8"
+          stroke-width="9"
+        />
+      </svg>
+      </h2>
+
     </div>
   <canvas class="sinWrap"></canvas>
   </div>
@@ -189,7 +207,7 @@ export default {
           this.canvas = document.querySelector('.sinWrap')
           this.canvasWidth = this.canvas.width
           this.canvasHeight = this.canvas.height
-
+          document.querySelector('.contFirst').style.height = this.canvas.height + 'px'
           this.uniforms = {
             resolution: {
               type: 'v2',

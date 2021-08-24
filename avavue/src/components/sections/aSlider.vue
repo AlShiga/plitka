@@ -3,7 +3,8 @@
       <secTitle :title='"[ Super puper cool team ];"' :addClass='"m-b-100"' />
       <div class="row m-b-100">
         <div class="offset-1 col-xl-12 col-lg-14 col-md-18 col-22">
-          <h6 class="h7 ttu">forward and we see our agency as a either the meaning of the work is obvious or to hell with it</h6>
+          <h6  v-if="$store.state.langEn" class="h7 ttu">we love our company for simplicity, openness and cool corporate activities</h6>
+          <h6 v-else class="h7 ttu">мы любим свою компанию за простоту, открытость и классные корпоративы</h6>
         </div>
       </div>
       <div class="row">

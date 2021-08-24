@@ -1,49 +1,53 @@
 <template>
-  <div class="prFirst">
-
-<div class="slider | js-drag-area">
-  <div class="slider__inner | js-slider">
-    <div class="slide | js-slide">
-      <div class="slide__inner | js-slide__inner">
-         <img class="js-slide__img" src="http://s3-us-west-2.amazonaws.com/s.cdpn.io/58281/tex2.jpg" alt="" crossorigin="anonymous" draggable="false">
+  <div v-if="!showSm" class="prFirst">
+    <div class="slider | js-drag-area">
+      <div  class="slider__inner | js-slider">
+        <div v-for="pr in projects" :key="pr.acf.name" class="slide | js-slide">
+          <div class="slide__inner | js-slide__inner">
+             <img class="js-slide__img" src="http://s3-us-west-2.amazonaws.com/s.cdpn.io/58281/tex2.jpg" alt="" crossorigin="anonymous" draggable="false">
+             <!-- <img class="js-slide__img" :src="pr.acf.img" alt="" crossorigin="anonymous" draggable="false"> -->
+          </div>
+        </div>
       </div>
     </div>
-    <div class="slide | js-slide" style="left: 120%;">
-      <div class="slide__inner | js-slide__inner">
-         <img class="js-slide__img" src="~@/assets/img/mProj/p3.jpg" alt="" crossorigin="anonymous" draggable="false">
+    <div class="titles">
+      <div class="titles__title titles__title--proxy">Lorem ipsum</div>
+      <div class="titles__list | js-titles">
+        <div v-for="pr in projectsT" :key="pr.acf.name" class="titles__title | js-title">
+          <div class="d-flex flex-column">
+            <div v-if="pr.acf.tags" class="p1 m-b-20">
+              <span v-for="tag in pr.acf.tags" class="p1" :key="tag.name">[&nbsp;{{tag.name}}&nbsp;]&nbsp;&nbsp;</span>
+            </div>
+           <a @click="$router.push({ path: `/projects/${pr.id}` })" class="h6">{{pr.acf.title}}</a>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="slide | js-slide" style="left: 240%;">
-      <div class="slide__inner | js-slide__inner">
-         <img class="js-slide__img" src="~@/assets/img/mProj/p1.jpg" alt="" crossorigin="anonymous" draggable="false">
-      </div>
-    </div>
-    <div class="slide | js-slide" style="left: 360%;">
-      <div class="slide__inner | js-slide__inner">
-         <img class="js-slide__img" src="~@/assets/img/mProj/p2.jpg" alt="" crossorigin="anonymous" draggable="false">
-      </div>
-    </div>
-    <div class="slide | js-slide" style="left: 480%;">
-      <div class="slide__inner | js-slide__inner">
-         <img class="js-slide__img" src="~@/assets/img/mProj/p2.jpg" alt="" crossorigin="anonymous" draggable="false">
-      </div>
-    </div>
-
   </div>
-</div>
-
-<div class="titles">
-  <div class="titles__title titles__title--proxy">Lorem ipsum</div>
-  <div class="titles__list | js-titles">
-    <div class="titles__title | js-title">Moonrocket1</div>
-    <div class="titles__title | js-title">Spaceman2</div>
-    <div class="titles__title | js-title">Moonrocket3</div>
-    <div class="titles__title | js-title">Spaceman4</div>
-    <div class="titles__title | js-title">Moonrocket5</div>
-    <div class="titles__title | js-title">Moonrocket1</div>
-  </div>
-</div>
-
+  <div v-if="showSm" class="prFirstSm p-t-250">
+    <div v-for="pr in projects" :key="pr.acf.title" class="mPrItem row m-b-250">
+      <div
+        class="
+          col-xl-16
+          offset-xl-7
+          col-lg-17
+          offset-lg-6
+          col-md-19
+          offset-md-4
+          col-22
+          offset-1
+          position-relattive
+        "
+      >
+        <img :src="pr.acf.img" alt="" class="imgDisp w-100" />
+        <div class="mPrItem__det">
+          <div v-if="pr.acf.tags" class="mPrItem__tags d-none d-lg-block m-b-40">
+            <span v-for="tag in pr.acf.tags" class="p1" :key="tag.name">[&nbsp;{{tag.name}}&nbsp;]&nbsp;&nbsp;</span>
+          </div>
+          <span @click="$router.push({ path: `/projects/${pr.id}` })" class="mPrItem__title h3 d-block">{{pr.acf.title}}</span>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -54,10 +58,14 @@ import * as THREE from 'three'
 export default {
   data () {
     return {
-      start: false
+      start: false,
+      projects: [],
+      projectsT: [],
+      show: false
     }
   },
   mounted () {
+    if (innerWidth < 1024.4) { this.showSm = true }
     const store = {
       ww: window.innerWidth,
       wh: window.innerHeight,
@@ -501,40 +509,41 @@ void main() {
     }
     let gl = {}
     let slider = {}
-    /***/
-    /** * INIT STUFF ****/
-    /***/
 
-    // const gl = new Gl()
-    // const slider = new Slider(document.querySelector('.js-slider'))
+    fetch(this.$store.state.linkAdmin + '/wp-json/wp/v2/posts?categories=3&per_page=5')
+      .then((r) => r.json())
+      // eslint-disable-next-line no-return-assign
+      .then((res) => {
+        this.projects = res.map(x => x)
+        this.projectsT = res.map(x => x)
+        this.projectsT.push(this.projectsT[0])
+        if (!this.showSm) {
+          setTimeout(() => {
+          // console.log(this.start)
+            if (!this.start) {
+              gl = new Gl()
+              slider = new Slider(document.querySelector('.js-slider'))
+              this.tick = () => {
+                gl.render()
+                slider.render()
+              }
+              gsap.ticker.add(this.tick)
+              this.start = true
+            // console.log('start')
+            } else {
+            // console.log('restart')
 
-    // this.tick = () => {
-    //   gl.render()
-    //   slider.render()
-    // }
-
-    // gsap.ticker.add(this.tick)
-    console.log(this.start)
-
-    if (!this.start) {
-      gl = new Gl()
-      slider = new Slider(document.querySelector('.js-slider'))
-      this.tick = () => {
-        gl.render()
-        slider.render()
-      }
-      gsap.ticker.add(this.tick)
-      this.start = true
-      console.log('start')
-    } else {
-      console.log('restart')
-
-      gsap.ticker.add(this.tick)
-    }
+              gsap.ticker.add(this.tick)
+            }
+          }, 500)
+        }
+      })
   },
   unmounted () {
     console.log('end')
-    gsap.ticker.add(this.tick)
+    if (!this.showSm) {
+      gsap.ticker.add(this.tick)
+    }
   }
 }
 </script>
@@ -545,6 +554,9 @@ $easeOutExpo: cubic-bezier(0.190, 1.000, 0.220, 1.000);
   position: relative;
   height: 100vh;
   width: 100%;
+}
+.prFirstSm{
+  padding-top: 240px;
 }
 .dom-gl{
   position: absolute;
@@ -574,7 +586,14 @@ $easeOutExpo: cubic-bezier(0.190, 1.000, 0.220, 1.000);
 
 .slide{
   overflow: hidden;
-
+  &:nth-of-type(1){left: 0;}
+  &:nth-of-type(2){left: 120%;}
+  &:nth-of-type(3){left: 240%;}
+  &:nth-of-type(4){left: 360%;}
+  &:nth-of-type(5){left: 480%;}
+  &:nth-of-type(6){left: 600%;}
+  &:nth-of-type(7){left: 720%;}
+  &:nth-of-type(8){left: 840%;}
   &:first-child{
     position: relative;
   }
@@ -615,7 +634,9 @@ $easeOutExpo: cubic-bezier(0.190, 1.000, 0.220, 1.000);
   overflow: hidden;
   pointer-events: none;
   z-index: 3;
-
+  a{
+    pointer-events: all;
+  }
   &__list{
     position: absolute;
     top: 0;
@@ -627,13 +648,13 @@ $easeOutExpo: cubic-bezier(0.190, 1.000, 0.220, 1.000);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 6vw;
-    font-weight: bold;
+    // font-size: 6vw;
+    // font-weight: bold;
     width: 55vw;
-    margin-right:0vw;
-
-    letter-spacing: -0.1vw;
-    color: #fff;
+    // margin-right:0vw;
+    height: 20vh;
+    // letter-spacing: -0.1vw;
+    // color: #fff;
 
     &--proxy{
       visibility: hidden;

@@ -35,7 +35,7 @@
       </div>
     </div>
   </div>
-  <div class="mPrItem row m-b-250">
+  <!-- <div class="mPrItem row m-b-250">
     <div
       class="
         col-xl-16
@@ -88,52 +88,59 @@
         <span class="h3 d-block">zapolie-village</span>
       </div>
     </div>
-  </div>
+  </div> -->
   </div>
 </template>
 
 <script>
 import * as THREE from 'three'
-const vertexShader = `
-    precision mediump float;
-    uniform float uxVelo;
-    uniform float uyVelo;
-    varying vec2 vUv;
-    #define M_PI 3.1415926535897932384626433832795
-    void main(){
-      vec3 pos = position;
-      pos.x = pos.x + ((sin(uv.y * M_PI) * uxVelo) * 0.125);
-      pos.y = pos.y + ((cos(uv.x * M_PI) * uyVelo) * 0.125);
-      vUv = uv;
-      gl_Position = projectionMatrix * modelViewMatrix * vec4(pos,1.);
-    }
-    `
+import { gsap } from 'gsap/all'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+gsap.registerPlugin(ScrollTrigger)
 
-const fragmentShader = `
+const vertexShader = `
 precision mediump float;
 
+uniform float uVelo;
+
+varying vec2 vUv;
+
+#define M_PI 3.1415926535897932384626433832795
+
+void main(){
+  vec3 pos = position;
+  pos.y = pos.y + ((sin(uv.x * M_PI) * uVelo) * 0.125);
+
+  vUv = uv;
+  gl_Position = projectionMatrix * modelViewMatrix * vec4(pos,1.);
+}
+`
+const backgroundCoverUv = `
 vec2 backgroundCoverUv(vec2 screenSize, vec2 imageSize, vec2 uv) {
   float screenRatio = screenSize.x / screenSize.y;
   float imageRatio = imageSize.x / imageSize.y;
 
-  vec2 newSize = screenRatio < imageRatio
+  vec2 newSize = screenRatio < imageRatio 
       ? vec2(imageSize.x * screenSize.y / imageSize.y, screenSize.y)
       : vec2(screenSize.x, imageSize.y * screenSize.x / imageSize.x);
 
-  vec2 newOffset = (screenRatio < imageRatio
-      ? vec2((newSize.x - screenSize.x) / 2.0, 0.0)
+  vec2 newOffset = (screenRatio < imageRatio 
+      ? vec2((newSize.x - screenSize.x) / 2.0, 0.0) 
       : vec2(0.0, (newSize.y - screenSize.y) / 2.0)) / newSize;
 
   return uv * screenSize / newSize + newOffset;
-}
+}`
+const fragmentShader = `
+precision mediump float;
+
+${backgroundCoverUv}
 
 uniform sampler2D uTexture;
 
 uniform vec2 uMeshSize;
 uniform vec2 uImageSize;
 
-uniform float uxVelo;
-uniform float uyVelo;
+uniform float uVelo;
 uniform float uScale;
 
 varying vec2 vUv;
@@ -144,20 +151,15 @@ void main() {
   vec2 texCenter = vec2(0.5);
   vec2 texUv = backgroundCoverUv(uMeshSize, uImageSize, uv);
   vec2 texScale = (texUv - texCenter) * uScale + texCenter;
-  vec4 texturer = texture(uTexture, texScale);
+  vec4 texture = texture2D(uTexture, texScale);
 
-  texScale.x += 0.15 * uxVelo;
-  if(uv.x < 1.) texturer.g = texture(uTexture, texScale).g;
+  texScale.y += 0.15 * uVelo;
+  if(uv.x < 1.) texture.g = texture2D(uTexture, texScale).g;
 
-  texScale.x += 0.10 * uxVelo;
-  if(uv.x < 1.) texturer.b = texture(uTexture, texScale).b;
-  texScale.y += 0.15 * uyVelo;
-  if(uv.x < 1.) texturer.g = texture(uTexture, texScale).g;
+  texScale.y += 0.10 * uVelo;
+  if(uv.x < 1.) texture.b = texture2D(uTexture, texScale).b;
 
-  texScale.y += 0.10 * uyVelo;
-  if(uv.x < 1.) texturer.b = texture(uTexture, texScale).b;
-
-  gl_FragColor = texturer;
+  gl_FragColor = texture;
 }
 `
 
@@ -267,8 +269,8 @@ const AddImg = {
           value: new THREE.Vector2(el.offsetWidth, el.offsetHeight)
         },
         uScale: { value: 1 },
-        uxVelo: { value: 0 },
-        uyVelo: { value: 0.1 }
+        // uxVelo: { value: 0 },
+        uVelo: { value: 0.1 }
       }
       const geometry = new THREE.PlaneBufferGeometry(1, 1, 30, 30)
       const material = new THREE.ShaderMaterial({
@@ -282,12 +284,12 @@ const AddImg = {
       const cube = new THREE.Mesh(geometry, material)
       this.images[key] = cube
       cube.scale.set(el.offsetWidth, el.offsetHeight, 1)
-      el.style.opacity = '0.5'
+      el.style.opacity = '0'
 
       this.scene.add(this.images[key])
       console.log(this.canvasW, el.offsetWidth, el)
       cube.position.x = -this.canvasW / 2 + el.offsetWidth / 2 + el.getBoundingClientRect().x
-      cube.position.y = -this.canvasH / 2 + el.offsetHeight / 2 + el.getBoundingClientRect().y
+      cube.position.y = this.canvasH / 2 + el.offsetHeight / 2 + el.getBoundingClientRect().y
     })
     console.log(AddImg.images)
 
@@ -306,9 +308,9 @@ const AddImg = {
       AddImg.images[key].position.y = AddImg.canvasH / 2 - el.offsetHeight / 2 - el.getBoundingClientRect().y
     })
     AddImg.renderer.render(AddImg.scene, AddImg.camera)
-    AddImg.scr = (AddImg.scr * 8 + checkScrollSpeed() / 100) / 9
+    AddImg.scr = (AddImg.scr * 12 + checkScrollSpeed() / 100) / 13
     uniforms.forEach((el) => {
-      el.uyVelo.value = AddImg.scr
+      el.uVelo.value = AddImg.scr * 2
     }
     )
   }
@@ -326,21 +328,18 @@ export default {
 
   },
   mounted () {
-    fetch(this.$store.state.linkAdmin + '/wp-json/wp/v2/posts?categories=3')
+    fetch(this.$store.state.linkAdmin + '/wp-json/wp/v2/posts?categories=3&per_page=5')
       .then((r) => r.json())
-      // eslint-disable-next-line no-return-assign
       .then((res) => {
         this.projects = res.map(x => x)
-        // console.log(this.projects[0])
+        if (innerWidth < 1025) return
         setTimeout(() => {
-          // AddImg.init()
+          AddImg.init()
         }, 500)
       })
-    setTimeout(() => {
-      // AddImg.init()
-    }, 500)
   },
   unmounted () {
+    if (innerWidth < 1025) return
     AddImg.stop = true
   }
 }

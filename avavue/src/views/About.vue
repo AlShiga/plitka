@@ -23,8 +23,11 @@
       </div>
       <div class="row">
         <div class="offset-1 col-lg-12 col-md-15 col-22" >
-          <p class="h8">
-            <span class="p1 red">[ Our team ];</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AVA is a small team. There are five of us. Each of us is responsible for his/her part of the work. We are engaged in web design and site development of different difficulty.
+          <p v-if="$store.state.langEn" class="h8">
+            <span class="p1 red">[ Our team ];</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;There are five of us. No spy will be able to join our ranks of responsible and hardworking employees to cool off while waiting for a salary. Your project is in good hands.
+          </p>
+          <p v-else class="h8">
+            <span class="p1 red">[ Our team ];</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Нас пятеро. Ни один шпион не сможет затесаться в наши ряды ответственных и трудолюбивых сотрудников, чтобы прохлаждаться в ожидании зарплаты. Ваш проект в надежных руках.
           </p>
         </div>
       </div>
@@ -39,8 +42,15 @@
       <secTitle :title='"[ Super puper cool team ];"' :addClass='"m-b-100"' />
       <div class="row m-b-100">
         <div class="offset-1 col-xl-16 col-lg-12 col-md-15 col-22">
-          <h4 class="h6">
-            craft, service and efficiency drive us forward and we see our agency as a place where our shared values meet.
+          <h4  v-if="$store.state.langEn"  class="h6">
+           Skill, achievement and development
+           inspire us to do quality work.
+          Ava is the place
+          of like-minded people.
+
+          </h4>
+          <h4 v-else  class="h6">
+           мастерство, достижения и развитие вдохновляют нас на качественную работу. ава - место единомышленников.
           </h4>
         </div>
       </div>

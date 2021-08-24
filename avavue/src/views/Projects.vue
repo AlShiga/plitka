@@ -5,14 +5,15 @@
     <div class="prMore">
       <div class="row p-t-200 p-b-200">
         <div class="col-xl-19 offset-xl-1 col-lg-19 offset-lg-1 col-md-22 offset-md-1 col-22 offset-1">
-          <div v-for="pr in projects" :key="pr.acf.title" class="prMoreItem p-b-40 p-t-40 m-b-20">
+          <div v-for="pr in projects" :key="pr.acf.title" class="prMoreItem p-b-40 p-t-40 m-b-20" v-on:mouseover="myMouseover" v-on:mouseout="myMouseout" v-on:mousemove="myMousemove">
             <span @click="$router.push({ path: `/projects/${pr.id}` })" class="h6 prMoreItem__title ttu">{{pr.acf.title}}</span>
             <div class="prMoreItem__detail">
-              <p class="p1">International company</p>
+              <p class="p1">{{($store.state.langEn)?pr.acf.fieldEN: pr.acf.field}}</p>
               <div v-if="pr.tags" class="d-none d-lg-block">
                 <span v-for="tag in pr.acf.tags" class="p1" :key="tag.name">[&nbsp;{{tag.name}}&nbsp;]&nbsp;&nbsp;</span>
               </div>
             </div>
+            <img src="@/assets/img/gif/ninkita-call.gif" alt="" class="prMoreItem__img">
           </div>
         </div>
       </div>
@@ -23,18 +24,63 @@
 
 <script>
 // import formPizza from '@/components/sections/formPizza.vue'
+import { gsap } from 'gsap/all'
 import myFooter from '@/components/sections/footer.vue'
 import prFirst from '@/components/sections/prFirst.vue'
 
 export default {
   data () {
     return {
-      projects: []
+      projects: [],
+      imgTarget: '',
+      transform: {
+        x: 0,
+        y: 0,
+        curX: 0,
+        curY: 0,
+        scale: 1,
+        opacity: 1,
+        bx: 0,
+        by: 0
+      }
     }
   },
+
   components: {
     myFooter,
     prFirst
+  },
+  methods: {
+    myMouseover: function (e) {
+      if (innerWidth < 1023) return
+      this.transform.bx = e.target.getBoundingClientRect().left
+      this.transform.by = e.target.getBoundingClientRect().top
+      this.transform.x = e.clientX - this.transform.bx
+      this.transform.y = e.clientY - this.transform.by
+      this.imgTarget = e.relatedTarget.querySelector('img')
+      gsap.to(this.imgTarget, { x: this.transform.x, y: this.transform.y, scale: 1, duration: 0 })
+      gsap.ticker.add(this.updatePos)
+      console.log(this)
+      console.log(e)
+    },
+    myMousemove: function (e) {
+      if (innerWidth < 1023) return
+      this.transform.curX = e.clientX - this.transform.bx
+      this.transform.curY = e.clientY - this.transform.by
+      // console.log(2)
+    },
+    myMouseout: function (e) {
+      if (innerWidth < 1023) return
+      gsap.to(this.imgTarget, { x: this.transform.x, y: this.transform.y, scale: 0, opacity: 0, duration: 0.5 })
+      gsap.ticker.remove(this.updatePos)
+      // console.log(3)
+    },
+    updatePos: function (e) {
+      if (innerWidth < 1023) return
+      this.transform.x = (this.transform.x * 9 + this.transform.curX) / 10
+      this.transform.y = (this.transform.y * 9 + this.transform.curY) / 10
+      gsap.to(this.imgTarget, { x: this.transform.x, y: this.transform.y, scale: 1, opacity: this.transform.opacity, duration: 0.3 })
+    }
   },
   mounted () {
     fetch(this.$store.state.linkAdmin + '/wp-json/wp/v2/posts?categories=4')
@@ -55,6 +101,8 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+  border-bottom: 1px solid currentColor;
   @media (max-width: 1449.98px) {
 
   }
@@ -73,6 +121,22 @@ export default {
     margin-right: 30vw;
     cursor: pointer;
   }
-  border-bottom: 1px solid currentColor;
+  &__img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: scale(0);
+    opacity: 0;
+    pointer-events: none;
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+    transition: opacity 0.3s;
+  }
+}
+.mAdvItem{
+  & *{
+    // pointer-events:none;
+  }
 }
 </style>

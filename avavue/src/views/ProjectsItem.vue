@@ -18,7 +18,7 @@
         </div>
         <div class="col-xl-7 offset-xl-1 col-lg-8 offset-lg-1 col-md-12 offset-md-1 col-22 offset-1">
           <div class="m-b-40">
-          <span class="p1" v-html="project.acf.text"></span>
+          <span class="p1" v-html="($store.state.langEn)?project.acf.textEN: project.acf.text"></span>
           </div>
           <span class="d-block m-b-40">
           <span class="p1 ttu " v-for="tag in project.acf.tags"  :key="tag.name">[&nbsp;{{tag.name}}&nbsp;]&nbsp;&nbsp;</span>

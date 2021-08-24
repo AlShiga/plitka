@@ -6,7 +6,7 @@
     </div>
 
     <div class="bg_w p-t-100 p-b-200">
-      <secTitle :title='"[ Super puper cool team ];"' :addClass='"m-b-100"' />
+      <secTitle :title='"[wanted dead or alive];"' :addClass='"m-b-100"' />
       <div class="row m-b-40">
         <div class="col-22 offset-1">
           <div class="m-b-40">
@@ -27,27 +27,34 @@
           </div>
           <div class="print">
             <img src="~@/assets/img/print.png" alt="" class="w-100 m-b-15">
-            <p class="p1 ttu">wow.  we feel like this</p>
+            <p v-if="$store.state.langEn" class="p1 ttu">wow.  we feel like this</p>
+            <p v-else class="p1 ttu">Пс, че там по работе? </p>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="offset-1 col-xl-13 col-lg-14 col-md-17 col-22" >
-          <p class="h7 ttu">
+          <p v-if="$store.state.langEn" class="h7 ttu">
             we’re a branding/digital design studio connecting brands to people through craft and culture.
             A collective of three like-minded creatives and one powerhouse project
+          </p>
+          <p v-else class="h7 ttu">
+           Если ты хочешь стать частью нашей дружной команды любителей самозабвенного труда и выездных корпоративов, скорее пиши. Соратники с соответствующим набором скилов приветствуются, иные не рассматриваются.
           </p>
         </div>
       </div>
 
     </div>
     <div v-if="show" class="bg_g p-t-100 p-b-200">
-      <secTitle :title='"[ Super puper cool team ];"' :addClass='"m-b-100"' />
+      <secTitle :title='($store.state.langEn)?"[ Grand Master of the Order of Jedi I. Won this job in the lottery, don&rsquo;t you think?]":"[Великий Магистр Ордена Джедаев я. Выиграл эту работу в лотерее, так вы думаете?]"' :addClass='"m-b-100"' />
 
       <div class="row m-b-100">
         <div class="offset-1 col-xl-13 col-lg-14 col-md-17 col-22" >
-          <p class="h6 ttu">
+          <p v-if="$store.state.langEn" class="h6 ttu">
             Remember. Part of the crew - part of the ship
+          </p>
+          <p v-else class="h6 ttu">
+            Часть команды — часть корабля.
           </p>
         </div>
       </div>
@@ -119,12 +126,16 @@ export default {
     }
     &:nth-of-type(4n - 3){
       margin-left: 100/24*3%;
+      background-color: #E10F1C;
+      color: #F8F8F8;
     }
     &:nth-of-type(4n - 2){
       margin-left: 100/24*1%;
     }
     &:nth-of-type(4n - 1){
       margin-left: 100/24*10%;
+       background-color: gray;
+      color: #F8F8F8;
     }
     &:nth-of-type(4n){
       margin-left: 100/24*1%;
