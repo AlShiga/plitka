@@ -514,7 +514,7 @@ export default {
         this.onWindowResize()
         window.addEventListener('resize', this.onWindowResize, false)
 
-        document.addEventListener('pointermove', this.onPointerMove)
+        document.addEventListener('mousemove', this.onPointerMove)
       }
 
       this.render = () => {
@@ -522,7 +522,7 @@ export default {
         this.renderer.render(scene, this.camera)
       }
     } else {
-      document.addEventListener('pointermove', this.onPointerMove)
+      document.addEventListener('mousemove', this.onPointerMove)
       window.addEventListener('resize', this.onWindowResize, false)
       requestAnimationFrame(this.animate)
     }
@@ -533,7 +533,7 @@ export default {
     // this.scrollAnimation()
   },
   unmounted () {
-    document.removeEventListener('pointermove', this.onPointerMove)
+    document.removeEventListener('mousemove', this.onPointerMove)
     window.removeEventListener('resize', this.onWindowResize, false)
     cancelAnimationFrame(this.animate)
     this.mFirstPause = true
@@ -551,8 +551,8 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
-  bottom: 0;
-  right: 0;
+  // bottom: 0;
+  // right: 0;
   &__bg{
     position: absolute;
     top: 90vh;

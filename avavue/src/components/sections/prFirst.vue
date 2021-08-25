@@ -4,8 +4,8 @@
       <div  class="slider__inner | js-slider">
         <div v-for="pr in projects" :key="pr.acf.name" class="slide | js-slide">
           <div class="slide__inner | js-slide__inner">
-             <img class="js-slide__img" src="http://s3-us-west-2.amazonaws.com/s.cdpn.io/58281/tex2.jpg" alt="" crossorigin="anonymous" draggable="false">
-             <!-- <img class="js-slide__img" :src="pr.acf.img" alt="" crossorigin="anonymous" draggable="false"> -->
+             <!-- <img class="js-slide__img" src="http://s3-us-west-2.amazonaws.com/s.cdpn.io/58281/tex2.jpg" alt="" crossorigin="anonymous" draggable="false"> -->
+             <img class="js-slide__img" :src="pr.acf.img" alt="" crossorigin="anonymous" draggable="false">
           </div>
         </div>
       </div>
@@ -509,35 +509,61 @@ void main() {
     }
     let gl = {}
     let slider = {}
-
-    fetch(this.$store.state.linkAdmin + '/wp-json/wp/v2/posts?categories=3&per_page=5')
-      .then((r) => r.json())
+    if (!this.$store.state.prMPost.lenght) {
+      fetch(this.$store.state.linkAdmin + '/wp-json/wp/v2/posts?categories=3&per_page=5')
+        .then((r) => r.json())
       // eslint-disable-next-line no-return-assign
-      .then((res) => {
-        this.projects = res.map(x => x)
-        this.projectsT = res.map(x => x)
-        this.projectsT.push(this.projectsT[0])
-        if (!this.showSm) {
-          setTimeout(() => {
-          // console.log(this.start)
-            if (!this.start) {
-              gl = new Gl()
-              slider = new Slider(document.querySelector('.js-slider'))
-              this.tick = () => {
-                gl.render()
-                slider.render()
+        .then((res) => {
+          this.projects = res.map(x => x)
+          this.$store.commit('addPrMPost', this.projects)
+          this.projectsT = res.map(x => x)
+          this.projectsT.push(this.projectsT[0])
+          if (!this.showSm) {
+            setTimeout(() => {
+              // console.log(this.start)
+              if (!this.start) {
+                gl = new Gl()
+                slider = new Slider(document.querySelector('.js-slider'))
+                this.tick = () => {
+                  gl.render()
+                  slider.render()
+                }
+                gsap.ticker.add(this.tick)
+                this.start = true
+                // console.log('start')
+              } else {
+                // console.log('restart')
+
+                gsap.ticker.add(this.tick)
               }
-              gsap.ticker.add(this.tick)
-              this.start = true
+            }, 100)
+          }
+        })
+    } else {
+      this.projects = this.$store.state.prMPost
+      this.projectsT = this.$store.state.prMPost
+      this.projectsT.push(this.projectsT[0])
+      if (!this.showSm) {
+        setTimeout(() => {
+          // console.log(this.start)
+          if (!this.start) {
+            gl = new Gl()
+            slider = new Slider(document.querySelector('.js-slider'))
+            this.tick = () => {
+              gl.render()
+              slider.render()
+            }
+            gsap.ticker.add(this.tick)
+            this.start = true
             // console.log('start')
-            } else {
+          } else {
             // console.log('restart')
 
-              gsap.ticker.add(this.tick)
-            }
-          }, 500)
-        }
-      })
+            gsap.ticker.add(this.tick)
+          }
+        }, 100)
+      }
+    }
   },
   unmounted () {
     console.log('end')

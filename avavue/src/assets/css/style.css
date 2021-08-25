@@ -8112,6 +8112,7 @@ input {
   background: transparent;
   color: currentColor;
   border: none;
+  border-radius: 0;
   border-bottom: 1px solid currentColor;
   padding: 15px 0;
   margin-bottom: 40px;
@@ -9248,14 +9249,5 @@ button.swiper-pagination-bullet {
 
 .moreBlog span + span {
   margin-left: 30px;
-}
-
-.contFirst {
-  min-height: 100vh;
-  height: 100vh;
-}
-
-.contFirst__content {
-  height: 100%;
 }
 /*# sourceMappingURL=style.css.map */

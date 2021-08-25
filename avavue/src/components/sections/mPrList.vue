@@ -335,7 +335,7 @@ export default {
         if (innerWidth < 1025) return
         setTimeout(() => {
           AddImg.init()
-        }, 500)
+        }, 1500)
       })
   },
   unmounted () {

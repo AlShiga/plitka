@@ -83,12 +83,19 @@ export default {
     }
   },
   mounted () {
-    fetch(this.$store.state.linkAdmin + '/wp-json/wp/v2/posts?categories=4')
-      .then((r) => r.json())
+    if (!this.$store.state.prPost.lenght) {
+      fetch(this.$store.state.linkAdmin + '/wp-json/wp/v2/posts?categories=4')
+        .then((r) => r.json())
       // eslint-disable-next-line no-return-assign
-      .then((res) => {
-        this.projects = res.map(x => x)
-      })
+        .then((res) => {
+          this.projects = res.map(x => x)
+          this.$store.commit('addPrPost', this.projects)
+          this.$store.commit('hideMenu')
+        })
+    } else {
+      this.projects = this.$store.state.prPost
+      this.$store.commit('hideMenu')
+    }
   }
 
 }

@@ -281,10 +281,40 @@ export default {
           { strokeDashoffset: '0px' }
         )
       })
+    },
+    getPosts: function (e) {
+      if (!this.$store.state.blogPost.lenght) {
+        fetch(this.$store.state.linkAdmin + '/wp-json/wp/v2/posts?categories=2&per_page=12')
+          .then((r) => r.json())
+        // eslint-disable-next-line no-return-assign
+          .then((res) => {
+            this.blogs = res.map(x => x)
+            this.$store.commit('addBlogPost', this.blogs)
+          })
+      }
+      if (!this.$store.state.prMPost.lenght) {
+        fetch(this.$store.state.linkAdmin + '/wp-json/wp/v2/posts?categories=3&per_page=5')
+          .then((r) => r.json())
+        // eslint-disable-next-line no-return-assign
+          .then((res) => {
+            this.projects = res.map(x => x)
+            this.$store.commit('addPrMPost', this.projects)
+          })
+      }
+      if (!this.$store.state.prPost.lenght) {
+        fetch(this.$store.state.linkAdmin + '/wp-json/wp/v2/posts?categories=4')
+          .then((r) => r.json())
+        // eslint-disable-next-line no-return-assign
+          .then((res) => {
+            this.projects = res.map(x => x)
+            this.$store.commit('addPrPost', this.projects)
+          })
+      }
     }
   },
   mounted () {
     this.scrollAnimation()
+    this.$store.commit('hideMenu')
   },
   unmounted () {
     this.scrollTrig.kill()

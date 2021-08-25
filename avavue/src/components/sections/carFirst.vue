@@ -68,7 +68,7 @@ export default {
     min-height: 150vh;
     &__content{
       position: relative;
-      z-index: 10005;
+      z-index: 2;
       pointer-events: none;
     }
   }

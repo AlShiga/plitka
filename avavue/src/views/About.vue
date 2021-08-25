@@ -144,6 +144,7 @@ export default {
         this.show = true
         // console.log(this.vac)
         console.log(this.employee)
+        this.$store.commit('hideMenu')
       })
   }
 }

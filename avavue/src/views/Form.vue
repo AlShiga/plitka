@@ -49,13 +49,40 @@
       </div>
       <div v-else-if="page==5" class="form__step">
         <div class="col-20 offset-2">
-          <input placeholder="[ phone ]" type="text" />
-          <input placeholder="[ Name ]" type="text" />
-          <input placeholder="[ email ]" type="text" />
-          <input placeholder="[ site ]" type="text" />
-          <div class="form__buttonWrap">
-            <myButton @click="sendMessage" :text="'[ SEnd ]'" />
-          </div>
+            <div class="form-wrapper">
+              <p class="form-sent p1" v-if="sent">Сообщение отправлено</p>
+              <form id="formapp" @submit="checkForm">
+                <div>
+                  <input id="your-name" placeholder="Name" v-model="name" type="text" name="your-name">
+                </div>
+                <div>
+                  <input id="your-email" placeholder="Email" v-model="email" type="text" name="your-email" min="0">
+                </div>
+                <div>
+                  <input id="your-message" placeholder="Message" v-model="message" type="text" name="your-message" min="0">
+                </div>
+                <div>
+                  <input id="your-number" placeholder="Phone" v-model="number" type="number" name="your-number">
+                </div>
+
+                <div>
+                  <!-- <input type="submit" value="Submit"> -->
+                  <!-- <button class="btn2" type="submit" value="Submit">Send</button> -->
+                    <myButton
+                      @click="checkForm" type="submit" value="Submit"
+                      :text="
+                        $store.state.langEn ? '[ send ]' : '[ отправить ]'
+                      "
+                    />
+                </div>
+                 <div class="p-t-40" v-if="errors.length">
+                  <!-- <b>Please correct the following error(s):</b> -->
+                  <ul>
+                    <li class="p1" v-for="(error, index) in errors" :key="index">{{ error }}</li>
+                  </ul>
+                </div>
+              </form>
+            </div>
         </div>
       </div>
       </transition>
@@ -66,13 +93,19 @@
 
 <script>
 import myButton from '@/components/myButton.vue'
-
+import axios from 'axios'
 export default {
   data () {
     return {
       answer: [],
       page: 1,
-      pageAll: 5
+      pageAll: 5,
+      sent: false,
+      errors: [],
+      name: null,
+      email: null,
+      number: null,
+      message: null
     }
   },
   components: {
@@ -96,6 +129,55 @@ export default {
     },
     sendMessage: function () {
 
+    },
+    validEmail: function (email) {
+      // eslint-disable-next-line no-useless-escape
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      return re.test(email)
+    },
+    checkForm: function (e) {
+      e.preventDefault()
+      this.errors = []
+
+      if (!this.name) {
+        this.errors.push('Name required.')
+      }
+      if (!this.email) {
+        this.errors.push('Email required.')
+      } else if (!this.validEmail(this.email)) {
+        this.errors.push('Valid email required.')
+      }
+      if (!this.number) {
+        this.errors.push('Number required.')
+      }
+      if (this.errors.length) { this.sent = false }
+      if (!this.errors.length) {
+        var bodyFormData = new FormData()
+        bodyFormData.set('your-name', this.name)
+        bodyFormData.set('your-email', this.email)
+        bodyFormData.set('your-number', this.number)
+        bodyFormData.set('your-message', this.message + '||' + this.answer.toString())
+
+        axios({
+          method: 'post',
+          url:
+            'https://ava.avadev.ru/wp-json/contact-form-7/v1/contact-forms/32/feedback',
+          data: bodyFormData,
+          config: { headers: { 'Content-Type': 'multipart/form-data' } }
+        })
+          .then(() => {
+            // console.log(response)
+            this.succesMess()
+            return true
+          })
+          .catch(function (response) {
+            console.log(response)
+          })
+      }
+    },
+    succesMess: function () {
+      console.log('succesMess')
+      this.sent = true
     }
   },
   mounted () {

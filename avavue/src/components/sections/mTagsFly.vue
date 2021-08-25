@@ -54,7 +54,7 @@ export default {
         scrub: 2,
         id: '1',
         // onToggle: self => console.log('toggled, isActive:', self.isActive)
-        onToggle: () => { this.world.gravity.scale = 0.0015 }
+        onToggle: () => { if (innerWidth > 1024) { this.world.gravity.scale = 0.0015 } else { this.world.gravity.scale = 0.0008 } }
       })
       this.scrollTrPlay = ScrollTrigger.create({
         trigger: '.wrapFlyTags',
@@ -96,7 +96,7 @@ export default {
         options: {
           width: window.innerWidth,
           height: window.innerHeight * 0.9,
-          pixelRatio: 2,
+          // pixelRatio: 2,
           background: '#C4C4C4',
           wireframes: false
         }
@@ -178,71 +178,71 @@ export default {
           web: {
             x: innerWidth / 2,
             y: 200 / 1920 * innerWidth,
-            w: 460 / 1920 * innerWidth,
-            h: 78 / 1920 * innerWidth,
+            w: 460 / 1920 * innerWidth * 2,
+            h: 78 / 1920 * innerWidth * 2,
             s: innerWidth / 1920 * 2
           },
           love: {
             x: innerWidth / 2,
             y: 400 / 1920 * innerWidth,
-            w: 240 / 1920 * innerWidth,
-            h: 78 / 1920 * innerWidth,
+            w: 240 / 1920 * innerWidth * 2,
+            h: 78 / 1920 * innerWidth * 2,
             s: innerWidth / 1920 * 2
           },
           brand: {
             x: innerWidth / 2,
             y: 600 / 1920 * innerWidth,
-            w: 430 / 1920 * innerWidth,
-            h: 78 / 1920 * innerWidth,
+            w: 430 / 1920 * innerWidth * 2,
+            h: 78 / 1920 * innerWidth * 2,
             s: innerWidth / 1920 * 2
           },
           sites: {
             x: innerWidth / 2,
             y: 800 / 1920 * innerWidth,
-            w: 243 / 1920 * innerWidth,
-            h: 78 / 1920 * innerWidth,
+            w: 243 / 1920 * innerWidth * 2,
+            h: 78 / 1920 * innerWidth * 2,
             s: innerWidth / 1920 * 2
           },
           animations: {
             x: innerWidth / 2,
             y: 1000 / 1920 * innerWidth,
-            w: 411 / 1920 * innerWidth,
-            h: 78 / 1920 * innerWidth,
+            w: 411 / 1920 * innerWidth * 2,
+            h: 78 / 1920 * innerWidth * 2,
             s: innerWidth / 1920 * 2
           },
           copywriting: {
             x: innerWidth / 2,
             y: 1200 / 1920 * innerWidth,
-            w: 448 / 1920 * innerWidth,
-            h: 78 / 1920 * innerWidth,
+            w: 448 / 1920 * innerWidth * 2,
+            h: 78 / 1920 * innerWidth * 2,
             s: innerWidth / 1920 * 2
           },
           promotion: {
             x: innerWidth / 2,
             y: 1400 / 1920 * innerWidth,
-            w: 422 / 1920 * innerWidth,
-            h: 78 / 1920 * innerWidth,
+            w: 422 / 1920 * innerWidth * 2,
+            h: 78 / 1920 * innerWidth * 2,
             s: innerWidth / 1920 * 2
           },
           naming: {
             x: innerWidth / 2,
             y: 1600 / 1920 * innerWidth,
-            w: 313 / 1920 * innerWidth,
-            h: 78 / 1920 * innerWidth,
+            w: 313 / 1920 * innerWidth * 2,
+            h: 78 / 1920 * innerWidth * 2,
             s: innerWidth / 1920 * 2
           },
           cats: {
             x: innerWidth / 2,
             y: 1800 / 1920 * innerWidth,
-            w: 233 / 1920 * innerWidth,
-            h: 78 / 1920 * innerWidth,
+            w: 233 / 1920 * innerWidth * 2,
+            h: 78 / 1920 * innerWidth * 2,
             s: innerWidth / 1920 * 2
           },
           uxui: {
             x: innerWidth / 2,
             y: 2000 / 1920 * innerWidth,
-            w: 457 / 1920 * innerWidth,
-            h: 78 / 1920 * innerWidth,
+            w: 457 / 1920 * innerWidth * 2,
+            h: 78 / 1920 * innerWidth * 2,
             s: innerWidth / 1920 * 2
           }
         }

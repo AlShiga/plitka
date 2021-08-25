@@ -3,7 +3,7 @@
     <div class="col-22 offset-1">
       <div class="secTitle">
         <p class="p1 ttu mp0">{{ title }}</p>
-        <div class="secTitle__circle"></div>
+        <div @click.stop="$store.commit('toggleMenu')" class="secTitle__circle"></div>
       </div>
     </div>
   </div>
@@ -51,6 +51,9 @@ export default {
       border-radius: 50%;
       background-color: currentColor;
       transition: 0.3s;
+      margin-left: 20px;
+      flex: none;
+      cursor: pointer;
       &:hover{
         background-color: #E10F1C;
       }

@@ -207,7 +207,7 @@ export default {
           this.canvas = document.querySelector('.sinWrap')
           this.canvasWidth = this.canvas.width
           this.canvasHeight = this.canvas.height
-          document.querySelector('.contFirst').style.height = this.canvas.height + 'px'
+          document.querySelector('.contFirst').style.height = innerHeight + 'px'
           this.uniforms = {
             resolution: {
               type: 'v2',
@@ -303,6 +303,9 @@ export default {
 <style scoped lang="scss">
 .contFirst {
   position: relative;
+  &__content{
+    height: 100%;
+  }
 }
 .sinWrap {
   position: absolute;

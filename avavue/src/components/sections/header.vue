@@ -16,7 +16,7 @@
           >
             <path
               d="M40 18.8015L24.1062 18.2431L29.5131 12.1825L27.8175 10.4801L21.7569 15.8938L21.1985 0H18.8015L18.2431 15.8938L12.1825 10.4801L10.4869 12.1825L15.8938 18.2431L0 18.8015V21.1985L15.8938 21.7569L10.4869 27.8175L12.1825 29.5132L18.2431 24.1062L18.8015 40H21.1985L21.7569 24.1062L27.8175 29.5132L29.5131 27.8175L24.1062 21.7569L40 21.1985V18.8015Z"
-              fill="#ED2330"
+              fill="#be1e2d"
             />
           </svg>
         </div>
@@ -382,7 +382,7 @@
           >
             <path
               d="M40 18.8015L24.1062 18.2431L29.5131 12.1825L27.8175 10.4801L21.7569 15.8938L21.1985 0H18.8015L18.2431 15.8938L12.1825 10.4801L10.4869 12.1825L15.8938 18.2431L0 18.8015V21.1985L15.8938 21.7569L10.4869 27.8175L12.1825 29.5132L18.2431 24.1062L18.8015 40H21.1985L21.7569 24.1062L27.8175 29.5132L29.5131 27.8175L24.1062 21.7569L40 21.1985V18.8015Z"
-              fill="#ED2330"
+              fill="#be1e2d"
             />
           </svg>
         </div>
@@ -764,7 +764,7 @@
           >
             <path
               d="M40 18.8015L24.1062 18.2431L29.5131 12.1825L27.8175 10.4801L21.7569 15.8938L21.1985 0H18.8015L18.2431 15.8938L12.1825 10.4801L10.4869 12.1825L15.8938 18.2431L0 18.8015V21.1985L15.8938 21.7569L10.4869 27.8175L12.1825 29.5132L18.2431 24.1062L18.8015 40H21.1985L21.7569 24.1062L27.8175 29.5132L29.5131 27.8175L24.1062 21.7569L40 21.1985V18.8015Z"
-              fill="#ED2330"
+              fill="#be1e2d"
             />
           </svg>
         </div>
@@ -780,7 +780,7 @@
           >
             <path
               d="M40 18.8015L24.1062 18.2431L29.5131 12.1825L27.8175 10.4801L21.7569 15.8938L21.1985 0H18.8015L18.2431 15.8938L12.1825 10.4801L10.4869 12.1825L15.8938 18.2431L0 18.8015V21.1985L15.8938 21.7569L10.4869 27.8175L12.1825 29.5132L18.2431 24.1062L18.8015 40H21.1985L21.7569 24.1062L27.8175 29.5132L29.5131 27.8175L24.1062 21.7569L40 21.1985V18.8015Z"
-              fill="#ED2330"
+              fill="#be1e2d"
             />
           </svg>
         </div>
@@ -1146,7 +1146,7 @@
           >
             <path
               d="M40 18.8015L24.1062 18.2431L29.5131 12.1825L27.8175 10.4801L21.7569 15.8938L21.1985 0H18.8015L18.2431 15.8938L12.1825 10.4801L10.4869 12.1825L15.8938 18.2431L0 18.8015V21.1985L15.8938 21.7569L10.4869 27.8175L12.1825 29.5132L18.2431 24.1062L18.8015 40H21.1985L21.7569 24.1062L27.8175 29.5132L29.5131 27.8175L24.1062 21.7569L40 21.1985V18.8015Z"
-              fill="#ED2330"
+              fill="#be1e2d"
             />
           </svg>
         </div>
@@ -1159,7 +1159,7 @@
       <div class=""></div>
     </div>
     <div class="row">
-      <div class="col-1 offset-1">
+      <div class="col-md-1 offset-md-1 col-1 offset-2">
         <router-link to="/">
           <svg
             style="opacity: 0"
@@ -1198,7 +1198,7 @@
           col-lg-1
           offset-lg-0
           col-md-2
-          offset-md-1 offset-10
+          offset-md-1 offset-9
           col-4
           d-flex
           align-items-center
@@ -1208,6 +1208,19 @@
           <span class="p1 ttu" v-if="$store.state.langEn">[ EN ]</span>
           <span class="p1 ttu" v-else>[ RU ]</span>
         </a>
+      </div>
+      <div
+        class="
+          col-lg-1
+          offset-lg-1
+          col-md-2
+          offset-md-2
+          col-4  offset-4
+          d-flex
+          align-items-center
+        "
+      >
+        <a @click.stop="$store.commit('toggleMenu')" :class="($store.state.showMenu)?'header__circle header__circle_active':'header__circle'"></a>
       </div>
       <div class="header__menu">
         <div class="row">
@@ -1264,7 +1277,7 @@
   </div>
   <div class="header header_top m-t-20 p-t-20">
     <div class="row position-relative">
-      <div class="col-1 offset-1">
+      <div class="col-md-1 offset-md-1 col-1 offset-2">
         <router-link to="/">
           <svg
             class="header__logo"
@@ -1283,6 +1296,20 @@
       </div>
     </div>
   </div>
+  <transition name="slide-fade">
+    <div v-if="$store.state.showMenu" class="mainMenu">
+      <div class="mainMenu__menu">
+        <div class="row">
+          <div class="col-22 offset-1 p-b-20"><a @click="$router.push('/projects')" class="h5">[ {{($store.state.langEn)?"Project":"Работы"}} ];</a></div>
+          <div class="col-22 offset-1 p-b-20"><a @click="$router.push('/about')" class="h5">[ {{($store.state.langEn)?"Аbout":"О нас"}} ];</a></div>
+          <div class="col-18 offset-8 p-b-20"><a @click="$router.push('/career')" class="h5">[ {{($store.state.langEn)?"Career":"Карьера"}} ];</a></div>
+          <div class="col-18 offset-8 p-b-20"><a @click="$router.push('/blog')" class="h5">[ {{($store.state.langEn)?"Blog":"Блог"}} ];</a></div>
+          <div class="col-22 offset-1 p-b-20"><p class="h5">[ Say&nbsp;hello ].</p></div>
+          <div class="col-17 offset-5 p-b-20"><a href="tel:+78129062232" class="h5">+7 812 906 22 32</a></div>
+        </div>
+      </div>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -1354,6 +1381,29 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+.mainMenu{
+  position: fixed;
+  top: 0;left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 18;
+  background-color: #202020;
+  padding-top: 150px;
+  display: flex;
+  &__menu{
+    margin-bottom: 100px;
+    @media (max-width: 1024.98px) {
+     margin-top: auto;
+    }
+    a{
+      transition: 0.3s;
+      cursor: pointer;
+      &:hover{
+        color: #ED2330;
+      }
+    }
+  }
+}
 .prel {
   position: fixed;
   top: 0;
@@ -1443,6 +1493,28 @@ export default {
       pointer-events: all;
     }
   }
+  &__circle{
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: currentColor;
+    transition: 0.3s;
+    margin-left: 20px;
+    flex: none;
+    cursor: pointer;
+    &:hover{
+      background-color: #E10F1C;
+    }
+    &_active{
+      background-color: #E10F1C;
+    }
+  }
+  &__logo{
+    @media (max-width: 767.98px) {
+    width: 30px;
+    height: auto;
+  }
+  }
 }
 .header__menu {
   position: absolute;
@@ -1510,5 +1582,20 @@ export default {
   will-change: auto;
   z-index: 99999;
   opacity: 0.1;
+}
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.3s ease-out;
+
+  // transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(50%) skew(-32deg, 0deg);
+  opacity: 0;
 }
 </style>

@@ -3,12 +3,32 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     langEn: true,
-    linkAdmin: 'https://ava.avadev.ru'
+    showMenu: false,
+    linkAdmin: 'https://ava.avadev.ru',
+    blogPost: [],
+    prPost: [],
+    prMPost: []
   },
   mutations: {
+    toggleMenu (state) {
+      state.showMenu = !state.showMenu
+    },
+    hideMenu (state) {
+      state.showMenu = false
+    },
     selectLang (state) {
       state.langEn = !state.langEn
+    },
+    addBlogPost (state, arr) {
+      state.blogPost = arr
+    },
+    addPrPost (state, arr) {
+      state.prPost = arr
+    },
+    addPrMPost (state, arr) {
+      state.prMPost = arr
     }
+
   },
   actions: {
   },
