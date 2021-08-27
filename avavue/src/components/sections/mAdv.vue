@@ -19,10 +19,10 @@ export default {
     return {
       name: 'aAdv',
       advList: [
-        { name: '[ no manager ];', img: require('@/assets/img/gif/ninkita-call.gif') },
-        { name: '[ perfect service ];', img: require('@/assets/img/gif/money.gif') },
-        { name: '[ we are honest ];', img: require('@/assets/img/gif/kivaem.gif') },
-        { name: '[ love every project ];', img: require('@/assets/img/gif/love.gif') }
+        { name: '[ NO MANAGER ];', img: require('@/assets/img/gif/ninkita-call.gif') },
+        { name: '[ PERFECT SERVICE ];', img: require('@/assets/img/gif/money.gif') },
+        { name: '[ WE ARE HONEST ];', img: require('@/assets/img/gif/kivaem.gif') },
+        { name: '[ LOVE EVERY PROJECT ];', img: require('@/assets/img/gif/love.gif') }
       ]
     }
   },
@@ -31,10 +31,10 @@ export default {
   },
   methods () {},
   mounted () {
-    console.log('Прив1')
+    // console.log('Прив1')
   },
   unmounted () {
-    console.log('Пока1')
+    // console.log('Пока1')
   }
 }
 </script>

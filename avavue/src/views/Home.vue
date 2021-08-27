@@ -7,7 +7,7 @@
         <myMarquee :addClass="'z-1 lent_rotate lent_gray'" />
         <myMarquee :addClass="'z-2'" />
       </div>
-      <div class="row changeBgTrig">
+      <div class=" p-t-200 row changeBgTrig">
         <div
           class="
             col-xl-12
@@ -99,7 +99,7 @@
         </div>
       </div>
       <div class="p-t-100 p-b-200">
-        <secTitle :title="'[ Super puper cool team ];'" :addClass="'m-b-250'" />
+        <secTitle :title="'[ Super puper cool team ];'" :addClass="'m-b-150'" />
         <div class="row m-b-40">
           <div class="col-22 offset-1">
             <h2 class="h3 m-b-40">&lt;Hello world/&gt;</h2>
@@ -225,7 +225,7 @@ export default {
       }, 100)
     },
     hideButton: function (e) {
-      console.log(this.$refs.hideButton)
+      // console.log(this.$refs.hideButton)
       const btn = document.querySelector('.hideButton')
       btn.style.opacity = '0'
       btn.style.transition = '0.2s'
@@ -246,7 +246,7 @@ export default {
 
         // markers: true,
         onToggle: self => {
-          console.log(self.direction)
+          // console.log(self.direction)
           if (self.isActive && self.direction > 0) {
             document.querySelector('.changeBg').classList.add('bg_w')
           } else if (self.direction < 0) {
@@ -283,15 +283,6 @@ export default {
       })
     },
     getPosts: function (e) {
-      if (!this.$store.state.blogPost.lenght) {
-        fetch(this.$store.state.linkAdmin + '/wp-json/wp/v2/posts?categories=2&per_page=12')
-          .then((r) => r.json())
-        // eslint-disable-next-line no-return-assign
-          .then((res) => {
-            this.blogs = res.map(x => x)
-            this.$store.commit('addBlogPost', this.blogs)
-          })
-      }
       if (!this.$store.state.prMPost.lenght) {
         fetch(this.$store.state.linkAdmin + '/wp-json/wp/v2/posts?categories=3&per_page=5')
           .then((r) => r.json())
@@ -299,6 +290,15 @@ export default {
           .then((res) => {
             this.projects = res.map(x => x)
             this.$store.commit('addPrMPost', this.projects)
+          })
+      }
+      if (!this.$store.state.blogPost.lenght) {
+        fetch(this.$store.state.linkAdmin + '/wp-json/wp/v2/posts?categories=2&per_page=12')
+          .then((r) => r.json())
+        // eslint-disable-next-line no-return-assign
+          .then((res) => {
+            this.blogs = res.map(x => x)
+            this.$store.commit('addBlogPost', this.blogs)
           })
       }
       if (!this.$store.state.prPost.lenght) {
@@ -315,6 +315,9 @@ export default {
   mounted () {
     this.scrollAnimation()
     this.$store.commit('hideMenu')
+    setTimeout(() => {
+      this.getPosts()
+    }, 1000)
   },
   unmounted () {
     this.scrollTrig.kill()

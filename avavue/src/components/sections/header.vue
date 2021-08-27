@@ -1187,11 +1187,10 @@
           align-items-center
         "
       >
-        <a @click.stop="$router.push('/form')" class=""
-          ><span v-if="$store.state.langEn" class="p1 ttu m-b-10"
-            >[ Start the project ]</span
-          ><span v-else class="p1 ttu m-b-10">[ Начать проект ]</span></a
-        >
+        <a @click.stop="$router.push('/form')"  class="showText ">
+          <span v-if="$store.state.langEn" class="p1 ttu">[ Start the project ] <span class="p1  " >[ just click ]</span> </span>
+          <span v-else class="p1 ttu ">[ Начать проект ]<span class="p1  " >[ просто нажми ]</span></span>
+        </a>
       </div>
       <div
         class="
@@ -1225,51 +1224,44 @@
       <div class="header__menu">
         <div class="row">
           <div class="col-24">
-            <router-link to="/blog"
-              ><p class="p1 ttu m-b-10">
-                <span v-if="$store.state.langEn" class="p1 ttu m-b-10"
-                  >[&nbsp;Blog&nbsp;]</span
-                ><span v-else class="p1 ttu m-b-10">[&nbsp;Блог&nbsp;]</span>
-              </p></router-link
-            >
+            <router-link to="/projects">
+              <p class="p1 showText ttu m-b-10">
+                <span v-if="$store.state.langEn" class="p1 ttu ">[&nbsp;projects&nbsp;] <span class="p1">[&nbsp;we&nbsp;did&nbsp;it&nbsp;]</span> </span>
+                <span v-else class="p1 ttu ">[&nbsp;Проекты&nbsp;]<span class="p1">[&nbsp;я&nbsp;сделаль&nbsp;]</span></span>
+              </p>
+            </router-link>
           </div>
           <div class="col-24">
-            <router-link to="/contacts"
-              ><p class="p1 ttu m-b-10">
-                <span v-if="$store.state.langEn" class="p1 ttu m-b-10"
-                  >[&nbsp;Contacts&nbsp;]</span
-                ><span v-else class="p1 ttu m-b-10"
-                  >[&nbsp;Контакты&nbsp;]</span
-                >
-              </p></router-link
-            >
+            <router-link to="/about">
+              <p class="p1 showText ttu m-b-10">
+                <span v-if="$store.state.langEn" class="p1 ttu ">[&nbsp;Team&nbsp;] <span class="p1">[&nbsp;who&nbsp;we&nbsp;are&nbsp;]</span> </span>
+                <span v-else class="p1 ttu ">[&nbsp;Команда&nbsp;]<span class="p1">[&nbsp;кто&nbsp;такие&nbsp;]</span></span>
+              </p>
+            </router-link>
           </div>
           <div class="offset-12 col-12">
-            <router-link to="/about"
-              ><p class="p1 ttu m-b-10">
-                <span v-if="$store.state.langEn" class="p1 ttu m-b-10"
-                  >[&nbsp;About&nbsp;]</span
-                ><span v-else class="p1 ttu m-b-10">[&nbsp;О нас&nbsp;]</span>
-              </p></router-link
-            >
+            <router-link to="/career">
+              <p class="p1 showText ttu m-b-10">
+                <span v-if="$store.state.langEn" class="p1 ttu ">[&nbsp;Career&nbsp;] <span class="p1">[&nbsp;Join&nbsp;to&nbsp;us&nbsp;]</span> </span>
+                <span v-else class="p1 ttu ">[&nbsp;Карьера&nbsp;]<span class="p1">[&nbsp;го&nbsp;к&nbsp;нам!&nbsp;]</span></span>
+              </p>
+            </router-link>
           </div>
           <div class="offset-12 col-12">
-            <router-link to="/career"
-              ><p class="p1 ttu m-b-10">
-                <span v-if="$store.state.langEn" class="p1 ttu m-b-10"
-                  >[&nbsp;Career&nbsp;]</span
-                ><span v-else class="p1 ttu m-b-10">[&nbsp;Карьера&nbsp;]</span>
-              </p></router-link
-            >
+            <router-link to="/blog">
+              <p class="p1 showText ttu m-b-10">
+                <span v-if="$store.state.langEn" class="p1 ttu ">[&nbsp;Blog&nbsp;] <span class="p1">[&nbsp;stories&nbsp;]</span> </span>
+                <span v-else class="p1 ttu ">[&nbsp;Блог&nbsp;]<span class="p1">[&nbsp;байки&nbsp;]</span></span>
+              </p>
+            </router-link>
           </div>
           <div class="col-24">
-            <router-link to="/projects"
-              ><p class="p1 ttu m-b-10">
-                <span v-if="$store.state.langEn" class="p1 ttu m-b-10"
-                  >[&nbsp;Projects&nbsp;]</span
-                ><span v-else class="p1 ttu m-b-10">[&nbsp;Работы&nbsp;]</span>
-              </p></router-link
-            >
+            <router-link to="/contacts">
+              <p class="p1 showText ttu m-b-10">
+                <span v-if="$store.state.langEn" class="p1 ttu">[&nbsp;Contacts&nbsp;]<span class="p1">[&nbsp;Hello&nbsp;]</span></span>
+                <span v-else class="p1 ttu">[&nbsp;Контакты&nbsp;]<span class="p1">[&nbsp;Привет&nbsp;]</span></span>
+              </p>
+            </router-link>
           </div>
         </div>
       </div>
@@ -1300,11 +1292,46 @@
     <div v-if="$store.state.showMenu" class="mainMenu">
       <div class="mainMenu__menu">
         <div class="row">
-          <div class="col-22 offset-1 p-b-20"><a @click="$router.push('/projects')" class="h5">[ {{($store.state.langEn)?"Project":"Работы"}} ];</a></div>
-          <div class="col-22 offset-1 p-b-20"><a @click="$router.push('/about')" class="h5">[ {{($store.state.langEn)?"Аbout":"О нас"}} ];</a></div>
-          <div class="col-18 offset-8 p-b-20"><a @click="$router.push('/career')" class="h5">[ {{($store.state.langEn)?"Career":"Карьера"}} ];</a></div>
-          <div class="col-18 offset-8 p-b-20"><a @click="$router.push('/blog')" class="h5">[ {{($store.state.langEn)?"Blog":"Блог"}} ];</a></div>
-          <div class="col-22 offset-1 p-b-20"><p class="h5">[ Say&nbsp;hello ].</p></div>
+          <div class="col-22 offset-1 p-b-0">
+             <router-link to="/projects">
+              <p class="h5 showText ttu m-b-0">
+                <span v-if="$store.state.langEn" class="h5 ttu ">[&nbsp;projects&nbsp;] <span class="h5 tuu">[&nbsp;we&nbsp;did&nbsp;it&nbsp;]</span> </span>
+                <span v-else class="h5 ttu ">[&nbsp;Проекты&nbsp;]<span class="h5 ttu">[&nbsp;я&nbsp;сделаль&nbsp;]</span></span>
+              </p>
+            </router-link>
+          </div>
+          <div class="col-22 offset-1 p-b-0">
+             <router-link to="/about">
+              <p class="h5 showText ttu m-b-0">
+                <span v-if="$store.state.langEn" class="h5 ttu ">[&nbsp;Team&nbsp;] <span class="h5 ttu">[&nbsp;who&nbsp;we&nbsp;are&nbsp;]</span> </span>
+                <span v-else class="h5 ttu ">[&nbsp;Команда&nbsp;]<span class="h5 ttu">[&nbsp;кто&nbsp;такие&nbsp;]</span></span>
+              </p>
+            </router-link>
+          </div>
+          <div class="col-18 offset-8 p-b-0">
+             <router-link to="/career">
+              <p class="h5 showText ttu m-b-0">
+                <span v-if="$store.state.langEn" class="h5 ttu ">[&nbsp;Career&nbsp;] <span class="h5 ttu">[&nbsp;Join&nbsp;to&nbsp;us&nbsp;]</span> </span>
+                <span v-else class="h5 ttu ">[&nbsp;Карьера&nbsp;]<span class="h5 ttu">[&nbsp;го&nbsp;к&nbsp;нам!&nbsp;]</span></span>
+              </p>
+            </router-link>
+          </div>
+          <div class="col-18 offset-8 p-b-0">
+            <router-link to="/blog">
+              <p class="h5 showText ttu m-b-0">
+                <span v-if="$store.state.langEn" class="h5 ttu ">[&nbsp;Blog&nbsp;] <span class="h5 ttu">[&nbsp;stories&nbsp;]</span> </span>
+                <span v-else class="h5 ttu ">[&nbsp;Блог&nbsp;]<span class="h5 ttu">[&nbsp;байки&nbsp;]</span></span>
+              </p>
+            </router-link>
+          </div>
+          <div class="col-22 offset-1 p-b-0">
+            <router-link to="/contacts">
+              <p class="h5 showText ttu m-b-0">
+                <span v-if="$store.state.langEn" class="h5 ttu">[&nbsp;Contacts&nbsp;]<span class="h5">[&nbsp;Hello&nbsp;]</span></span>
+                <span v-else class="h5 ttu">[&nbsp;Контакты&nbsp;]<span class="h5">[&nbsp;Привет&nbsp;]</span></span>
+              </p>
+            </router-link>
+          </div>
           <div class="col-17 offset-5 p-b-20"><a href="tel:+78129062232" class="h5">+7 812 906 22 32</a></div>
         </div>
       </div>
@@ -1397,9 +1424,19 @@ export default {
     }
     a{
       transition: 0.3s;
+      line-height: 1.1;
+
+      & *{
+      line-height: 1.15;
+
+      transition: 0.3s;
+      }
       cursor: pointer;
       &:hover{
         color: #ED2330;
+        & *{
+          color: #ED2330;
+        }
       }
     }
   }
@@ -1598,4 +1635,33 @@ export default {
   transform: translateX(50%) skew(-32deg, 0deg);
   opacity: 0;
 }
+.showText{
+  display: block;
+  overflow: hidden;
+  width: 100%;
+      position: relative;
+    & > span {
+      display: inline-block;
+      // @include transition(.3s);
+      transition: 0.3s;
+      & > span {
+        color: white;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        // content: attr(data-hover);
+        // font-weight: 800;
+        // @include transform(translate3d(0,0,0));
+        transform:translate3d(0,0,0);
+      }
+    }
+    &:hover{
+      &>span{
+        // @include transform(translateY(-100%));
+        transform:translateY(-100%);
+      }
+    }
+
+}
+
 </style>

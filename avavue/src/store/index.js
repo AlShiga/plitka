@@ -4,6 +4,7 @@ export default createStore({
   state: {
     langEn: true,
     showMenu: false,
+    loadFirst: false,
     linkAdmin: 'https://ava.avadev.ru',
     blogPost: [],
     prPost: [],
@@ -27,6 +28,9 @@ export default createStore({
     },
     addPrMPost (state, arr) {
       state.prMPost = arr
+    },
+    loadedFirst (state) {
+      state.loadFirst = true
     }
 
   },

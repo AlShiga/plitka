@@ -2,19 +2,26 @@
  <div class="overflow-hidden">
     <!-- <div class="prFirst"></div> -->
     <prFirst/>
+
     <div class="prMore">
-      <div class="row p-t-200 p-b-200">
+      <div class="row p-t-100 p-b-200">
         <div class="col-xl-19 offset-xl-1 col-lg-19 offset-lg-1 col-md-22 offset-md-1 col-22 offset-1">
-          <div v-for="pr in projects" :key="pr.acf.title" class="prMoreItem p-b-40 p-t-40 m-b-20" v-on:mouseover="myMouseover" v-on:mouseout="myMouseout" v-on:mousemove="myMousemove">
-            <span @click="$router.push({ path: `/projects/${pr.id}` })" class="h6 prMoreItem__title ttu">{{pr.acf.title}}</span>
-            <div class="prMoreItem__detail">
-              <p class="p1">{{($store.state.langEn)?pr.acf.fieldEN: pr.acf.field}}</p>
-              <div v-if="pr.tags" class="d-none d-lg-block">
-                <span v-for="tag in pr.acf.tags" class="p1" :key="tag.name">[&nbsp;{{tag.name}}&nbsp;]&nbsp;&nbsp;</span>
-              </div>
-            </div>
-            <img src="@/assets/img/gif/ninkita-call.gif" alt="" class="prMoreItem__img">
+          <div class="prBtn m-b-80">
+            <div v-for="tag in tags" :key="tag.id" @click="getPost($event, tag.id)" class="tag" data-v-6ad55cbc=""><span class="h9 ttu" data-v-6ad55cbc="">{{tag.name}}</span></div>
           </div>
+          <transition-group name="list" tag="p">
+
+            <div v-for="pr in projects" :key="pr.acf.title" class="prMoreItem p-b-40 p-t-40 m-b-20" v-on:mouseover="myMouseover" v-on:mouseout="myMouseout" v-on:mousemove="myMousemove">
+              <span @click="$router.push({ path: `/projects/${pr.id}` })" class="h6 prMoreItem__title ttu">{{pr.acf.title}}</span>
+              <div class="prMoreItem__detail">
+                <p class="p1">{{($store.state.langEn)?pr.acf.fieldEN: pr.acf.field}}</p>
+                <div v-if="pr.tags" class="d-none d-lg-block">
+                  <span v-for="tag in pr.acf.tags" class="p1" :key="tag.name">[&nbsp;{{tag.name}}&nbsp;]&nbsp;&nbsp;</span>
+                </div>
+              </div>
+              <img src="@/assets/img/gif/ninkita-call.gif" alt="" class="prMoreItem__img">
+            </div>
+          </transition-group>
         </div>
       </div>
     </div>
@@ -32,6 +39,7 @@ export default {
   data () {
     return {
       projects: [],
+      tags: [],
       imgTarget: '',
       transform: {
         x: 0,
@@ -80,9 +88,33 @@ export default {
       this.transform.x = (this.transform.x * 9 + this.transform.curX) / 10
       this.transform.y = (this.transform.y * 9 + this.transform.curY) / 10
       gsap.to(this.imgTarget, { x: this.transform.x, y: this.transform.y, scale: 1, opacity: this.transform.opacity, duration: 0.3 })
+    },
+    getPost: function (e, cat) {
+      document.querySelectorAll('.prBtn .tag').forEach((el) => {
+        el.classList.remove('active')
+      })
+      console.log(e)
+      console.log(e.target)
+      e.target.classList.add('active')
+      fetch(this.$store.state.linkAdmin + '/wp-json/wp/v2/posts?categories=4&tags=' + cat)
+        .then((r) => r.json())
+      // eslint-disable-next-line no-return-assign
+        .then((res) => {
+          this.projects = res.map(x => x)
+        })
     }
   },
   mounted () {
+    fetch(this.$store.state.linkAdmin + '/wp-json/wp/v2/tags')
+      .then((r) => r.json())
+      // eslint-disable-next-line no-return-assign
+      .then((res) => {
+        // this.tags = res.map(x => x)
+        res.map(x => x).forEach((el) => {
+          if (Number(el.name) > 0) return
+          this.tags.push(el)
+        })
+      })
     if (!this.$store.state.prPost.lenght) {
       fetch(this.$store.state.linkAdmin + '/wp-json/wp/v2/posts?categories=4')
         .then((r) => r.json())
@@ -144,6 +176,34 @@ export default {
 .mAdvItem{
   & *{
     // pointer-events:none;
+  }
+}
+.list-item {
+  display: inline-block;
+  margin-right: 10px;
+}
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.3s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+.tag{
+  transition: 0.3s;
+  cursor: pointer;
+  & > *{
+    pointer-events: none;
+  }
+  &:hover{
+    background-color: #f8f8f8;
+    color: #202020;
+  }
+  &.active{
+    background-color: #f8f8f8;
+    color: #202020;
   }
 }
 </style>

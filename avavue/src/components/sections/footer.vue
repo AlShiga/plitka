@@ -94,6 +94,7 @@ export default {
       currentImage: 0,
       allImage: 0,
       zIndexVal: 1,
+      int: '',
       mousePos: {
         old: {
           x: 0,
@@ -120,9 +121,10 @@ export default {
       this.allImage = this.images.length
       // console.log(this.images)
       this.wrap.addEventListener('mousemove', this.getMousePos)
-      setInterval(() => {
+      this.int = setInterval(() => {
         this.mousePos.cash.x = this.mousePos.current.x
         this.mousePos.cash.y = this.mousePos.current.y
+        // console.log(123)
       }, 200)
     },
     getMousePos: function (e) {
@@ -176,17 +178,20 @@ export default {
       // scale down the image
         .to(img, 1, {
           ease: 'Quint.easeOut',
-          scale: 0.1
+          scale: 0
         }, 0.4)
     }
 
   },
   mounted () {
     this.init()
+  },
+  unmounted () {
+    if (innerWidth < 1024) return
+
+    this.wrap.removeEventListener('mousemove', this.getMousePos)
+    clearInterval(this.int)
   }
-  // unmounted () {
-  //   console.log('Пока')
-  // }
 }
 </script>
 

@@ -201,24 +201,19 @@ const AddImg = {
   renderer: {},
   scr: 0,
   init: function () {
-    if (!AddImg.inited) {
-      AddImg.inited = true
-      this.canvasW = window.innerWidth
-      this.canvasH = window.innerHeight
-      this.aspect = window.innerWidth / window.innerHeight
-
-      this.loader = new THREE.TextureLoader()
-
-      this.scene = new THREE.Scene()
-
-      this.camera = new THREE.PerspectiveCamera(
-        70,
-        this.aspect,
-        100,
-        1000
-      )
-      this.camera.position.set(0, 0, 1000)
-      this.camera.fov =
+    this.canvasW = window.innerWidth
+    this.canvasH = window.innerHeight
+    this.aspect = window.innerWidth / window.innerHeight
+    this.loader = new THREE.TextureLoader()
+    this.scene = new THREE.Scene()
+    this.camera = new THREE.PerspectiveCamera(
+      70,
+      this.aspect,
+      100,
+      1000
+    )
+    this.camera.position.set(0, 0, 1000)
+    this.camera.fov =
       2 *
       Math.atan(
         window.innerWidth /
@@ -226,18 +221,18 @@ const AddImg = {
           (2 * 1000)
       ) *
       (180 / Math.PI)
-      this.camera.updateProjectionMatrix()
+    this.camera.updateProjectionMatrix()
 
-      this.renderer = new THREE.WebGLRenderer({
-        alpha: true,
-        antialias: true
-      })
-      this.renderer.setClearColor(0xffffff, 0)
-      this.renderer.setSize(window.innerWidth, window.innerHeight)
-      document.querySelector('.mPrWrap').appendChild(this.renderer.domElement)
-      this.renderer.domElement.classList.add('dispWrap')
-      this.findImg('.imgDisp')
-    }
+    this.renderer = new THREE.WebGLRenderer({
+      alpha: true,
+      antialias: true
+    })
+    this.renderer.setClearColor(0xffffff, 0)
+    this.renderer.setSize(window.innerWidth, window.innerHeight)
+    document.querySelector('.mPrWrap').appendChild(this.renderer.domElement)
+    this.renderer.domElement.classList.add('dispWrap')
+    this.findImg('.imgDisp')
+
     if (AddImg.stop) {
       AddImg.stop = !AddImg.stop
       requestAnimationFrame(AddImg.render)
@@ -287,11 +282,11 @@ const AddImg = {
       el.style.opacity = '0'
 
       this.scene.add(this.images[key])
-      console.log(this.canvasW, el.offsetWidth, el)
+      // console.log(this.canvasW, el.offsetWidth, el)
       cube.position.x = -this.canvasW / 2 + el.offsetWidth / 2 + el.getBoundingClientRect().x
       cube.position.y = this.canvasH / 2 + el.offsetHeight / 2 + el.getBoundingClientRect().y
     })
-    console.log(AddImg.images)
+    // console.log(AddImg.images)
 
     this.render()
     // console.log(this);
@@ -325,18 +320,41 @@ export default {
 
   },
   methods: {
-
+    scrollAnim: function () {
+      document.querySelectorAll('.mPrItem__det').forEach((el) => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: el,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1,
+            markers: true
+          }
+        })
+        tl.to(el, { yPercent: -100 })
+      })
+    }
   },
   mounted () {
-    fetch(this.$store.state.linkAdmin + '/wp-json/wp/v2/posts?categories=3&per_page=5')
-      .then((r) => r.json())
-      .then((res) => {
-        this.projects = res.map(x => x)
-        if (innerWidth < 1025) return
-        setTimeout(() => {
-          AddImg.init()
-        }, 1500)
-      })
+    if (!this.$store.state.prMPost.lenght) {
+      fetch(this.$store.state.linkAdmin + '/wp-json/wp/v2/posts?categories=3&per_page=5')
+        .then((r) => r.json())
+        .then((res) => {
+          this.projects = res.map(x => x)
+          if (innerWidth < 1025) return
+          setTimeout(() => {
+            AddImg.init()
+            this.scrollAnim()
+          }, 2500)
+        })
+    } else {
+      this.projects = this.$store.state.prMPost
+      if (innerWidth < 1025) return
+      setTimeout(() => {
+        AddImg.init()
+        this.scrollAnim()
+      }, 2500)
+    }
   },
   unmounted () {
     if (innerWidth < 1025) return

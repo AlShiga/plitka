@@ -64,7 +64,7 @@ export default {
         // scrub: 2,
         id: '2',
         onToggle: self => {
-          console.log('toggled, isActive:', self.isActive)
+          // console.log('toggled, isActive:', self.isActive)
           if (self.isActive) {
             this.Render.run(this.render)
             this.myMatter.pause = false
@@ -411,7 +411,32 @@ export default {
 
       this.mouse.element.removeEventListener('mousewheel', this.mouse.mousewheel)
       this.mouse.element.removeEventListener('DOMMouseScroll', this.mouse.mousewheel)
+      // let touchStart
+      // this.mouseConstraint.mouse.element.addEventListener('touchstart', (event) => {
+      //   if (!this.mouseConstraint.body) {
+      //     // touchStart = event
+      //   }
+      // })
 
+      this.mouseConstraint.mouse.element.addEventListener('touchend', (event) => {
+        if (!this.mouseConstraint.body) {
+          // const startY = touchStart.changedTouches[0].clientY
+          // const endY = event.changedTouches[0].clientY
+          // const delta = Math.abs(startY - endY)
+          this.mouse.element.removeEventListener('touchmove', this.mouse.mousemove)
+          this.mouse.element.removeEventListener('touchstart', this.mouse.mousedown)
+          this.mouse.element.removeEventListener('touchend', this.mouse.mouseup)
+          setTimeout(() => {
+            this.mouse.element.addEventListener('touchmove', this.mouse.mousemove)
+            this.mouse.element.addEventListener('touchstart', this.mouse.mousedown)
+            this.mouse.element.addEventListener('touchend', this.mouse.mouseup)
+          }, 500)
+          // if (delta > 80) {
+          //   // window.scrollTo(0, 600)
+          //   // console.log('xxx')
+          // }
+        }
+      })
       // run the engine
       this.Engine.run(this.engine)
 

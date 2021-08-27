@@ -2,18 +2,18 @@
 <myCursor/>
 <myHeader/>
   <router-view v-slot="{ Component }">
-    <transition :name="transitionName" mode="out-in" :duration="700">
+    <transition :name="transitionName" mode="out-in" :duration="500">
         <component :is="Component" />
     </transition>
   </router-view>
 </template>
 <style lang="scss">
 .fade1-enter-active {
-  transition: all 0.3s ease-out;
+  transition: all 0.5s ease-out;
 }
 
 .fade1-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+  transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
 }
 
 .fade1-enter-from,
@@ -23,11 +23,11 @@
 }
 
 .fade-enter-active {
-  transition: all 0.3s ease-out;
+  transition: all 0.5s ease-out;
 }
 
 .fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+  transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
 }
 
 .fade-enter-from,

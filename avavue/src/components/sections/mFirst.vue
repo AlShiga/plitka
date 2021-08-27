@@ -172,7 +172,9 @@
         <h1 class="h2 m-b-80">и страсти</h1>
       </div>
     </div>
-    <div class="containerMAdv" touch-action="none"></div>
+    <div class="containerMAdv" touch-action="none">
+      <canvas width="1920" height="947" ></canvas>
+    </div>
     <div class="containerMAdv__bg z-1" touch-action="none"></div>
   </div>
 </template>
@@ -248,8 +250,7 @@ export default {
     }
   },
   mounted () {
-    if (this.mFirstPause === false) {
-      const fragmentShader = `
+    const fragmentShader = `
         uniform vec2 u_resolution;
         uniform float u_pxaspect;
         uniform vec2 u_mouse;
@@ -452,80 +453,78 @@ export default {
       }
     `
 
-      const vertexShader = `
+    const vertexShader = `
       void main() {
           gl_Position = vec4( position, 1.0 );
       }
     `
 
-      let scene
+    let scene
 
-      const loader = new THREE.TextureLoader()
-      let texture, _500
-      loader.setCrossOrigin('anonymous')
-      loader.load(require('@/assets/img/noise.png'), (tex) => {
-        texture = tex
-        texture.wrapS = THREE.RepeatWrapping
-        texture.wrapT = THREE.RepeatWrapping
-        texture.minFilter = THREE.LinearFilter
+    const loader = new THREE.TextureLoader()
+    let texture, _500
+    loader.setCrossOrigin('anonymous')
+    loader.load(require('@/assets/img/noise.png'), (tex) => {
+      texture = tex
+      texture.wrapS = THREE.RepeatWrapping
+      texture.wrapT = THREE.RepeatWrapping
+      texture.minFilter = THREE.LinearFilter
 
-        loader.load(require('@/assets/img/mainAva.jpg'), (tex) => {
-          _500 = tex
+      loader.load(require('@/assets/img/mainAva.jpg'), (tex) => {
+        _500 = tex
 
-          init()
-          this.animate()
-        })
+        init()
+        this.animate()
       })
+    })
 
-      const init = () => {
-        this.container = document.querySelector('.containerMAdv')
+    const init = () => {
+      this.container = document.querySelector('.containerMAdv')
 
-        this.camera = new THREE.Camera()
-        this.camera.position.z = 1
+      this.camera = new THREE.Camera()
+      this.camera.position.z = 1
 
-        scene = new THREE.Scene()
+      scene = new THREE.Scene()
 
-        var geometry = new THREE.PlaneBufferGeometry(2, 2)
+      var geometry = new THREE.PlaneBufferGeometry(2, 2)
 
-        this.uniforms = {
-          u_time: { type: 'f', value: 1.0 },
-          u_resolution: { type: 'v2', value: new THREE.Vector2() },
-          u_pxaspect: { type: 'f', value: window.devicePixelRatio },
-          u_noise: { type: 't', value: texture },
-          u_text500: { type: 't', value: _500 },
-          u_mouse: { type: 'v2', value: new THREE.Vector2(-0.1, -0.1) }
-        }
-
-        var material = new THREE.ShaderMaterial({
-          uniforms: this.uniforms,
-          vertexShader: vertexShader,
-          fragmentShader: fragmentShader
-        })
-        material.extensions.derivatives = true
-
-        var mesh = new THREE.Mesh(geometry, material)
-        scene.add(mesh)
-
-        this.renderer = new THREE.WebGLRenderer()
-        this.renderer.setPixelRatio(window.devicePixelRatio)
-
-        this.container.appendChild(this.renderer.domElement)
-
-        this.onWindowResize()
-        window.addEventListener('resize', this.onWindowResize, false)
-
-        document.addEventListener('mousemove', this.onPointerMove)
+      this.uniforms = {
+        u_time: { type: 'f', value: 1.0 },
+        u_resolution: { type: 'v2', value: new THREE.Vector2() },
+        u_pxaspect: { type: 'f', value: window.devicePixelRatio },
+        u_noise: { type: 't', value: texture },
+        u_text500: { type: 't', value: _500 },
+        u_mouse: { type: 'v2', value: new THREE.Vector2(-0.1, -0.1) }
       }
 
-      this.render = () => {
-        // this.uniforms.u_time.value = delta * 0.0005
-        this.renderer.render(scene, this.camera)
-      }
-    } else {
-      document.addEventListener('mousemove', this.onPointerMove)
+      var material = new THREE.ShaderMaterial({
+        uniforms: this.uniforms,
+        vertexShader: vertexShader,
+        fragmentShader: fragmentShader
+      })
+      material.extensions.derivatives = true
+
+      var mesh = new THREE.Mesh(geometry, material)
+      scene.add(mesh)
+
+      // this.renderer = new THREE.WebGLRenderer()
+      this.renderer = new THREE.WebGLRenderer({
+        canvas: document.querySelector('.containerMAdv canvas')
+      })
+      this.renderer.setPixelRatio(window.devicePixelRatio)
+
+      // this.container.appendChild(this.renderer.domElement)
+
+      this.onWindowResize()
       window.addEventListener('resize', this.onWindowResize, false)
-      requestAnimationFrame(this.animate)
+
+      document.addEventListener('mousemove', this.onPointerMove)
     }
+
+    this.render = () => {
+      this.renderer.render(scene, this.camera)
+    }
+
     this.mouse.X = innerWidth / 10 * 9
     this.mouse.oldX = innerWidth / 10 * 9
     this.mouse.Y = innerHeight / 10
