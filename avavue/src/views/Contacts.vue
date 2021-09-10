@@ -1,58 +1,51 @@
 <template>
   <div class="overflow-hidden">
     <contFirst/>
-    <div class="lent lent_gray">
-      <div class="lent__img"></div>
-    </div>
+    <myMarquee :addClass="'z-1  lent_gray'" />
     <div class="bg_g p-t-100 p-b-200">
-      <secTitle :title='"[ Super puper cool team ];"' :addClass='"m-b-100"' />
+      <secTitle :title="($store.state.langEn) ? ('[ contact us ];') : ('[ напиши нам ];')" :addClass='"m-b-150"' />
       <div class="row">
         <div class="col-lg-9 offset-lg-1 col-22 offset-1">
           <div class="d-flex flex-column">
-            <a href="mailto:info@ava-digital.ru" class="h9 m-b-10 ttu"
-              >info@ava-digital.ru</a
+            <a href="mailto:info@ava-digital.ru" class="h9 showText showText_b m-b-10 ttu"
+              ><span class="h9 ttu ">[&nbsp;info@ava-digital.ru&nbsp;];<span class="h9">[&nbsp;info@ava-digital.ru&nbsp;];</span> </span></a
             >
-            <a href="tel:+78129062232" class="h9 m-b-10 ttu"
-              >+7 812 906 — 22 — 32</a
+            <a href="tel:+78129062232" class="h9 showText showText_b m-b-10 ttu"
+              ><span class="h9 ttu ">[&nbsp;+7 812 906 - 22 - 32&nbsp;];<span class="h9">[&nbsp;+7 812 906 - 22 - 32&nbsp;];</span> </span></a
             >
-            <p class="h9 m-b-10 ttu">St. Petersburg</p>
+            <p class="h9 m-b-80 ttu">{{($store.state.langEn) ? ('[ St. Petersburg ];') : ('[ Санкт-Петербург ];')}}</p>
             <p class="h9"></p>
-            <a href="#" class="h9 m-b-10 ttu">[ Behance ]</a>
-            <a href="#" class="h9 m-b-10 ttu">[ Facebook ]</a>
-            <a href="#" class="h9 m-b-10 ttu">[ Instagram ]</a>
-            <a href="#" class="h9 m-b-10 ttu">[ VK ]</a>
+            <a href="https://www.behance.net/avadigital" class="h9 showText showText_b m-b-10 ttu" target="_blank"> <span class="h9 ttu ">[&nbsp;Behance&nbsp;];<span class="h9">[&nbsp;Behance&nbsp;];</span> </span></a>
+            <a href="https://www.facebook.com/we.are.ava.digital/" class="h9 showText showText_b m-b-10 ttu" target="_blank"><span class="h9 ttu ">[&nbsp;Facebook&nbsp;];<span class="h9">[&nbsp;Facebook&nbsp;];</span> </span></a>
+            <a href="https://www.instagram.com/we_are_ava_digital/" class="h9 showText showText_b m-b-10 ttu" target="_blank"><span class="h9 ttu ">[&nbsp;Instagram&nbsp;];<span class="h9">[&nbsp;Instagram&nbsp;];</span> </span></a>
+            <a href="https://vk.com/avrora_digital" class="h9 showText showText_b m-b-200 ttu" target="_blank"><span class="h9 ttu ">[&nbsp;VK&nbsp;];<span class="h9">[&nbsp;VK&nbsp;];</span> </span></a>
           </div>
         </div>
         <div class="col-lg-12 offset-lg-1 col-22 offset-1">
-          <!-- <input type="text" placeholder="ИМЯ" />
-          <input type="text" placeholder="ИМЯ" />
-          <input type="text" placeholder="ИМЯ" /> -->
-
             <div class="form-wrapper">
-              <p class="form-sent p1" v-if="sent">Сообщение отправлено</p>
+              <p class="form-sent p1" v-if="sent">{{($store.state.langEn)?'[ Message sent ]':'[ Сообщение отправлено ]'}}</p>
               <form id="formapp" @submit="checkForm">
                 <div>
-                  <input id="your-name" placeholder="Name" v-model="name" type="text" name="your-name">
+                  <input id="your-number" :placeholder="($store.state.langEn) ? ('[ Phone ]*') : ('[ Телефон ]*')" v-model="number" onkeyup="this.value = this.value.replace(/[^0-9_-_+()/-]/g,'');" type="text" name="your-number">
+                </div>
+                  <input id="your-name" :placeholder="($store.state.langEn) ? ('[ Name ]') : ('[ Имя ]')" v-model="name" type="text" name="your-name">
+                <div>
                 </div>
                 <div>
-                  <input id="your-email" placeholder="Email" v-model="email" type="text" name="your-email" min="0">
+                  <input id="your-email" :placeholder="($store.state.langEn) ? ('[ Email ]*') : ('[ Email ]*')" v-model="email" type="text" name="your-email" min="0">
                 </div>
                 <div>
-                  <input id="your-message" placeholder="Message" v-model="message" type="text" name="your-message" min="0">
-                </div>
-                <div>
-                  <input id="your-number" placeholder="Phone" v-model="number" type="number" name="your-number">
+                  <input id="your-message" :placeholder="($store.state.langEn) ? ('[ Question ]') : ('[ Вопрос ]')" v-model="message" type="text" name="your-message" min="0">
                 </div>
 
-                <div>
-                  <!-- <input type="submit" value="Submit"> -->
-                  <!-- <button class="btn2" type="submit" value="Submit">Send</button> -->
-                    <myButton
-                      @click="checkForm" type="submit" value="Submit"
-                      :text="
-                        $store.state.langEn ? '[ send ]' : '[ отправить ]'
-                      "
-                    />
+                <div class="m-t-100" >
+                  <myButton
+                    @click="checkForm" type="submit" value="Submit"
+                    :text="
+                      $store.state.langEn ? '[ send ]' : '[ отправить ]'
+                    "
+                    :myStyle="'button_blackGr'"
+                  />
                 </div>
                  <div class="p-t-40" v-if="errors.length">
                   <!-- <b>Please correct the following error(s):</b> -->
@@ -71,7 +64,7 @@
 
 <script>
 import axios from 'axios'
-
+import myMarquee from '@/components/myMarquee.vue'
 import contFirst from '@/components/sections/contFirst.vue'
 import myFooter from '@/components/sections/footer.vue'
 import secTitle from '@/components/secTitle.vue'
@@ -82,7 +75,8 @@ export default {
     contFirst,
     myFooter,
     secTitle,
-    myButton
+    myButton,
+    myMarquee
   },
   data () {
     return {
@@ -104,16 +98,13 @@ export default {
       e.preventDefault()
       this.errors = []
 
-      if (!this.name) {
-        this.errors.push('Name required.')
-      }
       if (!this.email) {
-        this.errors.push('Email required.')
+        this.errors.push((this.$store.state.langEn) ? 'Email required' : 'Введите Email')
       } else if (!this.validEmail(this.email)) {
-        this.errors.push('Valid email required.')
+        this.errors.push((this.$store.state.langEn) ? 'Valid email required' : 'Email некоректный')
       }
       if (!this.number) {
-        this.errors.push('Number required.')
+        this.errors.push((this.$store.state.langEn) ? 'Number required' : 'Введите телефон')
       }
       if (this.errors.length) { this.sent = false }
       if (!this.errors.length) {
@@ -126,7 +117,7 @@ export default {
         axios({
           method: 'post',
           url:
-            'https://ava.avadev.ru/wp-json/contact-form-7/v1/contact-forms/32/feedback',
+            this.$store.state.linkAdmin + '/wp-json/contact-form-7/v1/contact-forms/1326/feedback',
           data: bodyFormData,
           config: { headers: { 'Content-Type': 'multipart/form-data' } }
         })
@@ -136,12 +127,12 @@ export default {
             return true
           })
           .catch(function (response) {
-            console.log(response)
+            // console.log(response)
           })
       }
     },
     succesMess: function () {
-      console.log('succesMess')
+      // console.log('succesMess')
       this.sent = true
     }
   },

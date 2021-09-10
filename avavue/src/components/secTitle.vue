@@ -2,7 +2,7 @@
   <div class="row" :class="addClass">
     <div class="col-22 offset-1">
       <div class="secTitle">
-        <p class="p1 ttu mp0">{{ title }}</p>
+        <p class="p1 ttu mp0" style="max-width: 500px;">{{ title }}</p>
         <div @click.stop="$store.commit('toggleMenu')" class="secTitle__circle"></div>
       </div>
     </div>

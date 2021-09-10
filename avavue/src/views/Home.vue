@@ -7,8 +7,8 @@
         <myMarquee :addClass="'z-1 lent_rotate lent_gray'" />
         <myMarquee :addClass="'z-2'" />
       </div>
-      <div class=" p-t-200 row changeBgTrig">
-        <div
+      <div class=" p-t-200 p-b-100 row changeBgTrig">
+        <div v-on:mouseover.stop="myMouseover" v-on:mouseout="myMouseout" v-on:mousemove="myMousemove"
           class="
             col-xl-12
             offset-xl-1
@@ -18,12 +18,12 @@
             offset-md-1
             col-22
             offset-1
+            textAboutAs
           "
         >
           <p v-show="$store.state.langEn" class="h7 ttu">
-            we’re a branding/digital design
-            <span class="h7 underline"
-              >studio
+            AVA is a digital full-cycle <span class="h7 underline"
+              >agency.
               <svg
                 width="193"
                 height="18"
@@ -38,27 +38,7 @@
                   stroke-linecap="round"
                 />
               </svg>
-            </span>
-            connecting brands to people through craft and culture. A collective
-            of three like-minded creatives and one
-            <span class="h7 cirk"
-              >powerhouse
-              <svg
-                width="343"
-                height="73"
-                viewBox="0 0 343 73"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M341.495 31.7285C341.856 53.4176 267.335 71 175.046 71C82.7579 71 9.60777 55.3875 1.89483 37.2383C-4.41828 22.3831 79.6885 2 171.977 2C218.265 2 313.593 15.5789 294.55 36.2024"
-                  stroke="#E10F1C"
-                  stroke-width="3"
-                  stroke-linecap="round"
-                />
-              </svg>
-            </span>
-            project
+            </span> We make crushing sites that everyone likes. We are obsessed with design, technology and dream of making the Internet beautiful.
           </p>
           <p v-show="!$store.state.langEn" class="h7 ttu">
             AVA - digital <span class="h7 underline"
@@ -78,56 +58,42 @@
               </svg>
             </span> полного цикла. Делаем сокрушительные сайты,
             которые всем нравятся. Мы помешаны на дизайне, технологиях и мечтаем
-            сделать интернет
-            <span class="h7 cirk"
-              >красивым.<svg
-                width="343"
-                height="73"
-                viewBox="0 0 343 73"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M341.495 31.7285C341.856 53.4176 267.335 71 175.046 71C82.7579 71 9.60777 55.3875 1.89483 37.2383C-4.41828 22.3831 79.6885 2 171.977 2C218.265 2 313.593 15.5789 294.55 36.2024"
-                  stroke="#E10F1C"
-                  stroke-width="3"
-                  stroke-linecap="round"
-                />
-              </svg>
-            </span>
+            сделать интернет красивым.
+
           </p>
+          <!-- <img class="mAdvItem__img" :src="require('@/assets/img/gif/clench.gif')"> -->
+          <video class="mAdvItem__img" autoplay muted loop :src="require('@/assets/img/gif/clench.mp4')"></video>
+          <!-- <img class="mAdvItem__img" :src="require('@/assets/img/gif/clench.gif')"> -->
         </div>
       </div>
-      <div class="p-t-100 p-b-200">
-        <secTitle :title="'[ Super puper cool team ];'" :addClass="'m-b-150'" />
+      <div class="p-t-100 p-b-250">
+        <secTitle :title="($store.state.langEn)?('[ Super puper cool team ];'):('[ мы крутая команда ];')" :addClass="'m-b-150'" />
         <div class="row m-b-40">
           <div class="col-22 offset-1">
-            <h2 class="h3 m-b-40">&lt;Hello world/&gt;</h2>
+            <h2 class="h3 m-b-80">&lt;Hello world/&gt;</h2>
             <div class="print">
-              <img
-                width="1222"
-                height="600"
-                src="~@/assets/img/print.png"
-                alt=""
-                class="w-100 m-b-15"
-              />
-              <p class="p1 ttu">wow. we feel like this</p>
+              <picture>
+                  <source srcset="~@/assets/img/printMd.png" media="(max-width: 1024px)">
+                  <source srcset="~@/assets/img/printSm.png" media="(max-width: 768px)">
+                  <img class="w-100 m-b-15"  width="1222" height="600" srcset="~@/assets/img/print.png">
+              </picture>
+              <p class="p1 ttu">{{($store.state.langEn)?('Something about AVA'):('Что-то про AVA')}}</p>
             </div>
           </div>
         </div>
         <div class="row m-b-150">
           <div class="offset-1 col-lg-12 col-md-15 col-22">
             <p class="h8">
-              <span class="p1 red">[ Our team ];</span
-              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AVA is a small team.
-              There are five of us. Each of us is responsible for his/her part
-              of the work. We are engaged in web design and site development of
-              different difficulty.
+              <span class="p1 red">[ {{($store.state.langEn)?('Our team'):('О нас')}} ];</span
+              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              {{($store.state.langEn)?
+              ("We're doing web design. We create sites for business from different areas and develop mobile applications, printing design and branding. We are the coolest team."):
+              ('Мы занимаемся веб-дизайном. Создаем сайты для бизнеса из разных сфер. Разрабатываем мобильные приложения, полиграфический дизайн и брендинг. Мы самая крутая команда.')}}
             </p>
           </div>
         </div>
         <div class="row position-relative">
-          <div class="yes h2 red">YES</div>
+          <div class="yes h2 red">{{($store.state.langEn)?('YEP'):('ДА')}}</div>
           <div class="col-lg-5 offset-lg-1 d-none d-lg-block">
             <div
               @mouseenter="hideButton"
@@ -138,12 +104,13 @@
               <myButton
                 class="hideButton"
                 ref="hideButton"
-                :text="$store.state.langEn ? '[ no ]' : '[ нет ]'"
+                :text="$store.state.langEn ? '[ disagree ]' : '[ нет ]'"
               />
             </div>
           </div>
           <div
             class="
+              col-xl-6
               col-lg-5
               offset-lg-6
               col-md-7
@@ -151,6 +118,7 @@
               col-22
               offset-1
               m-b-40
+              btnTellMore
             "
           >
             <myButton
@@ -172,7 +140,7 @@
           >
             <myButton
               @click="showYes"
-              :text="$store.state.langEn ? '[ really? ]' : '[ серьезно ]'"
+              :text="$store.state.langEn ? '[ really? ]' : '[ серьёзно? ]'"
             />
           </div>
         </div>
@@ -180,8 +148,8 @@
     </div>
     <mTagsFly />
     <myMarquee :addClass="'z-2 lent__red'" />
-    <div class="position-relative p-t-100 p-b-200">
-      <secTitle :title="'[ Super puper cool team ];'" :addClass="'m-b-100'" />
+    <div class="position-relative p-t-100 p-b-80">
+      <secTitle :title="($store.state.langEn)?('[ Our projects ];'):('[  Наши проекты ];')" :addClass="'m-b-100'" />
       <mPrList />
     </div>
     <mAdv />
@@ -205,6 +173,15 @@ gsap.registerPlugin(ScrollTrigger)
 export default {
   data () {
     return {
+      imgTarget: '',
+      transform: {
+        x: 0,
+        y: 0,
+        curX: 0,
+        curY: 0,
+        scale: 1,
+        opacity: 1
+      }
     }
   },
   components: {
@@ -248,9 +225,9 @@ export default {
         onToggle: self => {
           // console.log(self.direction)
           if (self.isActive && self.direction > 0) {
-            document.querySelector('.changeBg').classList.add('bg_w')
+            document.querySelector('.changeBg').classList.add('bg_ww')
           } else if (self.direction < 0) {
-            document.querySelector('.changeBg').classList.remove('bg_w')
+            document.querySelector('.changeBg').classList.remove('bg_ww')
           }
         },
         onUpdate: self => {
@@ -262,22 +239,10 @@ export default {
         start: 'top bottom',
         end: 'bottom top',
         scrub: 1,
-        markers: true,
+        // markers: true,
         animation: gsap.fromTo(
           '.underline svg',
           { strokeDashoffset: '200px' },
-          { strokeDashoffset: '0px' }
-        )
-      })
-      this.scrollTrig2 = ScrollTrigger.create({
-        trigger: '.cirk',
-        start: 'top bottom',
-        end: 'bottom top',
-        scrub: 1,
-        markers: true,
-        animation: gsap.fromTo(
-          '.cirk svg',
-          { strokeDashoffset: '700px' },
           { strokeDashoffset: '0px' }
         )
       })
@@ -293,7 +258,7 @@ export default {
           })
       }
       if (!this.$store.state.blogPost.lenght) {
-        fetch(this.$store.state.linkAdmin + '/wp-json/wp/v2/posts?categories=2&per_page=12')
+        fetch(this.$store.state.linkAdmin + '/wp-json/wp/v2/posts?categories=2&per_page=20')
           .then((r) => r.json())
         // eslint-disable-next-line no-return-assign
           .then((res) => {
@@ -302,7 +267,7 @@ export default {
           })
       }
       if (!this.$store.state.prPost.lenght) {
-        fetch(this.$store.state.linkAdmin + '/wp-json/wp/v2/posts?categories=4')
+        fetch(this.$store.state.linkAdmin + '/wp-json/wp/v2/posts?categories=4&per_page=20')
           .then((r) => r.json())
         // eslint-disable-next-line no-return-assign
           .then((res) => {
@@ -310,6 +275,31 @@ export default {
             this.$store.commit('addPrPost', this.projects)
           })
       }
+    },
+    myMouseover: function (e) {
+      if (innerWidth < 1023) return
+      this.transform.x = e.clientX - e.target.getBoundingClientRect().left
+      this.transform.y = e.clientY - e.target.getBoundingClientRect().top
+      this.imgTarget = e.target.querySelector('video')
+      gsap.to(this.imgTarget, { x: this.transform.x, y: this.transform.y, scale: 1, duration: 0 })
+      gsap.ticker.add(this.updatePos)
+    },
+    myMousemove: function (e) {
+      if (innerWidth < 1023) return
+      this.transform.curX = e.clientX - e.target.getBoundingClientRect().left
+      this.transform.curY = e.clientY - e.target.getBoundingClientRect().top
+      // console.log([this.transform.x, this.transform.y])
+    },
+    myMouseout: function (e) {
+      if (innerWidth < 1023) return
+      gsap.to(this.imgTarget, { x: this.transform.x, y: this.transform.y, scale: 0, opacity: 0, duration: 0.5 })
+      gsap.ticker.remove(this.updatePos)
+    },
+    updatePos: function (e) {
+      if (innerWidth < 1023) return
+      this.transform.x = (this.transform.x * 9 + this.transform.curX) / 10
+      this.transform.y = (this.transform.y * 9 + this.transform.curY) / 10
+      gsap.to(this.imgTarget, { x: this.transform.x, y: this.transform.y, scale: 1, opacity: this.transform.opacity, duration: 0.3 })
     }
   },
   mounted () {
@@ -320,9 +310,7 @@ export default {
     }, 1000)
   },
   unmounted () {
-    this.scrollTrig.kill()
-    this.scrollTrig1.kill()
-    this.scrollTrig2.kill()
+    ScrollTrigger.getAll().forEach(t => t.kill())
   }
 }
 
@@ -348,10 +336,10 @@ export default {
   &::before {
     content: "";
     position: absolute;
-    width: 300%;
-    height: 400%;
-    top: -150%;
-    left: -100%;
+    width: 200%;
+    height: 300%;
+    top: -100%;
+    left: -50%;
     // background-color: rgba($color: red, $alpha: 0.2);
   }
 }
@@ -369,15 +357,29 @@ export default {
     stroke-dasharray: 200px;
   }
 }
-.cirk {
+
+.textAboutAs{
   position: relative;
-  svg {
+  // pointer-events: none;
+  & *{
+    position: relative;
+    pointer-events: none;
+    z-index: 2;
+  }
+  img , video{
     position: absolute;
-    top: -0.1em;
-    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 300px;
     height: auto;
-    left: -0%;
-    stroke-dasharray: 700px;
+    opacity: 0;
+  }
+}
+.btnTellMore{
+  text-align: right;
+  @media (max-width: 767.98px) {
+    text-align: left;
   }
 }
 </style>

@@ -3,8 +3,7 @@
   <div class="row m-b-150">
     <div class="offset-1 col-lg-12 col-md-16 col-18">
       <h3 v-if="$store.state.langEn" class="h7 ttu">
-        forward and we see our agency as a either the meaning of the work is
-        obvious or to hell with it
+        {{($store.state.langEn)?('Here is our projects. No doubt your site will be even better.'):('Здесь наши проекты. Не сомневайтесь, ваш сайт будет еще лучше.')}}
       </h3>
       <h3 v-else class="h7 ttu">
         Здесь наши завершённые работы. Не сомневайтесь, ваш сайт будет ещё лучше.
@@ -26,12 +25,12 @@
         position-relattive
       "
     >
-      <img :src="pr.acf.img" alt="" class="imgDisp w-100" />
+      <img :src="pr.acf.img" width="1920" height="1080" alt="" class="imgDisp w-100" />
       <div class="mPrItem__det">
         <div v-if="pr.acf.tags" class="mPrItem__tags d-none d-lg-block m-b-40">
           <span v-for="tag in pr.acf.tags" class="p1" :key="tag.name">[&nbsp;{{tag.name}}&nbsp;]&nbsp;&nbsp;</span>
         </div>
-        <span @click="$router.push({ path: `/projects/${pr.id}` })" class="mPrItem__title h3 d-block">{{pr.acf.title}}</span>
+        <span @click="$router.push({ path: `/projects/${pr.id}` })" class="mPrItem__title h3 d-block">{{($store.state.langEn)?pr.acf.titleEN:pr.acf.title}}</span>
       </div>
     </div>
   </div>
@@ -233,10 +232,10 @@ const AddImg = {
     this.renderer.domElement.classList.add('dispWrap')
     this.findImg('.imgDisp')
 
-    if (AddImg.stop) {
-      AddImg.stop = !AddImg.stop
-      requestAnimationFrame(AddImg.render)
-    }
+    // if (AddImg.stop) {
+    //   AddImg.stop = !AddImg.stop
+    //   cancelAnimationFrame(AddImg.render)
+    // }
   },
   findImg: function (selector) {
     this.domImg = document.querySelectorAll(selector)
@@ -293,7 +292,7 @@ const AddImg = {
   },
   render: () => {
     // console.log('anim')
-    if (AddImg.stop) return
+    // if (AddImg.stop) return
     requestAnimationFrame(AddImg.render)
     const newPos = window.scrollY
     if (AddImg.scroll != null) {
@@ -313,7 +312,8 @@ const AddImg = {
 export default {
   data () {
     return {
-      projects: {}
+      projects: {},
+      tl: []
     }
   },
   components: {
@@ -327,12 +327,14 @@ export default {
             trigger: el,
             start: 'top bottom',
             end: 'bottom top',
-            scrub: 1,
-            markers: true
+            scrub: 1
+            // markers: true
           }
         })
         tl.to(el, { yPercent: -100 })
+        this.tl.push(tl)
       })
+      // console.log(this.tl)
     }
   },
   mounted () {
@@ -341,24 +343,31 @@ export default {
         .then((r) => r.json())
         .then((res) => {
           this.projects = res.map(x => x)
-          if (innerWidth < 1025) return
-          setTimeout(() => {
-            AddImg.init()
-            this.scrollAnim()
-          }, 2500)
+          Promise.all(Array.from(document.querySelectorAll('.mPrItem img')).filter(img => !img.complete).map(img => new Promise(resolve => { img.onload = img.onerror = resolve }))).then(() => {
+            // console.log('images finished loading')
+            setTimeout(() => {
+              this.scrollAnim()
+              if (innerWidth < 1025) return
+              AddImg.init()
+            }, 2500)
+          })
         })
     } else {
       this.projects = this.$store.state.prMPost
-      if (innerWidth < 1025) return
-      setTimeout(() => {
-        AddImg.init()
-        this.scrollAnim()
-      }, 2500)
+      Promise.all(Array.from(document.querySelectorAll('.mPrItem img')).filter(img => !img.complete).map(img => new Promise(resolve => { img.onload = img.onerror = resolve }))).then(() => {
+        // console.log('images finished loading')
+        setTimeout(() => {
+          this.scrollAnim()
+          if (innerWidth < 1025) return
+          AddImg.init()
+        }, 2500)
+      })
     }
   },
   unmounted () {
-    if (innerWidth < 1025) return
-    AddImg.stop = true
+    ScrollTrigger.getAll().forEach(t => t.kill())
+    // if (innerWidth < 1025) return
+    // AddImg.stop = true
   }
 }
 
@@ -395,6 +404,10 @@ export default {
   }
   &__title{
     cursor: pointer;
+    transition: 0.3s;
+    &:hover{
+      color: #ed2330;
+    }
   }
 }
 </style>

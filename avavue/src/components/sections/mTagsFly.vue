@@ -1,6 +1,6 @@
 <template>
   <div class="bg_g p-t-100">
-    <secTitle :title='"[ Super puper cool team ];"' :addClass='"m-b-100"' />
+    <secTitle :title="($store.state.langEn)?('[ we make cool things ];'):('[ мы делаем крутые штуки ];')" :addClass='"m-b-100"' />
     <div class="wrapFlyTags"></div>
   </div>
 </template>
@@ -49,20 +49,20 @@ export default {
       this.scrollTr = ScrollTrigger.create({
         trigger: '.wrapFlyTags',
         start: 'center center',
-        markers: true,
+        // markers: true,
         // end: 'bottom top',
         scrub: 2,
-        id: '1',
+        // id: '1',
         // onToggle: self => console.log('toggled, isActive:', self.isActive)
         onToggle: () => { if (innerWidth > 1024) { this.world.gravity.scale = 0.0015 } else { this.world.gravity.scale = 0.0008 } }
       })
       this.scrollTrPlay = ScrollTrigger.create({
         trigger: '.wrapFlyTags',
         start: 'top bottom',
-        markers: true,
+        // markers: true,
         end: 'bottom top',
         // scrub: 2,
-        id: '2',
+        // id: '2',
         onToggle: self => {
           // console.log('toggled, isActive:', self.isActive)
           if (self.isActive) {
@@ -95,8 +95,8 @@ export default {
         engine: this.engine,
         options: {
           width: window.innerWidth,
-          height: window.innerHeight * 0.9,
-          // pixelRatio: 2,
+          height: window.innerHeight * 0.8,
+          pixelRatio: 1,
           background: '#C4C4C4',
           wireframes: false
         }
@@ -174,72 +174,144 @@ export default {
             s: innerWidth / 1920
           }
         },
+        md: {
+          web: {
+            x: 600 / 1920 * innerWidth,
+            y: 240 / 1920 * innerWidth,
+            w: 460 / 1920 * innerWidth * 3 / 2,
+            h: 78 / 1920 * innerWidth * 3 / 2,
+            s: innerWidth / 1920 * 3 / 2
+          },
+          love: {
+            x: 960 / 1920 * innerWidth,
+            y: 100 / 1920 * innerWidth,
+            w: 240 / 1920 * innerWidth * 3 / 2,
+            h: 78 / 1920 * innerWidth * 3 / 2,
+            s: innerWidth / 1920 * 3 / 2
+          },
+          brand: {
+            x: 1320 / 1920 * innerWidth,
+            y: 240 / 1920 * innerWidth,
+            w: 430 / 1920 * innerWidth * 3 / 2,
+            h: 78 / 1920 * innerWidth * 3 / 2,
+            s: innerWidth / 1920 * 3 / 2
+          },
+          sites: {
+            x: 400 / 1920 * innerWidth,
+            y: 380 / 1920 * innerWidth,
+            w: 243 / 1920 * innerWidth * 3 / 2,
+            h: 78 / 1920 * innerWidth * 3 / 2,
+            s: innerWidth / 1920 * 3 / 2
+          },
+          animations: {
+            x: 940 / 1920 * innerWidth,
+            y: 380 / 1920 * innerWidth,
+            w: 411 / 1920 * innerWidth * 3 / 2,
+            h: 78 / 1920 * innerWidth * 3 / 2,
+            s: innerWidth / 1920 * 3 / 2
+          },
+          naming: {
+            x: 1520 / 1920 * innerWidth,
+            y: 380 / 1920 * innerWidth,
+            w: 313 / 1920 * innerWidth * 3 / 2,
+            h: 78 / 1920 * innerWidth * 3 / 2,
+            s: innerWidth / 1920 * 3 / 2
+          },
+          copywriting: {
+            x: 680 / 1920 * innerWidth,
+            y: 520 / 1920 * innerWidth,
+            w: 448 / 1920 * innerWidth * 3 / 2,
+            h: 78 / 1920 * innerWidth * 3 / 2,
+            s: innerWidth / 1920 * 3 / 2
+          },
+          promotion: {
+            x: 1380 / 1920 * innerWidth,
+            y: 520 / 1920 * innerWidth,
+            w: 422 / 1920 * innerWidth * 3 / 2,
+            h: 78 / 1920 * innerWidth * 3 / 2,
+            s: innerWidth / 1920 * 3 / 2
+          },
+          cats: {
+            x: 620 / 1920 * innerWidth,
+            y: 660 / 1920 * innerWidth,
+            w: 233 / 1920 * innerWidth * 3 / 2,
+            h: 78 / 1920 * innerWidth * 3 / 2,
+            s: innerWidth / 1920 * 3 / 2
+          },
+          uxui: {
+            x: 1180 / 1920 * innerWidth,
+            y: 660 / 1920 * innerWidth,
+            w: 457 / 1920 * innerWidth * 3 / 2,
+            h: 78 / 1920 * innerWidth * 3 / 2,
+            s: innerWidth / 1920 * 3 / 2
+          }
+        },
         sm: {
           web: {
-            x: innerWidth / 2,
+            x: innerWidth / 12 + 460 / 1920 * innerWidth,
             y: 200 / 1920 * innerWidth,
             w: 460 / 1920 * innerWidth * 2,
             h: 78 / 1920 * innerWidth * 2,
             s: innerWidth / 1920 * 2
           },
           love: {
-            x: innerWidth / 2,
+            x: innerWidth / 12 + 240 / 1920 * innerWidth,
             y: 400 / 1920 * innerWidth,
             w: 240 / 1920 * innerWidth * 2,
             h: 78 / 1920 * innerWidth * 2,
             s: innerWidth / 1920 * 2
           },
           brand: {
-            x: innerWidth / 2,
+            x: innerWidth / 12 + 430 / 1920 * innerWidth,
             y: 600 / 1920 * innerWidth,
             w: 430 / 1920 * innerWidth * 2,
             h: 78 / 1920 * innerWidth * 2,
             s: innerWidth / 1920 * 2
           },
           sites: {
-            x: innerWidth / 2,
+            x: innerWidth / 12 + 243 / 1920 * innerWidth,
             y: 800 / 1920 * innerWidth,
             w: 243 / 1920 * innerWidth * 2,
             h: 78 / 1920 * innerWidth * 2,
             s: innerWidth / 1920 * 2
           },
           animations: {
-            x: innerWidth / 2,
+            x: innerWidth / 12 + 411 / 1920 * innerWidth,
             y: 1000 / 1920 * innerWidth,
             w: 411 / 1920 * innerWidth * 2,
             h: 78 / 1920 * innerWidth * 2,
             s: innerWidth / 1920 * 2
           },
           copywriting: {
-            x: innerWidth / 2,
+            x: innerWidth / 12 + 448 / 1920 * innerWidth,
             y: 1200 / 1920 * innerWidth,
             w: 448 / 1920 * innerWidth * 2,
             h: 78 / 1920 * innerWidth * 2,
             s: innerWidth / 1920 * 2
           },
           promotion: {
-            x: innerWidth / 2,
+            x: innerWidth / 12 + 422 / 1920 * innerWidth,
             y: 1400 / 1920 * innerWidth,
             w: 422 / 1920 * innerWidth * 2,
             h: 78 / 1920 * innerWidth * 2,
             s: innerWidth / 1920 * 2
           },
           naming: {
-            x: innerWidth / 2,
+            x: innerWidth / 12 + 313 / 1920 * innerWidth,
             y: 1600 / 1920 * innerWidth,
             w: 313 / 1920 * innerWidth * 2,
             h: 78 / 1920 * innerWidth * 2,
             s: innerWidth / 1920 * 2
           },
           cats: {
-            x: innerWidth / 2,
+            x: innerWidth / 12 + 233 / 1920 * innerWidth,
             y: 1800 / 1920 * innerWidth,
             w: 233 / 1920 * innerWidth * 2,
             h: 78 / 1920 * innerWidth * 2,
             s: innerWidth / 1920 * 2
           },
           uxui: {
-            x: innerWidth / 2,
+            x: innerWidth / 12 + 457 / 1920 * innerWidth,
             y: 2000 / 1920 * innerWidth,
             w: 457 / 1920 * innerWidth * 2,
             h: 78 / 1920 * innerWidth * 2,
@@ -247,34 +319,36 @@ export default {
           }
         }
       }
-      this.curSize = (innerWidth > 700) ? this.size.xl : this.size.sm
+
+      this.curSize = (innerWidth > 700) ? ((innerWidth > 1100) ? this.size.xl : this.size.md) : this.size.sm
+
       this.elWorld = {
         ground: this.Bodies.rectangle(
-          window.innerWidth * 0.9 / 2 + 160,
-          window.innerHeight * 0.9 + 80,
+          window.innerWidth * 1 / 2 + 160,
+          window.innerHeight * 0.8 + 80,
           window.innerWidth + 320,
           160,
           { render: { fillStyle: '#080808' }, isStatic: true }
         ),
         wallLeft: this.Bodies.rectangle(
-          -80,
-          window.innerHeight * 0.9 / 2,
+          -80 - 2,
+          window.innerHeight * 1 / 2,
           160,
-          window.innerHeight * 0.9,
+          window.innerHeight * 0.8,
           { isStatic: true }
         ),
         wallRight: this.Bodies.rectangle(
-          window.innerWidth + 80,
-          window.innerHeight * 0.9 / 2,
+          window.innerWidth + 80 + 2,
+          window.innerHeight * 0.8 / 2,
           160,
           1200,
           { isStatic: true }
         ),
         roof: this.Bodies.rectangle(
           window.innerWidth / 2 + 160,
-          -80,
+          -80 - 1,
           window.innerWidth + 320,
-          160,
+          160 + 1,
           { isStatic: true }
         ),
         web: this.Bodies.rectangle(this.curSize.web.x, this.curSize.web.y, this.curSize.web.w, this.curSize.web.h, {
@@ -450,10 +524,21 @@ export default {
   unmounted () {
     this.Render.stop(this.render)
     this.myMatter.pause = true
-    this.scrollTr.kill()
-    this.scrollTrPlay.kill()
+    ScrollTrigger.getAll().forEach(t => t.kill())
   }
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style lang="scss">
+  .wrapFlyTags{
+    position: relative;
+  }
+  .wrapFlyTags canvas{
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .wrapFlyTags canvas:first-of-type{
+    position: relative
+  }
+ </style>

@@ -23,5 +23,14 @@ export default {
 <style scoped lang="scss">
   .servItem{
     width: 400vw;
+    height: 40px;
+    background-size:contain;
+    background-repeat-x: repeat;
+    background-repeat-y: no-repeat;
+    &_web{background-image: url(~@/assets/img/web.svg);}
+    &_des{background-image: url(~@/assets/img/ux.svg);}
+    &_br{background-image: url(~@/assets/img/br.svg);}
+    &_pr{background-image: url(~@/assets/img/pr.svg);}
+    &_cw{background-image: url(~@/assets/img/cw.svg);}
   }
 </style>

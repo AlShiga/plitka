@@ -2,25 +2,37 @@
  <div class="overflow-hidden">
     <!-- <div class="prFirst"></div> -->
     <prFirst/>
-
     <div class="prMore">
       <div class="row p-t-100 p-b-200">
         <div class="col-xl-19 offset-xl-1 col-lg-19 offset-lg-1 col-md-22 offset-md-1 col-22 offset-1">
           <div class="prBtn m-b-80">
-            <div v-for="tag in tags" :key="tag.id" @click="getPost($event, tag.id)" class="tag" data-v-6ad55cbc=""><span class="h9 ttu" data-v-6ad55cbc="">{{tag.name}}</span></div>
+            <div v-for="tag in tags" :key="tag.id" @click="getPost($event, tag.id)" class="tag tag_W" data-v-6ad55cbc=""><span class="h9 ttu" data-v-6ad55cbc="">{{tag.name}}</span></div>
           </div>
           <transition-group name="list" tag="p">
-
-            <div v-for="pr in projects" :key="pr.acf.title" class="prMoreItem p-b-40 p-t-40 m-b-20" v-on:mouseover="myMouseover" v-on:mouseout="myMouseout" v-on:mousemove="myMousemove">
-              <span @click="$router.push({ path: `/projects/${pr.id}` })" class="h6 prMoreItem__title ttu">{{pr.acf.title}}</span>
-              <div class="prMoreItem__detail">
-                <p class="p1">{{($store.state.langEn)?pr.acf.fieldEN: pr.acf.field}}</p>
-                <div v-if="pr.tags" class="d-none d-lg-block">
-                  <span v-for="tag in pr.acf.tags" class="p1" :key="tag.name">[&nbsp;{{tag.name}}&nbsp;]&nbsp;&nbsp;</span>
+            <div v-for="pr in projects" :key="pr.acf.title" class="">
+              <div v-if='!pr.acf.toSite'  @click="$router.push({ path: `/projects/${pr.id}` })"  class="prMoreItem p-b-40 p-t-40 m-b-20" v-on:mouseover="myMouseover" v-on:mouseout="myMouseout" v-on:mousemove="myMousemove">
+                <span class="h6 prMoreItem__title ">{{($store.state.langEn)?pr.acf.titleEN: pr.acf.title}}</span>
+                <div class="prMoreItem__detail">
+                  <p class="p1 text-right">{{($store.state.langEn)?pr.acf.fieldEN: pr.acf.field}}</p>
+                  <div v-if="pr.tags" class="d-none d-lg-block text-right">
+                    <span v-for="tag in pr.acf.tags" class="p1" :key="tag.name">&nbsp;&nbsp;[&nbsp;{{tag.name}}&nbsp;]</span>
+                  </div>
                 </div>
+                <img :src="pr.acf.imgSm" alt="" class="prMoreItem__img">
               </div>
-              <img src="@/assets/img/gif/ninkita-call.gif" alt="" class="prMoreItem__img">
+              <a v-else :href="pr.acf.toSiteLink" target="_blank" class="prMoreItem p-b-40 p-t-40 m-b-20" v-on:mouseover="myMouseover" v-on:mouseout="myMouseout" v-on:mousemove="myMousemove">
+                <span class="h6 prMoreItem__title ">{{($store.state.langEn)?pr.acf.titleEN: pr.acf.title}}</span>
+                <div class="prMoreItem__detail">
+                  <p class="p1 text-right">{{($store.state.langEn)?pr.acf.fieldEN: pr.acf.field}}</p>
+                  <div v-if="pr.tags" class="d-none d-lg-block text-right">
+                    <span v-for="tag in pr.acf.tags" class="p1" :key="tag.name">&nbsp;&nbsp;[&nbsp;{{tag.name}}&nbsp;]</span>
+                  </div>
+                </div>
+                <img :src="pr.acf.imgSm" alt="" class="prMoreItem__img">
+              </a>
+
             </div>
+
           </transition-group>
         </div>
       </div>
@@ -65,11 +77,11 @@ export default {
       this.transform.by = e.target.getBoundingClientRect().top
       this.transform.x = e.clientX - this.transform.bx
       this.transform.y = e.clientY - this.transform.by
-      this.imgTarget = e.relatedTarget.querySelector('img')
+      this.imgTarget = e.target.querySelector('img')
       gsap.to(this.imgTarget, { x: this.transform.x, y: this.transform.y, scale: 1, duration: 0 })
       gsap.ticker.add(this.updatePos)
-      console.log(this)
-      console.log(e)
+      // console.log(this)
+      // console.log(e)
     },
     myMousemove: function (e) {
       if (innerWidth < 1023) return
@@ -93,10 +105,10 @@ export default {
       document.querySelectorAll('.prBtn .tag').forEach((el) => {
         el.classList.remove('active')
       })
-      console.log(e)
-      console.log(e.target)
+      // console.log(e)
+      // console.log(e.target)
       e.target.classList.add('active')
-      fetch(this.$store.state.linkAdmin + '/wp-json/wp/v2/posts?categories=4&tags=' + cat)
+      fetch(this.$store.state.linkAdmin + '/wp-json/wp/v2/posts?categories=4&per_page=20&tags=' + cat)
         .then((r) => r.json())
       // eslint-disable-next-line no-return-assign
         .then((res) => {
@@ -116,7 +128,7 @@ export default {
         })
       })
     if (!this.$store.state.prPost.lenght) {
-      fetch(this.$store.state.linkAdmin + '/wp-json/wp/v2/posts?categories=4')
+      fetch(this.$store.state.linkAdmin + '/wp-json/wp/v2/posts?categories=4&per_page=40')
         .then((r) => r.json())
       // eslint-disable-next-line no-return-assign
         .then((res) => {
@@ -142,6 +154,18 @@ export default {
   align-items: center;
   position: relative;
   border-bottom: 1px solid currentColor;
+  cursor: pointer;
+  position: relative;
+  & img{
+    position: absolute;
+    width: 300px;
+    height: auto;
+    top: 0;
+    left: 0;
+  }
+  & *{
+    pointer-events: none;
+  }
   @media (max-width: 1449.98px) {
 
   }
@@ -157,7 +181,7 @@ export default {
     align-items: flex-start;
   }
   &__title{
-    margin-right: 30vw;
+    margin-right: 3vw;
     cursor: pointer;
   }
   &__img{
@@ -171,6 +195,11 @@ export default {
     height: 150px;
     object-fit: cover;
     transition: opacity 0.3s;
+  }
+    transition: 0.3s;
+  &:hover{
+    color: #ED2330;
+    border-color: #f8f8f8;
   }
 }
 .mAdvItem{
@@ -190,20 +219,5 @@ export default {
 .list-leave-to {
   opacity: 0;
   transform: translateX(30px);
-}
-.tag{
-  transition: 0.3s;
-  cursor: pointer;
-  & > *{
-    pointer-events: none;
-  }
-  &:hover{
-    background-color: #f8f8f8;
-    color: #202020;
-  }
-  &.active{
-    background-color: #f8f8f8;
-    color: #202020;
-  }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="button">
+  <div class="button" :class='myStyle'>
     <div v-on:mouseover.stop="myMouseover" v-on:mouseout="myMouseout" v-on:mousemove="myMousemove" class="button__btn">
       <span class="h9 ttu">{{text}}</span>
     </div>
@@ -12,7 +12,7 @@ import { gsap } from 'gsap/all'
 // import func from 'vue-editor-bridge'
 
 export default {
-  props: ['text'],
+  props: ['text', 'myStyle'],
   data () {
     return {
       move: {
@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     animButton: function (e) {
-      gsap.to(this.el, { x: this.move.x, y: this.move.y, ease: 'power1' })
+      gsap.to(this.el, { x: this.move.x, y: this.move.y, scale: 0.96, ease: 'power1' })
     },
     myMouseover: function (e) {
       gsap.ticker.add(this.animButton)
@@ -30,7 +30,7 @@ export default {
     },
     myMouseout: function (e) {
       gsap.ticker.remove(this.animButton)
-      gsap.to(e.target, { x: 0, y: 0, ease: 'Back.easeOut' })
+      gsap.to(e.target, { x: 0, y: 0, scale: 1, ease: 'Back.easeOut' })
     },
     myMousemove: function (e) {
       this.move.x = -(e.target.getBoundingClientRect().left + e.target.getBoundingClientRect().width / 2 - e.clientX) / 4
@@ -46,6 +46,10 @@ export default {
   .button{
     position: relative;
     display: inline-block;
+    background-color: transparent;
+    border:none;
+    border-color: transparent;
+    color: transparent;
     &__btn{
       color: #262626;
       display: inline-block;
@@ -58,6 +62,9 @@ export default {
       cursor: pointer;
       user-select: none;
       white-space: nowrap;
+      @media (max-width: 1459.98px) {
+        padding: 20px 50px;
+      }
       & *{
         pointer-events: none;
       }
@@ -74,6 +81,29 @@ export default {
       pointer-events: none;
       transform: translate(10px, 10px);
     }
-
+  }
+  .button_black{
+    .button__btn{
+      color: #f8f8f8;
+      border: 1px solid #f8f8f8;
+      background-color: #262626;
+    }
+    .button__bg{
+      position: absolute;
+      border: 1px solid #262626;
+      background-color: #f8f8f8;
+    }
+  }
+  .button_blackGr{
+    .button__btn{
+      color: #f8f8f8;
+      border: 1px solid #C4C4C4;
+      background-color: #262626;
+    }
+    .button__bg{
+      position: absolute;
+      border: 1px solid #262626;
+      background-color: #C4C4C4;
+    }
   }
 </style>

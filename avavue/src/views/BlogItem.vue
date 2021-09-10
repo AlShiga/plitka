@@ -8,13 +8,13 @@
         </div>
       </div>
     </div>
-    <div class=" bg_w p-b-200">
+    <div class=" bg_w p-b-150">
       <div class="row">
         <div class="col-xl-1 offset-xl-8 col-lg-2 offset-lg-6 col-md-2 offset-md-4 col-22 offset-1">
           <p class="p1">{{new Date(blog.date).toLocaleString('ru',{ day: 'numeric', month: 'numeric', year: 'numeric'})}}</p>
         </div>
         <div class="col-xl-7 offset-xl-1 col-lg-8 offset-lg-1 col-md-12 offset-md-1 col-22 offset-1">
-          <div class="m-b-40">
+          <div class="blogText m-b-40">
           <span class="p1" v-html="($store.state.langEn)?blog.acf.textEN: blog.acf.text"></span>
           </div>
           <div v-if="blog.acf.gal.length===1" class="">
@@ -29,7 +29,6 @@
               @swiper="onSwiper"
               @slideChange="onSlideChange"
             >
-
               <swiper-slide v-for="galItem in blog.acf.gal"  :key="galItem">
                 <div class="polarImg">
                   <div class="cartItem">
@@ -41,24 +40,22 @@
                   <p v-else class="p1 ttu gray">{{galItem.det}}</p> -->
                 </div>
               </swiper-slide>
-
             </swiper>
           </div>
         </div>
       </div>
     </div>
 
-    <div v-if='showMore' class="bg_g p-t-200 p-b-200">
-
+    <div v-if='showMore' class="bg_g p-t-150 p-b-200">
+      <secTitle :title='($store.state.langEn)?"[ interesting stories ];":"[ интересные истории ];"' :addClass='"m-b-150"' />
       <div class="row">
-        <div  class="col-xl-18 offset-xl-5 col-lg-14 offset-lg-9 col-md-16 offset-md-7 col-22 offset-1">
-          <a v-for="bl in blogMore" :key="bl.id" @click="$router.push({ path: `/blog/${bl.id}` })" class="moreBlog p-b-20 m-b-40">
-            <span class="h6">{{bl.acf.title}}</span>
+        <div  class="col-xl-19 offset-xl-4 col-lg-14 offset-lg-9 col-md-16 offset-md-7 col-22 offset-1">
+          <a v-for="bl in blogMore" :key="bl.id" @click="$router.push({ path: `/blog/${bl.id}` })" class="moreBlog pointer p-b-20 m-b-20">
+            <span class="h6">{{($store.state.langEn)?bl.acf.titleEN:bl.acf.title}}</span>
             <span class="p1">[&nbsp;{{new Date(bl.date).toLocaleString('ru',{ day: 'numeric', month: 'numeric', year: 'numeric'})}}&nbsp;]</span>
           </a>
         </div>
       </div>
-
     </div>
     <myFooter big="true"/>
   </div>
@@ -67,13 +64,15 @@
 
 <script>
 import myFooter from '@/components/sections/footer.vue'
+import secTitle from '@/components/secTitle.vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 export default {
   name: 'Contacts',
   components: {
     myFooter,
     Swiper,
-    SwiperSlide
+    SwiperSlide,
+    secTitle
   },
   data () {
     return {
@@ -89,13 +88,13 @@ export default {
         .then((res) => {
           this.blog = res
           this.show = true
-          console.log(this.blog)
+          // console.log(this.blog)
           fetch(this.$store.state.linkAdmin + '/wp-json/wp/v2/posts?categories=2&per_page=4&before=' + this.blog.date)
             .then((r) => r.json())
             .then((res) => {
               this.blogMore = res
               this.showMore = true
-              console.log(this.blogMore)
+              // console.log(this.blogMore)
             })
         })
     }
@@ -105,7 +104,8 @@ export default {
   },
   watch: {
     $route (to, from) {
-      this.getPost()
+      this.show = false
+      if (to.name === from.name) this.getPost()
     }
   }
 }
@@ -115,12 +115,23 @@ export default {
 .blogFirst{
   padding-top: 220px;
 }
-.cartItem{
-  cursor: pointer;
+.blogText *{
+  font-family: Montserrat, sans-serif;
 }
-.fade-enter-active,
+.cartItem{
+  // cursor: pointer;
+  padding: 1vw 1vw 3vw 1vw;
+  @media (max-width: 767px) {
+     padding: 4vw 4vw 10vw 4vw;
+  }
+}
+
 .fade-leave-active {
+  transition: opacity 0.1s ease;
+}
+.fade-enter-active{
   transition: opacity 0.5s ease;
+
 }
 
 .fade-enter-from,

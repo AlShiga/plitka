@@ -1,49 +1,29 @@
 <template>
   <div class="contFirst p-t-100 p-b-100">
     <div class=" position-relative z-1 col-22 offset-1 contFirst__content d-flex align-items-end">
-      <h2 v-if="$store.state.langEn" class="h3">
+      <h2 @click.stop="$router.push('/form')" v-if="$store.state.langEn" class="h3 pointer">
         Let's start<br />
-        your a project
-        <svg style='height:0.5em; width:auto; margin-left:0.5em'
-        width="92"
-        height="72"
-        viewBox="0 0 92 72"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M5 0V32.9474C5 38.4702 9.47715 42.9474 15 42.9474H85M85 42.9474L58.75 19.6842M85 42.9474L58.75 68"
-          stroke="#F8F8F8"
-          stroke-width="9"
-        />
-      </svg>
+        your project
+        <svg class="d-none d-md-inline" style='height:0.5em; width:auto; margin-left:0.5em' width="92" height="72" viewBox="0 0 92 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M0.5 32.9474V0H9.5V32.9474C9.5 35.9849 11.9624 38.4474 15 38.4474H73.1374L55.7654 23.052L61.7346 16.3164L91.6464 42.8247L61.8569 71.2554L55.6431 64.7446L73.7671 47.4474H15C6.99187 47.4474 0.5 40.9555 0.5 32.9474Z" fill="#F8F8F8"/>
+        </svg>
       </h2>
-       <h2 v-else class="h3">
+      <h2 @click.stop="$router.push('/form')" v-else class="h3 pointer">
         Скорее за<br />
         работу
-        <svg style='height:0.5em; width:auto; margin-left:0.5em'
-        width="92"
-        height="72"
-        viewBox="0 0 92 72"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M5 0V32.9474C5 38.4702 9.47715 42.9474 15 42.9474H85M85 42.9474L58.75 19.6842M85 42.9474L58.75 68"
-          stroke="#F8F8F8"
-          stroke-width="9"
-        />
-      </svg>
+        <svg class="d-none d-md-inline" style='height:0.5em; width:auto; margin-left:0.5em' width="92" height="72" viewBox="0 0 92 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M0.5 32.9474V0H9.5V32.9474C9.5 35.9849 11.9624 38.4474 15 38.4474H73.1374L55.7654 23.052L61.7346 16.3164L91.6464 42.8247L61.8569 71.2554L55.6431 64.7446L73.7671 47.4474H15C6.99187 47.4474 0.5 40.9555 0.5 32.9474Z" fill="#F8F8F8"/>
+        </svg>
       </h2>
-
     </div>
-  <canvas class="sinWrap"></canvas>
+    <canvas class="sinWrap"></canvas>
   </div>
 </template>
 
 <script>
 // import Matter from 'matter-js'
 import * as THREE from 'three'
+import { gsap } from 'gsap/all'
 
 export default {
   data () {
@@ -56,7 +36,8 @@ export default {
         mouseX: 1000,
         mouseY: 1000,
         oldMouseX: 1000,
-        oldMouseY: 1000
+        oldMouseY: 1000,
+        request: null
         // dist: 0.1
       }
     }
@@ -77,11 +58,22 @@ export default {
       this.contFirst.mouseX = e.clientX
       this.contFirst.mouseY = e.clientY
       // console.log(this.contFirst.mouseX)
+      cancelAnimationFrame(this.request)
+      this.request = requestAnimationFrame(this.transformCanvas)
+      // console.log('mmmm')
+    },
+    transformCanvas: function () {
+      if (this.stop) return
+      const cx = innerWidth / 2
+      const dx = this.contFirst.mouseX - cx
+
+      const tiltx = (dx / cx)
+      gsap.to('.sinWrap', { xPercent: -11 + tiltx * 10, ease: 'Power2.easeOut', duration: 1 })
     }
   },
   // methods(){},
   mounted () {
-    console.log('Прив1')
+    // console.log('Прив1')
     if (this.contFirst.pause === false) {
       const jsVertexShader = `
       attribute vec3 position;
@@ -122,7 +114,7 @@ export default {
         constructor () {
           this.renderParam = {
             clearColor: 0x666666,
-            width: window.innerWidth,
+            width: window.innerWidth * 1.5,
             height: window.innerHeight
           }
 
@@ -180,7 +172,7 @@ export default {
             )
           }
 
-          const windowWidth = window.innerWidth
+          const windowWidth = window.innerWidth * 1.8
           const windowHeight = window.innerHeight
 
           this.camera.aspect = windowWidth / windowHeight
@@ -268,12 +260,8 @@ export default {
       this.mesh = new Mesh(this.stage)
 
       this.mesh.init()
-
-      // window.addEventListener('resize', this.stage.onResize)
-
       this.animate()
-      // console.log(this.mesh)
-      // console.log(this.stage)
+
       setInterval(() => {
         this.contFirst.oldMouseX = (this.contFirst.oldMouseX * 5 + this.contFirst.mouseX) / 6
         this.contFirst.oldMouseY = (this.contFirst.oldMouseY * 5 + this.contFirst.mouseY) / 6
@@ -290,10 +278,13 @@ export default {
       this.animate()
     }
     document.addEventListener('mousemove', this.mouseMove)
+    // console.log(this.$route.name)
   },
   unmounted () {
     window.removeEventListener('resize', this.stage.onResize)
+    document.removeEventListener('mousemove', this.mouseMove)
     cancelAnimationFrame(this.animate)
+    cancelAnimationFrame(this.request)
     this.stop = true
   }
 }

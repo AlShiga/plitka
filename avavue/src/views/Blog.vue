@@ -3,20 +3,21 @@
       <div class="blogFirst bg_w p-t-250 p-b-100">
         <div class="row">
           <div class="col-22 offset-1">
-            <h1 class="h3">Share<br> our expirience</h1>
+            <h1 v-if="$store.state.langEn" class="h3">Share<br> our expirience</h1>
+            <h1 v-else class="h3">Делимся<br>своим опытом</h1>
           </div>
         </div>
       </div>
 
       <div class="bg_w p-b-200">
-        <div class="col-22 offset-1">
+        <div class=" col-24 offset-0 col-lg-22 offset-lg-1">
           <div class="blogBody">
             <div v-for="bl in blogs" @click="$router.push({ path: `/blog/${bl.id}` })" :key="bl.id" class="cartItem">
               <div class="cartItem__imgW m-b-20">
                 <img :src="bl.acf.gal[0]" alt="" class="w-100 m-b-10">
               </div>
-              <p class="p1 ttu m-b-10">{{bl.acf.title}}</p>
-              <p class="p1 ttu gray m-b-40">{{new Date(bl.date).toLocaleString('ru',{ day: 'numeric', month: 'numeric', year: 'numeric'})}}</p>
+              <p class="p1 ttu m-b-10">{{$store.state.langEn ?bl.acf.titleEN:bl.acf.title}}</p>
+              <p class="p1 ttu gray m-b-40 cartItem__date">{{new Date(bl.date).toLocaleString('ru',{ day: 'numeric', month: 'numeric', year: 'numeric'})}}</p>
             </div>
           </div>
         </div>
@@ -41,9 +42,10 @@ export default {
     }
   },
   mounted () {
-    console.log(this.$store.state.blogPost.length)
+    console.log(this.$route)
+    // console.log(this.$store.state.blogPost.length)
     if (!this.$store.state.blogPost.lenght) {
-      fetch(this.$store.state.linkAdmin + '/wp-json/wp/v2/posts?categories=2&per_page=12')
+      fetch(this.$store.state.linkAdmin + '/wp-json/wp/v2/posts?categories=2&per_page=20')
         .then((r) => r.json())
       // eslint-disable-next-line no-return-assign
         .then((res) => {
@@ -68,6 +70,16 @@ export default {
   margin-left: 3%;
   width: 30%;
   margin-bottom: 40px;
+  .cartItem__date{
+    transition: 0.7s;
+  }
+  &:hover{
+    background-color: #ED2330;
+    transition: 0.7s;
+    .cartItem__date{
+      color: #f8f8f8;
+    }
+  }
   &__imgW{
     position: relative;
     &::before{
@@ -139,6 +151,7 @@ export default {
     width: 100/24*22%;
   }
 }
+
 .blogBody{
   display: flex;
   justify-content: flex-start;

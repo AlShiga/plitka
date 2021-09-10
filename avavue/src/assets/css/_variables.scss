@@ -7,9 +7,12 @@
 *:active {
   outline: none !important;
 }
-
+*::selection {
+  color: $white; /* Цвет текста */
+  background: rgba($color:  $red, $alpha: 0.9); /* Цвет фона */
+ }
 * {
-  font-family: Neue Machina;
+  font-family: Montserrat, sans-serif;
   font-style: normal;
   font-weight: normal;
   line-height: 1.2;
@@ -326,6 +329,19 @@ input[type="number"] {
   @include pBot(20px, 15px, 15px, 15px);
 }
 
+.m-t-5 {
+  @include mTop(5px, 5px, 5px, 5px);
+}
+.m-b-5 {
+  @include mBot(5px, 5px, 5px, 5px);
+}
+.p-t-5 {
+  @include pTop(5px, 5px, 5px, 5px);
+}
+.p-b-5 {
+  @include pBot(5px, 5px, 5px, 5px);
+}
+
 .p-t-0 {
   padding-top: 0;
 }
@@ -403,7 +419,7 @@ input[type="number"] {
 .h4 {
   font-family: Montserrat, sans-serif;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 90%;
   letter-spacing: -0.035em;
   @include fontS(150px, 100px, 80px, 50px);
@@ -412,7 +428,7 @@ input[type="number"] {
 .h5 {
   font-family: Montserrat, sans-serif;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   line-height: 90%;
   @include fontS(100px, 60px, 60px, 40px);
 }
@@ -427,25 +443,25 @@ input[type="number"] {
 
 .h7 {
   font-family: Montserrat, sans-serif;
-font-style: normal;
-font-weight: 400;
-line-height: 110%;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 110%;
   @include fontS(44px, 34px, 28px, 24px);
 }
 
 .h8 {
   font-family: Montserrat, sans-serif;
-font-style: normal;
-font-weight: 400;
-line-height: 120%;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
   @include fontS(34px, 24px, 24px, 24px);
 }
 
 .h9 {
   font-family: Montserrat, sans-serif;
-font-style: normal;
-font-weight: 400;
-line-height: 120%;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
   @include fontS(22px, 18px, 16px, 16px);
 }
 
@@ -503,14 +519,14 @@ li > a {
 .h7 {
   font-family: Montserrat, sans-serif;
 font-style: normal;
-font-weight: 400;
+font-weight: 300;
 line-height: 110%;
   @include fontS(44px, 34px, 28px, 24px);
 }
 input {
   font-family: Montserrat, sans-serif;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   display: block;
   width: 100%;
   background: transparent;
@@ -520,7 +536,7 @@ input {
   border-bottom: 1px solid currentColor;
   padding: 15px 0;
   margin-bottom: 40px;
-  font-weight: normal;
+  // font-weight: normal;
   line-height: 150%;
   font-size: 44px;
   line-height: 140%;
@@ -528,9 +544,10 @@ input {
   @include fontS(44px, 34px, 28px, 24px);
   &::placeholder {
     font-family: Montserrat, sans-serif;
+    color: currentColor;
     font-style: normal;
-    font-weight: 400;
-    font-weight: normal;
+    font-weight: 300;
+
     line-height: 150%;
     text-transform: uppercase;
     @include fontS(44px, 34px, 28px, 24px);
@@ -545,12 +562,16 @@ input {
     background-color: $bg-w;
     color: $dark;
   }
+  &_ww {
+    background-color: $white;
+    color: $dark;
+  }
   &_g {
     background-color: $bg-g;
     color: $dark;
   }
   &_r {
-    background-color: $red;
+    background-color: #BB0410;
     color: $white;
   }
 }
@@ -559,4 +580,49 @@ input {
 }
 .d-inline-grid {
   display: inline-grid;
+}
+.pointer{
+  cursor: pointer;
+}
+.event-none{
+  pointer-events: none;
+}
+
+button, [type="button"],[type="reset"], [type="submit"]{
+  -webkit-appearance: none !important;
+}
+
+.showText{
+  display: block;
+  overflow: hidden;
+  width: 100%;
+      position: relative;
+    & > span {
+      display: inline-block;
+      // @include transition(.3s);
+      transition: 0.3s;
+      & > span {
+        color: #f8f8f8;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        // content: attr(data-hover);
+        // font-weight: 800;
+        // @include transform(translate3d(0,0,0));
+        transform:translate3d(0,0,0);
+      }
+    }
+    &:hover{
+      &>span{
+        // @include transform(translateY(-100%));
+        transform:translateY(-100%);
+      }
+    }
+  &_b{
+    & > span {
+      & > span {
+        color: #212529;
+      }
+    }
+  }
 }

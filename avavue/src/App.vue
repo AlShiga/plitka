@@ -1,11 +1,11 @@
 <template>
 <myCursor/>
 <myHeader/>
-  <router-view v-slot="{ Component }">
-    <transition :name="transitionName" mode="out-in" :duration="500">
-        <component :is="Component" />
-    </transition>
-  </router-view>
+    <router-view v-slot="{ Component }">
+      <transition :name="transitionName" mode="out-in" :duration="500">
+          <component :is="Component" :key="$router.path" />
+      </transition>
+    </router-view>
 </template>
 <style lang="scss">
 .fade1-enter-active {
@@ -76,13 +76,22 @@ export default ({
   },
   watch: {
     $route (to, from) {
-      console.log('routr')
+      // console.log('routr')
       const toDepth = to.path
       const fromDepth = from.path
       // console.log({ toDepth, fromDepth })
 
       if (toDepth.includes('blog')) { this.transitionName = 'fade' } else if (toDepth.includes('projects') || fromDepth.includes('projects')) { this.transitionName = 'fade1' } else { this.transitionName = 'fade' }
       // this.transitionName = toDepth < fromDepth ? 'fade' : 'slide-left'
+    },
+    isModalVisible () {
+      if (this.$store.state.showMenu) {
+        document.querySelector('body').style.overflow = 'hidden'
+        console.log('menu')
+        return
+      }
+      document.querySelector('body').style.overflow = 'auto'
+      console.log('menu')
     }
   }
 })

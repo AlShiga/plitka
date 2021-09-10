@@ -1,13 +1,13 @@
 <template>
 <transition name="fade">
-  <div v-if="show" class="prItem overflow-hidden">
+  <div :key="$router.path" v-if="show" class="prItem overflow-hidden">
     <div class="row">
       <img :src="project.acf.img" alt="" class="prItem__firstImg">
     </div>
     <div class="blogFirst bg_w p-t-250 p-b-80">
       <div class="row">
         <div class="col-lg-16 col-22 offset-lg-4 offset-1">
-          <h1 class="h3">{{project.acf.title}}</h1>
+          <h1 class="h3">{{($store.state.langEn)?project.acf.titleEN: project.acf.title}}</h1>
         </div>
       </div>
     </div>
@@ -21,23 +21,39 @@
           <span class="p1" v-html="($store.state.langEn)?project.acf.textEN: project.acf.text"></span>
           </div>
           <span class="d-block m-b-40">
-          <span class="p1 ttu " v-for="tag in project.acf.tags"  :key="tag.name">[&nbsp;{{tag.name}}&nbsp;]&nbsp;&nbsp;</span>
+          <span class="p1" v-for="tag in project.acf.tags"  :key="tag.name">[&nbsp;{{tag.name}}&nbsp;]&nbsp;&nbsp;</span>
           </span>
-          <a class="p1 ttu d-block m-b-40 red" target="_blank" :href="project.acf.siteLink">{{project.acf.site}}</a>
-          <a class="p1 ttu d-block m-b-40 red" target="_blank" :href="project.acf.behLink">{{project.acf.beh}}</a>
+          <a class="p1 d-block m-b-40 red" target="_blank" :href="project.acf.siteLink">{{project.acf.site}}</a>
+          <a class="p1 d-block m-b-40 red" target="_blank" :href="project.acf.behLink">{{project.acf.beh}}</a>
         </div>
       </div>
     </div>
     <div class="row">
-      <div class="w-100" v-html="project.acf.red"></div>
+      <div class="w-100 prRed" v-html="project.acf.red"></div>
     </div>
-    <div v-if='showMore' class="  p-t-200 p-b-150">
+    <div class="row bg_w p-t-200 p-b-200">
+      <div class="col-xl-8 offset-xl-14 col-lg-9 offset-lg-14 col-md-14 offset-md-9 col-18 offset-4">
+        <span class="p1 d-block  m-t-20" v-for="team in project.acf.team"  :key="team">{{team}}&nbsp;&nbsp;</span>
+        <a class="p1 d-block m-t-40 red" target="_blank" :href="project.acf.siteLink">{{project.acf.site}}</a>
+        <a class="p1 d-block m-t-40 red" target="_blank" :href="project.acf.behLink">{{project.acf.beh}}</a>
+      </div>
+    </div>
+    <div v-if='showMore' class="  p-t-150 p-b-150">
+      <secTitle :title='($store.state.langEn)?"[ more cool projects ];":"[ больше  крутых проектов ];"' :addClass='"m-b-150"' />
+
       <div class="row">
         <div  class="col-xl-18 offset-xl-5 col-lg-14 offset-lg-9 col-md-16 offset-md-7 col-22 offset-1">
-          <a v-for="bl in projectMore" :key="bl.id" @click="$router.push({ path: `/projects/${bl.id}` })" class="moreBlog p-b-20 m-b-40">
-            <span class="h6">{{bl.acf.title}}</span>
-            <span class="p1">[&nbsp;{{new Date(bl.date).toLocaleString('ru',{ day: 'numeric', month: 'numeric', year: 'numeric'})}}&nbsp;]</span>
-          </a>
+          <div v-for="bl in projectMore" :key="bl.id">
+            <a v-if='!bl.acf.toSite'  @click="$router.push({ path: `/projects/${bl.id}` })" class="moreBlog pointer moreBlog_white p-b-20 m-b-20">
+              <span class="h6">{{($store.state.langEn)?bl.acf.titleEN:bl.acf.title}}</span>
+              <span class="p1">[&nbsp;{{new Date(bl.date).toLocaleString('ru',{ day: 'numeric', month: 'numeric', year: 'numeric'})}}&nbsp;]</span>
+            </a>
+            <a v-else :href="bl.acf.toSiteLink" target="_blank" class="moreBlog pointer moreBlog_white p-b-20 m-b-20">
+              <span class="h6">{{($store.state.langEn)?bl.acf.titleEN:bl.acf.title}}</span>
+              <span class="p1">[&nbsp;{{new Date(bl.date).toLocaleString('ru',{ day: 'numeric', month: 'numeric', year: 'numeric'})}}&nbsp;]</span>
+            </a>
+          </div>
+
           <div class="m-t-150 d-flex justify-content-end ">
             <svg @click="$router.push({ path: `/projects/` })" class="prTo" width="311" height="273" viewBox="0 0 311 273" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M57.8174 232.418C57.8174 232.554 57.8174 232.757 57.8174 232.893C57.953 233.028 58.0887 233.096 58.1565 233.164C58.0208 232.893 57.953 232.621 57.8174 232.418Z" fill="white"/>
@@ -49,20 +65,20 @@
               <path d="M22.2725 134.923C45.6719 77.8158 122.447 -35.0735 159.5 13.502C198.044 64.0319 262.951 98.4936 283.277 130.751" stroke="#F8F8F8" stroke-width="3"/>
               <circle cx="138.507" cy="14.5197" r="11.8322" fill="#F8F8F8"/>
             </svg>
-
           </div>
         </div>
       </div>
 
     </div>
-
+    <myFooter big="" small='true'/>
     <!-- <myFooter /> -->
   </div>
 </transition>
 </template>
 
 <script>
-// import myFooter from '@/components/sections/footer.vue'
+import myFooter from '@/components/sections/footer.vue'
+import secTitle from '@/components/secTitle.vue'
 
 export default {
   data () {
@@ -74,7 +90,8 @@ export default {
     }
   },
   components: {
-    // myFooter
+    myFooter,
+    secTitle
   },
   methods: {
     getPost: function () {
@@ -91,6 +108,14 @@ export default {
               if (this.projectMore.length) {
                 this.showMore = true
               }
+              // console.log('str')
+              document.querySelectorAll('iframe').forEach(el => {
+                const div = document.createElement('div')
+                div.classList.add('iframeWrap')
+                div.style.paddingBottom = el.height / el.width * 100 + '%'
+                el.before(div)
+                div.prepend(el)
+              })
             // console.log(this.blogMore)
             })
         })
@@ -101,26 +126,67 @@ export default {
   },
   watch: {
     $route (to, from) {
-      this.getPost()
+      this.show = false
+      if (to.name === from.name) this.getPost()
     }
   }
 
 }
 </script>
 <style lang="scss" >
+.prRed{
+  display: block;
+  *{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: auto;
+    max-width: 1920px;
+    margin: 0 auto;
+  }
+  br{
+    display: none;
+  }
+
+}
+.iframeWrap{
+  width: 100%;
+  padding-bottom: 60%;
+  position: relative;
+  iframe{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
 .prItem{
+
   &__firstImg{
     width:  100%;
     height: 100vh;
     object-fit: cover;
     object-position: center;
+    @media (max-width: 1024.98px) {
+      height: auto;
+      min-height: 300px;
+    }
+
+    // @media (max-width: 767.98px) {
+    //   display: flex;
+    //   flex-direction: column;
+    //   justify-content: flex-start;
+    //   align-items: flex-start;
+    // }
   }
 }
-.fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s ease;
+  transition: opacity 0.1s ease;
 }
-
+.fade-enter-active{
+   transition: opacity 1s ease;
+}
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;

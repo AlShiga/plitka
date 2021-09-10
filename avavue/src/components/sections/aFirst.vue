@@ -5,7 +5,7 @@
         <div class="m-b-20 col-20 offset-1">
           <h2 class="h3">Grid, type</h2>
         </div>
-        <div class="m-b-20 col-16 offset-lg-7 offset-md-7 offset-4">
+        <div class="m-b-80 col-16 offset-lg-7 offset-md-7 offset-4">
           <h2 class="h3 d-flex">
             <span class="h3 red">&</span>&nbsp;rock’n’roll
           </h2>
@@ -13,11 +13,11 @@
         <div
           class="
             m-b-40
-            col-xl-6
+            col-xl-7
             offset-xl-13
             col-lg-8
-            offset-lg-10
-            col-md-13
+            offset-lg-13
+            col-md-14
             offset-md-7
             col-22
             offset-1
@@ -28,15 +28,15 @@
 
             <br />
             <br />
-           We're doing web design. We create sites for business from different areas. We make mobile applications. We are engaged in printing design, branding.<br>
-* If you read this text and do not understand what it is about, congratulations, you are young or forgetful! And congratulations to us, because we survived and continue to work.
+            We're doing web design. We create sites for business from different areas and develop mobile applications, printing design and branding.<br>
+            * If you read this text and do not understand what it is about, congratulations, you are young or forgetful! And congratulations to us, because we survived and continue to work.
 
           </p>
           <p v-else class="p1">
- Ава работает с 2019 года. Скажи мы это пару лет назад, выглядело бы как недостаток. Но прошли 2020 и 21-й*, а наш копирайтер пишет этот текст для обновленного сайта. Признаться, непростые были годы. Молодые и амбициозные, мы постоянно метались в поисках вектора развития компании. Теперь курс взят, а мы все еще полны творческих потенций.
+            Ава работает с 2019 года. Скажи мы это пару лет назад, выглядело бы как недостаток. Но прошли 2020 и 21-й*, а наш копирайтер пишет этот текст для обновленного сайта. Признаться, непростые были годы. Молодые и амбициозные, мы постоянно метались в поисках вектора развития компании. Теперь курс взят, а мы все еще полны творческих потенций.
             <br />
             <br />
-           Мы занимаемся веб-дизайном. Создаем сайты для бизнеса из разных сфер. Делаем мобильные приложения. Занимаемся полиграфическим дизайном, брендингом. <br>
+           Мы занимаемся веб-дизайном. Создаем сайты для бизнеса из разных сфер. Разрабатываем мобильные приложения, полиграфический дизайн и брендинг. <br>
           *Если вы читаете этот текст и не понимаете, о чем речь, поздравляем, вы молоды или забывчивы! И поздравляем нас, ведь выстояли и работаем.
           </p>
         </div>
@@ -122,7 +122,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .aboutFirst {
-  padding-top: 220px;
+  padding-top: 300px;
   position: relative;
   min-height: 100vh;
   //   width: 100%;
@@ -130,6 +130,9 @@ export default {
   // background: rgb(0,32,36);
   // background: linear-gradient(259deg, dark 0%, gray 29%, dark 100%);
   //   overflow:hidden;
+  @media (max-width: 767.98px) {
+    padding-top: 300px;
+  }
 }
 .cirkle {
   position: absolute;

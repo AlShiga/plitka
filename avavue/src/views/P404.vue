@@ -1,9 +1,9 @@
 <template>
  <div class="overflow-hidden">
   <div class="p404">
-    <div class="p404__content">
+    <div class=" offset-1 p404__content">
       <div class="p404__button"><span class="h7">404</span></div>
-      <div class="p404__button"><span class="h7">what are you doing here?</span>
+      <div @click.stop="$router.push('/')" class="p404__button"><span class="h7 pointer">what are you doing here?</span>
         <svg width="30" height="24" viewBox="0 0 30 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M1 0V4.52631C1 10.0492 5.47715 14.5263 11 14.5263H28M28 14.5263L19.1406 6.65789M28 14.5263L19.1406 23" stroke="#F8F8F8" stroke-width="2"/>
         </svg>

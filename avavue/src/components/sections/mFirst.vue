@@ -41,58 +41,58 @@
           offset-1
         "
       >
-        <h1 class="h2 m-b-80">design</h1>
+        <h1 class="h2 m-b-100 d-lg-flex align-items-end">design<span class="d-none d-lg-block mFirst__textSm mp0 p1"><span class="p1 d-block m-b-10">[ AVA-Digital ];</span><span class="p1 d-block m-b-10">[ 2021 ];</span><span class="p1 d-block">[ UX / UI / branding / development ];</span></span></h1>
       </div>
       <div
         class="
-          col-xl-13
-          offset-xl-9
-          col-lg-13
-          offset-lg-9
-          col-md-11
-          offset-md-11
-          col-11
-          offset-12
-        "
-      >
-        <h1 class="h2 m-b-80">filled</h1>
-      </div>
-      <div
-        class="
-          col-xl-11
-          offset-xl-11
-          col-lg-12
-          offset-lg-10
-          col-md-9
-          offset-md-13
-          col-9
-          offset-14
-        "
-      >
-        <h1 class="h2 m-b-80">with</h1>
-      </div>
-      <div
-        class="
-          col-xl-22
+          col-xl-17
           offset-xl-1
-          col-lg-22
+          col-lg-18
           offset-lg-1
-          col-md-22
-          offset-md-1
+          col-md-20
+          offset-md-2
           col-20
           offset-2
         "
       >
-        <h1 class="h2 m-b-80">e-motions.</h1>
+        <h1 class="h2 m-b-80 text-right">filled</h1>
+      </div>
+      <div
+        class="
+          col-xl-17
+          offset-xl-1
+          col-lg-18
+          offset-lg-1
+          col-md-20
+          offset-md-2
+          col-20
+          offset-2
+        "
+      >
+        <h1 class="h2 m-b-80 text-right">with</h1>
+      </div>
+      <div
+        class="
+          col-xl-17
+          offset-xl-1
+          col-lg-18
+          offset-lg-1
+          col-md-20
+          offset-md-2
+          col-20
+          offset-2
+        "
+      >
+        <h1 class="h2 m-b-80 text-right">e&#8209;motions</h1>
       </div>
     </div>
     <div v-else class="row z-5 position-relative">
       <div
         class="
-          col-xl-19
-          offset-xl-4
-          col-lg-11
-          offset-lg-4
+          col-xl-17
+          offset-xl-1
+          col-lg-18
+          offset-lg-1
           col-md-19
           offset-md-3
           col-20
@@ -103,14 +103,14 @@
       </div>
       <div
         class="
-          col-xl-16
-          offset-xl-7
-          col-lg-15
-          offset-lg-7
-          col-md-16
-          offset-md-6
+          col-xl-19
+          offset-xl-4
+          col-lg-11
+          offset-lg-4
+          col-md-17
+          offset-md-5
           col-18
-          offset-5
+          offset-4
         "
       >
         <h1 class="h2 m-b-80">создаём</h1>
@@ -127,55 +127,58 @@
           offset-1
         "
       >
-        <h1 class="h2 m-b-80">дизайн</h1>
+        <h1 class="h2 m-b-100 d-lg-flex align-items-end">дизаин <span class="d-none d-lg-block mFirst__textSm p1"><span class="p1 d-block m-b-10">[ AVA-Digital ];</span><span class="p1 d-block m-b-10">[ 2021 ];</span><span class="p1 d-block">[ UX / UI / branding / development ];</span></span></h1>
       </div>
       <div
         class="
-          col-xl-13
-          offset-xl-9
-          col-lg-13
-          offset-lg-9
-          col-md-11
-          offset-md-11
-          col-11
-          offset-12
-        "
-      >
-        <h1 class="h2 m-b-80">полный</h1>
-      </div>
-      <div
-        class="
-          col-xl-11
-          offset-xl-11
-          col-lg-12
-          offset-lg-10
-          col-md-9
-          offset-md-13
-          col-9
-          offset-14
-        "
-      >
-        <h1 class="h2 m-b-80">огня</h1>
-      </div>
-      <div
-        class="
-          col-xl-22
+          col-xl-17
           offset-xl-1
-          col-lg-22
+          col-lg-18
           offset-lg-1
-          col-md-22
-          offset-md-1
+          col-md-20
+          offset-md-2
           col-20
           offset-2
         "
       >
-        <h1 class="h2 m-b-80">и страсти</h1>
+        <h1 class="h2 m-b-80 text-right">полный</h1>
+      </div>
+      <div
+        class="
+          col-xl-17
+          offset-xl-1
+          col-lg-18
+          offset-lg-1
+          col-md-20
+          offset-md-2
+          col-20
+          offset-2
+        "
+      >
+        <h1 class="h2 m-b-80 text-right">огня</h1>
+      </div>
+      <div
+        class="
+          col-xl-17
+          offset-xl-1
+          col-lg-18
+          offset-lg-1
+          col-md-20
+          offset-md-2
+          col-20
+          offset-2
+        "
+      >
+        <h1 class="h2 m-b-80 text-right">и страсти</h1>
       </div>
     </div>
     <div class="containerMAdv" touch-action="none">
-      <canvas width="1920" height="947" ></canvas>
+      <canvas class="canvas1" width="1920" height="947" ></canvas>
+      <!-- <canvas class="canvas2" width="1920" height="947" ></canvas> -->
+      <!-- <div class="containerMAdv__bg z-1" touch-action="none"></div> -->
+      <!-- <div class="containerMAdv__bg containerMAdv__bg_top z-1" touch-action="none"></div> -->
+      <img src="@/assets/img/bgFp.png" alt="" class="containerMAdv__img">
     </div>
-    <div class="containerMAdv__bg z-1" touch-action="none"></div>
   </div>
 </template>
 
@@ -193,7 +196,9 @@ export default {
       uniforms: '',
       render: '',
       mFirstPause: false,
-      mouse: {}
+      mouse: {},
+      play: 0,
+      playNum: 2
     }
   },
   methods: {
@@ -203,7 +208,7 @@ export default {
       e.preventDefault()
     },
     onWindowResize: function (e) {
-      this.renderer.setSize(window.innerWidth, window.innerHeight)
+      this.renderer.setSize(window.innerWidth * 1.1, window.innerHeight * 1.1)
       this.uniforms.u_resolution.value.x = this.renderer.domElement.width
       this.uniforms.u_resolution.value.y = this.renderer.domElement.height
     },
@@ -211,8 +216,12 @@ export default {
       // console.log('anim')
       if (this.stop) return
       requestAnimationFrame(this.animate)
-      this.render()
-      this.mousePos()
+      if (!(this.play % this.playNum)) {
+        this.render()
+        this.mousePos()
+      }
+      ++this.play
+      if (this.play >= 20) this.play = 0
     },
     mousePos: function () {
       const ratio = window.innerHeight / window.innerWidth
@@ -223,33 +232,10 @@ export default {
         (this.mouse.oldX - window.innerWidth / 2) / window.innerWidth / ratio
       this.uniforms.u_mouse.value.y =
         ((this.mouse.oldY - window.innerHeight / 2) / window.innerHeight) * -1
-    },
-    scrollAnimation () {
-      this.scrollTrPlay = ScrollTrigger.create({
-        trigger: '.mFirst',
-        start: 'top bottom',
-        markers: true,
-        end: 'bottom top',
-        // scrub: 2,
-        id: '2',
-        onToggle: self => {
-          console.log(self.isActive)
-          if (self.isActive) {
-            // document.addEventListener('pointermove', this.onPointerMove)
-            // window.addEventListener('resize', this.onWindowResize, false)
-            // requestAnimationFrame(this.animate)
-          } else {
-            // document.removeEventListener('pointermove', this.onPointerMove)
-            // window.removeEventListener('resize', this.onWindowResize, false)
-            // this.stop = true
-            // cancelAnimationFrame(this.animate)
-          }
-        }
-        // onToggle: () => { this.world.gravity.scale = 0.0015 }
-      })
     }
   },
   mounted () {
+    if (innerWidth < 1023) this.playNum = 4
     const fragmentShader = `
         uniform vec2 u_resolution;
         uniform float u_pxaspect;
@@ -262,12 +248,12 @@ export default {
         const float PI =  3.14;
         const float TAU = 6.28;
 
-        const bool addNoise = false; // Whether to add noise to the rays
+        const bool addNoise = true; // Whether to add noise to the rays
         const float decay = .96; // the amount to decay each sample by
         const float exposure = .65; // the screen exposure
         const float lightStrength = 5.5;
         const vec3 lightcolour = vec3(1.0, 0.1, 0.1); // the colour of the light
-        const vec3 falloffcolour = vec3(1.0, 0.0, 0.1); // the colour of the falloff
+        const vec3 falloffcolour = vec3(0.90, 0.0, 0.05); // the colour of the falloff
         const vec3 bgcolour = vec3(.125, 0.125, .125); // the base colour of the render
         const float falloff = .5;
         const int samples = 12; // The number of samples to take
@@ -509,15 +495,14 @@ export default {
 
       // this.renderer = new THREE.WebGLRenderer()
       this.renderer = new THREE.WebGLRenderer({
-        canvas: document.querySelector('.containerMAdv canvas')
+        canvas: document.querySelector('.containerMAdv .canvas1')
       })
       this.renderer.setPixelRatio(window.devicePixelRatio)
 
       // this.container.appendChild(this.renderer.domElement)
 
       this.onWindowResize()
-      window.addEventListener('resize', this.onWindowResize, false)
-
+      // window.addEventListener('resize', this.onWindowResize, false)
       document.addEventListener('mousemove', this.onPointerMove)
     }
 
@@ -530,10 +515,23 @@ export default {
     this.mouse.Y = innerHeight / 10
     this.mouse.oldY = innerHeight / 10
     // this.scrollAnimation()
+
+    this.tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.mFirst',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 3
+        // markers: true
+      }
+    })
+    this.tl.to('.containerMAdv', { yPercent: 30 })
+    // this.tl.push(tl)
   },
   unmounted () {
-    document.removeEventListener('mousemove', this.onPointerMove)
+    ScrollTrigger.getAll().forEach(t => t.kill())
     window.removeEventListener('resize', this.onWindowResize, false)
+    document.removeEventListener('mousemove', this.onPointerMove)
     cancelAnimationFrame(this.animate)
     this.mFirstPause = true
     this.stop = true
@@ -544,7 +542,19 @@ export default {
 <style scoped lang="scss">
 .mFirst {
   position: relative;
-  padding-top: 250px;
+  padding-top: 300px;
+  // overflow: hidden;
+  &__textSm{
+    transform: translate(50px, 50%);
+    @media (max-width: 1439.98px) {
+      transform: translate(40px, 40%);
+    }
+  }
+  @media (max-width: 767.98px) {
+    .h2{
+      margin-bottom: 27px;
+    }
+  }
 }
 .containerMAdv {
   position: absolute;
@@ -552,14 +562,35 @@ export default {
   left: 0;
   // bottom: 0;
   // right: 0;
+  background-color: #202020;
   &__bg{
     position: absolute;
-    top: 90vh;
+    bottom: 0vh;
     right: 0;
     left: 0;
     height: 10vh;
     background: linear-gradient(to bottom, rgba(32,32,32,0) 0%, #202020 100%);
+    transition: 1s ease-in-out;
+    &_top{
+      background: linear-gradient(to top, rgba(32,32,32,0) 0%, #202020 100%);
+      top: 0vh;
+      bottom: auto;
+    }
   }
+  &__img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width:100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  // canvas{
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  // }
 }
-
+.bg_w .containerMAdv__bg{background: linear-gradient(to bottom, #202020 0%, #202020 100%);}
+.bg_w .containerMAdv__bg_top{background: linear-gradient(to top, #202020 0%, #202020 100%);}
 </style>

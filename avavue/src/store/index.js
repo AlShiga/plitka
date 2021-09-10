@@ -5,7 +5,8 @@ export default createStore({
     langEn: true,
     showMenu: false,
     loadFirst: false,
-    linkAdmin: 'https://ava.avadev.ru',
+    captcha: false,
+    linkAdmin: 'https://ava-digital.ru',
     blogPost: [],
     prPost: [],
     prMPost: []
@@ -31,6 +32,9 @@ export default createStore({
     },
     loadedFirst (state) {
       state.loadFirst = true
+    },
+    captchaTern (state) {
+      state.captcha = true
     }
 
   },

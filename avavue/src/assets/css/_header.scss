@@ -4,10 +4,10 @@
   top: 0;
   left: 0;
   &_top{
-    z-index: 20;
+    z-index: 2000;
   }
   &_bottom{
-    z-index: 19;
+    z-index: 1999;
     mix-blend-mode: difference;
   }
   &__border{

@@ -1,5 +1,6 @@
 <template>
-  <div v-if="!showSm" class="prFirst">
+  <div class="p-t-100"></div>
+  <div v-if="!showSm" class="prFirst ">
     <div class="slider | js-drag-area">
       <div  class="slider__inner | js-slider">
         <div v-for="pr in projects" :key="pr.acf.name" class="slide | js-slide">
@@ -11,14 +12,14 @@
       </div>
     </div>
     <div class="titles">
-      <div class="titles__title titles__title--proxy">Lorem ipsum</div>
+      <div class="titles__title titles__title--proxy"></div>
       <div class="titles__list | js-titles">
         <div v-for="pr in projectsT" :key="pr.acf.name" class="titles__title | js-title">
           <div class="d-flex flex-column">
             <div v-if="pr.acf.tags" class="p1 m-b-20">
               <span v-for="tag in pr.acf.tags" class="p1" :key="tag.name">[&nbsp;{{tag.name}}&nbsp;]&nbsp;&nbsp;</span>
             </div>
-           <a @click="$router.push({ path: `/projects/${pr.id}` })" class="h6">{{pr.acf.title}}</a>
+           <a @click="$router.push({ path: `/projects/${pr.id}` })" class="h6 pointer">{{($store.state.langEn)?pr.acf.titleEN:pr.acf.title}}</a>
           </div>
         </div>
       </div>
@@ -44,7 +45,7 @@
           <div v-if="pr.acf.tags" class="mPrItem__tags d-none d-lg-block m-b-40">
             <span v-for="tag in pr.acf.tags" class="p1" :key="tag.name">[&nbsp;{{tag.name}}&nbsp;]&nbsp;&nbsp;</span>
           </div>
-          <span @click="$router.push({ path: `/projects/${pr.id}` })" class="mPrItem__title h3 d-block">{{pr.acf.title}}</span>
+          <span @click="$router.push({ path: `/projects/${pr.id}` })" class="mPrItem__title h3 d-block ">{{($store.state.langEn)?pr.acf.titleEN:pr.acf.title}}</span>
         </div>
       </div>
     </div>
@@ -61,7 +62,9 @@ export default {
       start: false,
       projects: [],
       projectsT: [],
-      show: false
+      show: false,
+      showSm: false
+
     }
   },
   mounted () {
@@ -206,7 +209,7 @@ export default {
           // Timeline that plays when visible
           const tl = gsap.timeline({ paused: true })
             .fromTo(plane.mat.uniforms.uScale, {
-              value: 0.65
+              value: 0.95
             }, {
               value: 1,
               duration: 1,
@@ -455,7 +458,7 @@ void main() {
 
         this.pos = {
           x: (left + (width / 2)) - (store.ww / 2),
-          y: (top + (height / 2)) - (store.wh / 2)
+          y: (top + (height / 2)) - (store.wh / 2) - 70
         }
 
         this.position.y = this.pos.y
@@ -488,7 +491,7 @@ void main() {
           uTexture: { value: 0 },
           uMeshSize: { value: new THREE.Vector2(this.rect.width, this.rect.height) },
           uImageSize: { value: new THREE.Vector2(0, 0) },
-          uScale: { value: 0 },
+          uScale: { value: 1 },
           uVelo: { value: 0 }
         }
 
@@ -566,7 +569,7 @@ void main() {
     }
   },
   unmounted () {
-    console.log('end')
+    // console.log('end')
     if (!this.showSm) {
       gsap.ticker.add(this.tick)
     }
@@ -609,7 +612,9 @@ $easeOutExpo: cubic-bezier(0.190, 1.000, 0.220, 1.000);
     position: relative;
   }
 }
+// .mPrItem__title a{
 
+// }
 .slide{
   overflow: hidden;
   &:nth-of-type(1){left: 0;}
@@ -656,10 +661,11 @@ $easeOutExpo: cubic-bezier(0.190, 1.000, 0.220, 1.000);
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  overflow: hidden;
+  transform: translate(-40%, -50%);
+  // overflow: hidden;
   pointer-events: none;
   z-index: 3;
+
   a{
     pointer-events: all;
   }
@@ -673,17 +679,20 @@ $easeOutExpo: cubic-bezier(0.190, 1.000, 0.220, 1.000);
   &__title{
     display: flex;
     align-items: center;
-    justify-content: center;
+    // justify-content: center;
     // font-size: 6vw;
     // font-weight: bold;
-    width: 55vw;
+    width: 80vw;
     // margin-right:0vw;
     height: 20vh;
     // letter-spacing: -0.1vw;
     // color: #fff;
-
+    transition: 0.3s;
+    &:hover{
+      color: #E10F1C;
+    }
     &--proxy{
-      visibility: hidden;
+      // visibility: hidden;
     }
   }
 }

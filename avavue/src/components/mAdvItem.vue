@@ -1,9 +1,9 @@
 <template>
   <div class="mAdvItem" v-on:mouseover.stop="myMouseover" v-on:mouseout="myMouseout" v-on:mousemove="myMousemove">
-    <span class="h7">{{ name }}</span>
-    <img class="mAdvItem__img" v-if = img :src = img alt="">
+    <span class="h7 ttu">{{ name }}</span>
+    <!-- <img class="mAdvItem__img" v-if = img :src = img alt=""> -->
+    <video class="mAdvItem__img" autoplay muted loop :src = img></video>
   </div>
-
 </template>
 
 <script>
@@ -30,7 +30,7 @@ export default {
       if (innerWidth < 1023) return
       this.transform.x = e.clientX - e.target.getBoundingClientRect().left
       this.transform.y = e.clientY - e.target.getBoundingClientRect().top
-      this.imgTarget = e.target.querySelector('img')
+      this.imgTarget = e.target.querySelector('video')
       gsap.to(this.imgTarget, { x: this.transform.x, y: this.transform.y, scale: 1, duration: 0 })
       gsap.ticker.add(this.updatePos)
     },

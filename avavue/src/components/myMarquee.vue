@@ -40,8 +40,11 @@ export default {
     border-top: 1px solid #F8F8F8;
     border-bottom: 1px solid #F8F8F8;
     transform: translateX(-20%);
+    @media (max-width: 1449.98px) {
+      padding: 25px 0;
+    }
   &_gray{
-    background-color:#818181;
+    background-color:#424041;
   }
   &_rotate{
     transform-origin: center;

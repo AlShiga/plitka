@@ -1,6 +1,6 @@
 <template>
     <div class="bg_r p-t-100 p-b-200">
-      <secTitle :title='"[ Super puper cool team ];"' :addClass='"m-b-100"' />
+      <secTitle :title="($store.state.langEn) ? ('[ have fun with us ];') : ('[ с нами весело ];')" :addClass='"m-b-100"' />
 
       <div class="row">
         <div class="offset-1 col-23">
@@ -75,47 +75,46 @@ export default {
 }
 
 .swiper-slide {
-  width: 35% !important;
+  width: 100/24*8% !important;
 }
 
 .swiper-slide:nth-child(2n) {
-  width: 25% !important;
+  width: 100/24*10% !important;
 }
 
 .swiper-slide:nth-child(3n) {
-  width: 20% !important;
+  width: 100/24*6% !important;
 }
 @media (max-width: 1449.98px) {
 .swiper-slide {
-  width: 35% !important;
+  width: 100/24*9% !important;
 }
 
 .swiper-slide:nth-child(2n) {
-  width: 25% !important;
+  width: 100/24*10% !important;
 }
 
 .swiper-slide:nth-child(3n) {
-  width: 20% !important;
+  width: 100/24*6% !important;
 }
 }
 @media (max-width: 1024.98px) {
 .swiper-slide {
-  width: 55% !important;
+  width: 100/24*12% !important;
 }
 
 .swiper-slide:nth-child(2n) {
-  width: 45% !important;
+  width: 100/24*14% !important;
 }
 
 .swiper-slide:nth-child(3n) {
-  width: 40% !important;
+  width: 100/24*8% !important;
 }
 }
 @media (max-width: 767.98px) {
-.swiper-slide {
-  width: 80% !important;
-}
-
+  .swiper-slide, .swiper-slide:nth-child(2n), .swiper-slide:nth-child(3n) {
+    width: 100/24*20% !important;
+  }
 }
 .polarImg{
   width: 100%;

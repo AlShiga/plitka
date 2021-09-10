@@ -51,18 +51,28 @@ const routes = [
     path: '/404',
     name: '404',
     component: () => import(/* webpackChunkName: "about" */ '../views/P404.vue')
-  }
+  },
+  { path: '/:pathMatch(.*)*', name: '404', component: () => import(/* webpackChunkName: "about" */ '../views/P404.vue') }
 ]
 
 const router = createRouter({
   routes,
   history: createWebHistory(process.env.BASE_URL),
   scrollBehavior (to, from, savedPosition) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve({ left: 0, top: 0 })
-      }, 500)
-    })
+    console.log(to, from, savedPosition)
+    if (to.name !== from.name) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve({ left: 0, top: 0 })
+        }, 500)
+      })
+    } else {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve({ left: 0, top: 0 })
+        }, 100)
+      })
+    }
   }
   // routes,
   // // mode: 'history',

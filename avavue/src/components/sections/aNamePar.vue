@@ -1,6 +1,6 @@
 <template>
     <div class="bg_w parWrap p-t-200 p-b-200">
-      <div class="row p-b-200">
+      <div class="row p-b-100">
         <div class="col-22 offset-1">
             <div class="par" >
               <span class="h3 text-center" >ava-digital</span>
@@ -12,6 +12,7 @@
               <span class="h3 text-center" >ava-digital</span>
               <span class="h3 text-center" >ava-digital</span>
             </div>
+            <div class="parP"></div>
         </div>
       </div>
     </div>
@@ -92,12 +93,12 @@ export default {
     // })()
     this.elem = document.querySelectorAll('.par span')
     this.scr = 1
-    this.maxScr = 1
+    this.maxScr = 10
 
     gsap.ticker.add(this.anim)
   },
   unmounted () {
-    gsap.ticker.add(this.anim)
+    gsap.ticker.remove(this.anim)
   }
 }
 </script>
@@ -111,20 +112,24 @@ export default {
   position: relative;
   width: 100%;
     span{
-    white-space: nowrap;
-    width: 100%;
-    font-size:160px;
-    font-family:Helvetica;
-    position: absolute;
-    top: 0;
-    left: 0;
-    color: #ECE8ED;
-    transition:0.4s ease-in-out ;
-    text-shadow: 2px 0 0 #E10F1C, -2px 0 0 #E10F1C, 0 2px 0 #E10F1C, 0 -2px 0 #E10F1C, 1px 1px #E10F1C, -1px -1px 0 #E10F1C, 1px -1px 0 #E10F1C, -1px 1px 0 #E10F1C;
-  }
-  span:last-of-type{
-    text-shadow: 2px 0 0 #262626, -2px 0 0 #262626, 0 2px 0 #262626, 0 -2px 0 #262626, 1px 1px #262626, -1px -1px 0 #262626, 1px -1px 0 #262626, -1px 1px 0 #262626;
-  }
+      white-space: nowrap;
+      width: 100%;
+      font-size:160px;
+      font-size: #{"max(18vw, 18vw)"};
+      font-family: Twentytwelve, Helvetica, sans-serif;
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: #ECE8ED;
+      transition:0.4s ease-in-out ;
+      text-shadow: 2px 0 0 #E10F1C, -2px 0 0 #E10F1C, 0 2px 0 #E10F1C, 0 -2px 0 #E10F1C, 1px 1px #E10F1C, -1px -1px 0 #E10F1C, 1px -1px 0 #E10F1C, -1px 1px 0 #E10F1C;
+    }
+    span:last-of-type{
+      text-shadow: 2px 0 0 #262626, -2px 0 0 #262626, 0 2px 0 #262626, 0 -2px 0 #262626, 1px 1px #262626, -1px -1px 0 #262626, 1px -1px 0 #262626, -1px 1px 0 #262626;
+    }
+}
+.parP{
+  height: #{"max(18vw, 18vw)"};
 }
 
 </style>

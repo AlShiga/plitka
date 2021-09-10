@@ -3,10 +3,15 @@
   <!-- <p class="h7 ttu text-center">to send your resume - eat pizza</p>
   <p class="h7 ttu text-center">we will check</p> -->
   <div class="">
+    <div v-if="pause"  class="capPizza__pause"></div>
     <div v-if="!play" v-on:click="start()"  class="capPizza__first">
-      <p class="h8 text-center p-b-40">
+      <p v-if="$store.state.langEn" class="h8 text-center p-b-40 capPizza__text">
         To send your resume - eat pizza<br>
         we will check!
+      </p>
+      <p v-else class="h8 text-center p-b-40 capPizza__text">
+        Съешь пиццу<br>
+        и отправь сообщение
       </p>
       <img src="~@/assets/img/pizza/1.png" alt="" class="capPizza__firstImg">
     </div>
@@ -14,10 +19,10 @@
     <div v-else class="capPizza__main">
       <div class="capPizza__progress"></div>
       <div v-if="stage=='start'" class="capPizza__start">
-          <p class="h8">{{ startText }}</p>
+          <p class="h8 capPizza__text text-center">{{ startText }}</p>
       </div>
       <div v-on:click="restart()" v-if="stage=='end'" class="capPizza__start capPizza__end">
-          <p class="h8">{{ endText }}</p>
+          <p class="h8 capPizza__text text-center">{{ endText }}</p>
       </div>
       <div class="capPizza__mainPizza">
         <div class="">
@@ -78,6 +83,7 @@ export default {
       captcha: false,
       play: false,
       stage: 'start',
+      pause: false,
       count: {
         bite1: 0,
         bite2: 0,
@@ -120,18 +126,21 @@ export default {
       setTimeout(() => {
         this.countPoints()
         if (this.count.bite1 + this.count.bite2 + this.count.bite3 + this.count.bite4 + this.count.bite5 + this.count.bite6 + this.count.bite7 < 10) {
-          this.endText = 'Oh! We will teach you how to eat pizza'
+          this.endText = (this.$store.state.langEn) ? ('Oh! We will teach you how to eat pizza') : ('Эх ты! Мы научим тебя правильно есть пиццу')
         } else {
-          this.endText = 'Good job! We will teach you how to eat pizza'
+          this.endText = (this.$store.state.langEn) ? ('Good job! We will teach you how to eat pizza') : ('Отличная работа! Мы научим тебя правильно есть пиццу')
         }
         this.captcha = true
         this.stage = 'end'
+        this.pause = true
       }, 9100)
       setTimeout(() => {
-      }, 12000)
+        this.pause = false
+      }, 11000)
     },
     countPoints: function () {
-      console.log(this.count.bite1 + this.count.bite2 + this.count.bite3 + this.count.bite4 + this.count.bite5 + this.count.bite6 + this.count.bite7)
+      this.$store.commit('captchaTern')
+      // console.log(this.count.bite1 + this.count.bite2 + this.count.bite3 + this.count.bite4 + this.count.bite5 + this.count.bite6 + this.count.bite7)
     },
     restart: function () {
       this.count.bite1 = 0
@@ -160,6 +169,7 @@ export default {
 .capPizza{
   position: relative;
   overflow: hidden;
+  min-height: 200px;
   &::before{
     content: "";
     display: block;
@@ -169,7 +179,9 @@ export default {
     position: absolute;
     top: 0;left: 0; bottom: 0;right: 0;
   }
-
+  &__text{
+    padding: 20px;
+  }
   &__first{
     display: flex;
     width: 100%;
@@ -195,6 +207,9 @@ export default {
   &__mainPizza{
     position: relative;
     width: 30%;
+    @media (max-width: 767.98px) {
+    width: 40%;
+    }
   &::before{
     content: "";
     display: block;
@@ -263,6 +278,15 @@ export default {
       transform: translateX(0%);
       transition: 5s linear;
     }
+  }
+  &__pause{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    // background-color: red;
+    z-index: 20;
   }
 }
 </style>

@@ -1,10 +1,10 @@
 <template>
     <div class="bg_r p-t-100 p-b-200">
-      <secTitle :title='"[ Super puper cool team ];"' :addClass='"m-b-100"' />
+      <secTitle :title='$store.state.langEn?"[ мы умеем развлекаться ];":"[ we know how to entertain ];"' :addClass='"m-b-100"' />
       <div class="row m-b-100">
         <div class="offset-1 col-xl-12 col-lg-14 col-md-18 col-22">
-          <h6  v-if="$store.state.langEn" class="h7 ttu">we love our company for simplicity, openness and cool corporate activities</h6>
-          <h6 v-else class="h7 ttu">мы любим свою компанию за простоту, открытость и классные корпоративы</h6>
+          <h6  v-if="$store.state.langEn" class="h7 ttu">we love our company for simplicity, openness and cool corporate activities.</h6>
+          <h6 v-else class="h7 ttu">мы любим свою компанию за простоту, открытость и классные корпоративы.</h6>
         </div>
       </div>
       <div class="row">
@@ -80,47 +80,46 @@ export default {
 }
 
 .swiper-slide {
-  width: 35% !important;
+  width: 100/24*8% !important;
 }
 
 .swiper-slide:nth-child(2n) {
-  width: 25% !important;
+  width: 100/24*10% !important;
 }
 
 .swiper-slide:nth-child(3n) {
-  width: 20% !important;
+  width: 100/24*6% !important;
 }
 @media (max-width: 1449.98px) {
 .swiper-slide {
-  width: 35% !important;
+  width: 100/24*9% !important;
 }
 
 .swiper-slide:nth-child(2n) {
-  width: 25% !important;
+  width: 100/24*10% !important;
 }
 
 .swiper-slide:nth-child(3n) {
-  width: 20% !important;
+  width: 100/24*6% !important;
 }
 }
 @media (max-width: 1024.98px) {
 .swiper-slide {
-  width: 55% !important;
+  width: 100/24*12% !important;
 }
 
 .swiper-slide:nth-child(2n) {
-  width: 45% !important;
+  width: 100/24*14% !important;
 }
 
 .swiper-slide:nth-child(3n) {
-  width: 40% !important;
+  width: 100/24*8% !important;
 }
 }
 @media (max-width: 767.98px) {
-.swiper-slide {
-  width: 80% !important;
-}
-
+  .swiper-slide, .swiper-slide:nth-child(2n), .swiper-slide:nth-child(3n) {
+    width: 100/24*20% !important;
+  }
 }
 .polarImg{
   width: 100%;

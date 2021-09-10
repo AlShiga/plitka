@@ -1,71 +1,71 @@
 <template>
   <div class="overflow-hidden bg_g">
     <div class="form">
-      <transition name="fade" mode="out-in">
-      <div v-if="page==1" class="form__step">
+      <transition-group name="fade" mode="out-in">
+      <div v-if="page==1&&!sent" class="form__step">
         <div class="col-20 offset-2">
           <h6 class="h6 p-t-150 p-b-100">
-            what is the status of the project now?
+            {{($store.state.langEn)?'What is the status of the project now?':'Есть сайт или создаем с нуля?'}}
           </h6>
           <div class="form__buttonWrap">
-            <myButton @click.stop="addAnswer" :text="'[ New project ]'" />
-            <myButton @click.stop="addAnswer" :text="'[ existing project ]'" />
+            <myButton @click.stop="addAnswer" :text="($store.state.langEn)?'[ New project ]':'[ Новый сайт ]'" />
+            <myButton @click.stop="addAnswer" :text="($store.state.langEn)?'[ existing project ]':'[ Редизайн ]'" />
           </div>
         </div>
       </div>
-      <div v-else-if="page==2" class="form__step">
+      <div v-else-if="page==2&&!sent" class="form__step">
         <div class="col-20 offset-2">
-          <h6 class="h6 p-t-150 p-b-100">choose the type of your project:</h6>
+          <h6 class="h6 p-t-150 p-b-100">{{($store.state.langEn)?'Choose the type of your project:':'Какой тип сайта?'}}</h6>
           <div class="form__buttonWrap">
-            <myButton @click.stop="addAnswer" :text="'[ New project ]'" />
-            <myButton @click.stop="addAnswer" :text="'[ PROMO SITE ]'" />
-            <myButton @click.stop="addAnswer" :text="'[ ONLINE STORE ]'" />
-            <myButton @click.stop="addAnswer" :text="'[ OTHER ]'" />
+            <myButton @click.stop="addAnswer" :text="($store.state.langEn)?'[ landing page ]':'[ Одностраничник ]'" />
+            <myButton @click.stop="addAnswer" :text="($store.state.langEn)?'[ PROMO SITE ]':'[ Промо сайт ]'" />
+            <myButton @click.stop="addAnswer" :text="($store.state.langEn)?'[ ONLINE STORE ]':'[ Магазин ]'" />
+            <myButton @click.stop="addAnswer" :text="($store.state.langEn)?'[ OTHER ]':'[ Другое ]'" />
           </div>
         </div>
       </div>
-      <div v-else-if="page==3" class="form__step">
+      <div v-else-if="page==3&&!sent" class="form__step">
         <div class="col-20 offset-2">
-          <h6 class="h6 p-t-150 p-b-100">when are you ready to start?</h6>
+          <h6 class="h6 p-t-150 p-b-100">{{($store.state.langEn)?'When are you ready to start?':'Когда готовы начать?'}}</h6>
           <div class="form__buttonWrap">
-            <myButton @click.stop="addAnswer" :text="'[ immediately ]'" />
-            <myButton @click.stop="addAnswer" :text="'[ in a week ]'" />
-            <myButton @click.stop="addAnswer" :text="'[ within a month ]'" />
+            <myButton @click.stop="addAnswer" :text="($store.state.langEn)?'[ immediately ]':'[ сейчас ]'" />
+            <myButton @click.stop="addAnswer" :text="($store.state.langEn)?'[ in a week ]':'[ на неделе ]'" />
+            <myButton @click.stop="addAnswer" :text="($store.state.langEn)?'[ within a month ]':'[ через месяц ]'" />
           </div>
         </div>
       </div>
-      <div v-else-if="page==4" class="form__step">
+      <div v-else-if="page==4&&!sent" class="form__step">
         <div class="col-20 offset-2">
-          <h6 class="h6 p-t-150 p-b-100">what is the project budget?</h6>
+          <h6 class="h6 p-t-150 p-b-100">{{($store.state.langEn)?'What is the project budget?':'Какой ваш бюджет на разработку?'}}</h6>
           <div class="form__buttonWrap">
-            <myButton @click.stop="addAnswer" :text="'[ < 200.000 rub ]'" />
+            <myButton @click.stop="addAnswer" :text="($store.state.langEn)?'[ < 3.000&nbsp;$ ]':'[ < 200.000&nbsp;&#8381; ]'" />
             <myButton
               @click.stop="addAnswer"
-              :text="'[ 200.000 - 500.000 rub ]'"
+              :text="($store.state.langEn)?'[  3.000 - 8.000&nbsp;$ ]':'[ 200.000 - 500.000&nbsp;&#8381; ]'"
             />
-            <myButton @click.stop="addAnswer" :text="'[ > 500.000 rub  ]'" />
+            <myButton @click.stop="addAnswer" :text="($store.state.langEn)?'[ > 8.000&nbsp;$ ]':'[ > 500.000&nbsp;&#8381; ]'" />
           </div>
         </div>
       </div>
-      <div v-else-if="page==5" class="form__step">
+      <div v-else-if="page==5&&!sent" class="form__step p-t-200">
         <div class="col-20 offset-2">
-            <div class="form-wrapper">
-              <p class="form-sent p1" v-if="sent">Сообщение отправлено</p>
+            <div class="form-wrapper p-t-200">
+              <p class="form-sent p1" v-if="sent">{{($store.state.langEn)?'Message sent':'Сообщение отправлено'}}</p>
               <form id="formapp" @submit="checkForm">
                 <div>
-                  <input id="your-name" placeholder="Name" v-model="name" type="text" name="your-name">
+                  <input id="your-name" :placeholder="($store.state.langEn) ? ('[ Name ]') : ('[ Имя ]')" v-model="name" type="text" name="your-name">
                 </div>
                 <div>
-                  <input id="your-email" placeholder="Email" v-model="email" type="text" name="your-email" min="0">
+                  <input id="your-email" :placeholder="($store.state.langEn) ? ('[ Email ]*') : ('[ Email ]*')" v-model="email" type="text" name="your-email" min="0">
                 </div>
                 <div>
-                  <input id="your-message" placeholder="Message" v-model="message" type="text" name="your-message" min="0">
+                  <input id="your-message" :placeholder="($store.state.langEn) ? ('[ Message ]') : ('[ Вопрос ]')" v-model="message" type="text" name="your-message" min="0">
                 </div>
                 <div>
-                  <input id="your-number" placeholder="Phone" v-model="number" type="number" name="your-number">
+                  <input id="your-number" :placeholder="($store.state.langEn) ? ('[ Phone ]*') : ('[ Телефон ]*')" v-model="number" onkeyup="this.value = this.value.replace(/[^0-9_-_+()/-]/g,'');" type="text" name="your-number">
                 </div>
 
-                <div>
+                <div class="m-t-100 m-b-100" >
                   <!-- <input type="submit" value="Submit"> -->
                   <!-- <button class="btn2" type="submit" value="Submit">Send</button> -->
                     <myButton
@@ -73,9 +73,10 @@
                       :text="
                         $store.state.langEn ? '[ send ]' : '[ отправить ]'
                       "
+                      :style="'button_black'"
                     />
                 </div>
-                 <div class="p-t-40" v-if="errors.length">
+                 <div class="p-t-40 p-b-40" v-if="errors.length">
                   <!-- <b>Please correct the following error(s):</b> -->
                   <ul>
                     <li class="p1" v-for="(error, index) in errors" :key="index">{{ error }}</li>
@@ -85,8 +86,24 @@
             </div>
         </div>
       </div>
-      </transition>
-      <div class="form__count"></div>
+      <div v-if="sent" class="form__step p-t-200 p-b-40">
+        <div class="col-20 offset-2">
+          <h2 class="h6 p-b-40">{{($store.state.langEn) ? ('thanks!') : ('спасибо!')}}</h2>
+          <p class="p1 d-block p-b-80">
+            {{($store.state.langEn) ? ('We will consider your application and will contact you soon.') : ('Мы рассмотрим вашу заявку и свяжемся с вами в ближайшее время.')}}
+          </p>
+            <myButton
+              @click="$router.push('/')"
+              :text="
+                $store.state.langEn ? '[ Finish ]' : '[ На главную ]'
+              "
+            />
+        </div>
+      </div>
+      </transition-group>
+      <div class="form__count z-1">
+
+      </div>
     </div>
   </div>
 </template>
@@ -116,7 +133,7 @@ export default {
       // this.pageAll = document.querySelectorAll('.form__step').length
     },
     addAnswer: function (e) {
-      console.log(e.target.outerText)
+      // console.log(e.target.outerText)
       this.answer.push(e.target.outerText)
       this.nextQuestion()
       this.moveCount()
@@ -139,16 +156,13 @@ export default {
       e.preventDefault()
       this.errors = []
 
-      if (!this.name) {
-        this.errors.push('Name required.')
-      }
       if (!this.email) {
-        this.errors.push('Email required.')
+        this.errors.push((this.$store.state.langEn) ? 'Email required' : 'Введите Email')
       } else if (!this.validEmail(this.email)) {
-        this.errors.push('Valid email required.')
+        this.errors.push((this.$store.state.langEn) ? 'Valid email required' : 'Email некоректный')
       }
       if (!this.number) {
-        this.errors.push('Number required.')
+        this.errors.push((this.$store.state.langEn) ? 'Number required' : 'Введите телефон')
       }
       if (this.errors.length) { this.sent = false }
       if (!this.errors.length) {
@@ -161,7 +175,7 @@ export default {
         axios({
           method: 'post',
           url:
-            'https://ava.avadev.ru/wp-json/contact-form-7/v1/contact-forms/32/feedback',
+            this.$store.state.linkAdmin + '/wp-json/contact-form-7/v1/contact-forms/1326/feedback',
           data: bodyFormData,
           config: { headers: { 'Content-Type': 'multipart/form-data' } }
         })
@@ -171,18 +185,19 @@ export default {
             return true
           })
           .catch(function (response) {
-            console.log(response)
+            // console.log(response)
           })
       }
     },
     succesMess: function () {
-      console.log('succesMess')
+      // console.log('succesMess')
       this.sent = true
     }
   },
   mounted () {
     this.init()
     this.moveCount()
+    this.$store.commit('hideMenu')
   }
 }
 </script>
@@ -195,11 +210,18 @@ export default {
     flex-direction: column;
     justify-content: center;
     min-height: 100vh;
+    padding-top: 100px;
+    @media (max-width: 767px) {
+      padding-top: 200px;
+    }
   }
   &__buttonWrap {
     display: flex;
     flex-wrap: wrap;
-    gap: 40px;
+    .button{
+      margin-right: 40px;
+      margin-bottom: 40px;
+    }
   }
 }
 

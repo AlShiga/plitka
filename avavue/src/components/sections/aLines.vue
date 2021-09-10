@@ -19,9 +19,9 @@ export default {
       lineList: [
         { name: 'servItem_web', img: '' },
         { name: 'servItem_des', img: '' },
-        { name: 'servItem_web', img: '' },
-        { name: 'servItem_des', img: '' },
-        { name: 'servItem_des', img: '' }
+        { name: 'servItem_br', img: '' },
+        { name: 'servItem_pr', img: '' },
+        { name: 'servItem_cw', img: '' }
 
       ]
     }
@@ -43,18 +43,18 @@ export default {
           start: 'top bottom',
           end: 'bottom top',
           scrub: 2,
-          markers: true,
-          id: 'example' + key,
+          // markers: true,
+          // id: 'example' + key,
           animation: gsap.to(el, {
             // rotation: 27,
             x: -trans + trans / 3 * Math.random(),
             ease: 'cirk',
             duration: 0.5 + 0.3 * Math.random()
-          }),
-          onToggle: self => console.log('toggled, isActive:', self.isActive),
-          onUpdate: self => {
-            // console.log('progress:', self.progress.toFixed(3), 'direction:', self.direction, 'velocity', self.getVelocity())
-          }
+          })
+          // onToggle: self => console.log('toggled, isActive:', self.isActive),
+          // onUpdate: self => {
+          //   // console.log('progress:', self.progress.toFixed(3), 'direction:', self.direction, 'velocity', self.getVelocity())
+          // }
         })
       })
     }
@@ -64,15 +64,10 @@ export default {
     // this.trigger = new ScrollTrigger.default()
 
     this.scrollAnimation()
-    console.log(this.scrollTrig)
+    // console.log(this.scrollTrig)
   },
   unmounted () {
-    console.log('Пока1')
-    this.scrollTrig[0].kill()
-    this.scrollTrig[1].kill()
-    this.scrollTrig[2].kill()
-    this.scrollTrig[3].kill()
-    this.scrollTrig[4].kill()
+    ScrollTrigger.getAll().forEach(t => t.kill())
   }
 }
 </script>
