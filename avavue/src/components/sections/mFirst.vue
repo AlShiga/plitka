@@ -198,7 +198,11 @@ export default {
       mFirstPause: false,
       mouse: {},
       play: 0,
-      playNum: 2
+      playNum: 2,
+      pause: false,
+      RAF: {},
+      played: false,
+      loaded: false
     }
   },
   methods: {
@@ -215,7 +219,7 @@ export default {
     animate: function () {
       // console.log('anim')
       if (this.stop) return
-      requestAnimationFrame(this.animate)
+      this.RAF = requestAnimationFrame(this.animate)
       if (!(this.play % this.playNum)) {
         this.render()
         this.mousePos()
@@ -458,9 +462,13 @@ export default {
 
       loader.load(require('@/assets/img/mainAva.jpg'), (tex) => {
         _500 = tex
-
+        this.loaded = true
         init()
-        this.animate()
+        // console.log(this.played)
+        if (this.played === false) {
+          this.played = true
+          this.animate()
+        }
       })
     })
 
@@ -503,7 +511,8 @@ export default {
 
       this.onWindowResize()
       // window.addEventListener('resize', this.onWindowResize, false)
-      document.addEventListener('mousemove', this.onPointerMove)
+      // document
+      document.querySelector('.mFirst').addEventListener('mousemove', this.onPointerMove)
     }
 
     this.render = () => {
@@ -526,13 +535,36 @@ export default {
       }
     })
     this.tl.to('.containerMAdv', { yPercent: 30 })
+
+    ScrollTrigger.create({
+      trigger: '.mFirst',
+      start: 'top bottom',
+      // markers: true,
+      end: 'bottom top',
+      // scrub: 2,
+      // id: '2',
+      onToggle: self => {
+        // console.log(self.isActive)
+        // console.log(this.played)
+        if (self.isActive && this.loaded) {
+          if (!this.played) {
+            // console.log('start')
+            this.played = true
+            this.animate()
+          }
+        } else {
+          cancelAnimationFrame(this.RAF)
+          this.played = false
+        }
+      }
+      // onToggle: () => { this.world.gravity.scale = 0.0015 }
+    })
     // this.tl.push(tl)
   },
   unmounted () {
     ScrollTrigger.getAll().forEach(t => t.kill())
     window.removeEventListener('resize', this.onWindowResize, false)
     document.removeEventListener('mousemove', this.onPointerMove)
-    cancelAnimationFrame(this.animate)
     this.mFirstPause = true
     this.stop = true
   }

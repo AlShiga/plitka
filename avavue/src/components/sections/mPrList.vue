@@ -25,6 +25,7 @@
         position-relattive
       "
     >
+      <!-- <img src="http://s3-us-west-2.amazonaws.com/s.cdpn.io/58281/tex2.jpg"  width="1920" height="1080" alt="" class="imgDisp w-100" /> -->
       <img :src="pr.acf.img" width="1920" height="1080" alt="" class="imgDisp w-100" />
       <div class="mPrItem__det">
         <div v-if="pr.acf.tags" class="mPrItem__tags d-none d-lg-block m-b-40">
@@ -198,7 +199,9 @@ const AddImg = {
   scene: {},
   camera: {},
   renderer: {},
+  RAF: {},
   scr: 0,
+  pause: false,
   init: function () {
     this.canvasW = window.innerWidth
     this.canvasH = window.innerHeight
@@ -287,13 +290,15 @@ const AddImg = {
     })
     // console.log(AddImg.images)
 
-    this.render()
+    // this.render()
     // console.log(this);
   },
   render: () => {
     // console.log('anim')
     // if (AddImg.stop) return
-    requestAnimationFrame(AddImg.render)
+    AddImg.RAF = requestAnimationFrame(AddImg.render)
+    // if (!AddImg.pause) return
+    // console.log(AddImg.pause)
     const newPos = window.scrollY
     if (AddImg.scroll != null) {
       AddImg.scroll = newPos
@@ -313,7 +318,8 @@ export default {
   data () {
     return {
       projects: {},
-      tl: []
+      tl: [],
+      pause: true
     }
   },
   components: {
@@ -333,6 +339,25 @@ export default {
         })
         tl.to(el, { yPercent: -100 })
         this.tl.push(tl)
+      })
+      if (innerWidth < 1025) return
+      this.scrollTrPlay = ScrollTrigger.create({
+        trigger: '.mPrWrap',
+        start: 'top bottom',
+        // markers: true,
+        end: 'bottom top',
+        // scrub: 2,
+        // id: '2',
+        onToggle: self => {
+          AddImg.pause = self.isActive
+          console.log(AddImg.pause)
+          if (self.isActive) {
+            AddImg.render()
+          } else {
+            cancelAnimationFrame(AddImg.RAF)
+          }
+        }
+        // onToggle: () => { this.world.gravity.scale = 0.0015 }
       })
       // console.log(this.tl)
     }

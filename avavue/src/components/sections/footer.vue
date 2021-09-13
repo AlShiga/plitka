@@ -207,7 +207,7 @@ export default {
 
   },
   mounted () {
-    console.log('init')
+    // console.log('init')
     this.scrollTrig1 = ScrollTrigger.create({
       trigger: '.mBottomWrap',
       start: 'top bottom',
@@ -230,7 +230,7 @@ export default {
     this.init()
   },
   unmounted () {
-    console.log('end')
+    // console.log('end')
     ScrollTrigger.getAll().forEach(t => t.kill())
     if (innerWidth < 1024 || this.$props.small) return
 
