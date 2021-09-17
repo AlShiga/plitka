@@ -1,0 +1,60 @@
+.wpcf7-not-valid-tip {
+  display: none !important;
+}
+.wpcf7 form.invalid .wpcf7-response-output,
+.wpcf7 form.unaccepted .wpcf7-response-output,
+.wpcf7 form .wpcf7-response-output,
+.wpcf7 form .wpcf7-response-output {
+  border: none !important;
+  padding: 0 !important;
+  margin: 20px 0 !important;
+}
+
+.tippy-box[data-theme~="my"] {
+  background-color: $white;
+  color: $blue;
+  border: 1px solid currentColor;
+  border-radius: 0;
+  padding: 3px 5px;
+  & .tippy-content {
+    font-family: Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 140%;
+    @include fontS(16px, 14px, 14px, 14px);
+    @include fontS(
+      16/1920 * 100vw,
+      14/1366 * 100vw,
+      14/768 * 100vw,
+      14/360 * 100vw
+    );
+  }
+}
+.tippy-box[data-animation="scale"][data-placement^="top"] {
+  transform-origin: bottom;
+}
+.tippy-box[data-animation="scale"][data-placement^="bottom"] {
+  transform-origin: top;
+}
+.tippy-box[data-animation="scale"][data-placement^="left"] {
+  transform-origin: right;
+}
+.tippy-box[data-animation="scale"][data-placement^="right"] {
+  transform-origin: left;
+}
+.tippy-box[data-animation="scale"][data-state="hidden"] {
+  transform: scale(0.5);
+  opacity: 0;
+}
+[data-tippy-content]{
+  fill:$blue;
+  transition: 0.3s;
+  stroke-width: 1px;
+  &:hover{
+    fill: $white;
+    stroke: $blue;
+    // transform: scale(1.2);
+    // transform-origin: center;
+  }
+
+}

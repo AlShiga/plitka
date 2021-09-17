@@ -1,0 +1,357 @@
+.aFirst{
+  display: flex;
+  min-height: 100vh;
+  position: relative;
+  &__content{
+    margin: auto;
+    pointer-events: none;
+    position: relative;
+    z-index: 2;
+  }
+  &__slider{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    & .swiper{
+      height: 100%;
+    } 
+    & .swiper-slide{
+      display: flex;
+      & img{
+        margin: auto;
+        width: 25vw;
+        height: auto;
+        transform: rotate(-7deg);
+        @include media-breakpoint-down(md) {
+          width: 50%;
+          
+        }
+        @include media-breakpoint-down(sm) {
+          width: 70%;
+          
+        }
+      }
+    }
+  }
+  &__sliderCount{
+    position: absolute;
+    bottom: 4.16vw;
+    left: 4.16vw;
+  }
+}
+.aServ{
+  &__svg{
+    path{
+      stroke-dasharray: 700px;
+      stroke-dashoffset: 700px;
+      transition: 1s;
+    }
+  }
+}
+.swASs__bar{
+  width: 60%;
+  height: 1px;
+  background-color: $dark-gray;
+  position: relative;
+  margin-left: 30px;
+  top: -5px;
+  & div{
+    position: absolute;
+    top: -2px;
+    left: 0;
+    height: 3px;
+    width: 0;
+    transition: 0.5s;
+    background-color: $white;
+  }
+}
+.aAdvantages{
+  position: relative;
+  &__cirkle{
+    position: absolute;
+    bottom: 0%;
+    // width: 100%;
+    width: 80%;
+    height: auto;
+    left: 10%;
+    @include media-breakpoint-down(sm) {
+      bottom: 40%;
+    }
+  }
+  &__nums{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  &__numsItem{
+    width: 25%;
+    padding: 2%;
+    padding: 5% 2% 2% 4%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    @include media-breakpoint-down(sm) {
+      width: 50%;
+      padding: 20% 4% 4% 4%;
+    }
+    & *{
+      max-width: 300px;
+    }
+  }
+  &__numsItemTL{
+    position: absolute;
+    top: 0;
+    left: 20px;
+    width: calc(100% - 40px);
+    max-width: 100%;
+    height: 1px;
+    background-color: currentColor;
+  }
+  &__numsItemRL{
+    position: absolute;
+    top: 20px;
+    left: 0;
+    height: calc(100% - 40px);
+    width: 1px;
+    background-color: currentColor;
+  }
+  &__numsItemLL{
+    position: absolute;
+    top: 20px;
+    right: 0;
+    height: calc(100% - 40px);
+    width: 1px;
+    background-color: currentColor;
+  }
+}
+.aServ{
+  position: relative;
+  &__cirkle{
+    position: absolute;
+    top: 0;
+    left: 0;
+    // width: 100%;
+    height: auto;
+    width: 80%;
+    left: 10%;
+    display: none;
+  }
+}
+.moveImg{
+  position: relative;
+  & *{
+    pointer-events: none;
+  }
+  img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: auto;
+    opacity: 0;
+    z-index: 3;
+  }
+}
+.aComp{
+  &__itemCont{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // z-index: 2;
+    svg{
+      flex: none;
+      margin-left: 40px;
+    }
+
+  }
+}
+.aTeam{
+  &__item{
+    border-bottom: 1px solid currentColor;
+  }
+  &__itemImg{
+    position: relative;
+    &::before{
+      content: '';
+      display: block;
+      padding-bottom: 120%;
+    }
+    img{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+.aDoc{
+  &__wrap{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  &__item{
+    position: relative;
+    width: 33.33%;
+    @include media-breakpoint-down(md) {
+      width: 50%;
+    }
+    @include media-breakpoint-down(sm) {
+      width: 100%;
+    }
+    &::before{
+      content: '';
+      display: block;
+      padding-bottom: 70%;
+    }
+    & > *{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 2.16vw;
+      @include media-breakpoint-down(sm) {
+        padding: 4.16vw;
+      }
+    }
+    &_border{
+      &>*{
+        border-right:1px solid currentColor;
+        border-top:1px solid currentColor;
+      }
+    }
+  }
+
+}
+.aRev{
+  &__wrap{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  &__item{
+    width: 50%;
+    border: 1px solid currentColor;
+    padding: 4.16vw;
+    @include media-breakpoint-down(sm) {
+      svg{
+        width: 30px;
+        height: auto;
+      }
+      width: 100%;
+      padding: 8.33vw  4.16vw ;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.aHist{
+  // overflow: hidden;
+}
+.swHist{
+  margin-top: 30vw;
+  overflow: visible;
+  @include media-breakpoint-down(sm) {
+    margin-top: 60vw;
+  }
+  .swiper-slide{
+    padding-right: 4.16vw;
+    position: relative;
+    &::before{
+      pointer-events: none;
+    }
+    &::after{
+      pointer-events: none;
+    }
+    &:nth-of-type(7n+1){
+      &::before{
+        content: '';
+        position: absolute;
+        bottom: 100%;
+        width: 100%;
+        height: 700%;
+        background-image: url(../img/about/slh/smsolid.svg);
+        background-size: contain;
+        background-position: bottom;
+        background-repeat: no-repeat;
+      }
+      &::after{
+        content: '';
+        position: absolute;
+        bottom: 100%;
+        width: 200%;
+        height: 700%;
+        background-image: url(../img/about/slh/bigdot.svg);
+        background-size: contain;
+        background-position: bottom;
+        background-repeat: no-repeat;
+      }
+    }
+    &:nth-of-type(7n+3){
+      &::before{
+        content: '';
+        position: absolute;
+        bottom: 100%;
+        width: 200%;
+        height: 700%;
+        background-image: url(../img/about/slh/bigblue.svg);
+        background-size: contain;
+        background-position: bottom;
+        background-repeat: no-repeat;
+      }
+    }
+    &:nth-of-type(7n+5){
+      &::before{
+        content: '';
+        position: absolute;
+        bottom: 100%;
+        width: 100%;
+        height:700%;
+        background-image: url(../img/about/slh/smsolid.svg);
+        background-size: contain;
+        background-position: bottom;
+        background-repeat: no-repeat;
+      }
+      &::after{
+        content: '';
+        position: absolute;
+        bottom: 100%;
+        width: 200%;
+        height: 700%;
+        background-image: url(../img/about/slh/bigdot.svg);
+        background-size: contain;
+        background-position: bottom;
+        background-repeat: no-repeat;
+      }
+    }
+    &:nth-of-type(7n+7){
+      &::before{
+        content: '';
+        position: absolute;
+        bottom: 100%;
+        width: 100%;
+        height: 700%;
+        background-image: url(../img/about/slh/bigblue.svg);
+        background-size: contain;
+        background-position: bottom;
+        background-repeat: no-repeat;
+      }
+    }
+    &:last-of-type{
+      &::before{
+       background:transparent;
+      }
+      &::after{
+       background:transparent;
+      }
+    }
+  }
+}

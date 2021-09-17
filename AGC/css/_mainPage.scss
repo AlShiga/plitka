@@ -1,0 +1,185 @@
+.mFirst{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+.mNums{
+  // background: linear-gradient(to bottom, #E6E9F0 0%, #F3F3F3 100%);
+  &__invert{
+    svg{
+      mix-blend-mode: difference;
+    }
+    background: $white;
+
+    background: linear-gradient(to bottom, $blue-gray 0%, $white 50%, $black 50%);
+  }
+  &__cirk{
+    &_1{
+      stroke-dashoffset: 1505px;
+      stroke-dasharray: 1505px;
+      transition: 0.9s;
+    }
+    &_2{
+      stroke-dashoffset: 1505px;
+      stroke-dasharray: 1505px;
+      transition: 1.2s;
+    }
+    &_3{
+      stroke-dashoffset: 2625px;
+      stroke-dasharray: 2625px;
+      transition: 1.5s;
+    }
+    &_4{
+      stroke-dashoffset: 940px;
+      stroke-dasharray: 940px;
+      transition: 0.5s;
+    }
+  }
+}
+.mAdv{
+  position: relative;
+  overflow: hidden;
+
+  &__cirkle{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 22/24*100vw;
+    height: 22/24*100vw;
+    background-color: $blue;
+    border-radius: 100vw;
+    transform: translate(-50%, -50%);
+  }
+}
+.mText{
+  color: $white;
+  position: relative;
+  overflow: hidden;
+  &__cirkle{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 22/24*100vw;
+    height: 22/24*100vw;
+    background-color: $blue;
+    border-radius: 100vw;
+    transform: translate(-50%, -50%);
+    @include media-breakpoint-down(md) {
+      width:  100vw;
+      height: 100vw;
+    }
+    @include media-breakpoint-down(sm) {
+      width:  180vw;
+      height: 180vw;
+    }
+  }
+}
+.mProj{
+  position: relative;
+  overflow: hidden;
+  &__par{
+    position: relative;
+    min-height: 100vh;
+  }
+  &__parCirkle{
+    position: absolute;
+    top: -10vh;
+    left: 10vw;
+    width: 80vw;
+    height: auto;
+  }
+  &__parImg1{
+    position: absolute;
+    top: 0;
+    left: -40vw;
+    width: 15vw;
+    height: auto;
+  }
+  &__parImg2{
+    position: absolute;
+    top: 5vh;
+    left: 20vw;
+    width: 20vw;
+    height: auto;
+  }
+  &__parImg3{
+    position: absolute;
+    top: 10vh;
+    left: 32vw;
+    width: 35vw;
+    height: auto;
+  }
+  &__parImg4{
+    position: absolute;
+    top: 5vh;
+    right: 10vw;
+    width: 17vw;
+    height: auto;
+  }
+  &__parImg5{
+    position: absolute;
+    top: 25vh;
+    right: -5vw;
+    width: 12vw;
+    height: auto;
+  }
+  &__parImg6{
+    position: absolute;
+    top: 50vh;
+    left: -10vw;
+    width: 17vw;
+    height: auto;
+  }
+  &__parImg7{
+    position: absolute;
+    top: 70vh;
+    left: 17vw;
+    width: 17vw;
+    height: auto;
+  }
+  &__parImg8{
+    position: absolute;
+    top: 85vh;
+    left: 55vw;
+    width: 12vw;
+    height: auto;
+  }
+  &__parImg9{
+    position: absolute;
+    top: 65vh;
+    left: 65vw;
+    width: 18vw;
+    height: auto;
+  }
+}
+.mServ{
+  &__svg{
+    path{
+      stroke-dasharray: 600px;
+      stroke-dashoffset: 600px;
+      transition: 1s;
+    }
+  }
+  &__titleWrap{
+    height: 0;
+    position: relative;
+  }
+  &__title{
+    position: absolute;
+    bottom: 0;
+  }
+  .ac-header{
+    border-top:1px solid $black ;
+    border-bottom:1px solid $black ;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    button{
+      color: currentColor;
+    }
+    svg{
+      fill: currentColor;
+    }
+  }
+}

@@ -1,0 +1,119 @@
+.prWrap{
+  width: 400vw;
+  height: 100vh;
+  display: flex;
+  flex-wrap: nowrap;
+  @include media-breakpoint-down(md) {
+    flex-direction: column;
+  }
+}
+.prFirst{
+  display: flex;
+  align-items: center;
+  width: 100vw;
+  height: 100%;
+  flex: none;
+  overflow: hidden;
+  position: relative;
+  &__num{
+    position: absolute;
+    left: 4.16vw;
+    bottom: 4.16vw;
+    color: $blue;
+    z-index: 1;
+  }
+  &__bg{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: calc(100% - 100px);
+  }
+}
+
+.bar{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 4.16vw;
+  height: 100%;
+  background-color: $white;
+  border: 1px solid currentColor;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2.16vw 0;
+  @include media-breakpoint-down(md) {
+    display: none;
+  }
+  span{
+    writing-mode: tb;
+    transform: rotate(180deg);
+
+
+  }
+}
+
+.prFoto{
+  width: 100vw;
+  height: 100%;
+
+  overflow: scroll;
+  flex: none;
+  @include media-breakpoint-down(md) {
+    height: auto;
+  }
+  &__imgW{
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    &::before{
+      display: block;
+      content: "";
+      padding-bottom: 40%;
+    }
+    img{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 200%;
+      object-fit: cover;
+    }
+  }
+}
+.prMap{
+  width: 100vw;
+  height: 100%;
+  overflow: hidden;
+  flex: none;
+  @include media-breakpoint-down(md) {
+    height: auto;
+  }
+}
+.map{
+  width: 100%;
+  height: auto;
+}
+.prProj{
+  width: 100vw;
+  height: 100%;
+  overflow: hidden;
+  flex: none;
+  overflow: scroll;
+  @include media-breakpoint-down(md) {
+    height: auto;
+  }
+}
+
+.prSec__title{
+    border: 1px solid $blue;
+    color: $blue;
+}
+.prSec__titleCont{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 0;
+}

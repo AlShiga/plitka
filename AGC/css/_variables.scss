@@ -1,0 +1,560 @@
+@import "var/color";
+@import "var/font";
+
+*,
+*:hover,
+*:focus,
+*:active {
+  outline: none !important;
+}
+
+* {
+  font-family: HelveticaNeueCyr;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 22px;
+  line-height: 140%;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 14px;
+  @include media-breakpoint-down(lg) {
+    font-size: 14px;
+  }
+}
+
+body {
+  overflow-x: hidden;
+  background-color: $white;
+  color: $black;
+}
+
+ul {
+  padding-left: 0;
+}
+li {
+  list-style-type: none;
+  margin-left: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+}
+
+a,
+button {
+  outline: none;
+}
+
+::-webkit-scrollbar {
+  background-color: $white;
+}
+::-webkit-scrollbar-thumb {
+  background-color: $light-blue;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: $blue;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.siteWrap {
+  overflow: hidden;
+}
+.overflow-hidden {
+  overflow: hidden;
+}
+.noscroll {
+  overflow: hidden;
+}
+@mixin pTop($mpXL, $mpLG, $mpMD, $mpSM) {
+  padding-top: $mpXL;
+  @include media-breakpoint-down(lg) {
+    padding-top: $mpLG;
+  }
+  @include media-breakpoint-down(md) {
+    padding-top: $mpMD;
+  }
+  @include media-breakpoint-down(sm) {
+    padding-top: $mpSM;
+  }
+}
+@mixin pBot($mpXL, $mpLG, $mpMD, $mpSM) {
+  padding-bottom: $mpXL;
+  @include media-breakpoint-down(lg) {
+    padding-bottom: $mpLG;
+  }
+  @include media-breakpoint-down(md) {
+    padding-bottom: $mpMD;
+  }
+  @include media-breakpoint-down(sm) {
+    padding-bottom: $mpSM;
+  }
+}
+
+@mixin mTop($mpXL, $mpLG, $mpMD, $mpSM) {
+  margin-top: $mpXL;
+  @include media-breakpoint-down(lg) {
+    margin-top: $mpLG;
+  }
+  @include media-breakpoint-down(md) {
+    margin-top: $mpMD;
+  }
+  @include media-breakpoint-down(sm) {
+    margin-top: $mpSM;
+  }
+}
+@mixin mBot($mpXL, $mpLG, $mpMD, $mpSM) {
+  margin-bottom: $mpXL;
+  @include media-breakpoint-down(lg) {
+    margin-bottom: $mpLG;
+  }
+  @include media-breakpoint-down(md) {
+    margin-bottom: $mpMD;
+  }
+  @include media-breakpoint-down(sm) {
+    margin-bottom: $mpSM;
+  }
+}
+
+.m-t-300 {
+  @include mTop(300px, 200px, 200px, 150px);
+}
+.m-b-300 {
+  @include mBot(300px, 200px, 200px, 150px);
+}
+.p-t-300 {
+  @include pTop(300px, 200px, 200px, 150px);
+}
+.p-b-300 {
+  @include pBot(300px, 200px, 200px, 150px);
+}
+
+.m-t-250 {
+  @include mTop(300px, 200px, 150px, 120px);
+}
+.m-b-250 {
+  @include mBot(300px, 200px, 150px, 120px);
+}
+.p-t-250 {
+  @include pTop(300px, 200px, 150px, 120px);
+}
+.p-b-250 {
+  @include pBot(300px, 200px, 150px, 120px);
+}
+
+.m-t-250 {
+  @include mTop(250px, 200px, 150px, 100px);
+}
+.m-b-250 {
+  @include mBot(250px, 200px, 150px, 100px);
+}
+.p-t-250 {
+  @include pTop(250px, 200px, 150px, 100px);
+}
+.p-b-250 {
+  @include pBot(250px, 200px, 150px, 100px);
+}
+
+.m-t-200 {
+  @include mTop(200px, 160px, 160px, 100px);
+}
+.m-b-200 {
+  @include mBot(200px, 160px, 160px, 100px);
+}
+.p-t-200 {
+  @include pTop(200px, 160px, 160px, 100px);
+}
+.p-b-200 {
+  @include pBot(200px, 160px, 160px, 100px);
+}
+
+.m-t-160 {
+  @include mTop(160px, 140px, 140px, 100px);
+}
+.m-b-160 {
+  @include mBot(160px, 140px, 140px, 100px);
+}
+.p-t-160 {
+  @include pTop(160px, 140px, 140px, 100px);
+}
+.p-b-160 {
+  @include pBot(160px, 140px, 140px, 100px);
+}
+
+.m-t-100 {
+  @include mTop(100px, 80px, 80px, 60px);
+}
+.m-b-100 {
+  @include mBot(100px, 80px, 80px, 60px);
+}
+.p-t-100 {
+  @include pTop(100px, 80px, 80px, 60px);
+}
+.p-b-100 {
+  @include pBot(100px, 80px, 80px, 60px);
+}
+
+.m-t-80 {
+  @include mTop(80px, 60px, 60px, 60px);
+}
+.m-b-80 {
+  @include mBot(80px, 60px, 60px, 60px);
+}
+.p-t-80 {
+  @include pTop(80px, 60px, 60px, 60px);
+}
+.p-b-80 {
+  @include pBot(80px, 60px, 60px, 60px);
+}
+
+.m-t-60 {
+  @include mTop(60px, 60px, 40px, 30px);
+}
+.m-b-60 {
+  @include mBot(60px, 60px, 40px, 30px);
+}
+.p-t-60 {
+  @include pTop(60px, 60px, 40px, 30px);
+}
+.p-b-60 {
+  @include pBot(60px, 60px, 40px, 30px);
+}
+
+.m-t-40 {
+  @include mTop(40px, 30px, 30px, 30px);
+}
+.m-b-40 {
+  @include mBot(40px, 30px, 30px, 30px);
+}
+.p-t-40 {
+  @include pTop(40px, 30px, 30px, 30px);
+}
+.p-b-40 {
+  @include pBot(40px, 30px, 30px, 30px);
+}
+
+.m-t-30 {
+  @include mTop(30px, 25px, 25px, 25px);
+}
+.m-b-30 {
+  @include mBot(30px, 25px, 25px, 25px);
+}
+.p-t-30 {
+  @include pTop(30px, 25px, 25px, 25px);
+}
+.p-b-30 {
+  @include pBot(30px, 25px, 25px, 25px);
+}
+
+.m-t-20 {
+  @include mTop(20px, 15px, 15px, 15px);
+}
+.m-b-20 {
+  @include mBot(20px, 15px, 15px, 15px);
+}
+.p-t-20 {
+  @include pTop(20px, 15px, 15px, 15px);
+}
+.p-b-20 {
+  @include pBot(20px, 15px, 15px, 15px);
+}
+
+.m-t-15 {
+  @include mTop(15px, 12px, 12px, 12px);
+}
+.m-b-15 {
+  @include mBot(15px, 12px, 12px, 12px);
+}
+.p-t-15 {
+  @include pTop(15px, 12px, 12px, 12px);
+}
+.p-b-15 {
+  @include pBot(15px, 12px, 12px, 12px);
+}
+
+.m-t-10 {
+  @include mTop(10px, 10px, 10px, 10px);
+}
+.m-b-10 {
+  @include mBot(10px, 10px, 10px, 10px);
+}
+.p-t-10 {
+  @include pTop(10px, 10px, 10px, 10px);
+}
+.p-b-10 {
+  @include pBot(10px, 10px, 10px, 10px);
+}
+
+
+.p-t-0 {
+  padding-top: 0;
+}
+.p-b-0 {
+  padding-bottom: 0;
+}
+.m-t-0 {
+  margin-top: 0;
+}
+.m-b-0 {
+  margin-bottom: 0;
+}
+
+.m-t-a {
+  margin-top: auto;
+}
+.mp0 {
+  margin: 0;
+  padding: 0;
+}
+
+.z-1 {
+  z-index: 1;
+}
+.z-2 {
+  z-index: 2;
+}
+.z-3 {
+  z-index: 3;
+}
+.z-4 {
+  z-index: 4;
+}
+.z-5 {
+  z-index: 5;
+}
+.z-10 {
+  z-index: 10;
+}
+.z-100 {
+  z-index: 100;
+}
+
+@mixin fontS($fsXL, $fsLG, $fsMD, $fsSM) {
+  font-size: $fsXL;
+  @include media-breakpoint-down(lg) {
+    font-size: $fsLG;
+  }
+  @include media-breakpoint-down(md) {
+    font-size: $fsMD;
+  }
+  @include media-breakpoint-down(sm) {
+    font-size: $fsSM;
+  }
+}
+// .h1 {
+//   font-family:Helvetica, sans-serif; 
+//   font-style: normal;
+//   font-weight: normal;
+//   font-size: 62px;
+//   line-height: 110%;
+//   text-transform: uppercase;
+// }
+.h2 {
+  font-family: Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 100%;
+  @include fontS(150/1920*100vw, 100/1366*100vw, 60/768*100vw, 32/360*100vw);
+  &_08{
+    line-height: 80%;
+  }
+}
+.h3 {
+  font-family: Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 100%;
+  @include fontS(100/1920*100vw, 70/1366*100vw, 50/768*100vw, 26/360*100vw);
+  &_08{
+    line-height: 80%;
+  }
+}
+.h4 {
+  font-family: Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-weight: 300;
+  line-height: 100%;
+  @include fontS(60/1920*100vw, 40/1366*100vw, 30/768*100vw, 26/360*100vw);
+}
+.h5 {
+  font-family: Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-weight: 300;
+  line-height: 120%;
+  @include fontS(40/1920*100vw, 30/1366*100vw, 20/768*100vw, 17/360*100vw);
+}
+.p1,
+p,
+li,
+li > a {
+  font-family: Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 140%;
+  @include fontS(22px, 18px, 18px, 18px);
+  @include fontS(22/1920*100vw, 18/1366*100vw, 18/768*100vw, 18/360*100vw);
+}
+.p2 {
+  font-family: Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 140%;
+  @include fontS(16px, 14px, 14px, 14px);
+  @include fontS(16/1920*100vw, 14/1366*100vw, 14/768*100vw, 14/360*100vw);
+}
+.span1 {
+  font-family: Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 100%;
+  text-transform: uppercase;
+  @include fontS(430px, 300px, 250px, 90px);
+  @include fontS(430/1920*100vw, 300/1366*100vw, 250/768*100vw, 90/360*100vw);
+}
+.span2 {
+  font-family: Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 100%;
+  @include fontS(800px, 500px, 450px, 200px);
+  @include fontS(800/1920*100vw, 500/1366*100vw, 450/768*100vw, 200/360*100vw);
+}
+
+.ttu {
+  text-transform: uppercase;
+}
+.fwb {
+  font-weight: 900;
+}
+.w-100 {
+  width: 100% !important;
+  height: auto;
+}
+.h-100 {
+  height: 100%;
+  object-fit: cover;
+}
+
+.w-80 {
+  width: 80% !important;
+  height: auto;
+}
+
+.imgW {
+  position: relative;
+  display: block;
+  &::after {
+    content: "";
+    display: block;
+    padding-bottom: 50%;
+  }
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.madeAva {
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  svg {
+    margin-left: 10px;
+    fill: $gray;
+  }
+  &:hover,
+  &:focus {
+    // color:$darkGray;
+  }
+  &:active {
+    // color: $redDim;
+  }
+}
+
+input {
+  display: block;
+  width: 100%;
+  background: transparent;
+  color: currentColor;
+  border: none;
+  border-bottom: 1px solid currentColor;
+  padding: 15px 0;
+  margin-bottom: 20px;
+  font-family: Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 140%;
+  @include fontS(22px, 18px, 18px, 18px);
+  &::placeholder {
+    font-family: Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 140%;
+    color: currentColor;
+    @include fontS(22px, 18px, 18px, 18px);
+  }
+}
+
+.bg{
+  background-color: $white;
+  color: $black ;
+  &_bg{
+    background-color: $blue-gray;
+    color: $black ;
+  }
+  &_b{
+    background-color: $black;
+    color: $white;
+  }
+  &_blue{
+    background-color: $blue;
+    color: $white;
+  }
+  &_g{
+    background-color: $gray;
+    color: $black;
+  }
+}
+.line{
+  // width: 100%;
+  height: 1px;
+  background-color: currentColor;
+  &_mr{
+    margin-right: 20px;
+  }
+  &_ml{
+    margin-left: 20px;
+  }
+
+}
+.lineV{
+  width: 1px;
+  height: 100%;
+  background-color: currentColor;
+}

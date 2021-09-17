@@ -1,0 +1,16 @@
+.sFirst{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
+.sTwo{
+  &__images{
+    display: flex;
+    margin: -20px;
+    img{
+      margin: 20px;
+    }
+  }
+}
